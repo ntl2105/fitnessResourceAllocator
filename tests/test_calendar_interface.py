@@ -98,3 +98,64 @@ def test_build_calendar_interface_groups_rows_and_member_blocked_overlays():
     assert block["start_hour"] == 8.5
     assert block["duration_hours"] == 10.0
     assert block["label"] == "Work block."
+
+
+def test_activity_view_resolves_provider_and_clean_display_title():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-01",
+            "start_time": "18:45",
+            "end_time": "19:30",
+            "title": "Remote or hotel-gym substitution: Trainer-led lower-body strength session",
+            "activity_type": "fitness",
+            "goal_tags": ["strength"],
+            "load_level": "medium",
+            "location_id": "remote",
+            "mode": "remote",
+            "substitution_status": "substitution",
+            "trace_id": "trace_1",
+        }
+    ]
+    personalized_plan = {
+        "tasks": [
+            {
+                "task_id": "task_1",
+                "activity_id": "act_1",
+                "provider_ids": ["provider_trainer_001"],
+            }
+        ]
+    }
+    resource_universe = {
+        "providers": [
+            {
+                "provider_id": "provider_trainer_001",
+                "provider_type": "trainer",
+                "display_name": "Maya Tan",
+            }
+        ]
+    }
+
+    view_model = build_calendar_interface(
+        calendar_rows,
+        {"availability_blocks": []},
+        [
+            {
+                "trace_id": "trace_1",
+                "rejected_candidates": [],
+                "constraint_checks": [],
+                "dependency_checks": [],
+            }
+        ],
+        {},
+        personalized_plan,
+        resource_universe,
+    )
+
+    activity = view_model["weeks"][0]["activities"][0]
+    assert (
+        activity["raw_title"]
+        == "Remote or hotel-gym substitution: Trainer-led lower-body strength session"
+    )
+    assert activity["display_title"] == "Trainer-led lower-body strength session"
+    assert activity["provider_summary"] == "Maya Tan, trainer"

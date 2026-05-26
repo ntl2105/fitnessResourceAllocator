@@ -38,8 +38,12 @@ def build_calendar_interface(
     availability: dict[str, Any],
     traces: list[dict[str, Any]],
     rejection_summary: dict[str, Any],
+    personalized_plan: dict[str, Any] | None = None,
+    resource_universe: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     traces_by_id = {trace["trace_id"]: trace for trace in traces}
+    plan_tasks = tasks_by_id(personalized_plan)
+    providers = providers_by_id(resource_universe)
     travel_windows = member_travel_windows(availability)
     rows_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for row in calendar_rows:
@@ -57,7 +61,14 @@ def build_calendar_interface(
     weeks = []
     for week_start in sorted(set(rows_by_week) | set(blocked_by_week)):
         activities = [
-            activity_view(row, week_start, traces_by_id.get(row.get("trace_id")), travel_windows)
+            activity_view(
+                row,
+                week_start,
+                traces_by_id.get(row.get("trace_id")),
+                travel_windows,
+                plan_tasks,
+                providers,
+            )
             for row in sorted(
                 rows_by_week.get(week_start, []),
                 key=lambda item: (item["date"], item["start_time"], item["title"]),
@@ -100,12 +111,18 @@ def activity_view(
     week_start: date,
     trace: dict[str, Any] | None,
     travel_windows: list[tuple[date, date]],
+    plan_tasks: dict[str, dict[str, Any]] | None = None,
+    providers: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     row_date = date.fromisoformat(row["date"])
     flags = scenario_flags(row, trace, travel_windows)
+    task = (plan_tasks or {}).get(task_id_from_row(row) or "")
+    title = display_title(row["title"])
     return {
         "id": row["calendar_row_id"],
-        "title": row["title"],
+        "title": title,
+        "display_title": title,
+        "raw_title": row["title"],
         "date": row["date"],
         "day_index": (row_date - week_start).days,
         "start_hour": decimal_hour(row["start_time"]),
@@ -119,9 +136,67 @@ def activity_view(
         "mode": row["mode"],
         "substitution_status": row["substitution_status"],
         "trace_id": row.get("trace_id"),
+        "provider_summary": provider_summary(task, providers or {}),
         "badges": badges_for(row, flags),
         "scenario_flags": flags,
     }
+
+
+def task_id_from_row(row: dict[str, Any]) -> str | None:
+    row_id = row.get("calendar_row_id", "")
+    if row_id.startswith("row_"):
+        return row_id.removeprefix("row_")
+    return None
+
+
+def tasks_by_id(personalized_plan: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
+    return {
+        task["task_id"]: task
+        for task in (personalized_plan or {}).get("tasks", [])
+        if task.get("task_id")
+    }
+
+
+def providers_by_id(
+    resource_universe: dict[str, Any] | None,
+) -> dict[str, dict[str, Any]]:
+    return {
+        provider["provider_id"]: provider
+        for provider in (resource_universe or {}).get("providers", [])
+        if provider.get("provider_id")
+    }
+
+
+def provider_summary(
+    task: dict[str, Any] | None, providers: dict[str, dict[str, Any]]
+) -> str | None:
+    if not task:
+        return None
+    labels = []
+    for provider_id in task.get("provider_ids", []):
+        provider = providers.get(provider_id)
+        if provider:
+            labels.append(
+                f"{provider.get('display_name', provider_id)}, "
+                f"{provider.get('provider_type', 'provider')}"
+            )
+        else:
+            labels.append(provider_id)
+    return "; ".join(labels) if labels else None
+
+
+def display_title(raw_title: str) -> str:
+    prefixes = [
+        "Remote or hotel-gym substitution:",
+        "No-prep fallback for",
+        "Fallback:",
+        "Substitution:",
+    ]
+    title = raw_title
+    for prefix in prefixes:
+        if title.startswith(prefix):
+            title = title[len(prefix) :].strip()
+    return title[:1].upper() + title[1:] if title else raw_title
 
 
 def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:
