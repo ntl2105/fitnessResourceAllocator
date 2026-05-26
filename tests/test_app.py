@@ -92,6 +92,19 @@ def test_calendar_page_bootstraps_weekly_interface_assets():
 
     assert response.status_code == 200
     assert 'id="calendar-root"' in response.text
+    assert 'data-display-mode="agenda"' in response.text
     assert "/static/calendar.css" in response.text
     assert "/static/calendar.js" in response.text
     assert "/api/calendar/interface" in response.text
+
+
+def test_calendar_renderer_uses_day_agenda_without_absolute_time_grid():
+    js_response = client.get("/static/calendar.js")
+    css_response = client.get("/static/calendar.css")
+
+    assert js_response.status_code == 200
+    assert css_response.status_code == 200
+    assert "renderAgendaDay" in js_response.text
+    assert "time-column" not in js_response.text
+    assert "hour-line" not in js_response.text
+    assert "position: absolute" not in css_response.text
