@@ -1,0 +1,84 @@
+{
+  "frictions": [
+    {
+      "friction_id": "friction_planned_travel_good_facilities",
+      "name": "Planned travel with better facilities",
+      "description": "Hong Kong travel has hotel gym and pool access but no trusted in-person physio or lab access.",
+      "linked_resource_ids": [
+        "travel_hk_2026_06"
+      ],
+      "scheduler_expectation": "Use hotel-gym or remote substitutions; move labs outside travel."
+    },
+    {
+      "friction_id": "friction_last_minute_travel_limited_facilities",
+      "name": "Last-minute travel with limited facilities",
+      "description": "Jakarta escalation has no reliable gym and restaurant-based meals.",
+      "linked_resource_ids": [
+        "travel_jakarta_2026_08"
+      ],
+      "scheduler_expectation": "Use remote coaching, hotel-room mobility, prepared-food rules, or unschedule high-load activities."
+    },
+    {
+      "friction_id": "friction_provider_mismatch_morning_preference",
+      "name": "Provider availability mismatch with member preferences",
+      "description": "Member prefers morning exercise, but the primary trainer has limited morning availability.",
+      "linked_resource_ids": [
+        "provider_trainer_001"
+      ],
+      "scheduler_expectation": "Try evening slots, remote trainer, or alternate days before unscheduling."
+    },
+    {
+      "friction_id": "friction_lab_disrupted_by_travel",
+      "name": "Lab or consultation disruption during travel",
+      "description": "Fasting labs cannot be completed during travel because no partner lab is configured at travel destinations.",
+      "linked_resource_ids": [
+        "provider_lab_001",
+        "eq_lab_draw_station"
+      ],
+      "scheduler_expectation": "Schedule labs before travel and physician follow-up after labs."
+    },
+    {
+      "friction_id": "friction_food_prep_dependency",
+      "name": "Food prep dependency requiring chef or member prep",
+      "description": "High-protein prepared meals require chef or member prep before consumption.",
+      "linked_resource_ids": [
+        "provider_chef_001",
+        "eq_meal_prep_kit"
+      ],
+      "scheduler_expectation": "Place prep before meals, use no-prep substitution, or mark unsupported."
+    },
+    {
+      "friction_id": "friction_sauna_maintenance",
+      "name": "Equipment or facility unavailability",
+      "description": "Sauna is unavailable during a July maintenance window.",
+      "linked_resource_ids": [
+        "eq_sauna"
+      ],
+      "date_range": {
+        "start": "2026-07-08",
+        "end": "2026-07-14"
+      },
+      "scheduler_expectation": "Use breathwork, mobility, or ice bath if appropriate."
+    },
+    {
+      "friction_id": "friction_office_to_gym_buffer",
+      "name": "Physical-location travel-time conflict",
+      "description": "Office-to-gym transfer requires at least 15 minutes.",
+      "linked_resource_ids": [
+        "office",
+        "gym"
+      ],
+      "scheduler_expectation": "Reject gym activities starting immediately after office blocks."
+    },
+    {
+      "friction_id": "friction_skipped_high_load_recovery",
+      "name": "Skipped or substituted high-load activity requiring recovery adjustment",
+      "description": "If high-load lower-body training is skipped after travel fatigue or knee discomfort, a recovery adjustment should be applied.",
+      "linked_resource_ids": [
+        "provider_physio_001",
+        "provider_recovery_001"
+      ],
+      "scheduler_expectation": "Create or select lower-load recovery task and trace the adjustment."
+    }
+  ]
+}

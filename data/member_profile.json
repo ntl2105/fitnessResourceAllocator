@@ -1,0 +1,422 @@
+{
+  "member_id": "member_elyx_001",
+  "name": "Arjun Mehta",
+  "timezone": "Asia/Singapore",
+  "age_range": "45-49",
+  "occupation": "Regional technology executive",
+  "profile_summary": "Arjun is a Singapore-based technology executive who travels frequently across Asia. He wants a data-driven healthspan plan that improves strength, metabolic health, sleep, and travel resilience without creating more decision fatigue.",
+  "typical_work_hours": {
+    "monday_to_friday": {
+      "start": "08:30",
+      "end": "18:30",
+      "notes": "Often has early Europe calls and occasional US evening calls."
+    },
+    "saturday": {
+      "start": "10:00",
+      "end": "13:00",
+      "notes": "Light work or investor calls twice per month."
+    },
+    "sunday": {
+      "start": null,
+      "end": null,
+      "notes": "Generally reserved for family, recovery, meal planning, and light movement."
+    }
+  },
+  "goals": [
+    {
+      "goal_id": "goal_strength",
+      "name": "Increase lean muscle mass safely",
+      "priority": 1,
+      "description": "Build strength and preserve long-term mobility without worsening knee discomfort.",
+      "success_indicators": [
+        "2-3 strength sessions/week",
+        "improved lower-body strength scores",
+        "no knee flare-ups over 48 hours"
+      ]
+    },
+    {
+      "goal_id": "goal_metabolic",
+      "name": "Improve metabolic health",
+      "priority": 2,
+      "description": "Reduce early metabolic risk through nutrition, resistance training, cardio, and follow-up labs.",
+      "success_indicators": [
+        "improved fasting glucose trend",
+        "better post-meal energy",
+        "stable or reduced waist circumference"
+      ]
+    },
+    {
+      "goal_id": "goal_sleep",
+      "name": "Improve sleep consistency and recovery",
+      "priority": 3,
+      "description": "Improve sleep timing, recovery, and next-day energy despite travel and work stress.",
+      "success_indicators": [
+        "earlier average bedtime",
+        "higher morning energy",
+        "reduced late caffeine"
+      ]
+    },
+    {
+      "goal_id": "goal_cardio_travel",
+      "name": "Maintain cardiovascular fitness while traveling",
+      "priority": 4,
+      "description": "Keep cardio consistent using hotel gyms, walking, swimming, or other low-impact options.",
+      "success_indicators": [
+        "2 cardio sessions/week",
+        "Zone 2 maintained during travel weeks"
+      ]
+    },
+    {
+      "goal_id": "goal_adherence_prevention",
+      "name": "Improve adherence and preventive care",
+      "priority": 5,
+      "description": "Make recurring health actions easier to follow and coordinate with meals, labs, and consults.",
+      "success_indicators": [
+        "adherence above 85%",
+        "preventive labs completed",
+        "follow-up consultation completed after labs"
+      ]
+    }
+  ],
+  "preferences": {
+    "exercise_timing": {
+      "preferred": [
+        "06:30-08:00"
+      ],
+      "acceptable": [
+        "18:45-20:00"
+      ],
+      "avoid": [
+        "12:00-14:00",
+        "after_20:30"
+      ]
+    },
+    "session_length": {
+      "weekday_max_minutes": 60,
+      "weekend_max_minutes": 90
+    },
+    "training_preferences": [
+      "prefers trainer-led strength when learning new movements",
+      "likes data-driven progression",
+      "dislikes treadmill-only cardio",
+      "accepts remote coaching during travel"
+    ],
+    "nutrition_preferences": [
+      "prefers high-protein breakfasts",
+      "likes Indian, Japanese, Mediterranean, and Vietnamese food",
+      "dislikes strict calorie counting",
+      "accepts meal prep if it reduces weekday decision fatigue"
+    ],
+    "consultation_preferences": [
+      "accepts remote follow-up consults",
+      "prefers in-person physio and movement assessments",
+      "likes concise summaries and next actions"
+    ],
+    "communication_preferences": {
+      "style": "concise and action-oriented",
+      "detail_level": "medium",
+      "preferred_channels": [
+        "app",
+        "weekly summary"
+      ]
+    }
+  },
+  "constraints": {
+    "physical": [
+      {
+        "constraint_id": "constraint_knee_mild",
+        "name": "Mild right knee discomfort",
+        "severity": "mild",
+        "description": "Occasional discomfort after running, deep knee flexion, or sudden lower-body volume increases.",
+        "implications": [
+          "avoid sudden running volume increases",
+          "prefer knee-safe strength progressions",
+          "use cycling, walking, or swimming during flare-ups"
+        ]
+      },
+      {
+        "constraint_id": "constraint_back_tightness",
+        "name": "Occasional lower-back tightness",
+        "severity": "mild",
+        "description": "Tightness after long flights and long seated work blocks.",
+        "implications": [
+          "add mobility after flights",
+          "avoid heavy deadlift progression immediately after travel"
+        ]
+      }
+    ],
+    "schedule": [
+      "frequent work travel",
+      "early-morning calls twice per week",
+      "occasional last-minute travel",
+      "client dinners two to four times per month"
+    ],
+    "behavioral": [
+      "loses consistency during travel",
+      "often defaults to 6 or 7 out of 10 on energy ratings",
+      "may skip logging when tired or stressed"
+    ],
+    "medical_safety": [
+      "synthetic demo data only",
+      "abnormal labs route to physician review",
+      "reduce high-intensity activity after poor sleep or pain escalation"
+    ]
+  },
+  "baseline_metrics": {
+    "body_composition": {
+      "weight_kg": 78,
+      "height_cm": 176,
+      "estimated_body_fat_percent": 24,
+      "waist_cm": 92
+    },
+    "fitness": {
+      "resting_heart_rate_bpm": 68,
+      "estimated_vo2max_category": "average",
+      "strength_level": "intermediate",
+      "cardio_pattern": "inconsistent"
+    },
+    "sleep": {
+      "average_sleep_duration_hours": 6.3,
+      "average_bedtime": "23:45",
+      "wake_time": "06:30",
+      "main_issue": "late work and travel"
+    },
+    "metabolic": {
+      "risk_level": "mildly elevated",
+      "synthetic_markers": [
+        {
+          "name": "fasting_glucose",
+          "value": "slightly elevated"
+        },
+        {
+          "name": "apoB",
+          "value": "borderline"
+        }
+      ]
+    },
+    "subjective": {
+      "morning_energy_average": 6.7,
+      "afternoon_energy_average": 7.2,
+      "travel_week_energy_average": 5.8
+    }
+  },
+  "scheduling_rules": {
+    "planning_start_date": "2026-06-01",
+    "planning_months": 3,
+    "default_time_granularity_minutes": 15,
+    "max_high_load_activities_per_day": 1,
+    "max_medium_or_high_load_activities_per_day": 2,
+    "min_gap_between_fitness_sessions_hours": 6,
+    "avoid_high_intensity_after_poor_sleep": true,
+    "poor_sleep_threshold_hours": 5.5,
+    "avoid_heavy_lower_body_after_flight_hours": 24,
+    "prefer_morning_exercise": true,
+    "weekday_session_limit_minutes": 60,
+    "weekend_session_limit_minutes": 90,
+    "compact_recurring_low_complexity_tasks_in_calendar": true
+  },
+  "journey_phases": [
+    {
+      "phase_id": "phase_001",
+      "phase_type": "baseline",
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-21",
+      "trigger": "New 3-month plan starts.",
+      "primary_goals": [
+        "goal_strength",
+        "goal_metabolic",
+        "goal_adherence_prevention"
+      ],
+      "scheduling_biases": [
+        "complete labs",
+        "complete movement assessment",
+        "avoid excessive high-load training before physio review"
+      ]
+    },
+    {
+      "phase_id": "phase_002",
+      "phase_type": "consolidation",
+      "start_date": "2026-06-22",
+      "end_date": "2026-07-21",
+      "trigger": "Baseline assessments are complete.",
+      "primary_goals": [
+        "goal_strength",
+        "goal_metabolic",
+        "goal_cardio_travel"
+      ],
+      "scheduling_biases": [
+        "progress strength",
+        "increase Zone 2 consistency",
+        "use dietitian feedback"
+      ]
+    },
+    {
+      "phase_id": "phase_003",
+      "phase_type": "travel",
+      "start_date": "2026-07-22",
+      "end_date": "2026-08-15",
+      "trigger": "Planned Tokyo travel followed by low-resource last-minute Jakarta travel.",
+      "primary_goals": [
+        "goal_cardio_travel",
+        "goal_sleep",
+        "goal_adherence_prevention"
+      ],
+      "scheduling_biases": [
+        "prefer remote and hotel-compatible care",
+        "avoid labs",
+        "reduce load after flights"
+      ]
+    },
+    {
+      "phase_id": "phase_004",
+      "phase_type": "pain_escalation",
+      "start_date": "2026-08-16",
+      "end_date": "2026-08-22",
+      "trigger": "Synthetic knee discomfort after travel fatigue and missed lower-body session.",
+      "primary_goals": [
+        "goal_strength",
+        "goal_sleep"
+      ],
+      "scheduling_biases": [
+        "replace high-load lower-body work with mobility",
+        "schedule physio review",
+        "resume gradually"
+      ]
+    },
+    {
+      "phase_id": "phase_005",
+      "phase_type": "consolidation",
+      "start_date": "2026-08-23",
+      "end_date": "2026-08-31",
+      "trigger": "End-of-quarter routine review.",
+      "primary_goals": [
+        "goal_strength",
+        "goal_metabolic",
+        "goal_sleep"
+      ],
+      "scheduling_biases": [
+        "review progress",
+        "prepare next-quarter plan",
+        "avoid last-week overload"
+      ]
+    }
+  ],
+  "location_rhythm": {
+    "home_location_id": "home",
+    "office_location_id": "office",
+    "ordinary_weekday_pattern": [
+      {
+        "time_window": "06:00-08:15",
+        "likely_location": "home",
+        "notes": "Best for home mobility, remote coaching, or nearby gym."
+      },
+      {
+        "time_window": "08:30-18:30",
+        "likely_location": "office",
+        "notes": "Work block; only short tasks feasible."
+      },
+      {
+        "time_window": "18:45-20:15",
+        "likely_location": "gym",
+        "notes": "Backup training window if not blocked."
+      },
+      {
+        "time_window": "20:30-22:30",
+        "likely_location": "home",
+        "notes": "Recovery and evening routine only."
+      }
+    ],
+    "weekend_pattern": [
+      {
+        "time_window": "08:00-11:00",
+        "likely_location": "gym",
+        "notes": "Longer training, physio, or assessments."
+      },
+      {
+        "time_window": "12:00-18:00",
+        "likely_location": "home",
+        "notes": "Family, meal prep, recovery, walking."
+      }
+    ]
+  },
+  "travel_windows": [
+    {
+      "travel_window_id": "travel_hk_2026_06",
+      "travel_id": "travel_hk_2026_06",
+      "travel_type": "planned",
+      "type": "planned",
+      "destination": "Hong Kong",
+      "start": "2026-06-17T08:00:00+08:00",
+      "end": "2026-06-21T21:00:00+08:00",
+      "purpose": "Investor meetings",
+      "available_location_ids": [
+        "travel_hotel",
+        "remote"
+      ],
+      "member_location_override": "travel_hotel",
+      "expected_facilities": [
+        "hotel_gym",
+        "hotel_pool",
+        "remote_consultation_supported"
+      ],
+      "limitations": [
+        "no trusted in-person physiotherapist",
+        "no lab access planned",
+        "two likely client dinners"
+      ],
+      "notes": "Higher-resource planned travel case with useful hotel facilities but limited provider continuity."
+    },
+    {
+      "travel_window_id": "travel_tokyo_2026_07",
+      "travel_id": "travel_tokyo_2026_07",
+      "travel_type": "planned",
+      "type": "planned",
+      "destination": "Tokyo",
+      "start": "2026-07-22T07:30:00+08:00",
+      "end": "2026-07-29T22:30:00+08:00",
+      "purpose": "Board meetings and client visits",
+      "available_location_ids": [
+        "travel_hotel",
+        "remote"
+      ],
+      "member_location_override": "travel_hotel",
+      "expected_facilities": [
+        "basic_hotel_gym",
+        "walking_routes",
+        "remote_consultation_supported"
+      ],
+      "limitations": [
+        "limited equipment",
+        "unpredictable dinners",
+        "likely reduced sleep"
+      ],
+      "notes": "Moderate-resource planned travel case."
+    },
+    {
+      "travel_window_id": "travel_jakarta_2026_08",
+      "travel_id": "travel_jakarta_2026_08",
+      "travel_type": "last_minute",
+      "type": "last_minute",
+      "destination": "Jakarta",
+      "start": "2026-08-12T06:30:00+08:00",
+      "end": "2026-08-15T23:00:00+08:00",
+      "purpose": "Urgent client escalation",
+      "available_location_ids": [
+        "travel_hotel",
+        "remote"
+      ],
+      "member_location_override": "travel_hotel",
+      "expected_facilities": [
+        "hotel_room",
+        "remote_consultation_supported"
+      ],
+      "limitations": [
+        "no reliable gym",
+        "no known allied health provider",
+        "high work stress",
+        "restaurant-based meals"
+      ],
+      "notes": "Low-resource last-minute travel case designed to force substitutions or unscheduled tasks."
+    }
+  ]
+}
