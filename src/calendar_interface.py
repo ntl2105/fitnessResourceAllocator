@@ -101,6 +101,10 @@ def build_calendar_interface(
         "scenario_counts": {
             scenario: scenario_counts.get(scenario, 0) for scenario in SCENARIOS
         },
+        "goal_coverage": goal_coverage(calendar_rows, traces, personalized_plan),
+        "unscheduled_items": unscheduled_items(
+            traces, rejection_summary, personalized_plan
+        ),
         "weeks": weeks,
         "rejection_summary": rejection_summary,
     }
@@ -197,6 +201,86 @@ def display_title(raw_title: str) -> str:
         if title.startswith(prefix):
             title = title[len(prefix) :].strip()
     return title[:1].upper() + title[1:] if title else raw_title
+
+
+def goal_status(scheduled: int, unscheduled: int, substitutions: int) -> str:
+    if unscheduled and not scheduled:
+        return "missed"
+    if unscheduled or substitutions:
+        return "at_risk"
+    return "on_track" if scheduled else "no_activity"
+
+
+def goal_coverage(
+    calendar_rows: list[dict[str, Any]],
+    traces: list[dict[str, Any]],
+    personalized_plan: dict[str, Any] | None,
+) -> dict[str, list[dict[str, Any]]]:
+    plan_tasks = tasks_by_id(personalized_plan)
+    unscheduled_by_goal: Counter[str] = Counter()
+    for trace in traces:
+        if trace.get("final_status") != "unscheduled":
+            continue
+        task = plan_tasks.get(trace.get("task_instance_id", ""))
+        for goal in task.get("goal_tags", []) if task else []:
+            unscheduled_by_goal[goal] += 1
+
+    scheduled_by_goal: Counter[str] = Counter()
+    substitutions_by_goal: Counter[str] = Counter()
+    for row in calendar_rows:
+        for goal in row.get("goal_tags", []):
+            scheduled_by_goal[goal] += 1
+            if row.get("substitution_status") == "substitution":
+                substitutions_by_goal[goal] += 1
+
+    goals = sorted(set(scheduled_by_goal) | set(unscheduled_by_goal))
+    summary = [
+        {
+            "goal_tag": goal,
+            "scheduled": scheduled_by_goal[goal],
+            "unscheduled": unscheduled_by_goal[goal],
+            "substitutions": substitutions_by_goal[goal],
+            "status": goal_status(
+                scheduled_by_goal[goal],
+                unscheduled_by_goal[goal],
+                substitutions_by_goal[goal],
+            ),
+        }
+        for goal in goals
+    ]
+    return {"week": summary, "full_plan": summary}
+
+
+def unscheduled_items(
+    traces: list[dict[str, Any]],
+    rejection_summary: dict[str, Any],
+    personalized_plan: dict[str, Any] | None,
+) -> list[dict[str, Any]]:
+    plan_tasks = tasks_by_id(personalized_plan)
+    items = []
+    for trace in traces:
+        if trace.get("final_status") != "unscheduled":
+            continue
+        task = plan_tasks.get(trace.get("task_instance_id", ""))
+        activity_id = trace.get("activity_id")
+        summary = rejection_summary.get(activity_id, {})
+        items.append(
+            {
+                "activity_id": activity_id,
+                "task_instance_id": trace.get("task_instance_id"),
+                "title": activity_id,
+                "goal_tags": task.get("goal_tags", []) if task else [],
+                "unscheduled_count": summary.get("unscheduled_count", 1),
+                "rejected_candidate_count": summary.get(
+                    "rejected_candidate_count",
+                    len(trace.get("rejected_candidates", [])),
+                ),
+                "reason_summary": trace.get("policy_fit_summary")
+                or "No candidate slot passed policy and resource checks.",
+                "trace_id": trace.get("trace_id"),
+            }
+        )
+    return items
 
 
 def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:

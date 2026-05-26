@@ -159,3 +159,67 @@ def test_activity_view_resolves_provider_and_clean_display_title():
     )
     assert activity["display_title"] == "Trainer-led lower-body strength session"
     assert activity["provider_summary"] == "Maya Tan, trainer"
+
+
+def test_goal_coverage_reports_week_and_full_plan_risk():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-02",
+            "start_time": "07:00",
+            "end_time": "07:40",
+            "title": "Zone 2 bike",
+            "activity_type": "fitness",
+            "goal_tags": ["cardio"],
+            "load_level": "medium",
+            "location_id": "gym",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_1",
+        }
+    ]
+    traces = [
+        {
+            "trace_id": "trace_1",
+            "activity_id": "act_1",
+            "final_status": "scheduled",
+            "rejected_candidates": [],
+            "constraint_checks": [],
+            "dependency_checks": [],
+        },
+        {
+            "trace_id": "trace_2",
+            "activity_id": "act_2",
+            "final_status": "unscheduled",
+            "policy_fit_summary": "No valid slot.",
+            "rejected_candidates": [{"reasons": ["No provider available."]}],
+            "constraint_checks": [],
+            "dependency_checks": [],
+            "task_instance_id": "task_2",
+        },
+    ]
+
+    view_model = build_calendar_interface(
+        calendar_rows,
+        {"availability_blocks": []},
+        traces,
+        {"act_2": {"unscheduled_count": 1, "rejected_candidate_count": 1}},
+        {
+            "tasks": [
+                {
+                    "task_id": "task_2",
+                    "activity_id": "act_2",
+                    "goal_tags": ["cardio"],
+                    "status": "unscheduled",
+                }
+            ]
+        },
+        {"providers": []},
+    )
+
+    week_cardio = view_model["goal_coverage"]["week"][0]
+    assert week_cardio["goal_tag"] == "cardio"
+    assert week_cardio["scheduled"] == 1
+    assert week_cardio["unscheduled"] == 1
+    assert week_cardio["status"] == "at_risk"
+    assert view_model["unscheduled_items"][0]["activity_id"] == "act_2"
