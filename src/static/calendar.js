@@ -123,6 +123,29 @@ function formatDuration(hours) {
   return `${Math.round(hours * 60)}m`;
 }
 
+function renderCheckList(checks) {
+  if (!checks.length) return "<p>No failed checks on selected slot.</p>";
+  return `<ul>${checks.map((check) => `<li><strong>${escapeHtml(check.name)}:</strong> ${escapeHtml(check.reason)}</li>`).join("")}</ul>`;
+}
+
+function renderRejectedCandidates(candidates) {
+  if (!candidates.length) {
+    return "<p>No earlier candidate slots were rejected for this activity.</p>";
+  }
+  return `
+    <div class="trace-cards">
+      ${candidates.slice(0, 5).map((candidate) => `
+        <section class="trace-card">
+          <div class="trace-card-title">${escapeHtml(candidate.slot_summary)}</div>
+          <ul>
+            ${(candidate.human_reasons || []).map((reason) => `<li>${escapeHtml(reason)}</li>`).join("")}
+          </ul>
+        </section>
+      `).join("")}
+    </div>
+  `;
+}
+
 async function openTrace(traceId, title) {
   if (!traceId) return;
   drawer.classList.add("open");
@@ -136,17 +159,16 @@ async function openTrace(traceId, title) {
   );
   drawerContent.innerHTML = `
     <p><strong>Status:</strong> ${escapeHtml(trace.final_status)}</p>
+    <h3>Scheduled Slot</h3>
+    <p>${escapeHtml(trace.selected_slot_summary || "No selected slot.")}</p>
     <p><strong>Policy:</strong> ${escapeHtml(trace.policy_fit_summary)}</p>
     <p><strong>Resources:</strong> ${escapeHtml(trace.resource_fit_summary)}</p>
     <p><strong>Handoff:</strong> ${escapeHtml(trace.provider_handoff_summary || "None")}</p>
     <h3>Failed Checks</h3>
-    ${
-      failedChecks.length
-        ? `<ul>${failedChecks.map((check) => `<li><strong>${escapeHtml(check.name)}:</strong> ${escapeHtml(check.reason)}</li>`).join("")}</ul>`
-        : "<p>No failed checks on selected slot.</p>"
-    }
-    <h3>Rejected Candidates</h3>
-    <pre>${escapeHtml(JSON.stringify((trace.rejected_candidates || []).slice(0, 5), null, 2))}</pre>
+    ${renderCheckList(failedChecks)}
+    <h3>Earlier Rejected Attempts</h3>
+    <p class="trace-note">These were attempted slots for this same activity before the scheduler found the scheduled slot above.</p>
+    ${renderRejectedCandidates(trace.rejected_candidate_summaries || [])}
     <h3>Source Artifacts</h3>
     <ul>${(trace.source_artifact_paths || []).map((path) => `<li>${escapeHtml(path)}</li>`).join("")}</ul>
   `;

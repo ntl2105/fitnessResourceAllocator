@@ -1,4 +1,7 @@
+from copy import deepcopy
+from datetime import datetime
 from pathlib import Path
+import re
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request
@@ -87,6 +90,103 @@ def _load_trace(trace_id: str) -> dict[str, Any]:
     raise HTTPException(status_code=404, detail="Trace not found")
 
 
+def _task_id_from_calendar_row(row: dict[str, Any]) -> str | None:
+    row_id = row.get("calendar_row_id", "")
+    if row_id.startswith("row_"):
+        return row_id.removeprefix("row_")
+    return None
+
+
+def _calendar_rows_by_task_id() -> dict[str, dict[str, Any]]:
+    rows = load_json(RUN_DIR / "04_calendar" / "calendar_rows.json")
+    return {
+        task_id: row
+        for row in rows
+        if (task_id := _task_id_from_calendar_row(row)) is not None
+    }
+
+
+def _trace_activity_title(
+    trace: dict[str, Any], rows_by_task_id: dict[str, dict[str, Any]]
+) -> str:
+    row = rows_by_task_id.get(trace.get("task_instance_id"))
+    if row:
+        return row.get("title", trace.get("activity_id", "Activity"))
+    return trace.get("activity_id", "Activity")
+
+
+def _slot_summary(start: str, end: str, location_id: str | None) -> str:
+    start_dt = datetime.fromisoformat(start)
+    end_dt = datetime.fromisoformat(end)
+    day = f"{start_dt.strftime('%a %b')} {start_dt.day}"
+    time_range = f"{start_dt.strftime('%H:%M')}-{end_dt.strftime('%H:%M')}"
+    location = location_id or "unspecified location"
+    return f"{day}, {time_range} at {location}"
+
+
+def _human_reasons(
+    reasons: list[str], rows_by_task_id: dict[str, dict[str, Any]]
+) -> list[str]:
+    resolved = []
+    has_overlap_resolution = False
+    for reason in reasons:
+        overlap = re.fullmatch(r"Overlaps ([^.]+)\.", reason)
+        if overlap:
+            task_id = overlap.group(1)
+            row = rows_by_task_id.get(task_id)
+            if row:
+                resolved.append(
+                    "Rejected because it overlaps "
+                    f"{row['title']}, {row['start_time']}-{row['end_time']} "
+                    f"at {row.get('location_id') or row.get('mode')}."
+                )
+                has_overlap_resolution = True
+            else:
+                resolved.append(f"Rejected because it overlaps {task_id}.")
+            continue
+
+        nearby = re.fullmatch(r"Nearby task at incompatible location ([^.]+)\.", reason)
+        if nearby and has_overlap_resolution:
+            continue
+        if nearby:
+            resolved.append(
+                "Rejected because another nearby scheduled activity is at "
+                f"{nearby.group(1)}, and this candidate needs a different location."
+            )
+            continue
+
+        resolved.append(reason)
+    return resolved
+
+
+def _enriched_trace(trace: dict[str, Any]) -> dict[str, Any]:
+    rows_by_task_id = _calendar_rows_by_task_id()
+    payload = deepcopy(trace)
+    payload["activity_title"] = _trace_activity_title(trace, rows_by_task_id)
+
+    selected_slot = trace.get("selected_slot")
+    if selected_slot:
+        payload["selected_slot_summary"] = (
+            "Scheduled for "
+            f"{_slot_summary(selected_slot['start'], selected_slot['end'], selected_slot.get('location_id'))} "
+            "because all selected-slot policy and resource checks passed."
+        )
+    else:
+        payload["selected_slot_summary"] = "No selected slot."
+
+    payload["rejected_candidate_summaries"] = [
+        {
+            "slot_summary": _slot_summary(
+                candidate["start"], candidate["end"], candidate.get("location_id")
+            ),
+            "human_reasons": _human_reasons(candidate.get("reasons", []), rows_by_task_id),
+            "raw_reasons": candidate.get("reasons", []),
+        }
+        for candidate in trace.get("rejected_candidates", [])
+    ]
+    return payload
+
+
 def _read_text(stage_id: str, filename: str) -> str:
     return _run_path(stage_id, filename).read_text(encoding="utf-8")
 
@@ -132,7 +232,7 @@ def api_calendar_interface() -> Any:
 
 @app.get("/api/traces/{trace_id}")
 def api_trace(trace_id: str) -> dict[str, Any]:
-    return _load_trace(trace_id)
+    return _enriched_trace(_load_trace(trace_id))
 
 
 @app.get("/calendar")

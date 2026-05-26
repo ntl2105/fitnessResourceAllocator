@@ -57,4 +57,9 @@ button:hover { background: #f1f5f9; }
 .drawer-content { padding: 18px; overflow: auto; }
 .drawer-content h3 { margin: 18px 0 6px; }
 .drawer-content pre { white-space: pre-wrap; background: #f8fafc; border: 1px solid var(--line); padding: 10px; }
+.trace-note { color: var(--muted); font-size: 13px; }
+.trace-cards { display: grid; gap: 10px; }
+.trace-card { border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: #f8fafc; }
+.trace-card-title { font-weight: 700; margin-bottom: 6px; }
+.trace-card ul { margin: 0; padding-left: 18px; }
 .empty-state { padding: 24px; color: var(--muted); }

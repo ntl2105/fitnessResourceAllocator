@@ -58,6 +58,24 @@ def test_trace_lookup_and_run_file_endpoint():
     assert "Calendar Summary" in markdown_response.json()["content"]
 
 
+def test_trace_endpoint_resolves_rejected_candidate_conflicts_for_humans():
+    response = client.get("/api/traces/trace_task_act_019_20260604_002")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["activity_title"] == "Zone 2 stationary bike session"
+    assert payload["selected_slot_summary"] == (
+        "Scheduled for Fri Jun 5, 06:30-07:10 at gym because all selected-slot "
+        "policy and resource checks passed."
+    )
+    first_candidate = payload["rejected_candidate_summaries"][0]
+    assert first_candidate["slot_summary"] == "Thu Jun 4, 06:30-07:10 at gym"
+    assert first_candidate["human_reasons"] == [
+        "Rejected because it overlaps Baseline fasting metabolic lab panel, "
+        "07:00-07:45 at lab."
+    ]
+
+
 def test_run_file_endpoint_rejects_unknown_stages_and_path_traversal():
     assert "04_calendar" in KNOWN_STAGES
 
@@ -108,3 +126,13 @@ def test_calendar_renderer_uses_day_agenda_without_absolute_time_grid():
     assert "time-column" not in js_response.text
     assert "hour-line" not in js_response.text
     assert "position: absolute" not in css_response.text
+
+
+def test_trace_drawer_renders_human_decision_explanations():
+    js_response = client.get("/static/calendar.js")
+
+    assert js_response.status_code == 200
+    assert "Scheduled Slot" in js_response.text
+    assert "Earlier Rejected Attempts" in js_response.text
+    assert "rejected_candidate_summaries" in js_response.text
+    assert "JSON.stringify((trace.rejected_candidates" not in js_response.text
