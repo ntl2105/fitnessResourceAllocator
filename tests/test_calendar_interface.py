@@ -223,3 +223,34 @@ def test_goal_coverage_reports_week_and_full_plan_risk():
     assert week_cardio["unscheduled"] == 1
     assert week_cardio["status"] == "at_risk"
     assert view_model["unscheduled_items"][0]["activity_id"] == "act_2"
+
+
+def test_calendar_interface_exposes_location_bands_and_travel_blocks():
+    availability = {
+        "availability_blocks": [
+            {
+                "resource_type": "member_blocked",
+                "start": "2026-06-01T08:30:00+08:00",
+                "end": "2026-06-01T18:30:00+08:00",
+                "location_id": "office",
+                "notes": "Work block.",
+            },
+            {
+                "resource_type": "member_travel",
+                "start": "2026-06-03T09:30:00+08:00",
+                "end": "2026-06-05T13:15:00+08:00",
+                "location_id": "travel_hotel",
+                "notes": "Hong Kong planned travel.",
+            },
+        ]
+    }
+
+    view_model = build_calendar_interface(
+        [], availability, [], {}, {"tasks": []}, {"providers": []}
+    )
+    week = view_model["weeks"][0]
+
+    assert week["location_bands"][0]["label"] == "Work block."
+    assert week["location_bands"][1]["label"] == "Hong Kong planned travel."
+    assert week["travel_blocks"][0]["location_id"] == "travel_hotel"
+    assert week["travel_blocks"][0]["start_hour"] == 9.5

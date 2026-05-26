@@ -57,9 +57,14 @@ def build_calendar_interface(
         block_start = datetime.fromisoformat(block["start"])
         blocked_by_week[monday_start(block_start.date())].append(block)
 
+    context_by_week = context_blocks_by_week(availability)
     scenario_counts: Counter[str] = Counter()
     weeks = []
-    for week_start in sorted(set(rows_by_week) | set(blocked_by_week)):
+    for week_start in sorted(set(rows_by_week) | set(blocked_by_week) | set(context_by_week)):
+        context_blocks = sorted(
+            context_by_week.get(week_start, []),
+            key=lambda item: item["start"],
+        )
         activities = [
             activity_view(
                 row,
@@ -85,6 +90,14 @@ def build_calendar_interface(
                 "label": week_label(week_start),
                 "days": week_days(week_start),
                 "activities": activities,
+                "location_bands": [
+                    location_band(block, week_start) for block in context_blocks
+                ],
+                "travel_blocks": [
+                    travel_block(block, week_start)
+                    for block in context_blocks
+                    if block.get("resource_type") == "member_travel"
+                ],
                 "unavailable_blocks": [
                     unavailable_view(block, week_start)
                     for block in sorted(
@@ -292,6 +305,41 @@ def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:
         "start_hour": round(start.hour + start.minute / 60, 2),
         "duration_hours": round((end - start).total_seconds() / 3600, 2),
         "label": block.get("notes") or block.get("resource_id") or "Unavailable",
+        "location_id": block.get("location_id"),
+    }
+
+
+def context_blocks_by_week(availability: dict[str, Any]) -> dict[date, list[dict[str, Any]]]:
+    by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
+    for block in availability.get("availability_blocks", []):
+        if block.get("resource_type") not in {"member_blocked", "member_travel"}:
+            continue
+        start = datetime.fromisoformat(block["start"])
+        by_week[monday_start(start.date())].append(block)
+    return by_week
+
+
+def location_band(block: dict[str, Any], week_start: date) -> dict[str, Any]:
+    start = datetime.fromisoformat(block["start"])
+    end = datetime.fromisoformat(block["end"])
+    return {
+        "label": block.get("notes") or block.get("location_id") or "Location context",
+        "location_id": block.get("location_id"),
+        "resource_type": block.get("resource_type"),
+        "start_day_index": max(0, (start.date() - week_start).days),
+        "end_day_index": min(6, (end.date() - week_start).days),
+    }
+
+
+def travel_block(block: dict[str, Any], week_start: date) -> dict[str, Any]:
+    start = datetime.fromisoformat(block["start"])
+    end = datetime.fromisoformat(block["end"])
+    return {
+        "date": start.date().isoformat(),
+        "day_index": (start.date() - week_start).days,
+        "start_hour": round(start.hour + start.minute / 60, 2),
+        "duration_hours": round((end - start).total_seconds() / 3600, 2),
+        "label": block.get("notes") or "Travel",
         "location_id": block.get("location_id"),
     }
 
