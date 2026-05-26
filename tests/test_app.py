@@ -136,3 +136,18 @@ def test_trace_drawer_renders_human_decision_explanations():
     assert "Earlier Rejected Attempts" in js_response.text
     assert "rejected_candidate_summaries" in js_response.text
     assert "JSON.stringify((trace.rejected_candidates" not in js_response.text
+
+
+def test_calendar_renderer_has_review_debugging_sections():
+    js_response = client.get("/static/calendar.js")
+    css_response = client.get("/static/calendar.css")
+
+    assert js_response.status_code == 200
+    assert css_response.status_code == 200
+    assert "renderGoalCoverage" in js_response.text
+    assert "renderUnscheduledItems" in js_response.text
+    assert "renderLocationBands" in js_response.text
+    assert "weekScenarioCounts" in js_response.text
+    assert "provider_summary" in js_response.text
+    assert ".goal-panel" in css_response.text
+    assert ".location-band" in css_response.text

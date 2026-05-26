@@ -24,8 +24,10 @@ function escapeHtml(value) {
 
 function renderScenarioChips() {
   chips.innerHTML = "";
+  const week = state.model.weeks[state.weekIndex];
+  const counts = week ? weekScenarioCounts(week) : {};
   for (const scenario of state.model.scenarios) {
-    const count = state.model.scenario_counts[scenario] || 0;
+    const count = counts[scenario] || 0;
     const button = document.createElement("button");
     button.type = "button";
     button.className = `chip ${state.activeScenario === scenario ? "active" : ""}`;
@@ -48,8 +50,72 @@ function render() {
   }
 
   grid.innerHTML = `
+    ${renderGoalCoverage()}
+    ${renderUnscheduledItems()}
+    ${renderLocationBands(week)}
+    <p class="filter-help">Counts reflect the selected week. Filtering only affects visible activities in this week.</p>
     <div class="agenda-grid">
       ${week.days.map((day, dayIndex) => renderAgendaDay(week, day, dayIndex)).join("")}
+    </div>
+  `;
+}
+
+function weekScenarioCounts(week) {
+  const counts = {};
+  for (const scenario of state.model.scenarios) counts[scenario] = 0;
+  for (const activity of week.activities) {
+    for (const flag of activity.scenario_flags || []) {
+      counts[flag] = (counts[flag] || 0) + 1;
+    }
+  }
+  return counts;
+}
+
+function renderGoalCoverage() {
+  const goals = state.model.goal_coverage?.week || [];
+  if (!goals.length) return "";
+  return `
+    <section class="goal-panel">
+      <h2>Goal Coverage</h2>
+      <div class="goal-grid">
+        ${goals.map((goal) => `
+          <div class="goal-card status-${escapeHtml(goal.status)}">
+            <strong>${escapeHtml(goal.goal_tag.replaceAll("_", " "))}</strong>
+            <span>${goal.scheduled} scheduled · ${goal.unscheduled} unscheduled · ${goal.substitutions || 0} substitutions</span>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderUnscheduledItems() {
+  const items = state.model.unscheduled_items || [];
+  if (!items.length) return "";
+  return `
+    <section class="risk-panel">
+      <h2>Unscheduled / At Risk</h2>
+      ${items.slice(0, 8).map((item) => `
+        <div class="risk-item">
+          <strong>${escapeHtml(item.title || item.activity_id)}</strong>
+          <span>${escapeHtml((item.goal_tags || []).join(", "))}</span>
+          <span>${escapeHtml(item.reason_summary || "No candidate slot passed.")}</span>
+        </div>
+      `).join("")}
+    </section>
+  `;
+}
+
+function renderLocationBands(week) {
+  const bands = week.location_bands || [];
+  if (!bands.length) return "";
+  return `
+    <div class="location-bands">
+      ${bands.map((band) => `
+        <div class="location-band" style="grid-column: ${band.start_day_index + 1} / ${band.end_day_index + 2}">
+          ${escapeHtml(band.label)}
+        </div>
+      `).join("")}
     </div>
   `;
 }
@@ -104,6 +170,7 @@ function renderActivity(activity) {
       <div class="activity-time">${escapeHtml(activity.start_time)}-${escapeHtml(activity.end_time)}</div>
       <div class="activity-title">${escapeHtml(activity.title)}</div>
       <div class="activity-meta">${escapeHtml(activity.activity_type)} · ${escapeHtml(activity.location_id || activity.mode)} · ${escapeHtml(activity.load_level)}</div>
+      ${activity.provider_summary ? `<div class="activity-provider">${escapeHtml(activity.provider_summary)}</div>` : ""}
       <div class="badges">${badges}</div>
     </button>
   `;
