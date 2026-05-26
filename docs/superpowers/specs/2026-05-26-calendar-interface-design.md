@@ -8,6 +8,8 @@ Replace the current flat calendar table with a reviewer-first weekly calendar in
 
 The current `calendar_rows.json` artifact is correct but too row-oriented for human review. A reviewer has to scan hundreds of rows and open raw trace JSON manually to understand travel adaptations, substitutions, unavailable time, travel buffers, and rejected candidates.
 
+The first visual pass surfaced a second problem: the calendar can show scheduled rows, but it does not yet explain whether the schedule is good. A reviewer needs to see goal coverage, unscheduled work, provider ownership, member location, travel blocks, and human-readable activity names directly in the calendar.
+
 ## Chosen Approach
 
 Port the useful parts of the Figma weekly calendar into the existing FastAPI/Jinja app using plain HTML, CSS, and browser JavaScript. Do not add Vite, React, or a frontend build step for this assignment slice.
@@ -35,7 +37,7 @@ The app already writes these canonical artifacts:
 Add a Python view-model layer that converts these artifacts into a browser-friendly structure:
 
 ```text
-calendar_rows + availability + traces + rejection_summary
+calendar_rows + personalized_plan + availability + traces + rejection_summary + resource_universe
   -> calendar interface view model
   -> /api/calendar/interface
   -> static browser renderer
@@ -53,7 +55,14 @@ The `/calendar` page should show:
 - Unavailable overlays from `member_blocked` availability blocks.
 - Domain colors for the five modalities: consultation, fitness, food, medication, therapy.
 - Badges for remote, travel hotel, substitution, high load, dependency, and trace rejection.
-- Scenario chips for travel adaptations, substitutions, travel-time rejections, blocked-time rejections, remote sessions, high-load activities, and unscheduled summary.
+- Review filter chips for travel adaptations, substitutions, travel-time rejections, blocked-time rejections, remote sessions, high-load activities, and dependencies.
+- Review filter chip counts are scoped to the selected week, not the full three-month run. The UI must say: "Counts reflect the selected week. Filtering only affects visible activities in this week."
+- A goal coverage panel that shows selected-week and full-plan progress by goal tag.
+- An at-risk/unscheduled panel that shows activities that did not find placement, grouped by goal and activity.
+- Location bands under the day headers showing where the member is located or unavailable, such as Singapore, office, planned travel, last-minute travel, and in transit.
+- Travel blocks for exact travel times when available. Travel is a member constraint and should appear as blocked time in the calendar, not only as metadata.
+- Provider or specialist information on activity cards when a provider is assigned or required.
+- Display names for activity cards that are cleaner than raw scheduler names. Raw names remain in JSON and trace artifacts.
 - A click-driven trace drawer showing policy fit, resource fit, provider handoff summary, failed checks, rejected candidate examples, and source artifacts.
 
 The UI is read-only. It must not mutate the scheduler output.
@@ -101,10 +110,28 @@ The UI is read-only. It must not mutate the scheduler output.
       ]
     }
   ],
-  "scenario_counts": {
+  "run_scenario_counts": {
     "travel_adaptation": 108,
     "substitution": 129
   },
+  "goal_coverage": {
+    "week": [
+      {"goal_tag": "metabolic_health", "scheduled": 6, "unscheduled": 1, "status": "at_risk"}
+    ],
+    "full_plan": [
+      {"goal_tag": "metabolic_health", "scheduled": 54, "unscheduled": 4, "status": "on_track"}
+    ]
+  },
+  "unscheduled_items": [
+    {
+      "activity_id": "act_019",
+      "title": "Zone 2 stationary bike session",
+      "goal_tags": ["cardio", "metabolic_health"],
+      "unscheduled_count": 1,
+      "rejected_candidate_count": 14,
+      "reason_summary": "No candidate slot passed policy and resource checks."
+    }
+  ],
   "rejection_summary": {...}
 }
 ```
@@ -125,6 +152,52 @@ Each activity can have zero or more scenario flags:
 - `dependency`: trace has dependency checks beyond `dependencies_acknowledged`
 
 Scenario chips filter/highlight activities using these flags.
+
+The counts shown in the chip labels must be computed from the currently selected week in the browser. Run-level counts can remain in the API for summary panels, but they should not be used as weekly filter labels.
+
+## Goal Coverage
+
+Goal coverage is computed from scheduled calendar rows and unscheduled traces:
+
+- Scheduled counts come from `calendar_rows[*].goal_tags`.
+- Unscheduled counts come from traces whose `final_status == "unscheduled"`.
+- Rejected candidate counts come from trace `rejected_candidates`.
+- A goal is `missed` in a selected week if it has unscheduled work and no scheduled work.
+- A goal is `at_risk` if it has scheduled work but also unscheduled work or substitutions.
+- A goal is `on_track` if it has scheduled work and no unscheduled work in that scope.
+
+This is intentionally a coverage indicator, not a clinical outcome engine.
+
+## Location And Travel Display
+
+The calendar should show member location context separately from activities:
+
+- `member_blocked` blocks appear under day headers as member context, such as office time or fixed personal commitments.
+- `member_travel` blocks appear as location bands spanning all affected days.
+- Travel blocks with exact start/end times should also appear in the day agenda as unavailable rows.
+- If the seed data only has all-day travel windows, the UI can show a travel band, but the data-generation requirements must be updated to require exact travel legs.
+
+## Providers And Specialist Display
+
+Provider display should resolve from scheduler output and `resource_universe.json`:
+
+- Use scheduled task `provider_ids` from `personalized_plan.json`.
+- Resolve provider display names and provider types from `resource_universe.json`.
+- Show compact provider text on each activity card, such as `Maya Tan, trainer`.
+- If no provider is assigned but the activity has a facilitator type, show the facilitator type only.
+
+## Activity Display Names
+
+Calendar cards should use human display names. The raw activity title stays available in the trace drawer and audit files.
+
+Display-name rules:
+
+- Remove leading delivery/substitution prefixes such as `Remote or hotel-gym substitution:`.
+- Remove awkward fallback/prep prefixes when they obscure the actual activity.
+- Keep important distinctions as badges or metadata, such as `remote`, `hotel gym`, `fallback`, `chef prep`, or `substitution`.
+- Preserve clinical meaning: do not rename activities so broadly that a reviewer cannot tell what was scheduled.
+
+Food activities need stricter generation rules. The activity board should include breakfast, lunch, and dinner activities where food consumption is part of the plan. Supplements and medication protocols do not count as meals. Chef/member prep should be separate prerequisite work only when prep actually has to occur.
 
 ## Trace Drawer
 
@@ -163,3 +236,12 @@ Tests should cover:
 - `/calendar` includes the static renderer bootstrap
 
 Manual verification should include opening `/calendar`, switching weeks, applying at least one scenario chip, and opening a trace drawer.
+
+The reviewer should also verify that the first week answers these questions without opening raw JSON:
+
+- Which goals are on track, at risk, or missed?
+- Which activities failed to schedule?
+- Where is the member each day?
+- Which travel periods block activity scheduling?
+- Which provider or specialist owns each provider-led activity?
+- Which activity names still look like raw prompt artifacts rather than human calendar entries?
