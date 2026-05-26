@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elyx Audit</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #1f2933; background: #f7f8fa; }
+    header { background: #14213d; color: white; padding: 18px 28px; }
+    nav { margin-top: 10px; display: flex; gap: 16px; }
+    nav a { color: #e5e7eb; text-decoration: none; font-weight: 600; }
+    main { padding: 24px 28px; }
+    h1 { margin: 0; font-size: 28px; }
+    .stages { display: grid; gap: 16px; }
+    section { background: white; border: 1px solid #d9e2ec; padding: 18px; }
+    h2 { margin: 0 0 10px; font-size: 20px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    a { color: #0b5cad; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Elyx Audit</h1>
+    <nav>
+      <a href="/calendar">Calendar</a>
+      <a href="/summary">Summary</a>
+      <a href="/audit">Audit</a>
+    </nav>
+  </header>
+  <main>
+    <div class="stages">
+      {% for stage in stages %}
+      <section>
+        <h2>{{ stage.stage_id }}</h2>
+        <ul>
+          {% for file in stage.files %}
+          <li><a href="{{ file.url }}">{{ file.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>
