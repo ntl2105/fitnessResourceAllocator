@@ -161,6 +161,37 @@ def test_activity_view_resolves_provider_and_clean_display_title():
     assert activity["provider_summary"] == "Maya Tan, trainer"
 
 
+def test_display_title_removes_remote_fallback_prefix():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-01",
+            "start_time": "08:00",
+            "end_time": "08:30",
+            "title": "Remote fallback: Baseline movement and knee assessment",
+            "activity_type": "consultation",
+            "goal_tags": ["knee_health"],
+            "load_level": "low",
+            "location_id": "remote",
+            "mode": "remote",
+            "substitution_status": "substitution",
+            "trace_id": "trace_1",
+        }
+    ]
+
+    view_model = build_calendar_interface(
+        calendar_rows,
+        {"availability_blocks": []},
+        [],
+        {},
+    )
+
+    assert (
+        view_model["weeks"][0]["activities"][0]["display_title"]
+        == "Baseline movement and knee assessment"
+    )
+
+
 def test_goal_coverage_reports_week_and_full_plan_risk():
     calendar_rows = [
         {
@@ -225,6 +256,152 @@ def test_goal_coverage_reports_week_and_full_plan_risk():
     assert view_model["unscheduled_items"][0]["activity_id"] == "act_2"
 
 
+def test_weeks_carry_week_scoped_goal_coverage_and_unscheduled_items():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-02",
+            "start_time": "07:00",
+            "end_time": "07:40",
+            "title": "Zone 2 bike",
+            "activity_type": "fitness",
+            "goal_tags": ["cardio"],
+            "load_level": "medium",
+            "location_id": "gym",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_1",
+        },
+        {
+            "calendar_row_id": "row_task_2",
+            "date": "2026-06-09",
+            "start_time": "07:00",
+            "end_time": "07:30",
+            "title": "Mobility",
+            "activity_type": "therapy",
+            "goal_tags": ["mobility"],
+            "load_level": "low",
+            "location_id": "home",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_2",
+        },
+    ]
+    traces = [
+        {
+            "trace_id": "trace_3",
+            "activity_id": "act_3",
+            "final_status": "unscheduled",
+            "policy_fit_summary": "No candidate satisfied all policy checks.",
+            "rejected_candidates": [
+                {
+                    "reasons": [
+                        "No availability block covers physical location clinic for candidate slot."
+                    ]
+                }
+            ],
+            "constraint_checks": [],
+            "dependency_checks": [],
+            "task_instance_id": "task_3",
+        }
+    ]
+    personalized_plan = {
+        "tasks": [
+            {
+                "task_id": "task_3",
+                "activity_id": "act_3",
+                "goal_tags": ["cardio"],
+                "status": "unscheduled",
+                "target_date": "2026-06-05",
+                "title": "Cardiology consult",
+            }
+        ]
+    }
+
+    view_model = build_calendar_interface(
+        calendar_rows,
+        {"availability_blocks": []},
+        traces,
+        {"act_3": {"unscheduled_count": 1, "rejected_candidate_count": 1}},
+        personalized_plan,
+        {"providers": []},
+    )
+
+    first_week = view_model["weeks"][0]
+    second_week = view_model["weeks"][1]
+
+    assert first_week["goal_coverage"] == [
+        {
+            "goal_tag": "cardio",
+            "scheduled": 1,
+            "unscheduled": 1,
+            "substitutions": 0,
+            "status": "at_risk",
+        }
+    ]
+    assert first_week["unscheduled_items"][0]["title"] == "Cardiology consult"
+    assert first_week["unscheduled_items"][0]["reason_summary"] == (
+        "No clinic availability for this candidate slot."
+    )
+    assert second_week["goal_coverage"] == [
+        {
+            "goal_tag": "mobility",
+            "scheduled": 1,
+            "unscheduled": 0,
+            "substitutions": 0,
+            "status": "on_track",
+        }
+    ]
+    assert second_week["unscheduled_items"] == []
+
+
+def test_unscheduled_items_resolve_titles_and_goals_from_action_plan():
+    traces = [
+        {
+            "trace_id": "trace_1",
+            "activity_id": "act_002",
+            "final_status": "unscheduled",
+            "policy_fit_summary": "No candidate satisfied all policy checks.",
+            "rejected_candidates": [
+                {
+                    "start": "2026-06-05T07:00:00+08:00",
+                    "reasons": [
+                        "No availability block covers physical location clinic for candidate slot."
+                    ],
+                }
+            ],
+            "constraint_checks": [],
+            "dependency_checks": [],
+            "task_instance_id": "task_act_002_20260605_001",
+        }
+    ]
+    action_plan = {
+        "activities": [
+            {
+                "activity_id": "act_002",
+                "title": "Baseline movement and knee assessment",
+                "goal_tags": ["knee_health", "strength"],
+                "frequency": {"target_date": "2026-06-05"},
+            }
+        ]
+    }
+
+    view_model = build_calendar_interface(
+        [],
+        {"availability_blocks": []},
+        traces,
+        {"act_002": {"unscheduled_count": 1, "rejected_candidate_count": 7}},
+        {"tasks": []},
+        {"providers": []},
+        action_plan,
+    )
+
+    item = view_model["weeks"][0]["unscheduled_items"][0]
+    assert item["title"] == "Baseline movement and knee assessment"
+    assert item["goal_tags"] == ["knee_health", "strength"]
+    assert item["reason_summary"] == "No clinic availability for this candidate slot."
+
+
 def test_calendar_interface_exposes_location_bands_and_travel_blocks():
     availability = {
         "availability_blocks": [
@@ -250,8 +427,8 @@ def test_calendar_interface_exposes_location_bands_and_travel_blocks():
     )
     week = view_model["weeks"][0]
 
-    assert week["location_bands"][0]["label"] == "Work block."
-    assert week["location_bands"][1]["label"] == "Hong Kong planned travel."
+    assert week["location_bands"][0]["label"] == "Hong Kong planned travel."
+    assert len(week["location_bands"]) == 1
     assert week["travel_blocks"][0]["location_id"] == "travel_hotel"
     assert week["travel_blocks"][0]["start_hour"] == 9.5
 

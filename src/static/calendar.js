@@ -51,8 +51,8 @@ function render() {
 
   grid.innerHTML = `
     ${renderDataQualityWarnings()}
-    ${renderGoalCoverage()}
-    ${renderUnscheduledItems()}
+    ${renderGoalCoverage(week)}
+    ${renderUnscheduledItems(week)}
     ${renderLocationBands(week)}
     <p class="filter-help">Counts reflect the selected week. Filtering only affects visible activities in this week.</p>
     <div class="agenda-grid">
@@ -83,8 +83,8 @@ function weekScenarioCounts(week) {
   return counts;
 }
 
-function renderGoalCoverage() {
-  const goals = state.model.goal_coverage?.week || [];
+function renderGoalCoverage(week) {
+  const goals = week.goal_coverage || [];
   if (!goals.length) return "";
   return `
     <section class="goal-panel">
@@ -101,8 +101,8 @@ function renderGoalCoverage() {
   `;
 }
 
-function renderUnscheduledItems() {
-  const items = state.model.unscheduled_items || [];
+function renderUnscheduledItems(week) {
+  const items = week.unscheduled_items || [];
   if (!items.length) return "";
   return `
     <section class="risk-panel">

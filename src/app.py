@@ -224,6 +224,7 @@ def api_calendar_interface() -> Any:
     rejection_summary = load_json(RUN_DIR / "03_scheduling" / "rejection_summary.json")
     personalized_plan = load_json(RUN_DIR / "03_scheduling" / "personalized_plan.json")
     resource_universe = load_json(RUN_DIR / "00_inputs" / "resource_universe.json")
+    action_plan = load_json(RUN_DIR / "00_inputs" / "action_plan.json")
     return build_calendar_interface(
         calendar_rows,
         availability,
@@ -231,6 +232,7 @@ def api_calendar_interface() -> Any:
         rejection_summary,
         personalized_plan,
         resource_universe,
+        action_plan,
     )
 
 

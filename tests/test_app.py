@@ -153,6 +153,16 @@ def test_calendar_renderer_has_review_debugging_sections():
     assert ".location-band" in css_response.text
 
 
+def test_calendar_renderer_uses_week_scoped_review_panels():
+    js_response = client.get("/static/calendar.js")
+
+    assert js_response.status_code == 200
+    assert "renderGoalCoverage(week)" in js_response.text
+    assert "renderUnscheduledItems(week)" in js_response.text
+    assert "state.model.goal_coverage?.week" not in js_response.text
+    assert "state.model.unscheduled_items || []" not in js_response.text
+
+
 def test_calendar_renderer_exposes_data_quality_warnings():
     js_response = client.get("/static/calendar.js")
     css_response = client.get("/static/calendar.css")

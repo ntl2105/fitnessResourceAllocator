@@ -40,15 +40,26 @@ def build_calendar_interface(
     rejection_summary: dict[str, Any],
     personalized_plan: dict[str, Any] | None = None,
     resource_universe: dict[str, Any] | None = None,
+    action_plan: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     traces_by_id = {trace["trace_id"]: trace for trace in traces}
     plan_tasks = tasks_by_id(personalized_plan)
     providers = providers_by_id(resource_universe)
     travel_windows = member_travel_windows(availability)
+    activity_metadata = activities_by_id(action_plan)
+    activity_titles = activity_titles_by_id(calendar_rows, personalized_plan, action_plan)
     rows_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for row in calendar_rows:
         row_date = date.fromisoformat(row["date"])
         rows_by_week[monday_start(row_date)].append(row)
+
+    unscheduled_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
+    for trace in traces:
+        if trace.get("final_status") != "unscheduled":
+            continue
+        unscheduled_by_week[
+            unscheduled_week_start(trace, plan_tasks, activity_metadata)
+        ].append(trace)
 
     blocked_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for block in availability.get("availability_blocks", []):
@@ -60,7 +71,9 @@ def build_calendar_interface(
     context_by_week = context_blocks_by_week(availability)
     scenario_counts: Counter[str] = Counter()
     weeks = []
-    for week_start in sorted(set(rows_by_week) | set(blocked_by_week) | set(context_by_week)):
+    for week_start in sorted(
+        set(rows_by_week) | set(blocked_by_week) | set(context_by_week) | set(unscheduled_by_week)
+    ):
         context_blocks = sorted(
             context_by_week.get(week_start, []),
             key=lambda item: item["start"],
@@ -82,6 +95,8 @@ def build_calendar_interface(
         for activity in activities:
             scenario_counts.update(activity["scenario_flags"])
 
+        week_rows = rows_by_week.get(week_start, [])
+        week_unscheduled_traces = unscheduled_by_week.get(week_start, [])
         weeks.append(
             {
                 "week_id": iso_week_id(week_start),
@@ -90,6 +105,16 @@ def build_calendar_interface(
                 "label": week_label(week_start),
                 "days": week_days(week_start),
                 "activities": activities,
+                "goal_coverage": goal_summary(
+                    week_rows, week_unscheduled_traces, plan_tasks, activity_metadata
+                ),
+                "unscheduled_items": unscheduled_items_from_traces(
+                    week_unscheduled_traces,
+                    rejection_summary,
+                    plan_tasks,
+                    activity_titles,
+                    activity_metadata,
+                ),
                 "location_bands": [
                     location_band(block, week_start) for block in context_blocks
                 ],
@@ -114,9 +139,11 @@ def build_calendar_interface(
         "scenario_counts": {
             scenario: scenario_counts.get(scenario, 0) for scenario in SCENARIOS
         },
-        "goal_coverage": goal_coverage(calendar_rows, traces, personalized_plan),
+        "goal_coverage": goal_coverage(
+            calendar_rows, traces, personalized_plan, action_plan
+        ),
         "unscheduled_items": unscheduled_items(
-            traces, rejection_summary, personalized_plan
+            traces, rejection_summary, personalized_plan, activity_titles, action_plan
         ),
         "data_quality_warnings": data_quality_warnings(calendar_rows, availability),
         "weeks": weeks,
@@ -185,6 +212,14 @@ def providers_by_id(
     }
 
 
+def activities_by_id(action_plan: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
+    return {
+        activity["activity_id"]: activity
+        for activity in (action_plan or {}).get("activities", [])
+        if activity.get("activity_id")
+    }
+
+
 def provider_summary(
     task: dict[str, Any] | None, providers: dict[str, dict[str, Any]]
 ) -> str | None:
@@ -207,6 +242,7 @@ def display_title(raw_title: str) -> str:
     prefixes = [
         "Remote or hotel-gym substitution:",
         "No-prep fallback for",
+        "Remote fallback:",
         "Fallback:",
         "Substitution:",
     ]
@@ -229,14 +265,29 @@ def goal_coverage(
     calendar_rows: list[dict[str, Any]],
     traces: list[dict[str, Any]],
     personalized_plan: dict[str, Any] | None,
+    action_plan: dict[str, Any] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
-    plan_tasks = tasks_by_id(personalized_plan)
+    summary = goal_summary(
+        calendar_rows, traces, tasks_by_id(personalized_plan), activities_by_id(action_plan)
+    )
+    return {"week": summary, "full_plan": summary}
+
+
+def goal_summary(
+    calendar_rows: list[dict[str, Any]],
+    traces: list[dict[str, Any]],
+    plan_tasks: dict[str, dict[str, Any]],
+    activities: dict[str, dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    activities = activities or {}
     unscheduled_by_goal: Counter[str] = Counter()
     for trace in traces:
         if trace.get("final_status") != "unscheduled":
             continue
         task = plan_tasks.get(trace.get("task_instance_id", ""))
-        for goal in task.get("goal_tags", []) if task else []:
+        activity = activities.get(trace.get("activity_id", ""))
+        goals = task.get("goal_tags", []) if task else activity.get("goal_tags", [])
+        for goal in goals:
             unscheduled_by_goal[goal] += 1
 
     scheduled_by_goal: Counter[str] = Counter()
@@ -262,39 +313,131 @@ def goal_coverage(
         }
         for goal in goals
     ]
-    return {"week": summary, "full_plan": summary}
+    return summary
 
 
 def unscheduled_items(
     traces: list[dict[str, Any]],
     rejection_summary: dict[str, Any],
     personalized_plan: dict[str, Any] | None,
+    activity_titles: dict[str, str] | None = None,
+    action_plan: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    plan_tasks = tasks_by_id(personalized_plan)
+    return unscheduled_items_from_traces(
+        traces,
+        rejection_summary,
+        tasks_by_id(personalized_plan),
+        activity_titles or {},
+        activities_by_id(action_plan),
+    )
+
+
+def unscheduled_items_from_traces(
+    traces: list[dict[str, Any]],
+    rejection_summary: dict[str, Any],
+    plan_tasks: dict[str, dict[str, Any]],
+    activity_titles: dict[str, str],
+    activities: dict[str, dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    activities = activities or {}
     items = []
     for trace in traces:
         if trace.get("final_status") != "unscheduled":
             continue
         task = plan_tasks.get(trace.get("task_instance_id", ""))
         activity_id = trace.get("activity_id")
+        activity = activities.get(activity_id or "")
         summary = rejection_summary.get(activity_id, {})
         items.append(
             {
                 "activity_id": activity_id,
                 "task_instance_id": trace.get("task_instance_id"),
-                "title": activity_id,
-                "goal_tags": task.get("goal_tags", []) if task else [],
+                "title": item_title(activity_id, task, activity_titles),
+                "goal_tags": task.get("goal_tags", [])
+                if task
+                else activity.get("goal_tags", []),
                 "unscheduled_count": summary.get("unscheduled_count", 1),
                 "rejected_candidate_count": summary.get(
                     "rejected_candidate_count",
                     len(trace.get("rejected_candidates", [])),
                 ),
-                "reason_summary": trace.get("policy_fit_summary")
-                or "No candidate slot passed policy and resource checks.",
+                "reason_summary": unscheduled_reason_summary(trace),
                 "trace_id": trace.get("trace_id"),
             }
         )
     return items
+
+
+def activity_titles_by_id(
+    calendar_rows: list[dict[str, Any]],
+    personalized_plan: dict[str, Any] | None,
+    action_plan: dict[str, Any] | None = None,
+) -> dict[str, str]:
+    titles = {
+        row.get("activity_id"): display_title(row["title"])
+        for row in calendar_rows
+        if row.get("activity_id")
+    }
+    for task in (personalized_plan or {}).get("tasks", []):
+        if task.get("activity_id") and task.get("title"):
+            titles.setdefault(task["activity_id"], display_title(task["title"]))
+    for activity in (action_plan or {}).get("activities", []):
+        if activity.get("activity_id") and activity.get("title"):
+            titles.setdefault(activity["activity_id"], display_title(activity["title"]))
+    return titles
+
+
+def item_title(
+    activity_id: str | None,
+    task: dict[str, Any] | None,
+    activity_titles: dict[str, str],
+) -> str:
+    if task and task.get("title"):
+        return display_title(task["title"])
+    if activity_id and activity_id in activity_titles:
+        return activity_titles[activity_id]
+    return activity_id or "Unscheduled activity"
+
+
+def unscheduled_reason_summary(trace: dict[str, Any]) -> str:
+    reason_text = " ".join(
+        reason
+        for candidate in trace.get("rejected_candidates", [])
+        for reason in candidate.get("reasons", [])
+    )
+    if "physical location clinic" in reason_text:
+        return "No clinic availability for this candidate slot."
+    if "physical location lab" in reason_text:
+        return "No lab availability for this candidate slot."
+    if "No availability block covers candidate slot" in reason_text:
+        return "Required provider or resource was unavailable for candidate slots."
+    if "member travel" in reason_text.lower():
+        return "Candidate slots conflicted with member travel constraints."
+    if "overlaps" in reason_text.lower():
+        return "Candidate slots overlapped existing scheduled activities."
+    return (
+        trace.get("policy_fit_summary")
+        or "No candidate slot passed policy and resource checks."
+    )
+
+
+def unscheduled_week_start(
+    trace: dict[str, Any],
+    plan_tasks: dict[str, dict[str, Any]],
+    activities: dict[str, dict[str, Any]] | None = None,
+) -> date:
+    task = plan_tasks.get(trace.get("task_instance_id", ""))
+    for key in ("target_date", "date"):
+        if task and task.get(key):
+            return monday_start(date.fromisoformat(task[key]))
+    activity = (activities or {}).get(trace.get("activity_id", "")) or {}
+    frequency = activity.get("frequency", {})
+    if frequency.get("target_date"):
+        return monday_start(date.fromisoformat(frequency["target_date"]))
+    for candidate in trace.get("rejected_candidates", []):
+        if candidate.get("start"):
+            return monday_start(datetime.fromisoformat(candidate["start"]).date())
+    return date.today()
 
 
 def data_quality_warnings(
@@ -356,7 +499,7 @@ def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:
 def context_blocks_by_week(availability: dict[str, Any]) -> dict[date, list[dict[str, Any]]]:
     by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for block in availability.get("availability_blocks", []):
-        if block.get("resource_type") not in {"member_blocked", "member_travel"}:
+        if block.get("resource_type") != "member_travel":
             continue
         start = datetime.fromisoformat(block["start"])
         by_week[monday_start(start.date())].append(block)
