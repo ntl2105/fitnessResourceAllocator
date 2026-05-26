@@ -1,0 +1,6516 @@
+{
+  "activities": [
+    {
+      "activity_family_id": "fam_001",
+      "activity_id": "act_001",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "lab"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [
+        {
+          "hours": 10,
+          "must_happen": "before",
+          "type": "fasting"
+        }
+      ],
+      "details": "Complete baseline fasting lab panel",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-04",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "metabolic_health",
+        "preventive_care"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 1,
+      "raw_clinical_data_required": true,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_lab_draw_station"
+      ],
+      "required_provider_ids": [
+        "provider_lab_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Baseline fasting metabolic lab panel"
+    },
+    {
+      "activity_family_id": "fam_002",
+      "activity_id": "act_002",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Assess knee and back constraints before progression",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-05",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 2,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_003"
+      ],
+      "title": "Baseline movement and knee assessment"
+    },
+    {
+      "activity_family_id": "fam_002",
+      "activity_id": "act_003",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "summarized care context",
+        "recent blockers"
+      ],
+      "dependencies": [],
+      "details": "Remote fallback when in-person logistics or travel prevent the primary consult.",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-05",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 2,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote fallback: Baseline movement and knee assessment"
+    },
+    {
+      "activity_family_id": "fam_003",
+      "activity_id": "act_004",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [
+        {
+          "activity_title_contains": "Baseline fasting metabolic lab panel",
+          "must_happen": "before",
+          "offset_days_min": 2,
+          "type": "prerequisite_activity"
+        }
+      ],
+      "details": "Review baseline labs and approve protocol",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-12",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "metabolic_health",
+        "preventive_care"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 3,
+      "raw_clinical_data_required": true,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physician_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_005"
+      ],
+      "title": "Physician lab review and metabolic plan"
+    },
+    {
+      "activity_family_id": "fam_003",
+      "activity_id": "act_005",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "summarized care context",
+        "recent blockers"
+      ],
+      "dependencies": [
+        {
+          "activity_title_contains": "Baseline fasting metabolic lab panel",
+          "must_happen": "before",
+          "offset_days_min": 2,
+          "type": "prerequisite_activity"
+        }
+      ],
+      "details": "Remote fallback when in-person logistics or travel prevent the primary consult.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-12",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "metabolic_health",
+        "preventive_care"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 3,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physician_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote fallback: Physician lab review and metabolic plan"
+    },
+    {
+      "activity_family_id": "fam_004",
+      "activity_id": "act_006",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Translate metabolic goals into meals",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-10",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 4,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_dietitian_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Dietitian metabolic nutrition consult"
+    },
+    {
+      "activity_family_id": "fam_005",
+      "activity_id": "act_007",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [
+        {
+          "activity_title_contains": "Baseline movement",
+          "must_happen": "before",
+          "offset_days_min": 1,
+          "type": "prerequisite_activity"
+        }
+      ],
+      "details": "Translate physio constraints into training",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-13",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 5,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_gym_strength"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_008"
+      ],
+      "title": "Trainer onboarding and strength technique review"
+    },
+    {
+      "activity_family_id": "fam_005",
+      "activity_id": "act_008",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "summarized care context",
+        "recent blockers"
+      ],
+      "dependencies": [
+        {
+          "activity_title_contains": "Baseline movement",
+          "must_happen": "before",
+          "offset_days_min": 1,
+          "type": "prerequisite_activity"
+        }
+      ],
+      "details": "Remote fallback when in-person logistics or travel prevent the primary consult.",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "preferred_time_windows": [
+          "07:00-10:00"
+        ],
+        "target_date": "2026-06-13",
+        "type": "once",
+        "window_days": 7
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 5,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote fallback: Trainer onboarding and strength technique review"
+    },
+    {
+      "activity_family_id": "fam_006",
+      "activity_id": "act_009",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Monthly physician review",
+      "duration_minutes": 30,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "13:00-16:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "preventive_care",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "consolidation",
+        "travel"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 6,
+      "raw_clinical_data_required": true,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physician_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Monthly physician review"
+    },
+    {
+      "activity_family_id": "fam_007",
+      "activity_id": "act_010",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Monthly dietitian adjustment",
+      "duration_minutes": 30,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "08:00-12:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "consolidation",
+        "travel"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 7,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_dietitian_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Monthly dietitian check-in"
+    },
+    {
+      "activity_family_id": "fam_008",
+      "activity_id": "act_011",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Physio progression review",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
+        "preferred_time_windows": [
+          "09:00-12:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "consolidation",
+        "pain_escalation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 8,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_012"
+      ],
+      "title": "Physio progression review"
+    },
+    {
+      "activity_family_id": "fam_008",
+      "activity_id": "act_012",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "summarized care context",
+        "recent blockers"
+      ],
+      "dependencies": [],
+      "details": "Remote fallback when in-person logistics or travel prevent the primary consult.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
+        "preferred_time_windows": [
+          "09:00-12:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "consolidation",
+        "pain_escalation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 8,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote fallback: Physio progression review"
+    },
+    {
+      "activity_family_id": "fam_009",
+      "activity_id": "act_013",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Weekly adherence and travel planning",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "16:00-18:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "adherence",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 9,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Weekly health coach plan review"
+    },
+    {
+      "activity_family_id": "fam_010",
+      "activity_id": "act_014",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current goals",
+        "recent adherence summary",
+        "relevant constraints"
+      ],
+      "dependencies": [],
+      "details": "Post-travel recovery triage",
+      "duration_minutes": 15,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:30"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "recovery",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "provider_notes",
+        "next_actions"
+      ],
+      "prep_required": false,
+      "priority": 10,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Post-travel recovery triage"
+    },
+    {
+      "activity_family_id": "fam_011",
+      "activity_id": "act_015",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Build lower-body strength with knee-safe technique.",
+      "duration_minutes": 55,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "monday",
+          "wednesday",
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "high",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 11,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_gym_strength"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_016"
+      ],
+      "title": "Trainer-led lower-body strength session"
+    },
+    {
+      "activity_family_id": "fam_011",
+      "activity_id": "act_016",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "knee limitation summary",
+        "current training goal"
+      ],
+      "dependencies": [],
+      "details": "Preserves training intent while reducing provider, equipment, or travel constraints.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "monday",
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 11,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands",
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote or hotel-gym substitution: Trainer-led lower-body strength session"
+    },
+    {
+      "activity_family_id": "fam_012",
+      "activity_id": "act_017",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Build upper-body strength while managing total weekly load.",
+      "duration_minutes": 50,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 12,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_gym_strength"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_018"
+      ],
+      "title": "Trainer-led upper-body strength session"
+    },
+    {
+      "activity_family_id": "fam_012",
+      "activity_id": "act_018",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "knee limitation summary",
+        "current training goal"
+      ],
+      "dependencies": [],
+      "details": "Preserves training intent while reducing provider, equipment, or travel constraints.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 12,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands",
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote or hotel-gym substitution: Trainer-led upper-body strength session"
+    },
+    {
+      "activity_family_id": "fam_013",
+      "activity_id": "act_019",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Maintain aerobic base without knee impact.",
+      "duration_minutes": 40,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "monday",
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 13,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_stationary_bike"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Zone 2 stationary bike session"
+    },
+    {
+      "activity_family_id": "fam_014",
+      "activity_id": "act_020",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Low-impact cardio when running is not appropriate.",
+      "duration_minutes": 35,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "wednesday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 14,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Incline walking cardio"
+    },
+    {
+      "activity_family_id": "fam_015",
+      "activity_id": "act_021",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Use pool-based cardio during higher-resource travel.",
+      "duration_minutes": 40,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 15,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_pool"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Swim aerobic session"
+    },
+    {
+      "activity_family_id": "fam_016",
+      "activity_id": "act_022",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Maintain hips, ankles, back, and knee tolerance.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 5,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "mobility",
+        "recovery",
+        "knee_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 16,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Morning mobility circuit"
+    },
+    {
+      "activity_family_id": "fam_017",
+      "activity_id": "act_023",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "travel_hotel",
+        "home"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Reduce back tightness and restart movement after flights.",
+      "duration_minutes": 25,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "mobility",
+        "travel_continuity",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 17,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Post-flight mobility reset"
+    },
+    {
+      "activity_family_id": "fam_018",
+      "activity_id": "act_024",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Short knee stability work to support lower-body training.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "tuesday",
+          "thursday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 18,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_resistance_bands"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Knee stability mini-session"
+    },
+    {
+      "activity_family_id": "fam_019",
+      "activity_id": "act_025",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Use video coaching when primary trainer cannot attend.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 19,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_026"
+      ],
+      "title": "Remote form-check strength session"
+    },
+    {
+      "activity_family_id": "fam_019",
+      "activity_id": "act_026",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "knee limitation summary",
+        "current training goal"
+      ],
+      "dependencies": [],
+      "details": "Preserves training intent while reducing provider, equipment, or travel constraints.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "travel_continuity"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 19,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands",
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote or hotel-gym substitution: Remote form-check strength session"
+    },
+    {
+      "activity_family_id": "fam_020",
+      "activity_id": "act_027",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "gym",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Build trunk strength to reduce back tightness risk.",
+      "duration_minutes": 30,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "back_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 20,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat",
+        "eq_resistance_bands"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Core and anti-rotation session"
+    },
+    {
+      "activity_family_id": "fam_021",
+      "activity_id": "act_028",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "office"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Use work-compatible walking to increase low-intensity activity.",
+      "duration_minutes": 25,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "monday",
+          "wednesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 21,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Outdoor walking meeting block"
+    },
+    {
+      "activity_family_id": "fam_022",
+      "activity_id": "act_029",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Minimum effective strength dose during low-resource travel.",
+      "duration_minutes": 30,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 22,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_resistance_bands"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Hotel-room resistance band workout"
+    },
+    {
+      "activity_family_id": "fam_023",
+      "activity_id": "act_030",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Progress compound strength only when sleep and knee status are acceptable.",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "high",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 23,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_gym_strength"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_031"
+      ],
+      "title": "Technique-focused deadlift progression"
+    },
+    {
+      "activity_family_id": "fam_023",
+      "activity_id": "act_031",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "knee limitation summary",
+        "current training goal"
+      ],
+      "dependencies": [],
+      "details": "Preserves training intent while reducing provider, equipment, or travel constraints.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 23,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands",
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote or hotel-gym substitution: Technique-focused deadlift progression"
+    },
+    {
+      "activity_family_id": "fam_024",
+      "activity_id": "act_032",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "gym"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Improve balance and knee control for injury prevention.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "monday",
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "mobility"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 24,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Single-leg balance and proprioception"
+    },
+    {
+      "activity_family_id": "fam_025",
+      "activity_id": "act_033",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Light movement after dinner to support glucose and sleep.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 4,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "thursday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "sleep",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 25,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Evening decompression walk"
+    },
+    {
+      "activity_family_id": "fam_026",
+      "activity_id": "act_034",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Reduce screen strain during intense work blocks.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 5,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "recovery",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 26,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Short eye exercise break"
+    },
+    {
+      "activity_family_id": "fam_027",
+      "activity_id": "act_035",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Short movement snack when schedule blocks full workouts.",
+      "duration_minutes": 12,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 27,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Stair-climb micro-cardio"
+    },
+    {
+      "activity_family_id": "fam_028",
+      "activity_id": "act_036",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Long low-intensity walk to support aerobic base and recovery.",
+      "duration_minutes": 60,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "sleep"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 28,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Weekend long walk"
+    },
+    {
+      "activity_family_id": "fam_029",
+      "activity_id": "act_037",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym",
+        "home"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Prepare body for strength sessions and lower injury risk.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "monday",
+          "wednesday",
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "recovery",
+        "mobility"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 29,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Mobility plus breathwork warm-up"
+    },
+    {
+      "activity_family_id": "fam_030",
+      "activity_id": "act_038",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Prevent stiffness and support energy during travel days.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "travel_continuity",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 30,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel-day circulation walk"
+    },
+    {
+      "activity_family_id": "fam_031",
+      "activity_id": "act_039",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current cardio goal"
+      ],
+      "dependencies": [],
+      "details": "Short moderate intervals when sleep and knee status are acceptable.",
+      "duration_minutes": 25,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "cardio",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 31,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_stationary_bike"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Bike interval primer"
+    },
+    {
+      "activity_family_id": "fam_032",
+      "activity_id": "act_040",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "gym"
+      ],
+      "care_context_required": [
+        "current training goal",
+        "knee/back constraints"
+      ],
+      "dependencies": [],
+      "details": "Integrate safe progression after baseline and travel phases.",
+      "duration_minutes": 60,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "consolidation"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "heart_rate",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 32,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_gym_strength"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_041"
+      ],
+      "title": "Trainer-led full-body consolidation session"
+    },
+    {
+      "activity_family_id": "fam_032",
+      "activity_id": "act_041",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "remote",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "knee limitation summary",
+        "current training goal"
+      ],
+      "dependencies": [],
+      "details": "Preserves training intent while reducing provider, equipment, or travel constraints.",
+      "duration_minutes": 45,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "consolidation"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "RPE",
+        "knee_discomfort_0_10"
+      ],
+      "prep_required": false,
+      "priority": 32,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [
+        "eq_resistance_bands",
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [
+        "provider_trainer_remote_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "trainer",
+        "physiotherapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Remote or hotel-gym substitution: Trainer-led full-body consolidation session"
+    },
+    {
+      "activity_family_id": "fam_033",
+      "activity_id": "act_042",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [
+        {
+          "can_be_done_by_member": true,
+          "can_be_done_by_provider": true,
+          "must_happen": "before",
+          "offset_minutes_min": 30,
+          "prep_duration_minutes": 45,
+          "provider_type": "chef",
+          "type": "prep_task"
+        }
+      ],
+      "details": "Protein-forward breakfast requiring chef or member prep.",
+      "duration_minutes": 30,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": true,
+      "priority": 33,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_meal_prep_kit"
+      ],
+      "required_provider_ids": [
+        "provider_chef_001"
+      ],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "chef"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_043"
+      ],
+      "title": "High-protein prepared breakfast"
+    },
+    {
+      "activity_family_id": "fam_033",
+      "activity_id": "act_043",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel",
+        "home"
+      ],
+      "care_context_required": [
+        "nutrition goal",
+        "prep constraint"
+      ],
+      "dependencies": [],
+      "details": "Purchased or assembled option preserving nutrition intent when prep fails.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "energy_after_meal"
+      ],
+      "prep_required": false,
+      "priority": 33,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "No-prep fallback for high-protein prepared breakfast"
+    },
+    {
+      "activity_family_id": "fam_034",
+      "activity_id": "act_044",
+      "activity_type": "food",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Hotel breakfast rule: protein first, fiber second.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 34,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel protein breakfast rule"
+    },
+    {
+      "activity_family_id": "fam_035",
+      "activity_id": "act_045",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Lean protein, vegetables, and slow carbohydrate at lunch.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 35,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Metabolic lunch plate"
+    },
+    {
+      "activity_family_id": "fam_036",
+      "activity_id": "act_046",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [
+        {
+          "can_be_done_by_member": true,
+          "can_be_done_by_provider": true,
+          "must_happen": "before",
+          "offset_minutes_min": 30,
+          "prep_duration_minutes": 90,
+          "provider_type": "chef",
+          "type": "prep_task"
+        }
+      ],
+      "details": "Batch prep high-protein meals for decision-fatigue reduction.",
+      "duration_minutes": 90,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": true,
+      "priority": 36,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_meal_prep_kit"
+      ],
+      "required_provider_ids": [
+        "provider_chef_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "chef"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_047"
+      ],
+      "title": "Chef batch prep for weekday meals"
+    },
+    {
+      "activity_family_id": "fam_036",
+      "activity_id": "act_047",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel",
+        "home"
+      ],
+      "care_context_required": [
+        "nutrition goal",
+        "prep constraint"
+      ],
+      "dependencies": [],
+      "details": "Purchased or assembled option preserving nutrition intent when prep fails.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "adherence"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "energy_after_meal"
+      ],
+      "prep_required": false,
+      "priority": 36,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "No-prep fallback for chef batch prep for weekday meals"
+    },
+    {
+      "activity_family_id": "fam_037",
+      "activity_id": "act_048",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "gym",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Protein meal or shake after strength training.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 37,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Post-training protein meal"
+    },
+    {
+      "activity_family_id": "fam_038",
+      "activity_id": "act_049",
+      "activity_type": "food",
+      "allowed_locations": [
+        "travel_hotel",
+        "office"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Travel dinner rules: protein-forward, alcohol cap, vegetables first.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 38,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Restaurant dinner guardrail"
+    },
+    {
+      "activity_family_id": "fam_039",
+      "activity_id": "act_050",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Daily check for fiber target.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 39,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Fiber target check"
+    },
+    {
+      "activity_family_id": "fam_040",
+      "activity_id": "act_051",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "gym",
+        "clinic"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Hydration and electrolyte check before heat/cold therapy.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "recovery",
+        "therapy"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 40,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Hydration before sauna or ice bath"
+    },
+    {
+      "activity_family_id": "fam_041",
+      "activity_id": "act_052",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "office"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Repeatable meal experiment to observe glucose response.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 41,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_cgm"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "CGM-guided meal experiment"
+    },
+    {
+      "activity_family_id": "fam_042",
+      "activity_id": "act_053",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Stop caffeine after 14:00 to protect sleep.",
+      "duration_minutes": 2,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "sleep",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 42,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Late caffeine cutoff"
+    },
+    {
+      "activity_family_id": "fam_043",
+      "activity_id": "act_054",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [
+        {
+          "can_be_done_by_member": true,
+          "can_be_done_by_provider": true,
+          "must_happen": "before",
+          "offset_minutes_min": 30,
+          "prep_duration_minutes": 90,
+          "provider_type": "chef",
+          "type": "prep_task"
+        }
+      ],
+      "details": "Prepare travel snack pack to avoid poor airport meals.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "15:00-18:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": true,
+      "priority": 43,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_055"
+      ],
+      "title": "Travel snack pack preparation"
+    },
+    {
+      "activity_family_id": "fam_043",
+      "activity_id": "act_055",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel",
+        "home"
+      ],
+      "care_context_required": [
+        "nutrition goal",
+        "prep constraint"
+      ],
+      "dependencies": [],
+      "details": "Purchased or assembled option preserving nutrition intent when prep fails.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "15:00-18:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "energy_after_meal"
+      ],
+      "prep_required": false,
+      "priority": 43,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "No-prep fallback for travel snack pack preparation"
+    },
+    {
+      "activity_family_id": "fam_044",
+      "activity_id": "act_056",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Review meals, groceries, and travel constraints for next week.",
+      "duration_minutes": 25,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 44,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Weekend meal planning review"
+    },
+    {
+      "activity_family_id": "fam_045",
+      "activity_id": "act_057",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Confirm protein target by dinner.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "nutrition",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 45,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Protein target confirmation"
+    },
+    {
+      "activity_family_id": "fam_046",
+      "activity_id": "act_058",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Finish dinner at least 2.5 hours before target bedtime when feasible.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "07:30-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "sleep",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 46,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Dinner-to-bedtime spacing"
+    },
+    {
+      "activity_family_id": "fam_047",
+      "activity_id": "act_059",
+      "activity_type": "food",
+      "allowed_locations": [
+        "travel_hotel",
+        "office"
+      ],
+      "care_context_required": [
+        "metabolic goal",
+        "food preferences",
+        "travel schedule"
+      ],
+      "dependencies": [],
+      "details": "Use prepared or ordered meal fallback when chef prep is unavailable.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "07:30-09:00",
+          "12:00-13:30",
+          "18:30-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "meal_completed",
+        "protein_servings",
+        "fiber_servings",
+        "post_meal_energy"
+      ],
+      "prep_required": false,
+      "priority": 47,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Prepared travel meal fallback"
+    },
+    {
+      "activity_family_id": "fam_048",
+      "activity_id": "act_060",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [
+        {
+          "meal_window": "breakfast",
+          "must_happen": "with_or_after_meal",
+          "offset_minutes_max": 30,
+          "type": "food_timing"
+        }
+      ],
+      "details": "Take approved morning supplements with food.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "adherence",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 48,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Morning supplement protocol with breakfast"
+    },
+    {
+      "activity_family_id": "fam_049",
+      "activity_id": "act_061",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Take approved evening magnesium if physician-approved and tolerated.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "sleep",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 49,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Evening magnesium protocol"
+    },
+    {
+      "activity_family_id": "fam_050",
+      "activity_id": "act_062",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [
+        {
+          "meal_window": "breakfast",
+          "must_happen": "with_or_after_meal",
+          "offset_minutes_max": 30,
+          "type": "food_timing"
+        }
+      ],
+      "details": "Take weekly physician-approved vitamin D dose.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "adherence",
+        "preventive_care"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 50,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Vitamin D weekly dose reminder"
+    },
+    {
+      "activity_family_id": "fam_051",
+      "activity_id": "act_063",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Replace or check CGM sensor on schedule.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "metabolic_health",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 51,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_cgm"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "CGM sensor replacement"
+    },
+    {
+      "activity_family_id": "fam_052",
+      "activity_id": "act_064",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Measure blood pressure at home with seated protocol.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "preventive_care",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 52,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_bp_monitor"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Blood pressure home check"
+    },
+    {
+      "activity_family_id": "fam_053",
+      "activity_id": "act_065",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Pack travel supplements before departure.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "travel_continuity",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 53,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel supplement packing check"
+    },
+    {
+      "activity_family_id": "fam_054",
+      "activity_id": "act_066",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Record side effects and route concerns to physician.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "preventive_care",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 54,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Medication side-effect check-in"
+    },
+    {
+      "activity_family_id": "fam_055",
+      "activity_id": "act_067",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "If a dose is missed, follow safe skip rule instead of doubling.",
+      "duration_minutes": 2,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 55,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Late medication recovery rule"
+    },
+    {
+      "activity_family_id": "fam_056",
+      "activity_id": "act_068",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Use hydration protocol on flight and post-flight day.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "travel_continuity",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 56,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Hydration-electrolyte travel protocol"
+    },
+    {
+      "activity_family_id": "fam_057",
+      "activity_id": "act_069",
+      "activity_type": "medication",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "approved supplement/medication list",
+        "meal timing rule"
+      ],
+      "dependencies": [],
+      "details": "Prepare supplement list and adherence summary for physician review.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "preventive_care",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "miss_reason",
+        "side_effect_flag"
+      ],
+      "prep_required": false,
+      "priority": 57,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "physician",
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Quarterly supplement review prep"
+    },
+    {
+      "activity_family_id": "fam_058",
+      "activity_id": "act_070",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "gym",
+        "clinic"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [
+        {
+          "must_happen": "before",
+          "offset_minutes_min": 30,
+          "type": "hydration"
+        }
+      ],
+      "details": "Use sauna when facility is available and hydration dependency is met.",
+      "duration_minutes": 30,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "08:00-11:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery",
+        "sleep"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 58,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_sauna"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_071"
+      ],
+      "title": "Sauna recovery session"
+    },
+    {
+      "activity_family_id": "fam_058",
+      "activity_id": "act_071",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep goal"
+      ],
+      "dependencies": [],
+      "details": "Facility-free recovery option when sauna/ice bath is unavailable.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery",
+        "sleep"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day"
+      ],
+      "prep_required": false,
+      "priority": 58,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Breathwork and mobility fallback for sauna recovery session"
+    },
+    {
+      "activity_family_id": "fam_059",
+      "activity_id": "act_072",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Cold exposure session after high-load week if appropriate.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "08:00-11:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 59,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_ice_bath"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_073"
+      ],
+      "title": "Ice bath recovery session"
+    },
+    {
+      "activity_family_id": "fam_059",
+      "activity_id": "act_073",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep goal"
+      ],
+      "dependencies": [],
+      "details": "Facility-free recovery option when sauna/ice bath is unavailable.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day"
+      ],
+      "prep_required": false,
+      "priority": 59,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Breathwork and mobility fallback for ice bath recovery session"
+    },
+    {
+      "activity_family_id": "fam_060",
+      "activity_id": "act_074",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Evening recovery routine to support sleep.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 4,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "thursday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "sleep",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 60,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Guided breathwork downshift"
+    },
+    {
+      "activity_family_id": "fam_061",
+      "activity_id": "act_075",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "gym"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Recovery protocol after strength training.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "monday",
+          "wednesday",
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "recovery",
+        "mobility"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 61,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Post-training mobility recovery"
+    },
+    {
+      "activity_family_id": "fam_062",
+      "activity_id": "act_076",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Sleep protection routine during travel.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 5,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "sleep",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 62,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_sleep_tracker"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel sleep wind-down protocol"
+    },
+    {
+      "activity_family_id": "fam_063",
+      "activity_id": "act_077",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Remote therapist support during pain escalation.",
+      "duration_minutes": 30,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-11:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "recovery",
+        "pain_escalation"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 63,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_recovery_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Recovery therapist remote session"
+    },
+    {
+      "activity_family_id": "fam_064",
+      "activity_id": "act_078",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [
+        {
+          "must_happen": "before",
+          "offset_minutes_min": 30,
+          "type": "hydration"
+        }
+      ],
+      "details": "Clinic recovery therapy when facilities and schedule align.",
+      "duration_minutes": 45,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "08:00-11:00",
+          "18:45-20:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "medium",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 64,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_ice_bath",
+        "eq_sauna"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [
+        "act_079"
+      ],
+      "title": "Contrast therapy clinic block"
+    },
+    {
+      "activity_family_id": "fam_064",
+      "activity_id": "act_079",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep goal"
+      ],
+      "dependencies": [],
+      "details": "Facility-free recovery option when sauna/ice bath is unavailable.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "therapy",
+        "recovery"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day"
+      ],
+      "prep_required": false,
+      "priority": 64,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Breathwork and mobility fallback for contrast therapy clinic block"
+    },
+    {
+      "activity_family_id": "fam_065",
+      "activity_id": "act_080",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "recent load",
+        "sleep trend",
+        "pain trend"
+      ],
+      "dependencies": [],
+      "details": "Low-stimulation routine replacing late work or screen exposure.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 5,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "sleep",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "sleep_quality_next_day",
+        "recovery_score"
+      ],
+      "prep_required": false,
+      "priority": 65,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_sleep_tracker"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "therapist"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Low-stimulation evening routine"
+    },
+    {
+      "activity_family_id": "fam_066",
+      "activity_id": "act_081",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review steps and add a short walk if below target.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "18:00-20:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "cardio",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 66,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Daily step target review"
+    },
+    {
+      "activity_family_id": "fam_067",
+      "activity_id": "act_082",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review sleep and activity trends with health coach.",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "16:00-18:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "adherence",
+        "sleep"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 67,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Weekly wearable data review"
+    },
+    {
+      "activity_family_id": "fam_068",
+      "activity_id": "act_083",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Check whether planned meals are being followed.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "12:00-13:30"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 68,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Midweek meal adherence check"
+    },
+    {
+      "activity_family_id": "fam_069",
+      "activity_id": "act_084",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Use anchored 1-10 energy check to avoid defaulting to 6 or 7.",
+      "duration_minutes": 3,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "08:00-09:00"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "sleep",
+        "adherence"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 69,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Morning energy calibration check"
+    },
+    {
+      "activity_family_id": "fam_070",
+      "activity_id": "act_085",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Log knee discomfort after lower-body or cardio sessions.",
+      "duration_minutes": 3,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 3,
+        "preferred_days": [
+          "monday",
+          "wednesday",
+          "saturday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 70,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Knee pain post-session log"
+    },
+    {
+      "activity_family_id": "fam_071",
+      "activity_id": "act_086",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review upcoming travel, provider conflicts, and high-load days.",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "16:00-18:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "adherence",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 71,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Sunday next-week plan preview"
+    },
+    {
+      "activity_family_id": "fam_072",
+      "activity_id": "act_087",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Apply low-light and wind-down routine on arrival night.",
+      "duration_minutes": 20,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "20:00-22:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "sleep",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 72,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_sleep_tracker"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel arrival sleep protection"
+    },
+    {
+      "activity_family_id": "fam_073",
+      "activity_id": "act_088",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Move before flight to reduce back tightness.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "06:00-08:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "mobility",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 73,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Pre-flight mobility primer"
+    },
+    {
+      "activity_family_id": "fam_074",
+      "activity_id": "act_089",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "clinic"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Confirm home BP pattern if elevated.",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
+        "preferred_time_windows": [
+          "09:00-12:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "preventive_care",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 74,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_bp_monitor"
+      ],
+      "required_provider_ids": [
+        "provider_physician_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Clinic blood pressure verification"
+    },
+    {
+      "activity_family_id": "fam_075",
+      "activity_id": "act_090",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review what worked and failed after travel meals.",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "13:00-16:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes"
+      ],
+      "prep_required": false,
+      "priority": 75,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_dietitian_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason.",
+        "next_action": "Try next valid slot in same planning week if health load allows."
+      },
+      "substitution_activity_ids": [],
+      "title": "Nutrition travel debrief"
+    },
+    {
+      "activity_family_id": "fam_076",
+      "activity_id": "act_091",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [
+        "provider_trainer_remote_001"
+      ],
+      "details": "Confirm hotel gym equipment before departure and preselect substitutions.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "09:00-11:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "travel_continuity",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 76,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "trainer"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel gym equipment audit"
+    },
+    {
+      "activity_family_id": "fam_077",
+      "activity_id": "act_092",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review which goals felt useful and which generated friction.",
+      "duration_minutes": 25,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "16:00-18:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "adherence",
+        "preventive_care"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 77,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Quarterly goal reflection"
+    },
+    {
+      "activity_family_id": "fam_078",
+      "activity_id": "act_093",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Mobility circuit for hotel-room only travel days.",
+      "duration_minutes": 18,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "wednesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "mobility",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 78,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_yoga_mat"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Low-resource hotel-room mobility"
+    },
+    {
+      "activity_family_id": "fam_079",
+      "activity_id": "act_094",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Short activation circuit to preserve lower-body patterning during travel.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "06:30-08:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "strength",
+        "knee_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 79,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "trainer"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "No-equipment glute activation"
+    },
+    {
+      "activity_family_id": "fam_080",
+      "activity_id": "act_095",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Choose dinner constraints before client dinners to reduce decision fatigue.",
+      "duration_minutes": 5,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "tuesday",
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "17:00-18:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 80,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "dietitian"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Restaurant ordering precommitment"
+    },
+    {
+      "activity_family_id": "fam_081",
+      "activity_id": "act_096",
+      "activity_type": "fitness",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Short easy walk after dinner when schedule and safety permit.",
+      "duration_minutes": 15,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 4,
+        "preferred_days": [
+          "monday",
+          "tuesday",
+          "thursday",
+          "sunday"
+        ],
+        "preferred_time_windows": [
+          "20:00-21:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "metabolic_health",
+        "sleep"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 81,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Post-dinner glucose walk"
+    },
+    {
+      "activity_family_id": "fam_082",
+      "activity_id": "act_097",
+      "activity_type": "therapy",
+      "allowed_locations": [
+        "home",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Set curtains, room temperature, charger placement, and screen cutoff before sleep.",
+      "duration_minutes": 8,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_time_windows": [
+          "21:30-22:30"
+        ],
+        "type": "daily"
+      },
+      "goal_tags": [
+        "sleep",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 82,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [
+        "eq_sleep_tracker"
+      ],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": true,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Sleep environment setup"
+    },
+    {
+      "activity_family_id": "fam_083",
+      "activity_id": "act_098",
+      "activity_type": "food",
+      "allowed_locations": [
+        "office",
+        "travel_hotel"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Use two-drink cap or non-alcoholic option during client dinners.",
+      "duration_minutes": 3,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 2,
+        "preferred_days": [
+          "wednesday",
+          "friday"
+        ],
+        "preferred_time_windows": [
+          "17:00-18:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "sleep",
+        "metabolic_health"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 83,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "dietitian"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Alcohol boundary reminder"
+    },
+    {
+      "activity_family_id": "fam_084",
+      "activity_id": "act_099",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Summarize current knee restrictions for trainer before next progression block.",
+      "duration_minutes": 10,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
+        "preferred_time_windows": [
+          "12:00-15:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "knee_health",
+        "strength"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 84,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "trainer"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Physio note handoff to trainer"
+    },
+    {
+      "activity_family_id": "fam_085",
+      "activity_id": "act_100",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Check whether external provider notes are sufficient for next plan adjustment.",
+      "duration_minutes": 15,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "thursday"
+        ],
+        "preferred_time_windows": [
+          "13:00-16:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "adherence",
+        "preventive_care"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 85,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_healthcoach_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Provider handoff quality check"
+    },
+    {
+      "activity_family_id": "fam_086",
+      "activity_id": "act_101",
+      "activity_type": "food",
+      "allowed_locations": [
+        "travel_hotel",
+        "office"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Hit a minimum protein target on flight days using prepared or purchased options.",
+      "duration_minutes": 10,
+      "facilitator_type": "self_guided",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "wednesday"
+        ],
+        "preferred_time_windows": [
+          "07:00-09:00"
+        ],
+        "preferred_week": "first",
+        "type": "monthly"
+      },
+      "goal_tags": [
+        "nutrition",
+        "travel_continuity"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 86,
+      "raw_clinical_data_required": false,
+      "remote_allowed": false,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "dietitian"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Travel-day protein minimum"
+    },
+    {
+      "activity_family_id": "fam_087",
+      "activity_id": "act_102",
+      "activity_type": "consultation",
+      "allowed_locations": [
+        "remote"
+      ],
+      "care_context_required": [
+        "current phase",
+        "travel schedule",
+        "recent adherence"
+      ],
+      "dependencies": [],
+      "details": "Review whether high-load activities should be paused after knee discomfort.",
+      "duration_minutes": 20,
+      "facilitator_type": "provider",
+      "frequency": {
+        "count": 1,
+        "preferred_days": [
+          "monday"
+        ],
+        "preferred_time_windows": [
+          "08:00-10:00"
+        ],
+        "type": "weekly"
+      },
+      "goal_tags": [
+        "pain_escalation",
+        "recovery"
+      ],
+      "is_primary": true,
+      "journey_phase_applicability": [
+        "baseline",
+        "travel",
+        "pain_escalation",
+        "consolidation"
+      ],
+      "load_level": "low",
+      "metrics_to_collect": [
+        "completion_status",
+        "notes",
+        "barrier_flag"
+      ],
+      "prep_required": false,
+      "priority": 87,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [
+        "provider_physio_001"
+      ],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "health_coach",
+        "care_team"
+      ],
+      "skip_adjustment": {
+        "if_skipped": "Record miss reason and avoid compensatory overcorrection.",
+        "next_action": "Resume at the next valid slot or use lower-load fallback if needed."
+      },
+      "substitution_activity_ids": [],
+      "title": "Pain escalation load review"
+    }
+  ]
+}
