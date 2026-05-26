@@ -30,6 +30,9 @@ button:hover { background: #f1f5f9; }
 .chip.active { background: #14213d; color: white; border-color: #14213d; }
 .calendar-shell { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); }
 .calendar-grid { min-width: 980px; }
+.warning-panel { padding: 14px; border-bottom: 1px solid var(--line); background: #fffbeb; color: #78350f; }
+.warning-panel h2 { margin: 0 0 8px; font-size: 16px; }
+.warning-panel ul { margin: 0; padding-left: 18px; }
 .filter-help { color: var(--muted); font-size: 13px; margin: 0; padding: 0 14px 12px; }
 .goal-panel, .risk-panel { padding: 14px; border-bottom: 1px solid var(--line); background: #fff; }
 .goal-panel h2, .risk-panel h2 { margin: 0 0 10px; font-size: 16px; }

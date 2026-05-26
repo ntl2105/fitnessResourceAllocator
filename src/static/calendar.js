@@ -50,6 +50,7 @@ function render() {
   }
 
   grid.innerHTML = `
+    ${renderDataQualityWarnings()}
     ${renderGoalCoverage()}
     ${renderUnscheduledItems()}
     ${renderLocationBands(week)}
@@ -57,6 +58,17 @@ function render() {
     <div class="agenda-grid">
       ${week.days.map((day, dayIndex) => renderAgendaDay(week, day, dayIndex)).join("")}
     </div>
+  `;
+}
+
+function renderDataQualityWarnings() {
+  const warnings = state.model.data_quality_warnings || [];
+  if (!warnings.length) return "";
+  return `
+    <section class="warning-panel">
+      <h2>Data Review Warnings</h2>
+      <ul>${warnings.map((warning) => `<li>${escapeHtml(warning)}</li>`).join("")}</ul>
+    </section>
   `;
 }
 

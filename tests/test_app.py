@@ -151,3 +151,12 @@ def test_calendar_renderer_has_review_debugging_sections():
     assert "provider_summary" in js_response.text
     assert ".goal-panel" in css_response.text
     assert ".location-band" in css_response.text
+
+
+def test_calendar_renderer_exposes_data_quality_warnings():
+    js_response = client.get("/static/calendar.js")
+    css_response = client.get("/static/calendar.css")
+
+    assert "renderDataQualityWarnings" in js_response.text
+    assert "data_quality_warnings" in js_response.text
+    assert ".warning-panel" in css_response.text

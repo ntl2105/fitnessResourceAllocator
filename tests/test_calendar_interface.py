@@ -254,3 +254,63 @@ def test_calendar_interface_exposes_location_bands_and_travel_blocks():
     assert week["location_bands"][1]["label"] == "Hong Kong planned travel."
     assert week["travel_blocks"][0]["location_id"] == "travel_hotel"
     assert week["travel_blocks"][0]["start_hour"] == 9.5
+
+
+def test_calendar_interface_reports_data_generation_warnings():
+    rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-01",
+            "start_time": "08:00",
+            "end_time": "08:10",
+            "title": "Morning supplement protocol",
+            "activity_type": "food",
+            "goal_tags": ["nutrition"],
+            "load_level": "low",
+            "location_id": "home",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_1",
+        },
+        {
+            "calendar_row_id": "row_task_2",
+            "date": "2026-06-01",
+            "start_time": "12:00",
+            "end_time": "12:30",
+            "title": "No-prep fallback for high-protein prepared breakfast",
+            "activity_type": "food",
+            "goal_tags": ["nutrition"],
+            "load_level": "low",
+            "location_id": "home",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_2",
+        },
+    ]
+
+    view_model = build_calendar_interface(
+        rows,
+        {
+            "availability_blocks": [
+                {
+                    "resource_type": "member_travel",
+                    "start": "2026-06-03T00:00:00+08:00",
+                    "end": "2026-06-04T23:59:00+08:00",
+                    "location_id": "travel_hotel",
+                    "notes": "Travel window.",
+                }
+            ]
+        },
+        [],
+        {},
+        {"tasks": []},
+        {"providers": []},
+    )
+
+    warnings = " ".join(view_model["data_quality_warnings"])
+    assert (
+        "Food plan has supplement/protocol rows but no explicit breakfast/lunch/dinner coverage"
+        in warnings
+    )
+    assert "Raw activity titles still contain fallback/substitution wording" in warnings
+    assert "Travel windows should include exact travel leg times" in warnings

@@ -118,6 +118,7 @@ def build_calendar_interface(
         "unscheduled_items": unscheduled_items(
             traces, rejection_summary, personalized_plan
         ),
+        "data_quality_warnings": data_quality_warnings(calendar_rows, availability),
         "weeks": weeks,
         "rejection_summary": rejection_summary,
     }
@@ -294,6 +295,49 @@ def unscheduled_items(
             }
         )
     return items
+
+
+def data_quality_warnings(
+    calendar_rows: list[dict[str, Any]], availability: dict[str, Any]
+) -> list[str]:
+    warnings = []
+    food_titles = [
+        row.get("title", "").lower()
+        for row in calendar_rows
+        if row.get("activity_type") == "food"
+    ]
+    clean_food_titles = [
+        title
+        for title in food_titles
+        if "fallback" not in title and "protocol" not in title
+    ]
+    has_clean_meal = any(
+        meal in title
+        for title in clean_food_titles
+        for meal in ["breakfast", "lunch", "dinner"]
+    )
+    has_protocol_food = any(
+        "supplement" in title or "protocol" in title for title in food_titles
+    )
+    if has_protocol_food and not has_clean_meal:
+        warnings.append(
+            "Food plan has supplement/protocol rows but no explicit "
+            "breakfast/lunch/dinner coverage."
+        )
+
+    raw_title_text = " ".join(row.get("title", "") for row in calendar_rows).lower()
+    if "fallback" in raw_title_text or "substitution:" in raw_title_text:
+        warnings.append("Raw activity titles still contain fallback/substitution wording.")
+
+    for block in availability.get("availability_blocks", []):
+        if block.get("resource_type") != "member_travel":
+            continue
+        start = datetime.fromisoformat(block["start"])
+        end = datetime.fromisoformat(block["end"])
+        if start.hour == 0 and start.minute == 0 and end.hour in {23, 0}:
+            warnings.append("Travel windows should include exact travel leg times.")
+            break
+    return warnings
 
 
 def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:
