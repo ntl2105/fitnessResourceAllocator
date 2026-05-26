@@ -3,8 +3,10 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from src.calendar_interface import build_calendar_interface
 from src.io_utils import load_json
 
 
@@ -12,6 +14,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 RUN_DIR = DATA_DIR / "runs" / "demo-run"
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 KNOWN_STAGES = [
     "00_inputs",
@@ -52,6 +55,7 @@ STAGE_FILES = {
 
 app = FastAPI(title="Elyx Resource Allocator")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 def _data_path(filename: str) -> Path:
@@ -110,6 +114,20 @@ def api_availability() -> Any:
 @app.get("/api/plan")
 def api_plan() -> Any:
     return load_json(RUN_DIR / "03_scheduling" / "personalized_plan.json")
+
+
+@app.get("/api/calendar/interface")
+def api_calendar_interface() -> Any:
+    calendar_rows = load_json(RUN_DIR / "04_calendar" / "calendar_rows.json")
+    availability = load_json(RUN_DIR / "00_inputs" / "availability.json")
+    traces = load_json(RUN_DIR / "03_scheduling" / "decision_traces.json")
+    rejection_summary = load_json(RUN_DIR / "03_scheduling" / "rejection_summary.json")
+    return build_calendar_interface(
+        calendar_rows,
+        availability,
+        traces,
+        rejection_summary,
+    )
 
 
 @app.get("/api/traces/{trace_id}")

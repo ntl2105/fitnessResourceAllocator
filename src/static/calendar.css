@@ -1,0 +1,60 @@
+:root {
+  --hour-height: 64px;
+  --line: #d9e2ec;
+  --text: #1f2933;
+  --muted: #52606d;
+  --bg: #f7f8fa;
+  --panel: #ffffff;
+  --consultation: #2563eb;
+  --fitness: #059669;
+  --food: #d97706;
+  --medication: #7c3aed;
+  --therapy: #db2777;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background: var(--bg); }
+.app-header { display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 18px 28px; background: #14213d; color: white; }
+.app-header h1 { margin: 0; font-size: 26px; }
+.app-header p { margin: 4px 0 0; color: #cbd5e1; }
+nav { display: flex; gap: 16px; }
+nav a { color: white; font-weight: 700; text-decoration: none; }
+main { padding: 20px 28px 36px; }
+.toolbar, .scenario-panel { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; padding: 16px; background: var(--panel); border: 1px solid var(--line); }
+.scenario-panel p { margin: 3px 0 0; color: var(--muted); }
+button { border: 1px solid #cbd5e1; background: white; padding: 8px 12px; border-radius: 6px; cursor: pointer; font: inherit; }
+button:hover { background: #f1f5f9; }
+.eyebrow { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+#week-label { margin: 2px 0 0; font-size: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.chip { border-radius: 999px; text-transform: capitalize; }
+.chip.active { background: #14213d; color: white; border-color: #14213d; }
+.calendar-shell { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); }
+.calendar-grid { min-width: 980px; }
+.calendar-header, .calendar-body { display: grid; grid-template-columns: 68px repeat(7, minmax(120px, 1fr)); }
+.calendar-header > div { padding: 10px; border-bottom: 1px solid var(--line); border-left: 1px solid var(--line); background: #edf2f7; font-weight: 700; text-align: center; }
+.calendar-header > div:first-child { border-left: 0; }
+.time-column { border-right: 1px solid var(--line); }
+.time-cell { height: var(--hour-height); border-bottom: 1px solid var(--line); text-align: right; padding: 4px 8px; color: var(--muted); font-size: 12px; }
+.day-column { position: relative; border-left: 1px solid var(--line); min-height: calc(var(--hour-height) * 16); }
+.hour-line { height: var(--hour-height); border-bottom: 1px solid var(--line); }
+.unavailable { position: absolute; left: 0; right: 0; background: rgba(148, 163, 184, .35); border-top: 1px solid rgba(100, 116, 139, .35); border-bottom: 1px solid rgba(100, 116, 139, .35); font-size: 11px; color: #334155; padding: 3px 5px; overflow: hidden; }
+.activity { position: absolute; left: 4px; right: 4px; color: white; border-radius: 6px; padding: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,.4); box-shadow: 0 1px 3px rgba(15, 23, 42, .25); text-align: left; }
+.activity.hidden { display: none; }
+.activity-title { font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.activity-meta { margin-top: 3px; font-size: 11px; opacity: .9; }
+.badges { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+.badge { background: rgba(255,255,255,.22); border-radius: 999px; padding: 1px 5px; font-size: 10px; }
+.type-consultation { background: var(--consultation); }
+.type-fitness { background: var(--fitness); }
+.type-food { background: var(--food); }
+.type-medication { background: var(--medication); }
+.type-therapy { background: var(--therapy); }
+.trace-drawer { position: fixed; top: 0; right: 0; width: min(520px, 100vw); height: 100vh; background: white; border-left: 1px solid var(--line); box-shadow: -8px 0 24px rgba(15, 23, 42, .18); transform: translateX(100%); transition: transform .18s ease; z-index: 20; display: flex; flex-direction: column; }
+.trace-drawer.open { transform: translateX(0); }
+.drawer-header { padding: 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
+.drawer-header h2 { margin: 2px 0 0; font-size: 18px; }
+.drawer-content { padding: 18px; overflow: auto; }
+.drawer-content h3 { margin: 18px 0 6px; }
+.drawer-content pre { white-space: pre-wrap; background: #f8fafc; border: 1px solid var(--line); padding: 10px; }
+.empty-state { padding: 24px; color: var(--muted); }

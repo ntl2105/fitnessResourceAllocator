@@ -1,0 +1,238 @@
+from __future__ import annotations
+
+from collections import Counter, defaultdict
+from datetime import date, datetime, timedelta
+from typing import Any
+
+
+WEEK_DAYS = 7
+DISPLAY_START_HOUR = 6
+DISPLAY_END_HOUR = 22
+SCENARIOS = [
+    "remote",
+    "travel_adaptation",
+    "substitution",
+    "high_load",
+    "trace_rejections",
+    "travel_time_rejection",
+    "blocked_time_rejection",
+    "dependency",
+]
+
+
+def decimal_hour(value: str) -> float:
+    hour_text, minute_text = value.split(":", maxsplit=1)
+    return int(hour_text) + int(minute_text) / 60
+
+
+def duration_hours(start_time: str, end_time: str) -> float:
+    return round(decimal_hour(end_time) - decimal_hour(start_time), 2)
+
+
+def monday_start(value: date) -> date:
+    return value - timedelta(days=value.weekday())
+
+
+def build_calendar_interface(
+    calendar_rows: list[dict[str, Any]],
+    availability: dict[str, Any],
+    traces: list[dict[str, Any]],
+    rejection_summary: dict[str, Any],
+) -> dict[str, Any]:
+    traces_by_id = {trace["trace_id"]: trace for trace in traces}
+    travel_windows = member_travel_windows(availability)
+    rows_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
+    for row in calendar_rows:
+        row_date = date.fromisoformat(row["date"])
+        rows_by_week[monday_start(row_date)].append(row)
+
+    blocked_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
+    for block in availability.get("availability_blocks", []):
+        if block.get("resource_type") != "member_blocked":
+            continue
+        block_start = datetime.fromisoformat(block["start"])
+        blocked_by_week[monday_start(block_start.date())].append(block)
+
+    scenario_counts: Counter[str] = Counter()
+    weeks = []
+    for week_start in sorted(set(rows_by_week) | set(blocked_by_week)):
+        activities = [
+            activity_view(row, week_start, traces_by_id.get(row.get("trace_id")), travel_windows)
+            for row in sorted(
+                rows_by_week.get(week_start, []),
+                key=lambda item: (item["date"], item["start_time"], item["title"]),
+            )
+        ]
+        for activity in activities:
+            scenario_counts.update(activity["scenario_flags"])
+
+        weeks.append(
+            {
+                "week_id": iso_week_id(week_start),
+                "start_date": week_start.isoformat(),
+                "end_date": (week_start + timedelta(days=6)).isoformat(),
+                "label": week_label(week_start),
+                "days": week_days(week_start),
+                "activities": activities,
+                "unavailable_blocks": [
+                    unavailable_view(block, week_start)
+                    for block in sorted(
+                        blocked_by_week.get(week_start, []),
+                        key=lambda item: item["start"],
+                    )
+                ],
+            }
+        )
+
+    return {
+        "display_hours": {"start": DISPLAY_START_HOUR, "end": DISPLAY_END_HOUR},
+        "scenarios": SCENARIOS,
+        "scenario_counts": {
+            scenario: scenario_counts.get(scenario, 0) for scenario in SCENARIOS
+        },
+        "weeks": weeks,
+        "rejection_summary": rejection_summary,
+    }
+
+
+def activity_view(
+    row: dict[str, Any],
+    week_start: date,
+    trace: dict[str, Any] | None,
+    travel_windows: list[tuple[date, date]],
+) -> dict[str, Any]:
+    row_date = date.fromisoformat(row["date"])
+    flags = scenario_flags(row, trace, travel_windows)
+    return {
+        "id": row["calendar_row_id"],
+        "title": row["title"],
+        "date": row["date"],
+        "day_index": (row_date - week_start).days,
+        "start_hour": decimal_hour(row["start_time"]),
+        "duration_hours": duration_hours(row["start_time"], row["end_time"]),
+        "start_time": row["start_time"],
+        "end_time": row["end_time"],
+        "activity_type": row["activity_type"],
+        "goal_tags": row.get("goal_tags", []),
+        "load_level": row["load_level"],
+        "location_id": row.get("location_id"),
+        "mode": row["mode"],
+        "substitution_status": row["substitution_status"],
+        "trace_id": row.get("trace_id"),
+        "badges": badges_for(row, flags),
+        "scenario_flags": flags,
+    }
+
+
+def unavailable_view(block: dict[str, Any], week_start: date) -> dict[str, Any]:
+    start = datetime.fromisoformat(block["start"])
+    end = datetime.fromisoformat(block["end"])
+    return {
+        "date": start.date().isoformat(),
+        "day_index": (start.date() - week_start).days,
+        "start_hour": round(start.hour + start.minute / 60, 2),
+        "duration_hours": round((end - start).total_seconds() / 3600, 2),
+        "label": block.get("notes") or block.get("resource_id") or "Unavailable",
+        "location_id": block.get("location_id"),
+    }
+
+
+def scenario_flags(
+    row: dict[str, Any],
+    trace: dict[str, Any] | None,
+    travel_windows: list[tuple[date, date]],
+) -> list[str]:
+    flags: set[str] = set()
+    row_date = date.fromisoformat(row["date"])
+    if row.get("mode") == "remote":
+        flags.add("remote")
+    if row.get("location_id") == "travel_hotel" or (
+        row.get("mode") == "remote"
+        and any(start <= row_date <= end for start, end in travel_windows)
+    ):
+        flags.add("travel_adaptation")
+    if row.get("substitution_status") == "substitution":
+        flags.add("substitution")
+    if row.get("load_level") == "high":
+        flags.add("high_load")
+    if trace:
+        if trace.get("rejected_candidates"):
+            flags.add("trace_rejections")
+        checks = trace.get("constraint_checks", [])
+        if any(
+            check.get("name") == "travel_time_buffer" and check.get("passed") is False
+            for check in checks
+        ):
+            flags.add("travel_time_rejection")
+        reason_text = " ".join(
+            reason
+            for candidate in trace.get("rejected_candidates", [])
+            for reason in candidate.get("reasons", [])
+        ).lower()
+        if "member blocked" in reason_text:
+            flags.add("blocked_time_rejection")
+        dependency_checks = trace.get("dependency_checks", [])
+        if any(
+            check.get("name") != "dependencies_acknowledged"
+            for check in dependency_checks
+            if isinstance(check, dict)
+        ):
+            flags.add("dependency")
+    return sorted(flags)
+
+
+def badges_for(row: dict[str, Any], flags: list[str]) -> list[str]:
+    badges = []
+    if "remote" in flags:
+        badges.append("remote")
+    if row.get("location_id") == "travel_hotel":
+        badges.append("travel hotel")
+    if "substitution" in flags:
+        badges.append("substitution")
+    if "high_load" in flags:
+        badges.append("high load")
+    if "dependency" in flags:
+        badges.append("dependency")
+    if "trace_rejections" in flags:
+        badges.append("rejections")
+    return badges
+
+
+def member_travel_windows(availability: dict[str, Any]) -> list[tuple[date, date]]:
+    windows = []
+    for block in availability.get("availability_blocks", []):
+        if block.get("resource_type") != "member_travel":
+            continue
+        windows.append(
+            (
+                datetime.fromisoformat(block["start"]).date(),
+                datetime.fromisoformat(block["end"]).date(),
+            )
+        )
+    return windows
+
+
+def week_days(week_start: date) -> list[dict[str, str]]:
+    days = []
+    for offset in range(WEEK_DAYS):
+        current = week_start + timedelta(days=offset)
+        days.append({"date": current.isoformat(), "label": day_label(current)})
+    return days
+
+
+def week_label(week_start: date) -> str:
+    end = week_start + timedelta(days=6)
+    return f"{month_day(week_start)} - {month_day(end)}, {end.year}"
+
+
+def day_label(value: date) -> str:
+    return f"{value.strftime('%a %b')} {value.day}"
+
+
+def month_day(value: date) -> str:
+    return f"{value.strftime('%b')} {value.day}"
+
+
+def iso_week_id(week_start: date) -> str:
+    iso = week_start.isocalendar()
+    return f"{iso.year}-W{iso.week:02d}"

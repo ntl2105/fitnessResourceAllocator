@@ -29,8 +29,8 @@ def test_core_pages_and_api_artifacts_are_available():
 
     calendar_response = client.get("/calendar")
     assert calendar_response.status_code == 200
-    assert "Elyx Calendar" in calendar_response.text
-    assert "/api/traces/" in calendar_response.text
+    assert "Elyx Weekly Calendar" in calendar_response.text
+    assert "/api/calendar/interface" in calendar_response.text
 
     summary_response = client.get("/summary")
     assert summary_response.status_code == 200
@@ -70,3 +70,28 @@ def test_run_file_endpoint_rejects_unknown_stages_and_path_traversal():
         "/api/runs/latest/files/04_calendar/..%2F..%2Fmember_profile.json"
     )
     assert traversal_response.status_code == 404
+
+
+def test_calendar_interface_api_returns_weeks_and_scenarios():
+    response = client.get("/api/calendar/interface")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["weeks"]
+    assert "remote" in payload["scenario_counts"]
+    assert "substitution" in payload["scenario_counts"]
+    assert payload["display_hours"] == {"start": 6, "end": 22}
+    first_week = payload["weeks"][0]
+    assert len(first_week["days"]) == 7
+    assert "activities" in first_week
+    assert "unavailable_blocks" in first_week
+
+
+def test_calendar_page_bootstraps_weekly_interface_assets():
+    response = client.get("/calendar")
+
+    assert response.status_code == 200
+    assert 'id="calendar-root"' in response.text
+    assert "/static/calendar.css" in response.text
+    assert "/static/calendar.js" in response.text
+    assert "/api/calendar/interface" in response.text
