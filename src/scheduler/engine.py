@@ -92,6 +92,7 @@ def place_task(
 ) -> DecisionTrace:
     rejected_candidates: list[dict[str, Any]] = []
     last_checks: list[ConstraintCheck] = []
+    trace_id = f"trace_{task.task_instance_id}"
 
     for slot in candidate_slots(task, activity, availability):
         start = slot["start"]
@@ -117,6 +118,7 @@ def place_task(
 
         if policy_passed and resource_passed:
             return DecisionTrace(
+                trace_id=trace_id,
                 task_instance_id=task.task_instance_id,
                 activity_id=task.activity_id,
                 final_status="scheduled",
@@ -149,6 +151,7 @@ def place_task(
         )
 
     return DecisionTrace(
+        trace_id=trace_id,
         task_instance_id=task.task_instance_id,
         activity_id=task.activity_id,
         final_status="unscheduled",

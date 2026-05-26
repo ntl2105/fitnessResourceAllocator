@@ -495,6 +495,29 @@ def test_substitution_task_schedules_with_substitution_calendar_row():
     assert result.calendar_rows[0].substitution_status == "substitution"
 
 
+def test_scheduler_uses_deterministic_trace_ids_across_outputs():
+    start = datetime(2026, 6, 1, 9, tzinfo=UTC)
+    task = _task("stable_trace", resources={"location_ids": ["remote"]})
+    activity = {
+        "activity_id": "stable_trace",
+        "title": "Stable trace",
+        "activity_type": "consultation",
+        "load_level": "low",
+        "allowed_locations": ["remote"],
+    }
+
+    result = schedule_tasks(
+        [task],
+        {"stable_trace": activity},
+        AvailabilityData(planning_start_date=start.date(), planning_months=1),
+    )
+
+    expected_trace_id = "trace_task_stable_trace"
+    assert result.traces[0].trace_id == expected_trace_id
+    assert result.plan.tasks[0].trace_id == expected_trace_id
+    assert result.calendar_rows[0].trace_id == expected_trace_id
+
+
 def test_rejection_summary_aggregates_repeated_unscheduled_activity_instances():
     task_one = _task("never_places", target_date=date(2026, 6, 1), resources={"location_ids": ["lab"]})
     task_one.task_instance_id = "task_never_places_one"
