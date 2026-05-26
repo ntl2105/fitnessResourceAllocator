@@ -163,6 +163,17 @@ def test_calendar_renderer_uses_week_scoped_review_panels():
     assert "state.model.unscheduled_items || []" not in js_response.text
 
 
+def test_calendar_review_panels_render_below_agenda_with_clear_goal_math():
+    js_response = client.get("/static/calendar.js")
+
+    assert js_response.status_code == 200
+    js = js_response.text
+    assert js.index('<div class="agenda-grid">') < js.index("${renderGoalCoverage(week)}")
+    assert "scheduled of ${goal.scheduled + goal.unscheduled} planned" in js
+    assert "scheduled via substitution" in js
+    assert "Substitutions are already included in scheduled" in js
+
+
 def test_calendar_renderer_exposes_data_quality_warnings():
     js_response = client.get("/static/calendar.js")
     css_response = client.get("/static/calendar.css")

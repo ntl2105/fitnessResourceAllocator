@@ -51,13 +51,13 @@ function render() {
 
   grid.innerHTML = `
     ${renderDataQualityWarnings()}
-    ${renderGoalCoverage(week)}
-    ${renderUnscheduledItems(week)}
     ${renderLocationBands(week)}
     <p class="filter-help">Counts reflect the selected week. Filtering only affects visible activities in this week.</p>
     <div class="agenda-grid">
       ${week.days.map((day, dayIndex) => renderAgendaDay(week, day, dayIndex)).join("")}
     </div>
+    ${renderGoalCoverage(week)}
+    ${renderUnscheduledItems(week)}
   `;
 }
 
@@ -89,11 +89,13 @@ function renderGoalCoverage(week) {
   return `
     <section class="goal-panel">
       <h2>Goal Coverage</h2>
+      <p class="panel-note">Scheduled plus unscheduled equals planned work for this selected week. Substitutions are already included in scheduled.</p>
       <div class="goal-grid">
         ${goals.map((goal) => `
           <div class="goal-card status-${escapeHtml(goal.status)}">
             <strong>${escapeHtml(goal.goal_tag.replaceAll("_", " "))}</strong>
-            <span>${goal.scheduled} scheduled · ${goal.unscheduled} unscheduled · ${goal.substitutions || 0} substitutions</span>
+            <span>${goal.scheduled} scheduled of ${goal.scheduled + goal.unscheduled} planned</span>
+            <span>${goal.unscheduled} unscheduled · ${goal.substitutions || 0} scheduled via substitution</span>
           </div>
         `).join("")}
       </div>

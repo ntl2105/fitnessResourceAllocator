@@ -161,6 +161,55 @@ def test_activity_view_resolves_provider_and_clean_display_title():
     assert activity["provider_summary"] == "Maya Tan, trainer"
 
 
+def test_provider_summary_suppresses_travel_pool_wording_on_cards():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-01",
+            "start_time": "06:30",
+            "end_time": "07:15",
+            "title": "Remote or hotel-gym substitution: Trainer-led lower-body strength session",
+            "activity_type": "fitness",
+            "goal_tags": ["strength"],
+            "load_level": "medium",
+            "location_id": "remote",
+            "mode": "remote",
+            "substitution_status": "substitution",
+            "trace_id": "trace_1",
+        }
+    ]
+    personalized_plan = {
+        "tasks": [
+            {
+                "task_id": "task_1",
+                "activity_id": "act_1",
+                "provider_ids": ["provider_trainer_remote_001"],
+            }
+        ]
+    }
+    resource_universe = {
+        "providers": [
+            {
+                "provider_id": "provider_trainer_remote_001",
+                "provider_type": "trainer",
+                "display_name": "Remote travel trainer pool",
+            }
+        ]
+    }
+
+    view_model = build_calendar_interface(
+        calendar_rows,
+        {"availability_blocks": []},
+        [],
+        {},
+        personalized_plan,
+        resource_universe,
+    )
+
+    activity = view_model["weeks"][0]["activities"][0]
+    assert activity["provider_summary"] == "Remote trainer pool, trainer"
+
+
 def test_display_title_removes_remote_fallback_prefix():
     calendar_rows = [
         {

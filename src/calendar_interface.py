@@ -230,12 +230,18 @@ def provider_summary(
         provider = providers.get(provider_id)
         if provider:
             labels.append(
-                f"{provider.get('display_name', provider_id)}, "
+                f"{provider_display_name(provider.get('display_name', provider_id))}, "
                 f"{provider.get('provider_type', 'provider')}"
             )
         else:
             labels.append(provider_id)
     return "; ".join(labels) if labels else None
+
+
+def provider_display_name(display_name: str) -> str:
+    if display_name == "Remote travel trainer pool":
+        return "Remote trainer pool"
+    return display_name
 
 
 def display_title(raw_title: str) -> str:

@@ -36,6 +36,7 @@ button:hover { background: #f1f5f9; }
 .filter-help { color: var(--muted); font-size: 13px; margin: 0; padding: 0 14px 12px; }
 .goal-panel, .risk-panel { padding: 14px; border-bottom: 1px solid var(--line); background: #fff; }
 .goal-panel h2, .risk-panel h2 { margin: 0 0 10px; font-size: 16px; }
+.panel-note { margin: -4px 0 10px; color: var(--muted); font-size: 13px; }
 .goal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
 .goal-card, .risk-item { display: grid; gap: 3px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; background: #f8fafc; font-size: 12px; }
 .status-on_track { border-left: 4px solid #059669; }
