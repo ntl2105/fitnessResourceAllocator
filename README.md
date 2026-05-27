@@ -39,6 +39,8 @@ pip install -r requirements.txt
 python scripts/build_demo_run.py
 ```
 
+The staged generation process is documented in [docs/elyx_assignment_dataset_generation.md](docs/elyx_assignment_dataset_generation.md).
+
 This runs:
 
 1. `scripts/flatten_action_plan.py`

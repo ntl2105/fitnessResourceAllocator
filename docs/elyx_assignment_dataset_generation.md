@@ -21,9 +21,10 @@ Elyx member persona Marcus Tan. It is designed to show that the scheduler can:
 - generate a schedule that can be audited against goals, resources, and
   constraints
 
-The active dataset lives in `data/`. Generation and audit artifacts live in
-`data/generated/`. Superseded or invalid intermediate attempts live in
-`data/old/`.
+The active dataset lives in `data/`. Prompt/model generation intermediates live
+in `data/generated/` and are ignored for deployment. Deployable run artifacts
+live in `data/runs/demo-run/` and should be committed because the Vercel app is
+read-only and serves those JSON/Markdown files at runtime.
 
 ## Final Dataset Shape
 
@@ -31,12 +32,12 @@ The accepted generated dataset contains:
 
 | Area | Final count |
 | --- | ---: |
-| Goal actions in member profile | 7 |
+| Goal actions in member profile | 8 |
 | Activity families | 50 |
-| Primary activities | 50 |
+| Primary scheduler-facing activities | 49 |
 | Scheduler-facing activities | 100 |
 | Care-domain batches | 5 |
-| Availability blocks | 277 |
+| Availability blocks | 327 |
 | Planning horizon | 3 months |
 
 The active Stage 05 activity-family output is organized into five care-domain
@@ -51,8 +52,10 @@ batches:
 | `005_clinical_review_measurement` | Clinical review and measurement | 10 | 20 |
 
 This gives exactly 50 activity families and 100 scheduler-facing activities.
-Each family has one primary activity. Additional scheduler-facing activities are
-same-family substitutions or realistic context variants.
+Most families have one primary activity plus one same-family substitution or
+realistic context variant. One originally independent hotel-gym strength activity
+is intentionally linked as a substitution in the home-strength family so Tokyo
+travel can prefer the hotel gym before falling back to in-room bands/bodyweight.
 
 ## Generation Stages
 
@@ -79,6 +82,11 @@ and care-team decision follow-through are represented explicitly through:
 
 - `ga_behavior_coaching_weekly`
 - `ga_care_team_followthrough_3month`
+
+Daily meal coverage, daily medication/supplement adherence, structured meals,
+aerobic conditioning, strength, recovery, coaching, and clinical follow-through
+are represented as concrete goal actions. The scheduler uses these actions for
+weekly and three-month reporting.
 
 Primary artifact:
 
@@ -109,7 +117,9 @@ Primary artifact:
 
 Availability is expanded into concrete scheduler-facing blocks over the
 three-month planning horizon. This includes member blocked time, provider
-availability, location/equipment availability, and travel windows.
+availability, location/equipment availability, travel windows, WFH override
+days, occasional fitness-hour conflicts, and travel-specific equipment such as
+Tokyo hotel-gym availability.
 
 Primary artifacts:
 
@@ -161,7 +171,7 @@ Each generated family includes:
 - family identity and care domain
 - family-level target
 - goal action IDs
-- one primary activity
+- a primary activity when the family owns a standalone default option
 - zero or more same-family substitutions
 - substitution rules
 - validation notes
@@ -184,6 +194,12 @@ member-assembled, low-prep, or travel-compatible meals as deliberate variety
 rather than only as failure fallbacks. The scheduler tracks weekly primary caps
 inside a family and prefers a planned-variety substitution once the primary cap
 has been met.
+
+Travel substitutions are also resource-sensitive. For example, Tokyo travel has
+`eq_basic_gym_hotel_tokyo`, so strength scheduling now prefers a hotel-gym
+strength option before using the lower-resource in-room bands/bodyweight
+fallback. Lower-resource travel windows can still use portable equipment or
+remote/self-led substitutions.
 
 Primary artifacts:
 
@@ -230,9 +246,8 @@ needs at least 100 activities.
 
 The generator and prompts were updated so each batch has a minimum activity
 floor equal to two scheduler-facing activities per family. The short output was
-archived in:
-
-- `data/old/generated/stage05_activity_families_first_short/`
+not accepted into the active dataset; the accepted generated intermediates are
+kept under `data/generated/`.
 
 The active first run was then repaired by adding realistic same-family
 substitution variants to sparse families. This preserved the 50-family design and
@@ -243,6 +258,31 @@ coaching consultations now use feasible weekly or monthly frequencies, remote
 evening windows, and provider availability starts as candidate times. The final
 demo calendar includes at least 10 consultation rows across the three-month
 horizon.
+
+The provider universe was also expanded so training and remote-coaching rows can
+associate to concrete providers where appropriate. Provider spacing policy avoids
+back-to-back consultations with the same provider.
+
+### Scheduler Policy Repairs
+
+After initial calendar review, several scheduler behaviors were corrected:
+
+- every day now receives breakfast, lunch, and dinner unless a clear fasting or
+  skip reason exists
+- medication/supplement tasks remain daily and are not mislabeled as remote
+  provider activities
+- medium/high-load fitness must end by 20:30 unless explicitly allowed
+- substantial fitness sessions cannot stack multiple times on the same day
+- member location follows office, WFH, or travel state; during travel, hotel
+  location takes precedence
+- WFH days are represented as member-location overrides
+- weekly validation reports structured meals, member-assembled meal caps,
+  estimated chef-prep sessions, aerobic sessions, strength sessions, and
+  recovery actions
+- calendar rows keep `date` and `compact_group_key` aligned, and rows that move
+  off their target date include `original_target_date`
+- conditional clinical activities were renamed when no trigger exists, for
+  example initial physio assessment instead of pain-escalation language
 
 The repair is reproducible in:
 
@@ -260,19 +300,20 @@ pytest -q
 The canonical validation report passed:
 
 ```text
-Validation pass: 100 activities, 50 primary
+Validation pass: 100 activities, 49 primary
 ```
 
 The full test suite passed:
 
 ```text
-131 passed
+152 passed
 ```
 
 The validation report confirms:
 
 - 100 scheduler-facing activities
 - exactly 50 activity families
+- 49 primary scheduler-facing activities
 - all activity IDs are unique
 - all five modalities are present: consultation, fitness, food, medication, and
   therapy
@@ -286,6 +327,7 @@ The validation report confirms:
 - substitutions preserve family-level counted targets
 - the availability horizon covers June, July, and August 2026
 - availability density and resource distribution are within target ranges
+- deployable run artifacts exist under `data/runs/demo-run/`
 
 Primary validation artifact:
 
@@ -299,41 +341,46 @@ After the dataset was accepted, the demo run was rebuilt with:
 python scripts/build_demo_run.py
 ```
 
-The rebuilt scheduler output contains:
+The rebuilt scheduler output currently contains:
 
-- 738 expanded task instances
-- 347 scheduled calendar rows
-- 147 unscheduled task instances
-- 244 skipped task instances, primarily because a family primary already
-  satisfied the occurrence or support-only work was not a standalone member
-  calendar task
+- 1,396 expanded task traces
+- 526 scheduled calendar rows
+- 157 unscheduled task instances
+- 713 skipped task instances, primarily because a family primary already
+  satisfied the occurrence, a substitution was not needed, or support-only work
+  was not a standalone member calendar task
 - all five activity modalities represented in the calendar output
-- a serialized `goal_report` covering weekly and three-month goal status
+- a serialized `goal_report` covering weekly, three-month, and weekly validation
+  status
 
 The calendar summary includes:
 
 | Activity type | Scheduled rows |
 | --- | ---: |
-| consultation | 1 |
-| fitness | 54 |
-| food | 149 |
+| consultation | 22 |
+| fitness | 79 |
+| food | 276 |
 | medication | 92 |
-| therapy | 51 |
+| therapy | 57 |
 
 The scheduler now writes weekly and three-month goal coverage into:
 
 - `data/runs/demo-run/03_scheduling/personalized_plan.json`
 
-This makes unmet targets explicit rather than implicit. For example, the current
-schedule reports weekly goal coverage by ISO week and the three-month clinical
-review target as a separate three-month goal item.
+This makes unmet targets explicit rather than implicit. The current schedule
+reports weekly goal coverage by ISO week, three-month clinical/care-team review
+targets as separate three-month items, and weekly validation rows for the
+assignment-level constraints. Some constrained travel or partial-horizon weeks
+can still be marked unmet; the report exposes those misses rather than hiding
+them.
 
 ## Reviewer Notes
 
 The dataset intentionally favors auditability over hiding the generation process.
-Superseded outputs are archived under `data/old/` so reviewers can see what was
-rejected and why. The accepted files in `data/` are the source of truth for the
-assignment demo.
+Generated prompt/model intermediates remain under `data/generated/` for local
+inspection, while the accepted source files in `data/` and the deployable
+artifacts in `data/runs/demo-run/` are the source of truth for the assignment
+demo.
 
 The most important modeling decision is that substitutions are not loose
 alternatives. They remain inside an activity family, preserve the family intent,
