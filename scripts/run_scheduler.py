@@ -18,6 +18,7 @@ SCHEDULING_DIR = RUN_DIR / "03_scheduling"
 
 def main() -> None:
     action_plan = load_json(DATA_DIR / "action_plan.json")
+    member_profile = load_json(DATA_DIR / "member_profile.json")
     availability = AvailabilityData.model_validate(load_json(DATA_DIR / "availability.json"))
     resource_universe = ResourceUniverse.model_validate(load_json(DATA_DIR / "resource_universe.json"))
 
@@ -31,8 +32,11 @@ def main() -> None:
         availability,
         run_id="demo-run",
         travel_time_rules=resource_universe.travel_time_rules,
+        goal_actions=member_profile.get("goal_actions", []),
+        weekly_goal_actions=member_profile.get("weekly_goal_actions", []),
         source_artifact_paths=[
             "data/action_plan.json",
+            "data/member_profile.json",
             "data/availability.json",
             "data/resource_universe.json",
         ],

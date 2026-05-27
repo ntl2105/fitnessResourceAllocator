@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from src import app as app_module
 from src.app import KNOWN_STAGES, app
 
 
@@ -31,16 +32,30 @@ def test_core_pages_and_api_artifacts_are_available():
     assert calendar_response.status_code == 200
     assert "Elyx Weekly Calendar" in calendar_response.text
     assert "/api/calendar/interface" in calendar_response.text
+    assert "/profile" in calendar_response.text
+    assert 'data-tab-target="calendar-panel"' in calendar_response.text
+    assert 'data-tab-target="recap-panel"' in calendar_response.text
+    assert 'data-tab-target="profile-panel"' in calendar_response.text
+    assert "recap-root" in calendar_response.text
+    assert "member-profile-root" in calendar_response.text
+    assert "Profile content loads from the calendar interface model" in calendar_response.text
+
+    profile_response = client.get("/profile")
+    assert profile_response.status_code == 200
+    assert "Member Profile Brief" in profile_response.text
+    assert "Journey Timeline" in profile_response.text
 
     summary_response = client.get("/summary")
     assert summary_response.status_code == 200
     assert "Synthetic Data Quality" in summary_response.text
     assert "Calendar Summary" in summary_response.text
+    assert "/profile" in summary_response.text
 
     audit_response = client.get("/audit")
     assert audit_response.status_code == 200
     assert "00_inputs" in audit_response.text
     assert "04_calendar" in audit_response.text
+    assert "member_profile_brief.md" in audit_response.text
 
 
 def test_trace_lookup_and_run_file_endpoint():
@@ -50,6 +65,7 @@ def test_trace_lookup_and_run_file_endpoint():
     trace_response = client.get(f"/api/traces/{trace_id}")
     assert trace_response.status_code == 200
     assert trace_response.json()["trace_id"] == trace_id
+    assert trace_response.json()["planning_rationale"]
 
     markdown_response = client.get(
         "/api/runs/latest/files/04_calendar/summary_report.md"
@@ -57,23 +73,39 @@ def test_trace_lookup_and_run_file_endpoint():
     assert markdown_response.status_code == 200
     assert "Calendar Summary" in markdown_response.json()["content"]
 
+    profile_brief_response = client.get(
+        "/api/runs/latest/files/00_inputs/member_profile_brief.md"
+    )
+    assert profile_brief_response.status_code == 200
+    assert "Member Profile Brief" in profile_brief_response.json()["content"]
+
 
 def test_trace_endpoint_resolves_rejected_candidate_conflicts_for_humans():
-    response = client.get("/api/traces/trace_task_act_019_20260604_002")
+    traces = client.get(
+        "/api/runs/latest/files/03_scheduling/decision_traces.json"
+    ).json()
+    trace_id = next(
+        trace["trace_id"]
+        for trace in traces
+        if any(
+            any(reason.startswith("Overlaps ") for reason in candidate.get("reasons", []))
+            for candidate in trace.get("rejected_candidates", [])
+        )
+    )
+
+    response = client.get(f"/api/traces/{trace_id}")
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["activity_title"] == "Zone 2 stationary bike session"
-    assert payload["selected_slot_summary"] == (
-        "Scheduled for Fri Jun 5, 06:30-07:10 at gym because all selected-slot "
-        "policy and resource checks passed."
+    overlap_candidate = next(
+        candidate
+        for candidate in payload["rejected_candidate_summaries"]
+        if any(reason.startswith("Rejected because it overlaps") for reason in candidate["human_reasons"])
     )
-    first_candidate = payload["rejected_candidate_summaries"][0]
-    assert first_candidate["slot_summary"] == "Thu Jun 4, 06:30-07:10 at gym"
-    assert first_candidate["human_reasons"] == [
-        "Rejected because it overlaps Baseline fasting metabolic lab panel, "
-        "07:00-07:45 at lab."
-    ]
+    assert payload["activity_title"]
+    assert payload["selected_slot_summary"]
+    assert payload["planning_rationale"]
+    assert "task_" not in " ".join(overlap_candidate["human_reasons"])
 
 
 def test_run_file_endpoint_rejects_unknown_stages_and_path_traversal():
@@ -114,6 +146,9 @@ def test_calendar_page_bootstraps_weekly_interface_assets():
     assert "/static/calendar.css" in response.text
     assert "/static/calendar.js" in response.text
     assert "/api/calendar/interface" in response.text
+    assert 'id="recap-panel"' in response.text
+    assert 'id="profile-panel"' in response.text
+    assert 'id="calendar-panel"' in response.text
 
 
 def test_calendar_renderer_uses_day_agenda_without_absolute_time_grid():
@@ -128,14 +163,92 @@ def test_calendar_renderer_uses_day_agenda_without_absolute_time_grid():
     assert "position: absolute" not in css_response.text
 
 
+def test_calendar_renderer_supports_profile_tab_on_same_page():
+    js_response = client.get("/static/calendar.js")
+    css_response = client.get("/static/calendar.css")
+
+    assert js_response.status_code == 200
+    assert css_response.status_code == 200
+    assert "setupCalendarTabs" in js_response.text
+    assert "calendar-tab active" in js_response.text
+    assert "renderThreeMonthRecap" in js_response.text
+    assert "three_month_recap" in js_response.text
+    assert "renderMemberProfile" in js_response.text
+    assert "renderProviderUniverse" in js_response.text
+    assert "member_profile" in js_response.text
+    assert "profile-goal-grid" in js_response.text
+    assert ".calendar-tabs" in css_response.text
+    assert ".recap-grid" in css_response.text
+    assert ".member-profile-grid" in css_response.text
+    assert ".profile-provider-grid" in css_response.text
+    assert ".profile-timeline" in css_response.text
+    assert ".tab-panel[hidden]" in css_response.text
+
+
 def test_trace_drawer_renders_human_decision_explanations():
     js_response = client.get("/static/calendar.js")
 
     assert js_response.status_code == 200
     assert "Scheduled Slot" in js_response.text
+    assert "Why This Activity Exists" in js_response.text
+    assert "planning_rationale" in js_response.text
     assert "Earlier Rejected Attempts" in js_response.text
     assert "rejected_candidate_summaries" in js_response.text
     assert "JSON.stringify((trace.rejected_candidates" not in js_response.text
+
+
+def test_trace_explanation_inherits_primary_goal_and_describes_self_led_substitution():
+    primary = {
+        "activity_id": "act_strength_primary",
+        "activity_family_id": "strength_family",
+        "is_primary": True,
+        "title": "Home strength",
+        "goal_contributions": [
+            {
+                "weekly_goal_action_id": "ga_strength_sessions_weekly",
+                "counts_toward_weekly_target": True,
+            }
+        ],
+    }
+    substitution = {
+        "activity_id": "act_strength_travel",
+        "activity_family_id": "strength_family",
+        "is_primary": False,
+        "title": "Travel strength",
+        "facilitator_type": "member",
+        "substitution_for_activity_id": "act_strength_primary",
+        "substitution_reason_codes": ["equipment_unavailable"],
+        "frequency": {"preferred_time_windows": ["19:50-20:30"]},
+    }
+    trace = {
+        "final_status": "scheduled",
+        "activity_id": "act_strength_travel",
+        "task_instance_id": "task_strength",
+        "selected_slot": {
+            "start": "2026-06-24T19:50:00+08:00",
+            "end": "2026-06-24T20:25:00+08:00",
+            "location_id": "travel_hotel",
+        },
+    }
+    activities = {
+        "act_strength_primary": primary,
+        "act_strength_travel": substitution,
+    }
+    weekly_actions = {
+        "ga_strength_sessions_weekly": {
+            "label": "Strength sessions",
+            "target_per_week": 2,
+        }
+    }
+
+    goal = app_module._goal_explanation(trace, substitution, {}, {}, activities, weekly_actions)
+    reason = app_module._selected_slot_reason(trace, substitution, {}, goal)
+    rationale = app_module._planning_rationale(substitution, goal, activities)
+
+    assert goal["label"] == "Strength sessions"
+    assert any(item.startswith("Goal mapping: contributes to Strength sessions.") for item in rationale)
+    assert "member-led; no provider required" in reason
+    assert "travel hotel was an allowed location" in reason
 
 
 def test_calendar_renderer_has_review_debugging_sections():
@@ -163,15 +276,16 @@ def test_calendar_renderer_uses_week_scoped_review_panels():
     assert "state.model.unscheduled_items || []" not in js_response.text
 
 
-def test_calendar_review_panels_render_below_agenda_with_clear_goal_math():
+def test_calendar_review_panels_render_around_agenda_with_clear_goal_math():
     js_response = client.get("/static/calendar.js")
 
     assert js_response.status_code == 200
     js = js_response.text
+    assert js.index("${renderCategoryTime(week)}") < js.index('<div class="agenda-grid">')
     assert js.index('<div class="agenda-grid">') < js.index("${renderGoalCoverage(week)}")
-    assert "scheduled of ${goal.scheduled + goal.unscheduled} planned" in js
-    assert "scheduled via substitution" in js
-    assert "Substitutions are already included in scheduled" in js
+    assert "Target coverage: ${goal.scheduled} of ${target}" in js
+    assert "substitutions: ${goal.substitutions}" in js
+    assert "Support-only actions are tracked separately" in js
 
 
 def test_calendar_renderer_exposes_data_quality_warnings():

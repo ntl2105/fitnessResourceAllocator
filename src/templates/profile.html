@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elyx Profile - {{ member_name }}</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #1f2933; background: #f7f8fa; }
+    header { background: #14213d; color: white; padding: 18px 28px; }
+    nav { margin-top: 10px; display: flex; gap: 16px; }
+    nav a { color: #e5e7eb; text-decoration: none; font-weight: 600; }
+    main { padding: 24px 28px; display: grid; gap: 20px; }
+    h1 { margin: 0; font-size: 28px; }
+    section { background: white; border: 1px solid #d9e2ec; padding: 18px; }
+    pre { margin: 0; white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 15px; line-height: 1.55; }
+    .meta { color: #52606d; margin: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Elyx Member Profile</h1>
+    <nav>
+      <a href="/calendar">Calendar</a>
+      <a href="/profile">Profile</a>
+      <a href="/pipeline">Pipeline</a>
+      <a href="/summary">Summary</a>
+      <a href="/audit">Audit</a>
+    </nav>
+  </header>
+  <main>
+    <p class="meta">Human-readable brief generated from the latest run's member profile JSON.</p>
+    <section>
+      <pre>{{ profile_brief }}</pre>
+    </section>
+  </main>
+</body>
+</html>

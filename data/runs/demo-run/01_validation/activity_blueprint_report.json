@@ -1,0 +1,42 @@
+{
+  "batch_counts": {
+    "001_metabolic_nutrition": 12,
+    "002_cardiorespiratory_fitness": 10,
+    "003_strength_mobility_pain": 10,
+    "004_recovery_sleep_stress": 8,
+    "005_clinical_review_measurement": 10
+  },
+  "errors": [],
+  "family_count": 50,
+  "food_slot_counts": {
+    "breakfast": 1,
+    "dinner": 1,
+    "lunch": 1
+  },
+  "goal_counting_family_counts": {
+    "ga_aerobic_conditioning_weekly": 2,
+    "ga_sleep_recovery_weekly": 2,
+    "ga_strength_sessions_weekly": 2,
+    "ga_structured_meals_weekly": 3
+  },
+  "goal_counting_weekly_frequency_estimates": {
+    "ga_aerobic_conditioning_weekly": 2.0,
+    "ga_sleep_recovery_weekly": 4.0,
+    "ga_strength_sessions_weekly": 2.0,
+    "ga_structured_meals_weekly": 14.0
+  },
+  "goal_support_family_counts": {
+    "ga_adherence_support_weekly": 4,
+    "ga_aerobic_conditioning_weekly": 6,
+    "ga_clinical_review_3month": 10,
+    "ga_sleep_recovery_weekly": 6,
+    "ga_strength_sessions_weekly": 6,
+    "ga_structured_meals_weekly": 7,
+    "ga_travel_continuity_3month": 15
+  },
+  "minimum_family_count": 50,
+  "status": "pass",
+  "warnings": [
+    "ga_clinical_review_3month has no counting primary families."
+  ]
+}

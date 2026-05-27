@@ -11,6 +11,26 @@ const chips = document.getElementById("scenario-chips");
 const drawer = document.getElementById("trace-drawer");
 const drawerTitle = document.getElementById("drawer-title");
 const drawerContent = document.getElementById("drawer-content");
+const recapRoot = document.getElementById("recap-root");
+const profileRoot = document.getElementById("member-profile-root");
+const activityBoardRoot = document.getElementById("activity-board-root");
+
+function setupCalendarTabs() {
+  const tabs = Array.from(document.querySelectorAll("[data-tab-target]"));
+  if (!tabs.length) return;
+
+  for (const tab of tabs) {
+    tab.addEventListener("click", () => {
+      for (const candidate of tabs) {
+        const target = document.getElementById(candidate.dataset.tabTarget);
+        const active = candidate === tab;
+        candidate.className = active ? "calendar-tab active" : "calendar-tab";
+        candidate.setAttribute("aria-selected", String(active));
+        if (target) target.hidden = !active;
+      }
+    });
+  }
+}
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -51,6 +71,7 @@ function render() {
 
   grid.innerHTML = `
     ${renderDataQualityWarnings()}
+    ${renderCategoryTime(week)}
     ${renderLocationBands(week)}
     <p class="filter-help">Counts reflect the selected week. Filtering only affects visible activities in this week.</p>
     <div class="agenda-grid">
@@ -59,6 +80,285 @@ function render() {
     ${renderGoalCoverage(week)}
     ${renderUnscheduledItems(week)}
   `;
+}
+
+function renderMemberProfile(profile) {
+  if (!profileRoot || !profile) return;
+  const identity = profile.identity || {};
+  profileRoot.innerHTML = `
+    <section class="profile-hero">
+      <div>
+        <div class="eyebrow">Member Profile</div>
+        <h2>${escapeHtml(identity.name)}</h2>
+        <p>${escapeHtml(identity.summary)}</p>
+      </div>
+      <div class="profile-stat-grid">
+        ${(profile.stats || []).map((stat) => `
+          <div class="profile-stat">
+            <span>${escapeHtml(stat.label)}</span>
+            <strong>${escapeHtml(stat.value)}</strong>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+    <section class="member-profile-grid">
+      ${renderProfileSection("Goals", "profile-goal-grid", (profile.goals || []).map(renderProfileGoal).join(""))}
+      ${renderProfileFacts("Preferences", profile.preferences)}
+      ${renderProfileFacts("Dietary Access", profile.dietary_access)}
+      ${renderProfileFacts("Constraints", profile.constraints)}
+      ${renderProfileFacts("Baseline Snapshot", profile.baseline)}
+      ${renderProfileTimeline(profile.journey_phases)}
+      ${renderTravelWindows(profile.travel_windows)}
+      ${renderProviderUniverse(profile.provider_universe)}
+      ${renderProfileFacts("Scheduling Rules", profile.scheduling_rules)}
+    </section>
+  `;
+}
+
+function renderThreeMonthRecap(recap) {
+  if (!recapRoot) return;
+  if (!recap || !(recap.goals || []).length) {
+    recapRoot.innerHTML = '<p class="empty-state">No three-month goal recap is available.</p>';
+    return;
+  }
+  const totals = recap.totals || {};
+  const horizon = recap.horizon || {};
+  recapRoot.innerHTML = `
+    <section class="recap-hero">
+      <div>
+        <div class="eyebrow">Three-Month Recap</div>
+        <h2>Goal Coverage After Scheduling</h2>
+        <p>Shows how the full planning horizon converts Marcus's goals into scheduled activity coverage, substitutions, excess work, and remaining gaps.</p>
+      </div>
+      <div class="recap-stat-grid">
+        <div class="recap-stat"><span>Horizon</span><strong>${escapeHtml(horizon.label || "n/a")}</strong></div>
+        <div class="recap-stat"><span>Goals</span><strong>${escapeHtml(totals.goal_count || 0)}</strong></div>
+        <div class="recap-stat"><span>Actions</span><strong>${escapeHtml(totals.action_count || 0)}</strong></div>
+        <div class="recap-stat"><span>At Risk</span><strong>${escapeHtml((totals.at_risk || 0) + (totals.missed || 0))}</strong></div>
+      </div>
+    </section>
+    <section class="recap-grid">
+      ${(recap.goals || []).map(renderRecapGoal).join("")}
+    </section>
+  `;
+}
+
+function renderRecapGoal(goal) {
+  return `
+    <section class="recap-goal status-${escapeHtml(goal.status)}">
+      <header>
+        <div>
+          <span>${goal.priority ? `Priority ${escapeHtml(goal.priority)}` : "Goal"}</span>
+          <h3>${escapeHtml(goal.label)}</h3>
+          ${goal.description ? `<p>${escapeHtml(goal.description)}</p>` : ""}
+        </div>
+        <strong>${escapeHtml(goal.status.replaceAll("_", " "))}</strong>
+      </header>
+      <div class="recap-action-list">
+        ${(goal.actions || []).map(renderRecapAction).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderRecapAction(action) {
+  const progressLabel = action.support_only
+    ? `${action.support_scheduled || 0} support scheduled`
+    : `${action.scheduled} of ${action.horizon_target} target`;
+  const completion = action.completion_percent == null ? "" : `${action.completion_percent}%`;
+  const activityText = (action.top_activities || [])
+    .map((item) => `${item.title} (${item.count})`)
+    .join("; ");
+  return `
+    <article class="recap-action status-${escapeHtml(action.status)}">
+      <div class="recap-action-main">
+        <strong>${escapeHtml(action.label)}</strong>
+        <span>${escapeHtml(progressLabel)}${completion ? ` · ${escapeHtml(completion)}` : ""}</span>
+        ${activityText ? `<em>${escapeHtml(activityText)}</em>` : ""}
+      </div>
+      <div class="recap-action-metrics">
+        <span>${escapeHtml(action.weeks_with_coverage || 0)} weeks covered</span>
+        <span>${escapeHtml(action.substitutions || 0)} substitutions</span>
+        <span>${escapeHtml(action.blocked_instances || 0)} blocked</span>
+        ${action.extra_scheduled ? `<span>${escapeHtml(action.extra_scheduled)} extra</span>` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function renderActivityBoard(board) {
+  if (!activityBoardRoot) return;
+  const sections = board || [];
+  if (!sections.length) {
+    activityBoardRoot.innerHTML = '<p class="empty-state">No activity-to-goal mappings found.</p>';
+    return;
+  }
+  activityBoardRoot.innerHTML = `
+    <section class="activity-board-header">
+      <div>
+        <div class="eyebrow">Goal Mapping First</div>
+        <h2>Activity Board Review</h2>
+        <p>Review how goals map to weekly actions, activity families, scheduled instances, and blocked instances.</p>
+      </div>
+    </section>
+    ${sections.map(renderActivityBoardSection).join("")}
+  `;
+}
+
+function renderActivityBoardSection(section) {
+  return `
+    <section class="activity-board-section">
+      <header>
+        <div>
+          <h3>${escapeHtml(section.label)}</h3>
+          <p>${escapeHtml(section.notes || "")}</p>
+        </div>
+        <span>${escapeHtml(section.target_per_week)} weekly target</span>
+      </header>
+      <div class="activity-board-table">
+        <div class="activity-board-row activity-board-row-head">
+          <span>Activity</span>
+          <span>Cadence</span>
+          <span>Delivery</span>
+          <span>Metrics / Review</span>
+          <span>Backup / Skip</span>
+        </div>
+        ${(section.activities || []).map(renderActivityBoardRow).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderActivityBoardRow(activity) {
+  const warnings = activity.warnings || [];
+  const locations = activity.locations || [];
+  const providers = activity.provider_ids || [];
+  const backups = activity.backup_activity_ids || [];
+  const metrics = activity.metrics || [];
+  const prepText = activity.prep_required
+    ? `Prep required${activity.prep_source ? ` · ${activity.prep_source}` : ""}`
+    : activity.prep_source
+      ? `Prep source: ${activity.prep_source}`
+      : "No prep required";
+  const remoteText = activity.remote_allowed ? "remote ok" : "in-person only";
+  const reviewText = warnings.length
+    ? warnings.join(" ")
+    : (activity.dependencies || []).join(", ") || "ok";
+  return `
+    <div class="activity-board-row ${warnings.length ? "has-warning" : ""}">
+      <span>
+        <strong>${escapeHtml(activity.title)}</strong>
+        <em>${escapeHtml(activity.activity_type)} · ${activity.is_primary ? "primary" : "substitution"} · ${escapeHtml(activity.family_id)}</em>
+        ${activity.details ? `<small>${escapeHtml(activity.details)}</small>` : ""}
+      </span>
+      <span>
+        ${escapeHtml(activity.frequency)}
+        <em>${escapeHtml(activity.contribution_role || "n/a")}${activity.counts_toward_weekly_target ? "" : " · support"} · P${escapeHtml(activity.priority)} · ${escapeHtml(activity.load_level)}</em>
+        <em>${escapeHtml(activity.scheduled_count)} scheduled · ${escapeHtml(activity.unscheduled_count)} blocked</em>
+      </span>
+      <span>
+        ${escapeHtml(activity.facilitator_type || "n/a")}
+        <em>${escapeHtml(locations.join(", ") || "no location")}</em>
+        <em>${escapeHtml(remoteText)}${providers.length ? ` · ${escapeHtml(providers.join(", "))}` : ""}</em>
+        <em>${escapeHtml(prepText)}</em>
+      </span>
+      <span>
+        ${escapeHtml(metrics.length ? metrics.join(", ") : "No metrics listed")}
+        <em>${escapeHtml(reviewText)}</em>
+      </span>
+      <span>
+        ${escapeHtml(backups.length ? backups.join(", ") : "No backup listed")}
+        <em>${escapeHtml(activity.skip_adjustment || "Not specified")}</em>
+      </span>
+    </div>
+  `;
+}
+
+function renderProfileSection(title, className, content) {
+  if (!content) return "";
+  return `
+    <section class="profile-card ${className}">
+      <h3>${escapeHtml(title)}</h3>
+      ${content}
+    </section>
+  `;
+}
+
+function renderProfileGoal(goal) {
+  return `
+    <div class="profile-goal">
+      <span>Priority ${escapeHtml(goal.priority)}</span>
+      <strong>${escapeHtml(goal.label)}</strong>
+      ${goal.description ? `<p>${escapeHtml(goal.description)}</p>` : ""}
+      ${goal.target ? `<em>${escapeHtml(goal.target)}</em>` : ""}
+    </div>
+  `;
+}
+
+function renderProfileFacts(title, facts) {
+  const items = facts || [];
+  if (!items.length) return "";
+  return renderProfileSection(
+    title,
+    "profile-facts",
+    `<dl>${items.map((item) => `
+      <div>
+        <dt>${escapeHtml(item.label)}</dt>
+        <dd>${escapeHtml(item.value)}</dd>
+      </div>
+    `).join("")}</dl>`
+  );
+}
+
+function renderProfileTimeline(phases) {
+  const items = phases || [];
+  if (!items.length) return "";
+  return renderProfileSection(
+    "Journey Timeline",
+    "profile-timeline",
+    items.map((phase) => `
+      <div class="timeline-item">
+        <span>${escapeHtml(phase.date_range)}</span>
+        <strong>${escapeHtml(phase.label)}</strong>
+        <p>${escapeHtml((phase.goals || []).join(", "))}</p>
+      </div>
+    `).join("")
+  );
+}
+
+function renderTravelWindows(windows) {
+  const items = windows || [];
+  if (!items.length) return "";
+  return renderProfileSection(
+    "Travel Windows",
+    "profile-travel-grid",
+    items.map((window) => `
+      <div class="travel-card">
+        <span>${escapeHtml(window.type)}</span>
+        <strong>${escapeHtml(window.destination)}</strong>
+        <p>${escapeHtml(window.date_range)}</p>
+        ${window.notes ? `<em>${escapeHtml(window.notes)}</em>` : ""}
+      </div>
+    `).join("")
+  );
+}
+
+function renderProviderUniverse(providers) {
+  const items = providers || [];
+  if (!items.length) return "";
+  return renderProfileSection(
+    "Provider Universe",
+    "profile-provider-grid",
+    items.map((provider) => `
+      <div class="provider-card">
+        <span>${escapeHtml(provider.type)}</span>
+        <strong>${escapeHtml(provider.name)}</strong>
+        <p>${escapeHtml((provider.modes || []).join(", "))}</p>
+        <em>${escapeHtml((provider.locations || []).join(", "))}</em>
+        ${provider.notes ? `<small>${escapeHtml(provider.notes)}</small>` : ""}
+      </div>
+    `).join("")
+  );
 }
 
 function renderDataQualityWarnings() {
@@ -88,18 +388,77 @@ function renderGoalCoverage(week) {
   if (!goals.length) return "";
   return `
     <section class="goal-panel">
-      <h2>Goal Coverage</h2>
-      <p class="panel-note">Scheduled plus unscheduled equals planned work for this selected week. Substitutions are already included in scheduled.</p>
+      <h2>Progress Report</h2>
+      <p class="panel-note">After scheduling, this shows how the week is meeting goal targets and activity assignments. Support-only actions are tracked separately and excluded from core target progress.</p>
       <div class="goal-grid">
-        ${goals.map((goal) => `
-          <div class="goal-card status-${escapeHtml(goal.status)}">
-            <strong>${escapeHtml(goal.goal_tag.replaceAll("_", " "))}</strong>
-            <span>${goal.scheduled} scheduled of ${goal.scheduled + goal.unscheduled} planned</span>
-            <span>${goal.unscheduled} unscheduled · ${goal.substitutions || 0} scheduled via substitution</span>
-          </div>
-        `).join("")}
+        ${goals.map(renderGoalCard).join("")}
       </div>
     </section>
+  `;
+}
+
+function renderCategoryTime(week) {
+  const rows = week.category_time || [];
+  if (!rows.length) return "";
+  const maxMinutes = Math.max(1, ...rows.map((row) => row.minutes || 0));
+  return `
+    <section class="category-time-panel">
+      <h2>Weekly Time by Category</h2>
+      <p class="panel-note">Scheduled duration for this selected week across the five activity categories.</p>
+      <div class="category-time-grid">
+        ${rows.map((row) => renderCategoryTimeCard(row, maxMinutes)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderCategoryTimeCard(row, maxMinutes) {
+  const minutes = row.minutes || 0;
+  const hours = formatHours(minutes);
+  const width = Math.max(3, Math.round((minutes / maxMinutes) * 100));
+  return `
+    <div class="category-time-card type-border-${escapeHtml(row.category)}">
+      <div>
+        <strong>${escapeHtml(row.category)}</strong>
+        <span>${escapeHtml(row.activity_count || 0)} activities</span>
+      </div>
+      <b>${escapeHtml(hours)}</b>
+      <div class="category-time-track">
+        <span class="type-bg-${escapeHtml(row.category)}" style="width: ${width}%"></span>
+      </div>
+    </div>
+  `;
+}
+
+function formatHours(minutes) {
+  if (!minutes) return "0h";
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+  if (!hours) return `${remainder}m`;
+  return remainder ? `${hours}h ${remainder}m` : `${hours}h`;
+}
+
+function renderGoalCard(goal) {
+  const title = goal.label || goal.goal_tag || goal.weekly_goal_action_id;
+  const target = goal.target_per_week ?? (goal.scheduled + goal.unscheduled);
+  const extra = goal.extra_scheduled || 0;
+  const rawUnscheduled = goal.raw_unscheduled_instances || 0;
+  const supportLine = goal.support_only
+    ? `${goal.support_scheduled || 0} support scheduled · ${goal.support_unscheduled || 0} support unscheduled`
+    : `Still needed: ${goal.unscheduled} · blocked candidates: ${rawUnscheduled}`;
+  const scheduledLine = goal.support_only
+    ? "Support-only, excluded from core denominator"
+    : `Total scheduled: ${goal.scheduled_total || goal.scheduled}${goal.substitutions ? ` · substitutions: ${goal.substitutions}` : ""}${extra ? ` · extra above target: ${extra}` : ""}`;
+  const progressLine = goal.support_only
+    ? "Support-only, excluded from core denominator"
+    : `Target coverage: ${goal.scheduled} of ${target}`;
+  return `
+    <div class="goal-card status-${escapeHtml(goal.status)}">
+      <strong>${escapeHtml(title)}</strong>
+      <span>${escapeHtml(progressLine)}</span>
+      <span>${escapeHtml(scheduledLine)}</span>
+      <span>${escapeHtml(supportLine)}</span>
+    </div>
   `;
 }
 
@@ -142,6 +501,7 @@ function renderAgendaDay(week, day, dayIndex) {
         !state.activeScenario || activity.scenario_flags.includes(state.activeScenario)
     );
   const dayBlocks = week.unavailable_blocks.filter((block) => block.day_index === dayIndex);
+  const dayHabits = (week.habit_blocks || []).filter((block) => block.day_index === dayIndex);
 
   return `
     <section class="agenda-day">
@@ -150,6 +510,7 @@ function renderAgendaDay(week, day, dayIndex) {
         <div class="agenda-day-count">${dayActivities.length} activities</div>
       </header>
       ${renderDayContext(dayBlocks)}
+      ${renderHabitBlocks(dayHabits)}
       <div class="agenda-activities">
         ${
           dayActivities.length
@@ -158,6 +519,15 @@ function renderAgendaDay(week, day, dayIndex) {
         }
       </div>
     </section>
+  `;
+}
+
+function renderHabitBlocks(blocks) {
+  if (!blocks.length) return "";
+  return `
+    <div class="habit-context">
+      ${blocks.map((block) => `<div>${escapeHtml(block.summary)}</div>`).join("")}
+    </div>
   `;
 }
 
@@ -181,10 +551,13 @@ function renderActivity(activity) {
       data-trace-id="${escapeHtml(activity.trace_id)}"
       data-title="${escapeHtml(activity.title)}"
     >
+      ${activity.travel_to ? `<div class="activity-travel">${escapeHtml(activity.travel_to)}</div>` : ""}
       <div class="activity-time">${escapeHtml(activity.start_time)}-${escapeHtml(activity.end_time)}</div>
       <div class="activity-title">${escapeHtml(activity.title)}</div>
       <div class="activity-meta">${escapeHtml(activity.activity_type)} · ${escapeHtml(activity.location_id || activity.mode)} · ${escapeHtml(activity.load_level)}</div>
       ${activity.provider_summary ? `<div class="activity-provider">${escapeHtml(activity.provider_summary)}</div>` : ""}
+      ${activity.meal_summary ? `<div class="activity-value">${escapeHtml(activity.meal_summary)}</div>` : ""}
+      ${activity.prep_summary ? `<div class="activity-prep">${escapeHtml(activity.prep_summary)}</div>` : ""}
       <div class="badges">${badges}</div>
     </button>
   `;
@@ -227,6 +600,11 @@ function renderRejectedCandidates(candidates) {
   `;
 }
 
+function renderReasonList(reasons, emptyText) {
+  if (!reasons || !reasons.length) return `<p>${escapeHtml(emptyText)}</p>`;
+  return `<ul>${reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join("")}</ul>`;
+}
+
 async function openTrace(traceId, title) {
   if (!traceId) return;
   drawer.classList.add("open");
@@ -240,8 +618,14 @@ async function openTrace(traceId, title) {
   );
   drawerContent.innerHTML = `
     <p><strong>Status:</strong> ${escapeHtml(trace.final_status)}</p>
+    <h3>Why This Activity Exists</h3>
+    ${renderReasonList(trace.planning_rationale || [], "No planning rationale available.")}
     <h3>Scheduled Slot</h3>
     <p>${escapeHtml(trace.selected_slot_summary || "No selected slot.")}</p>
+    <h3>${trace.final_status === "scheduled" ? "Why This Was Scheduled" : "Why This Was Not Scheduled"}</h3>
+    ${trace.final_status === "scheduled"
+      ? renderReasonList(trace.why_scheduled || [], "No scheduling explanation available.")
+      : renderReasonList(trace.why_not_scheduled || [], "No blocking explanation available.")}
     <p><strong>Policy:</strong> ${escapeHtml(trace.policy_fit_summary)}</p>
     <p><strong>Resources:</strong> ${escapeHtml(trace.resource_fit_summary)}</p>
     <p><strong>Handoff:</strong> ${escapeHtml(trace.provider_handoff_summary || "None")}</p>
@@ -280,8 +664,13 @@ fetch(root.dataset.source)
   .then((response) => response.json())
   .then((model) => {
     state.model = model;
+    renderThreeMonthRecap(model.three_month_recap);
+    renderMemberProfile(model.member_profile);
+    renderActivityBoard(model.activity_board);
     render();
   })
   .catch((error) => {
     grid.innerHTML = `<div class="empty-state">Failed to load calendar interface: ${escapeHtml(error.message)}</div>`;
   });
+
+setupCalendarTabs();

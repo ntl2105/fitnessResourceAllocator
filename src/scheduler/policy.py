@@ -21,10 +21,16 @@ def evaluate_policy(
     travel_time_rules = (dependency_state or {}).get("travel_time_rules", [])
     checks = [
         no_overlap_check(start, end, scheduled_tasks),
+        movement_spacing_check(start, end, scheduled_tasks, activity),
+        late_substantial_fitness_check(start, end, activity),
+        same_day_substantial_fitness_check(start, scheduled_tasks, activity),
         same_day_repeat_check(task, start, scheduled_tasks, activity),
-        location_compatibility_check(start, scheduled_tasks, activity),
-        member_availability_check(start, end, availability),
+        same_provider_consultation_spacing_check(task, start, end, scheduled_tasks, activity),
+        meal_slot_exclusivity_check(start, scheduled_tasks, activity),
+        location_compatibility_check(start, end, scheduled_tasks, activity),
+        member_availability_check(start, end, availability, activity, candidate_location_id, task),
         member_travel_location_check(start, end, candidate_location_id, availability),
+        active_travel_required_check(start, end, activity, availability),
         travel_time_buffer_check(
             start,
             end,
@@ -36,6 +42,146 @@ def evaluate_policy(
     ]
     checks.extend(dependency_checks(task, start, scheduled_tasks, dependency_state))
     return all(check.passed for check in checks), checks
+
+
+MOVEMENT_ACTIVITY_TYPES = {"fitness", "therapy"}
+MOVEMENT_SPACING_MINUTES = 90
+LATEST_SUBSTANTIAL_FITNESS_END_HOUR = 20
+LATEST_SUBSTANTIAL_FITNESS_END_MINUTE = 30
+
+
+def movement_spacing_check(
+    start: datetime,
+    end: datetime,
+    scheduled_tasks: list[ScheduledTask],
+    activity: dict[str, Any] | None,
+) -> ConstraintCheck:
+    if not is_movement_activity(activity):
+        return ConstraintCheck(
+            name="movement_spacing",
+            passed=True,
+            reason="Activity is not a standalone movement or therapy block.",
+        )
+
+    nearest = None
+    nearest_gap = None
+    for scheduled in scheduled_tasks:
+        if scheduled.start.date() != start.date():
+            continue
+        if not scheduled_task_is_movement(scheduled):
+            continue
+        gap = gap_between_minutes(start, end, scheduled.start, scheduled.end)
+        if gap is None:
+            continue
+        if nearest_gap is None or gap < nearest_gap:
+            nearest = scheduled
+            nearest_gap = gap
+
+    passed = nearest_gap is None or nearest_gap >= MOVEMENT_SPACING_MINUTES
+    return ConstraintCheck(
+        name="movement_spacing",
+        passed=passed,
+        reason=(
+            "No nearby movement or therapy block creates an unrealistic sequence."
+            if passed
+            else (
+                f"This standalone fitness/therapy block requires {MOVEMENT_SPACING_MINUTES} "
+                f"minutes between sessions; only {nearest_gap} minutes around "
+                f"{nearest.title if nearest else 'another movement task'}."
+            )
+        ),
+    )
+
+
+def late_substantial_fitness_check(
+    start: datetime,
+    end: datetime,
+    activity: dict[str, Any] | None,
+) -> ConstraintCheck:
+    activity = activity or {}
+    if (
+        activity.get("activity_type") != "fitness"
+        or activity.get("load_level") == "low"
+        or activity.get("allow_late_finish")
+    ):
+        return ConstraintCheck(
+            name="late_substantial_fitness",
+            passed=True,
+            reason="Activity is not a medium/high-load fitness session.",
+        )
+    cutoff = start.replace(
+        hour=LATEST_SUBSTANTIAL_FITNESS_END_HOUR,
+        minute=LATEST_SUBSTANTIAL_FITNESS_END_MINUTE,
+        second=0,
+        microsecond=0,
+    )
+    passed = end <= cutoff
+    return ConstraintCheck(
+        name="late_substantial_fitness",
+        passed=passed,
+        reason=(
+            "Medium/high-load fitness ends by Marcus's 20:30 cutoff."
+            if passed
+            else "Rejected because Marcus avoids medium/high-load fitness ending after 20:30."
+        ),
+    )
+
+
+def same_day_substantial_fitness_check(
+    start: datetime,
+    scheduled_tasks: list[ScheduledTask],
+    activity: dict[str, Any] | None,
+) -> ConstraintCheck:
+    activity = activity or {}
+    if activity.get("activity_type") != "fitness" or activity.get("load_level") == "low":
+        return ConstraintCheck(
+            name="same_day_substantial_fitness",
+            passed=True,
+            reason="Activity is not a substantial fitness session.",
+        )
+    existing = next(
+        (
+            scheduled
+            for scheduled in scheduled_tasks
+            if scheduled.activity_type == "fitness"
+            and scheduled.load_level != "low"
+            and scheduled.start.date() == start.date()
+        ),
+        None,
+    )
+    return ConstraintCheck(
+        name="same_day_substantial_fitness",
+        passed=existing is None,
+        reason=(
+            "No substantial fitness session is already scheduled on this day."
+            if existing is None
+            else f"Rejected because {existing.title} is already the substantial fitness session for this day."
+        ),
+    )
+
+
+def is_movement_activity(activity: dict[str, Any] | None) -> bool:
+    if not activity:
+        return False
+    return str(activity.get("activity_type", "")).lower() in MOVEMENT_ACTIVITY_TYPES
+
+
+def scheduled_task_is_movement(scheduled: ScheduledTask) -> bool:
+    activity_type = str(getattr(scheduled, "activity_type", "") or "").lower()
+    return activity_type in MOVEMENT_ACTIVITY_TYPES
+
+
+def gap_between_minutes(
+    start: datetime,
+    end: datetime,
+    other_start: datetime,
+    other_end: datetime,
+) -> int | None:
+    if start >= other_end:
+        return int((start - other_end).total_seconds() // 60)
+    if other_start >= end:
+        return int((other_start - end).total_seconds() // 60)
+    return None
 
 
 def no_overlap_check(
@@ -77,6 +223,86 @@ def same_day_repeat_check(
     )
 
 
+SAME_PROVIDER_CONSULTATION_BUFFER_MINUTES = 30
+
+
+def same_provider_consultation_spacing_check(
+    task: TaskInstance,
+    start: datetime,
+    end: datetime,
+    scheduled_tasks: list[ScheduledTask],
+    activity: dict[str, Any] | None,
+) -> ConstraintCheck:
+    if (activity or {}).get("activity_type") != "consultation":
+        return ConstraintCheck(
+            name="same_provider_consultation_spacing",
+            passed=True,
+            reason="Activity is not a consultation.",
+        )
+    provider_ids = set(task.required_resources.get("provider_ids", []))
+    if not provider_ids:
+        return ConstraintCheck(
+            name="same_provider_consultation_spacing",
+            passed=True,
+            reason="Consultation has no provider requirement.",
+        )
+
+    for scheduled in scheduled_tasks:
+        if scheduled.activity_type != "consultation" or scheduled.start.date() != start.date():
+            continue
+        shared_provider_ids = provider_ids & set(scheduled.provider_ids)
+        if not shared_provider_ids:
+            continue
+        gap = gap_between_minutes(start, end, scheduled.start, scheduled.end)
+        if gap is None or gap < SAME_PROVIDER_CONSULTATION_BUFFER_MINUTES:
+            provider_label = ", ".join(sorted(shared_provider_ids))
+            return ConstraintCheck(
+                name="same_provider_consultation_spacing",
+                passed=False,
+                reason=(
+                    f"Consultation with {provider_label} needs at least "
+                    f"{SAME_PROVIDER_CONSULTATION_BUFFER_MINUTES} minutes from "
+                    f"{scheduled.title}; current gap is {gap if gap is not None else 0} minutes."
+                ),
+            )
+
+    return ConstraintCheck(
+        name="same_provider_consultation_spacing",
+        passed=True,
+        reason="No same-provider consultation is too close.",
+    )
+
+
+def meal_slot_exclusivity_check(
+    start: datetime,
+    scheduled_tasks: list[ScheduledTask],
+    activity: dict[str, Any] | None,
+) -> ConstraintCheck:
+    meal_slot = str((activity or {}).get("meal_slot") or "").lower()
+    if not meal_slot:
+        return ConstraintCheck(
+            name="meal_slot_exclusivity",
+            passed=True,
+            reason="Activity is not a meal-slot activity.",
+        )
+
+    existing = [
+        scheduled
+        for scheduled in scheduled_tasks
+        if scheduled.start.date() == start.date()
+        and scheduled_matches_meal_slot(scheduled, meal_slot)
+    ]
+    return ConstraintCheck(
+        name="meal_slot_exclusivity",
+        passed=not existing,
+        reason=(
+            f"No {meal_slot} has been scheduled on this day."
+            if not existing
+            else f"Rejected because {existing[0].title} already covers {meal_slot} on this day."
+        ),
+    )
+
+
 def dependency_checks(
     task: TaskInstance,
     start: datetime,
@@ -109,6 +335,8 @@ def dependency_checks(
             checks.append(hydration_dependency_check(dependency))
         elif dependency_type == "food_timing":
             checks.append(food_timing_dependency_check(dependency))
+        elif dependency_type == "food_task":
+            checks.append(food_task_dependency_check(dependency, start, scheduled_tasks))
         elif dependency_type == "prep_task":
             checks.append(prep_task_dependency_check(dependency, start, dependency_state))
         elif dependency_type == "prerequisite_activity":
@@ -160,6 +388,46 @@ def food_timing_dependency_check(dependency: dict[str, Any]) -> ConstraintCheck:
             else "Food timing dependency is missing timing metadata."
         ),
     )
+
+
+def food_task_dependency_check(
+    dependency: dict[str, Any],
+    start: datetime,
+    scheduled_tasks: list[ScheduledTask],
+) -> ConstraintCheck:
+    meal_slot = str(dependency.get("meal_slot") or "").lower()
+    if not meal_slot:
+        return ConstraintCheck(
+            name="dependency:food_task",
+            passed=False,
+            reason="Food task dependency is missing meal_slot.",
+        )
+
+    max_offset = int(dependency.get("offset_minutes_max", 30))
+    valid_meals = [
+        meal
+        for meal in scheduled_tasks
+        if meal.start.date() == start.date()
+        and scheduled_matches_meal_slot(meal, meal_slot)
+        and 0 <= int((start - meal.end).total_seconds() // 60) <= max_offset
+    ]
+
+    return ConstraintCheck(
+        name="dependency:food_task",
+        passed=bool(valid_meals),
+        reason=(
+            f"Accepted because {meal_slot} ended at {valid_meals[0].end.isoformat()}, "
+            f"within {max_offset} minutes of candidate."
+            if valid_meals
+            else f"Requires a same-day {meal_slot} ending within {max_offset} minutes before candidate."
+        ),
+    )
+
+
+def scheduled_matches_meal_slot(scheduled: ScheduledTask, meal_slot: str) -> bool:
+    title = scheduled.title.lower()
+    goal_tags = {tag.lower() for tag in scheduled.goal_tags}
+    return meal_slot in title or meal_slot in goal_tags
 
 
 def prep_task_dependency_check(
@@ -338,6 +606,9 @@ def member_availability_check(
     start: datetime,
     end: datetime,
     availability: AvailabilityData | None,
+    activity: dict[str, Any] | None = None,
+    candidate_location_id: str | None = None,
+    task: TaskInstance | None = None,
 ) -> ConstraintCheck:
     if availability is None:
         return ConstraintCheck(
@@ -354,6 +625,26 @@ def member_availability_check(
         ),
         None,
     )
+    if overlapping and is_required_meal_slot(activity, task):
+        return ConstraintCheck(
+            name="member_availability",
+            passed=True,
+            reason=(
+                "Candidate overlaps a member block, but daily meal slots remain "
+                "schedulable unless a fasting/meal-skip reason is explicit."
+            ),
+        )
+    if overlapping and allows_low_complexity_workday_exception(
+        overlapping.notes or "", activity, candidate_location_id
+    ):
+        return ConstraintCheck(
+            name="member_availability",
+            passed=True,
+            reason=(
+                "Candidate overlaps a work block, but the block allows "
+                "low-complexity remote/office/home tasks and this activity qualifies."
+            ),
+        )
     return ConstraintCheck(
         name="member_availability",
         passed=overlapping is None,
@@ -364,6 +655,40 @@ def member_availability_check(
             f"from {overlapping.start.isoformat()} to {overlapping.end.isoformat()}."
         ),
     )
+
+
+def allows_low_complexity_workday_exception(
+    notes: str,
+    activity: dict[str, Any] | None,
+    candidate_location_id: str | None,
+) -> bool:
+    if "except low-complexity remote tasks" not in notes and (
+        "except low-complexity remote/office/home tasks" not in notes
+    ):
+        return False
+    if candidate_location_id not in {"remote", "office", "home"}:
+        return False
+    activity = activity or {}
+    if activity.get("load_level") != "low":
+        return False
+    if activity.get("activity_type") in {"consultation", "medication", "food"}:
+        return True
+    return (
+        activity.get("activity_type") == "fitness"
+        and int(activity.get("duration_minutes") or 999) <= 15
+        and activity.get("facilitator_type") in {"self", "member"}
+    )
+
+
+def is_required_meal_slot(activity: dict[str, Any] | None, task: TaskInstance | None = None) -> bool:
+    activity = activity or {}
+    if task is None or not task.task_instance_id.startswith("task_meal_coverage_"):
+        return False
+    return activity.get("activity_type") == "food" and activity.get("meal_slot") in {
+        "breakfast",
+        "lunch",
+        "dinner",
+    }
 
 
 def member_travel_location_check(
@@ -388,6 +713,22 @@ def member_travel_location_check(
         None,
     )
     if overlapping is None:
+        same_day = travel_window_on_date(start, availability)
+        if same_day is not None:
+            allowed_locations = {"remote", "travel_hotel"}
+            if same_day.location_id:
+                allowed_locations.add(same_day.location_id)
+            passed = candidate_location_id in allowed_locations
+            return ConstraintCheck(
+                name="member_travel_location",
+                passed=passed,
+                reason=(
+                    f"Candidate location {candidate_location_id} is allowed on member travel day."
+                    if passed
+                    else f"Candidate location {candidate_location_id} rejected on member travel day; "
+                    f"allowed locations are {sorted(allowed_locations)}."
+                ),
+            )
         return ConstraintCheck(
             name="member_travel_location",
             passed=True,
@@ -407,6 +748,98 @@ def member_travel_location_check(
             else f"Candidate location {candidate_location_id} rejected during member travel; "
             f"allowed locations are {sorted(allowed_locations)}."
         ),
+    )
+
+
+def active_travel_required_check(
+    start: datetime,
+    end: datetime,
+    activity: dict[str, Any] | None,
+    availability: AvailabilityData | None,
+) -> ConstraintCheck:
+    if not activity_requires_active_travel(activity):
+        return ConstraintCheck(
+            name="active_travel_required",
+            passed=True,
+            reason="Activity does not require an active travel window.",
+        )
+
+    active_travel = active_travel_window(start, end, availability) or travel_window_on_date(
+        start, availability
+    )
+    return ConstraintCheck(
+        name="active_travel_required",
+        passed=active_travel is not None,
+        reason=(
+            "Travel-specific activity overlaps an active travel window."
+            if active_travel is not None
+            else "Travel-specific activity can only be scheduled during an active travel window."
+        ),
+    )
+
+
+def activity_requires_active_travel(activity: dict[str, Any] | None) -> bool:
+    if not activity:
+        return False
+
+    title = str(activity.get("title") or "").lower()
+    activity_id = str(activity.get("activity_id") or "").lower()
+    family_id = str(activity.get("activity_family_id") or "").lower()
+    allowed_locations = set(activity.get("allowed_locations") or [])
+    goal_tags = {str(tag).lower() for tag in activity.get("goal_tags") or []}
+    phase_ids = {str(phase).lower() for phase in activity.get("journey_phase_applicability") or []}
+
+    title_is_travel_specific = (
+        "travel-compatible" in title
+        or "during travel" in title
+        or "hotel room" in title
+        or "hotel gym" in title
+    )
+    id_is_travel_specific = "travel" in activity_id or "travel" in family_id
+    location_is_travel_only = bool(allowed_locations) and allowed_locations.issubset(
+        {"remote", "travel_hotel"}
+    )
+    phase_is_travel_specific = bool(phase_ids) and all(
+        "travel" in phase or phase.endswith("_002") or phase.endswith("_004") or phase.endswith("_006")
+        for phase in phase_ids
+    )
+
+    return (
+        title_is_travel_specific
+        or (location_is_travel_only and ("travel" in goal_tags or id_is_travel_specific))
+        or (location_is_travel_only and phase_is_travel_specific)
+    )
+
+
+def active_travel_window(
+    start: datetime,
+    end: datetime,
+    availability: AvailabilityData | None,
+):
+    if availability is None:
+        return None
+    return next(
+        (
+            block
+            for block in availability.availability_blocks
+            if block.resource_type in {"member_travel", "travel_window"}
+            and intervals_overlap(start, end, block.start, block.end)
+        ),
+        None,
+    )
+
+
+def travel_window_on_date(start: datetime, availability: AvailabilityData | None):
+    if availability is None:
+        return None
+    return next(
+        (
+            block
+            for block in availability.availability_blocks
+            if block.resource_type in {"member_travel", "travel_window"}
+            and block.start.date() <= start.date() <= block.end.date()
+        ),
+        None,
     )
 
 
@@ -524,6 +957,7 @@ def intervals_overlap(
 
 def location_compatibility_check(
     start: datetime,
+    end: datetime,
     scheduled_tasks: list[ScheduledTask],
     activity: dict[str, Any] | None,
 ) -> ConstraintCheck:
@@ -540,7 +974,8 @@ def location_compatibility_check(
         for scheduled in scheduled_tasks
         if scheduled.location_id
         and scheduled.start.date() == start.date()
-        and abs(scheduled.start - start) <= timedelta(hours=1)
+        and start < scheduled.end
+        and end > scheduled.start
     ]
     incompatible = [
         scheduled

@@ -1,0 +1,2222 @@
+{
+  "activity_family_blueprints": [
+    {
+      "activity_family_id": "b01_nutrition_breakfast_chef_home",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 5,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": "breakfast",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekday",
+        "count": 5,
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "breakfast",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 5,
+      "semantic_notes": [
+        "Covers core structured breakfast at home with chef prep or low-prep fallback.",
+        "Must not duplicate travel or office breakfast; substitutions only if chef unavailable or time-constrained."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "prep_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_breakfast_office_delivery",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "office",
+      "meal_slot": "breakfast",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "office-day"
+      },
+      "primary_intent": "breakfast",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Backup for breakfast when at office early or home prep unavailable.",
+        "Does not count toward core meal target unless explicitly scheduled as a structured meal."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "time_conflict",
+        "prep_unavailable"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_breakfast_travel_hotel",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": "breakfast",
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "breakfast",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel hotel breakfast (buffet or room service) as substitution for structured home breakfast.",
+        "Does not add to normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "prep_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b01_nutrition_lunch_office_delivery",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 5,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "office",
+      "meal_slot": "lunch",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekday",
+        "count": 5,
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "lunch",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 5,
+      "semantic_notes": [
+        "Covers core structured lunch via office delivery or chef-prepped packed meal.",
+        "Must not duplicate travel or restaurant lunch; substitutions only if delivery unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "prep_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_lunch_restaurant_travel",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": "lunch",
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "lunch",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel lunch via restaurant or hotel meal as substitution for structured office lunch.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "prep_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b01_nutrition_lunch_member_assembled_home",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": "lunch",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "lunch",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Member-assembled lunch at home as fallback if chef or delivery unavailable.",
+        "Does not count unless explicitly scheduled as structured meal."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "prep_unavailable"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_dinner_chef_home",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 4,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": "dinner",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekday+weekend",
+        "count": 4,
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Sunday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "dinner",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 4,
+      "semantic_notes": [
+        "Covers core structured dinner at home with chef prep.",
+        "Must not duplicate travel or restaurant dinner; substitutions only if chef unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "prep_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_dinner_restaurant",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "restaurant",
+      "meal_slot": "dinner",
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "dinner",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Structured restaurant dinner as fallback if chef prep unavailable or client dinner required.",
+        "Does not count unless explicitly scheduled as structured meal."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "prep_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_dinner_travel_hotel",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": "dinner",
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "dinner",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel dinner via restaurant or hotel meal as substitution for structured home dinner.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "prep_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b01_nutrition_fasting_aware_meal_support",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "food",
+      "family_target": {
+        "goal_action_id": "ga_structured_meals_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "meals"
+      },
+      "goal_action_ids": [
+        "ga_structured_meals_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "food",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "due-week",
+        "count": 0,
+        "days": [],
+        "window": "lab-due"
+      },
+      "primary_intent": "fasting_aware_meal",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Supports meal timing and structure around fasting labs.",
+        "Does not count as a meal; only supports meal scheduling logic."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_supplement_protocol_support",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "medication",
+      "family_target": {
+        "goal_action_id": "ga_adherence_support_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 7,
+        "unit_label": "protocol checks"
+      },
+      "goal_action_ids": [
+        "ga_adherence_support_weekly"
+      ],
+      "location_strategy": "mixed",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_002",
+        "phase_marcus_003",
+        "phase_marcus_004",
+        "phase_marcus_005",
+        "phase_marcus_006",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "medication",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "daily",
+        "count": 7,
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "supplement_protocol",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Daily supplement protocol supports adherence but does not count as a core meal.",
+        "Must not inflate meal or fitness goal math."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b01_nutrition_travel_meal_adherence_check",
+      "batch_id": "001_metabolic_nutrition",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_behavior_coaching_weekly",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 3,
+        "unit_label": "travel continuity reviews"
+      },
+      "goal_action_ids": [
+        "ga_behavior_coaching_weekly"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "travel_support",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Remote coach/dietitian check-in for meal adherence during travel.",
+        "Support-only; does not count as a meal."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b02_cardio_zone2_gym",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "gym",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 1,
+        "days": [
+          "Saturday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "zone2",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 1,
+      "semantic_notes": [
+        "Core gym-based aerobic session (Zone 2, e.g., rower or bike).",
+        "Substitute with home or travel variant if gym unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "facility_unavailable",
+        "equipment_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_zone2_home",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 1,
+        "days": [
+          "Wednesday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "zone2",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 1,
+      "semantic_notes": [
+        "Core home-based aerobic session (e.g., cycling, walking, or bodyweight circuit).",
+        "Substitute with travel or office variant if home unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "facility_unavailable",
+        "equipment_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_zone2_travel_hotel_gym",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "travel_cardio_substitution",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel hotel gym or pool aerobic session as substitution for core Zone 2.",
+        "Does not add to normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable",
+        "equipment_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b02_cardio_zone2_travel_bodyweight",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "travel_cardio_substitution",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel bodyweight or band-based aerobic session as fallback when no gym/pool available.",
+        "Does not add to normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable",
+        "equipment_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b02_cardio_swim_pool_hotel_hk",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "swim",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Swimming in hotel pool as aerobic substitution during Hong Kong travel.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b02_cardio_walking_office",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "office",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "office-day"
+      },
+      "primary_intent": "walk",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Short walking or movement breaks at office as aerobic support.",
+        "Does not count toward core goal; supports adherence when full session not possible."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "time_conflict",
+        "facility_unavailable"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_remote_coach_progression_review",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "monthly",
+        "count": 0,
+        "days": [],
+        "window": "monthly"
+      },
+      "primary_intent": "remote_handoff",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Remote coach review of aerobic progression and adherence.",
+        "Support-only; does not count as a session."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_cgm_log_support",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "medication",
+      "family_target": {
+        "goal_action_id": "ga_adherence_support_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 0,
+        "unit_label": "protocol checks"
+      },
+      "goal_action_ids": [
+        "ga_adherence_support_weekly"
+      ],
+      "location_strategy": "mixed",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "medication",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "cgm_log",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "CGM log or check as support for metabolic tracking.",
+        "Does not count toward core aerobic or meal goals."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_hydration_protocol_support",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "medication",
+      "family_target": {
+        "goal_action_id": "ga_adherence_support_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 0,
+        "unit_label": "protocol checks"
+      },
+      "goal_action_ids": [
+        "ga_adherence_support_weekly"
+      ],
+      "location_strategy": "mixed",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "medication",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "hydration",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Hydration/electrolyte protocol support, especially during travel.",
+        "Support-only; does not count as a meal or aerobic session."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b03_strength_trainer_gym",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "gym",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 1,
+        "days": [
+          "Saturday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "trainer_strength",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 1,
+      "semantic_notes": [
+        "Core trainer-led strength session at gym.",
+        "Substitute with remote or home variant if trainer/facility unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "facility_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b03_strength_home_strength",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 1,
+        "days": [
+          "Tuesday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "home_strength",
+      "primary_role": "core",
+      "primary_weekly_frequency_estimate": 1,
+      "semantic_notes": [
+        "Core home-based strength session (dumbbells, bands, bodyweight).",
+        "Substitute with travel or gym variant if home unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "facility_unavailable",
+        "equipment_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b03_strength_hotel_gym_strength",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "hotel_gym_strength",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Hotel gym-based strength session as substitution for core strength.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable",
+        "equipment_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b03_strength_bodyweight_travel_substitution",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "lower_load_strength_substitution",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Bodyweight or band-based strength as fallback when no gym/equipment available during travel.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "equipment_unavailable",
+        "lower_load_needed"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b03_strength_mobility_post_travel",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly",
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "post-travel",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "post_travel_recovery",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Mobility or recovery session after travel to address fatigue or tightness.",
+        "Does not count as strength unless explicitly substituted for missed session."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "pain_or_fatigue"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b03_strength_physio_assessment_due",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_005"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "phase-specific",
+        "count": 0,
+        "days": [],
+        "window": "pain_escalation"
+      },
+      "primary_intent": "physio_assessment",
+      "primary_role": "measurement",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Physiotherapist assessment after pain escalation or travel.",
+        "Counts only in due phase; may be remote if provider unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b03_strength_trainer_remote_substitution",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "provider-unavailable"
+      },
+      "primary_intent": "trainer_strength",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Remote trainer-led strength session as fallback if in-person unavailable.",
+        "Does not count unless explicitly scheduled as core session."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b03_strength_lower_load_strength_adjustment",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "fitness",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "sessions"
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_005"
+      ],
+      "primary_activity_type": "fitness",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "pain_or_fatigue"
+      },
+      "primary_intent": "lower_load_strength_substitution",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Lower-load strength session as substitution after pain or fatigue.",
+        "Does not count unless explicitly scheduled as core session."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "lower_load_needed",
+        "pain_or_fatigue"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b03_strength_mobility_pain_recovery_checkin",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 0,
+        "unit_label": "travel continuity reviews"
+      },
+      "goal_action_ids": [
+        "ga_care_team_followthrough_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_005",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "remote_handoff",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Remote coach or physio check-in for pain/mobility after travel or skipped high-load session.",
+        "Support-only; does not count as a session."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b04_recovery_evening_mobility_home",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 2,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekday",
+        "count": 2,
+        "days": [
+          "Monday",
+          "Thursday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "evening_recovery",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 2,
+      "semantic_notes": [
+        "Evening home-based mobility or recovery session for sleep support.",
+        "Substitute with travel or remote variant if unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "time_conflict",
+        "provider_unavailable"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b04_recovery_evening_mobility_travel",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "evening_recovery",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel hotel-based evening mobility or recovery session as substitution for home routine.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b04_recovery_sleep_routine_support",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 2,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": true,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 2,
+        "days": [
+          "Tuesday",
+          "Sunday"
+        ],
+        "window": "normal-week"
+      },
+      "primary_intent": "sleep_routine",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 2,
+      "semantic_notes": [
+        "Sleep routine or wind-down protocol for sleep quality.",
+        "Counts toward recovery goal; not a meal or fitness session."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b04_recovery_post_travel_fatigue_adjustment",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "post-travel",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "post_travel_recovery",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Post-travel fatigue adjustment session after long flights.",
+        "Does not count toward normal-week denominator; supports recovery."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "pain_or_fatigue"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b04_recovery_breathwork_support",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "fatigue_adjustment",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Breathwork or stress regulation as support for recovery.",
+        "Does not count toward core goal; support-only."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b04_recovery_remote_coach_recovery_checkin",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 0,
+        "unit_label": "travel continuity reviews"
+      },
+      "goal_action_ids": [
+        "ga_care_team_followthrough_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "remote_handoff",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Remote coach check-in for recovery and sleep during travel.",
+        "Support-only; does not count as a recovery action."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b04_recovery_evening_routine_travel",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "therapy",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "actions"
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "location_strategy": "travel_hotel",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "therapy",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "travel-window",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "sleep_routine",
+      "primary_role": "recovery",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Travel hotel-based evening sleep routine as substitution for home protocol.",
+        "Does not count toward normal-week denominator; supports travel continuity."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b05_clinical_lab_draw_due_week",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_clinical_review_3month",
+        "period": "3_month",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "clinic",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "due-week",
+        "count": 0,
+        "days": [],
+        "window": "lab-due"
+      },
+      "primary_intent": "lab",
+      "primary_role": "measurement",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Lab draw at clinic during due week for metabolic review.",
+        "Reschedule if travel or facility unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "facility_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b05_clinical_physician_review_due_week",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "clinic",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "due-week",
+        "count": 0,
+        "days": [],
+        "window": "review-due"
+      },
+      "primary_intent": "physician_review",
+      "primary_role": "measurement",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Physician review after labs during due week.",
+        "Substitute with remote review if travel or provider unavailable."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b05_clinical_dietitian_review_monthly",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_clinical_review_3month",
+        "period": "3_month",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "home",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "monthly",
+        "count": 0,
+        "days": [],
+        "window": "monthly"
+      },
+      "primary_intent": "dietitian_review",
+      "primary_role": "measurement",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Dietitian review monthly for nutrition and meal adaptation.",
+        "Substitute with remote review if provider unavailable or during travel."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b05_clinical_physio_reassessment_post_travel",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 1,
+        "support_counts": false,
+        "target_units": 1,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "post-travel",
+        "count": 0,
+        "days": [],
+        "window": "travel"
+      },
+      "primary_intent": "physio_assessment",
+      "primary_role": "measurement",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Physio reassessment after travel or pain escalation.",
+        "Remote if provider unavailable or travel context."
+      ],
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b05_clinical_lab_reschedule_coordination",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "as_needed",
+        "count": 0,
+        "days": [],
+        "window": "lab-reschedule"
+      },
+      "primary_intent": "care_team_review",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Care-team coordination for lab rescheduling if travel or facility unavailable.",
+        "Support-only; does not count as a review."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": true
+    },
+    {
+      "activity_family_id": "b05_clinical_biometric_review_support",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "monthly",
+        "count": 0,
+        "days": [],
+        "window": "monthly"
+      },
+      "primary_intent": "care_team_review",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Biometric review and summary by care team.",
+        "Support-only; does not count as a review."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b05_clinical_trainer_physio_handoff",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "substitutions_count": 0,
+        "support_counts": false,
+        "target_units": 0,
+        "unit_label": "reviews"
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_005"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "phase-specific",
+        "count": 0,
+        "days": [],
+        "window": "pain_escalation"
+      },
+      "primary_intent": "care_team_review",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Trainer-physio handoff after pain escalation or travel.",
+        "Support-only; does not count as a review."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b05_clinical_adherence_checkin_support",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "consultation",
+      "family_target": {
+        "goal_action_id": "ga_adherence_support_weekly",
+        "period": "weekly",
+        "substitutions_count": 0,
+        "support_counts": true,
+        "target_units": 0,
+        "unit_label": "protocol checks"
+      },
+      "goal_action_ids": [
+        "ga_adherence_support_weekly"
+      ],
+      "location_strategy": "remote",
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_007"
+      ],
+      "primary_activity_type": "consultation",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "cadence": "weekly",
+        "count": 0,
+        "days": [],
+        "window": "normal-week"
+      },
+      "primary_intent": "adherence_check",
+      "primary_role": "support",
+      "primary_weekly_frequency_estimate": 0,
+      "semantic_notes": [
+        "Weekly adherence check-in by remote coach.",
+        "Support-only; does not count as a review."
+      ],
+      "substitution_count": 0,
+      "substitution_reason_codes": [],
+      "travel_context": false
+    },
+    {
+      "activity_family_id": "b02_cardio_facility_unavailable_cardio_substitution",
+      "batch_id": "002_cardiorespiratory_fitness",
+      "care_domain": "cardiorespiratory_fitness",
+      "family_target": {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "period": "weekly",
+        "target_units": 2,
+        "unit_label": "sessions",
+        "substitutions_count": true,
+        "support_counts": false
+      },
+      "goal_action_ids": [
+        "ga_aerobic_conditioning_weekly"
+      ],
+      "primary_role": "support",
+      "primary_activity_type": "fitness",
+      "primary_intent": "facility_unavailable_cardio_substitution",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "type": "weekly",
+        "count": 0,
+        "cadence": "constraint_scoped",
+        "applies_when": [
+          "facility_unavailable",
+          "equipment_unavailable"
+        ]
+      },
+      "primary_weekly_frequency_estimate": 0,
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_005"
+      ],
+      "location_strategy": "mixed",
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "facility_unavailable",
+        "equipment_unavailable",
+        "time_conflict"
+      ],
+      "travel_context": false,
+      "semantic_notes": [
+        "Adds a same-goal cardio option when gym or cardio equipment access is blocked.",
+        "Supports the aerobic conditioning target without increasing the normal-week denominator."
+      ]
+    },
+    {
+      "activity_family_id": "b03_strength_provider_unavailable_strength_substitution",
+      "batch_id": "003_strength_mobility_pain",
+      "care_domain": "strength_mobility_pain",
+      "family_target": {
+        "goal_action_id": "ga_strength_sessions_weekly",
+        "period": "weekly",
+        "target_units": 2,
+        "unit_label": "sessions",
+        "substitutions_count": true,
+        "support_counts": false
+      },
+      "goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
+      "primary_role": "support",
+      "primary_activity_type": "fitness",
+      "primary_intent": "provider_unavailable_strength_substitution",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "type": "weekly",
+        "count": 0,
+        "cadence": "constraint_scoped",
+        "applies_when": [
+          "provider_unavailable",
+          "remote_delivery_needed"
+        ]
+      },
+      "primary_weekly_frequency_estimate": 0,
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_003",
+        "phase_marcus_005"
+      ],
+      "location_strategy": "home",
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "remote_delivery_needed",
+        "time_conflict"
+      ],
+      "travel_context": false,
+      "semantic_notes": [
+        "Adds a trainer-unavailable strength alternative that preserves the knee-safe strength goal.",
+        "Does not add extra normal-week strength volume."
+      ]
+    },
+    {
+      "activity_family_id": "b04_recovery_load_adjustment_after_poor_sleep",
+      "batch_id": "004_recovery_sleep_stress",
+      "care_domain": "recovery_sleep_stress",
+      "family_target": {
+        "goal_action_id": "ga_sleep_recovery_weekly",
+        "period": "weekly",
+        "target_units": 4,
+        "unit_label": "actions",
+        "substitutions_count": true,
+        "support_counts": false
+      },
+      "goal_action_ids": [
+        "ga_sleep_recovery_weekly"
+      ],
+      "primary_role": "recovery",
+      "primary_activity_type": "therapy",
+      "primary_intent": "poor_sleep_load_adjustment",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "type": "weekly",
+        "count": 0,
+        "cadence": "constraint_scoped",
+        "applies_when": [
+          "poor_sleep",
+          "pain_or_fatigue",
+          "lower_load_needed"
+        ]
+      },
+      "primary_weekly_frequency_estimate": 0,
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_001",
+        "phase_marcus_002",
+        "phase_marcus_004",
+        "phase_marcus_006"
+      ],
+      "location_strategy": "home",
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "lower_load_needed",
+        "pain_or_fatigue",
+        "time_conflict"
+      ],
+      "travel_context": false,
+      "semantic_notes": [
+        "Creates explicit recovery logic when sleep or fatigue requires lowering planned training load.",
+        "Preserves recovery intent without treating a meal or supplement as recovery completion."
+      ]
+    },
+    {
+      "activity_family_id": "b05_clinical_dietitian_lab_followup",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "clinical_review_measurement",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "target_units": 4,
+        "unit_label": "reviews",
+        "substitutions_count": true,
+        "support_counts": false
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month"
+      ],
+      "primary_role": "measurement",
+      "primary_activity_type": "consultation",
+      "primary_intent": "dietitian_lab_followup",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "type": "monthly",
+        "count": 1,
+        "cadence": "post_lab_due_week"
+      },
+      "primary_weekly_frequency_estimate": 0,
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_003",
+        "phase_marcus_005"
+      ],
+      "location_strategy": "remote",
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "provider_unavailable",
+        "remote_delivery_needed",
+        "time_conflict"
+      ],
+      "travel_context": false,
+      "semantic_notes": [
+        "Adds a nutrition-focused clinical follow-up after lab or CGM review.",
+        "Counts only toward the 3-month clinical review package, not a weekly denominator."
+      ]
+    },
+    {
+      "activity_family_id": "b05_clinical_remote_care_team_handoff",
+      "batch_id": "005_clinical_review_measurement",
+      "care_domain": "clinical_review_measurement",
+      "family_target": {
+        "goal_action_id": "ga_care_team_followthrough_3month",
+        "period": "3_month",
+        "target_units": 4,
+        "unit_label": "reviews",
+        "substitutions_count": true,
+        "support_counts": false
+      },
+      "goal_action_ids": [
+        "ga_clinical_review_3month",
+        "ga_care_team_followthrough_3month"
+      ],
+      "primary_role": "measurement",
+      "primary_activity_type": "consultation",
+      "primary_intent": "remote_care_team_handoff",
+      "primary_counts_toward_weekly_target": false,
+      "primary_frequency": {
+        "type": "monthly",
+        "count": 1,
+        "cadence": "phase_scoped"
+      },
+      "primary_weekly_frequency_estimate": 0,
+      "meal_slot": null,
+      "phase_scope": [
+        "phase_marcus_004",
+        "phase_marcus_006",
+        "phase_marcus_007"
+      ],
+      "location_strategy": "remote",
+      "substitution_count": 1,
+      "substitution_reason_codes": [
+        "travel_window",
+        "provider_unavailable",
+        "remote_delivery_needed"
+      ],
+      "travel_context": true,
+      "semantic_notes": [
+        "Adds explicit care-team handoff logic when travel or remote delivery changes the plan.",
+        "Supports travel continuity while preserving the clinical review target as the counting action."
+      ]
+    }
+  ],
+  "count_self_check": {
+    "001_metabolic_nutrition": 12,
+    "002_cardiorespiratory_fitness": 10,
+    "003_strength_mobility_pain": 10,
+    "004_recovery_sleep_stress": 8,
+    "005_clinical_review_measurement": 10,
+    "total": 50
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "version": "2026-05-27",
+  "minimum_primary_family_count": 50,
+  "total_primary_family_budget": 50,
+  "global_rules": [
+    "Generate an activity-family blueprint before generating full activity-family JSON.",
+    "The blueprint is the semantic plan for the board: goal math, primary roles, meal slots, substitutions, and travel context.",
+    "Travel is an adaptation context. It should not create a standalone goal denominator except for support-only tracking.",
+    "Support, prep, reminders, logs, and medication protocols should not inflate core goal coverage.",
+    "Substitutions must preserve the same family intent and only appear after a primary activity is blocked by travel, provider, equipment, facility, fatigue, pain, prep, or time constraints.",
+    "Food coverage must be represented by meal activities, not supplements. Breakfast, lunch, and dinner should be explicit where relevant.",
+    "Generation should avoid creating multiple normal-week primary activities for the same meal slot unless they apply to different contexts such as weekday, weekend, office, or travel."
+  ],
+  "batch_budgets": [
+    {
+      "batch_id": "001_metabolic_nutrition",
+      "prefix": "b01_nutrition",
+      "primary_family_budget": 12,
+      "theme": "metabolic nutrition, structured meals, meal-source logic, supplements or medication tied to food, CGM or hydration support, and travel meal substitutions"
+    },
+    {
+      "batch_id": "002_cardiorespiratory_fitness",
+      "prefix": "b02_cardio",
+      "primary_family_budget": 10,
+      "theme": "cardiorespiratory fitness, zone 2 work, swimming, cycling, rowing, walking, metabolic conditioning, and travel-safe aerobic substitutions"
+    },
+    {
+      "batch_id": "003_strength_mobility_pain",
+      "prefix": "b03_strength",
+      "primary_family_budget": 10,
+      "theme": "strength, mobility, knee-safe training, physiotherapy-informed pain resilience, hotel or home substitutions, and lower-load adjustments"
+    },
+    {
+      "batch_id": "004_recovery_sleep_stress",
+      "prefix": "b04_recovery",
+      "primary_family_budget": 8,
+      "theme": "recovery, sleep, fatigue management, stress regulation, evening routines, post-travel adjustment, and therapy modalities"
+    },
+    {
+      "batch_id": "005_clinical_review_measurement",
+      "prefix": "b05_clinical",
+      "primary_family_budget": 10,
+      "theme": "clinical review, lab measurements, fasting prerequisites, biometric checks, physician and dietitian review, physiotherapy reassessment, trainer handoff, and care coordination"
+    }
+  ],
+  "goal_action_budgets": [
+    {
+      "role": "core",
+      "primary_family_budget": 12,
+      "support_family_budget": 3,
+      "max_counting_primary_weekly_frequency": 14,
+      "allowed_primary_intents": [
+        "breakfast",
+        "lunch",
+        "dinner",
+        "travel_meal",
+        "fasting_aware_meal"
+      ],
+      "canonical_meal_slots": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ],
+      "travel_primary_allowed": false,
+      "notes": "Meals count. Supplements, chef prep, and meal-planning support do not count. Travel meals should usually be substitutions or travel-scoped families that also satisfy this underlying action.",
+      "goal_action_id": "ga_structured_meals_weekly",
+      "target": {
+        "period": "weekly",
+        "units": 14,
+        "unit_label": "meals"
+      }
+    },
+    {
+      "role": "core",
+      "primary_family_budget": 8,
+      "support_family_budget": 2,
+      "max_counting_primary_weekly_frequency": 2,
+      "allowed_primary_intents": [
+        "zone2",
+        "swim",
+        "bike",
+        "walk",
+        "travel_cardio_substitution"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": false,
+      "notes": "Normal weeks should target two cardio sessions, not several parallel cardio prescriptions. Travel variants should be substitutions unless the whole family is explicitly travel-scoped.",
+      "goal_action_id": "ga_aerobic_conditioning_weekly",
+      "target": {
+        "period": "weekly",
+        "units": 2,
+        "unit_label": "sessions"
+      }
+    },
+    {
+      "role": "core",
+      "primary_family_budget": 8,
+      "support_family_budget": 3,
+      "max_counting_primary_weekly_frequency": 2,
+      "allowed_primary_intents": [
+        "trainer_strength",
+        "hotel_gym_strength",
+        "home_strength",
+        "lower_load_strength_substitution"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": false,
+      "notes": "Strength should be a coherent weekly progression. Mobility is support unless it explicitly substitutes after pain, fatigue, or travel.",
+      "goal_action_id": "ga_strength_sessions_weekly",
+      "target": {
+        "period": "weekly",
+        "units": 2,
+        "unit_label": "sessions"
+      }
+    },
+    {
+      "role": "recovery",
+      "primary_family_budget": 8,
+      "support_family_budget": 3,
+      "max_counting_primary_weekly_frequency": 4,
+      "allowed_primary_intents": [
+        "sleep_routine",
+        "evening_recovery",
+        "post_travel_recovery",
+        "fatigue_adjustment"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": true,
+      "notes": "Recovery actions can count, but logging and reminders are support-only.",
+      "goal_action_id": "ga_sleep_recovery_weekly",
+      "target": {
+        "period": "weekly",
+        "units": 4,
+        "unit_label": "actions"
+      }
+    },
+    {
+      "role": "measurement",
+      "primary_family_budget": 8,
+      "support_family_budget": 2,
+      "max_counting_primary_weekly_frequency": 1,
+      "allowed_primary_intents": [
+        "lab",
+        "physician_review",
+        "dietitian_review",
+        "physio_assessment",
+        "care_team_review"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": false,
+      "notes": "This is due-week logic, not a normal every-week denominator. Labs should create prerequisites for review.",
+      "goal_action_id": "ga_clinical_review_3month",
+      "target": {
+        "period": "3_month",
+        "units": 4,
+        "unit_label": "reviews"
+      }
+    },
+    {
+      "role": "support",
+      "primary_family_budget": 8,
+      "support_family_budget": 8,
+      "max_counting_primary_weekly_frequency": 0,
+      "allowed_primary_intents": [
+        "supplement_protocol",
+        "hydration",
+        "cgm_log",
+        "adherence_check",
+        "meal_linked_protocol"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": true,
+      "notes": "Support-only. These activities may be scheduled and audited but should not count as core outcome progress.",
+      "goal_action_id": "ga_adherence_support_weekly",
+      "target": {
+        "period": "weekly",
+        "units": 7,
+        "unit_label": "protocol checks"
+      }
+    },
+    {
+      "goal_action_id": "ga_care_team_followthrough_3month",
+      "role": "care_team",
+      "primary_family_budget": 4,
+      "support_family_budget": 4,
+      "max_counting_primary_weekly_frequency": 0,
+      "allowed_primary_intents": [
+        "remote_handoff",
+        "provider_review",
+        "lab_followup",
+        "plan_adjustment"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": true,
+      "notes": "Care-team follow-through touchpoints that count as explicit consultations.",
+      "target": {
+        "period": "3_month",
+        "units": 6,
+        "unit_label": "touchpoints"
+      }
+    },
+    {
+      "goal_action_id": "ga_behavior_coaching_weekly",
+      "role": "coaching",
+      "primary_family_budget": 4,
+      "support_family_budget": 6,
+      "max_counting_primary_weekly_frequency": 1,
+      "allowed_primary_intents": [
+        "adherence_checkin",
+        "friction_resolution",
+        "travel_support",
+        "meal_prep_failure_resolution"
+      ],
+      "canonical_meal_slots": [],
+      "travel_primary_allowed": true,
+      "notes": "Member-facing behavior coaching and friction-resolution touchpoints.",
+      "target": {
+        "period": "weekly",
+        "units": 1,
+        "unit_label": "touchpoints"
+      }
+    }
+  ]
+}

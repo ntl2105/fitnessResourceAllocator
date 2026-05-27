@@ -20,6 +20,7 @@ class ActivityPrescription(FlexibleModel):
     activity_id: str
     priority: int
     goal_tags: list[str] = []
+    goal_contributions: list[dict[str, Any]] = []
     activity_type: ActivityType
     title: str
     frequency: dict[str, Any]
@@ -48,7 +49,11 @@ class ActivityPrescription(FlexibleModel):
 class ActivityFamily(FlexibleModel):
     activity_family_id: str
     intent: str
+    care_domain: str | None = None
+    family_target: dict[str, Any] | None = None
     goal_tags: list[str] = []
+    goal_action_ids: list[str] = []
+    satisfies_weekly_goal_action_ids: list[str] = []
     primary_activity: ActivityPrescription
     substitution_activities: list[ActivityPrescription] = []
     substitution_rules: list[dict[str, Any]] = []

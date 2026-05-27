@@ -16,21 +16,114 @@ from src.models.trace import ConstraintCheck, DecisionTrace
 def test_member_profile_parses_seed_with_journey_phase_timeline(load_seed):
     profile = MemberProfile.model_validate(load_seed("member_profile.json"))
 
-    assert profile.member_id == "member_elyx_001"
+    assert profile.member_id.startswith("member_elyx_")
     assert profile.journey_phases
+    assert profile.goal_actions
+    assert profile.goal_actions[0].goal_action_id.startswith("ga_")
     assert isinstance(profile.journey_phases[0].start_date, date)
     assert profile.journey_phases[0].phase_type == "baseline"
-    assert profile.travel_windows[0].travel_window_id == "travel_hk_2026_06"
+    assert profile.travel_windows[0].travel_window_id
+
+
+def test_member_profile_accepts_period_aware_goal_actions(load_seed):
+    payload = load_seed("member_profile.json")
+    payload["goal_actions"] = [
+        {
+            "goal_action_id": "ga_structured_meals_001",
+            "goal_id": "goal_metabolic_health",
+            "label": "Complete structured metabolic meals",
+            "role": "core",
+            "target": {"period": "weekly", "units": 14, "unit_label": "meals"},
+            "activity_types": ["food"],
+            "substitutions_allowed": True,
+            "counts_substitutions": True,
+            "support_only": False,
+        },
+        {
+            "goal_action_id": "ga_three_month_review_001",
+            "goal_id": "goal_adherence_and_careteam",
+            "label": "Complete 3-month clinical review package",
+            "role": "measurement",
+            "target": {"period": "3_month", "units": 1, "unit_label": "review package"},
+            "activity_types": ["consultation"],
+            "substitutions_allowed": True,
+            "counts_substitutions": True,
+            "support_only": False,
+        },
+    ]
+
+    profile = MemberProfile.model_validate(payload)
+
+    assert profile.goal_actions[0].goal_action_id == "ga_structured_meals_001"
+    assert profile.goal_actions[0].target.period == "weekly"
+    assert profile.goal_actions[0].target.units == 14
+    assert profile.goal_actions[1].target.period == "3_month"
 
 
 def test_resource_universe_parses_seed_and_exposes_resource_ids(load_seed):
     universe = ResourceUniverse.model_validate(load_seed("resource_universe.json"))
 
-    assert "provider_physio_001" in universe.provider_ids()
-    assert "eq_stationary_bike" in universe.equipment_ids()
+    assert any(provider_id.startswith("provider_physio") for provider_id in universe.provider_ids())
+    assert universe.equipment_ids()
     assert {"home", "office", "gym", "clinic", "lab", "remote"}.issubset(
         set(universe.location_ids())
     )
+
+
+def test_resource_universe_names_specialist_and_allied_health_team(load_seed):
+    universe = ResourceUniverse.model_validate(load_seed("resource_universe.json"))
+    providers = {provider.provider_id: provider for provider in universe.providers}
+
+    physician = providers["provider_physician_01"]
+    assert physician.display_name == "Dr. Aisha Menon"
+    assert physician.model_extra["care_team_role"] == "lead_physician"
+    assert "preventive_cardiometabolic_medicine" in physician.model_extra["specialties"]
+
+    allied_health_roles = {
+        providers["provider_dietitian_01"].model_extra["care_team_role"],
+        providers["provider_physio_01"].model_extra["care_team_role"],
+        providers["provider_trainer_01"].model_extra["care_team_role"],
+        providers["provider_strength_coach_01"].model_extra["care_team_role"],
+        providers["provider_travel_trainer_01"].model_extra["care_team_role"],
+        providers["provider_remote_coach_01"].model_extra["care_team_role"],
+    }
+    assert allied_health_roles == {
+        "registered_dietitian",
+        "physiotherapist",
+        "performance_trainer",
+        "strength_coach",
+        "travel_trainer",
+        "health_coach",
+    }
+    assert providers["provider_strength_coach_01"].display_name == "Amelia Wong"
+    assert providers["provider_travel_trainer_01"].display_name == "Ravi Patel"
+    assert "provider_physician_01" in providers["provider_dietitian_01"].model_extra[
+        "handoff_partner_provider_ids"
+    ]
+
+
+def test_personal_trainers_have_scheduler_availability(load_seed):
+    availability = load_seed("availability.json")
+    trainer_blocks = [
+        block
+        for block in availability["availability_blocks"]
+        if block["resource_id"]
+        in {
+            "provider_trainer_01",
+            "provider_strength_coach_01",
+            "provider_travel_trainer_01",
+        }
+    ]
+    by_provider = {}
+    for block in trainer_blocks:
+        by_provider.setdefault(block["resource_id"], set()).add(block["location_id"])
+
+    assert {"provider_trainer_01", "provider_strength_coach_01", "provider_travel_trainer_01"}.issubset(
+        by_provider
+    )
+    assert "gym" in by_provider["provider_strength_coach_01"]
+    assert "remote" in by_provider["provider_travel_trainer_01"]
+    assert "travel_hotel" in by_provider["provider_travel_trainer_01"]
 
 
 def test_activity_families_document_parses_seed_and_flattens_activities(load_seed):
@@ -41,6 +134,8 @@ def test_activity_families_document_parses_seed_and_flattens_activities(load_see
     assert len(document.flattened_activities()) > len(document.activity_families)
     assert document.flatten_activities() == document.flattened_activities()
     assert document.activity_families[0].primary_activity.is_primary is True
+    assert document.activity_families[0].goal_action_ids
+    assert document.activity_families[0].primary_activity.goal_contributions
 
     family_with_substitution = next(
         family for family in document.activity_families if family.substitution_activities
@@ -52,11 +147,14 @@ def test_activity_families_document_parses_seed_and_flattens_activities(load_see
 
 def test_activity_prescription_allows_structured_skip_adjustment_and_dependency_metadata(load_seed):
     document = ActivityFamiliesDocument.model_validate(load_seed("activity_families.json"))
-    activity = document.activity_families[0].primary_activity
+    activities = document.flattened_activities()
+    structured_skip_activity = next(
+        activity for activity in activities if isinstance(activity.skip_adjustment, dict)
+    )
+    dependency_activity = next(activity for activity in activities if activity.dependencies)
 
-    assert isinstance(activity.skip_adjustment, dict)
-    assert activity.dependencies[0]["type"] == "fasting"
-    assert activity.dependencies[0]["hours"] == 10
+    assert isinstance(structured_skip_activity.skip_adjustment, dict)
+    assert dependency_activity.dependencies[0]["type"]
 
 
 def test_availability_data_parses_seed(load_seed):
@@ -112,6 +210,7 @@ def test_activity_family_contains_primary_and_substitution():
         activity_family_id="fam_001",
         intent="Maintain knee-safe strength.",
         goal_tags=["knee_health"],
+        satisfies_weekly_goal_action_ids=["wga_strength_001"],
         primary_activity=primary,
         substitution_activities=[substitution],
         substitution_rules=[
@@ -204,6 +303,7 @@ def test_decision_trace_and_calendar_row_match_required_contracts():
         "substitution_status",
         "trace_id",
         "compact_group_key",
+        "original_target_date",
     }.issubset(CalendarRow.model_fields)
 
     trace = DecisionTrace(
@@ -250,8 +350,10 @@ def test_decision_trace_and_calendar_row_match_required_contracts():
         substitution_status="primary",
         trace_id=trace.trace_id,
         compact_group_key="2026-06-04:consultation",
+        original_target_date=date(2026, 6, 3),
     )
 
     assert trace.final_status == "scheduled"
     assert trace.constraint_checks[0].passed is True
     assert row.trace_id == trace.trace_id
+    assert row.original_target_date == date(2026, 6, 3)

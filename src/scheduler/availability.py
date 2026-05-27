@@ -7,7 +7,7 @@ from src.models.schedule import TaskInstance
 from src.models.trace import ConstraintCheck
 
 
-MEMBER_CONTEXT_LOCATIONS = {"remote", "home", "office"}
+MEMBER_CONTEXT_LOCATIONS = {"remote", "home", "office", "restaurant"}
 
 
 def check_required_resources(
@@ -95,6 +95,12 @@ def location_available_check(
             passed=True,
             reason=reason,
         )
+    if location_id == "travel_hotel" and member_travel_covers_date(start, availability):
+        return ConstraintCheck(
+            name=f"location_available:{location_id}",
+            passed=True,
+            reason="Travel hotel is the member-context location for this travel date.",
+        )
 
     matching_block = next(
         (
@@ -115,4 +121,12 @@ def location_available_check(
             if matching_block
             else f"No availability block covers physical location {location_id} for candidate slot."
         ),
+    )
+
+
+def member_travel_covers_date(start: datetime, availability: AvailabilityData) -> bool:
+    return any(
+        block.resource_type in {"member_travel", "travel_window"}
+        and block.start.date() <= start.date() <= block.end.date()
+        for block in availability.availability_blocks
     )

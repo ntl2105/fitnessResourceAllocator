@@ -1,7 +1,34 @@
+# Python/runtime
 __pycache__/
 *.py[cod]
+*$py.class
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 .venv/
 venv/
+
+# Environment/local platform state
 .env
-.env.local
+.env.*
+!.env.example
+.vercel/
+
+# Generated artifacts
+data/generated/
+
+# Local-only handoff notes
+CODEX_HANDOFF.md
+
+# Assignment/source extras not needed by the app
+Programming Assignment.docx
+resource_allocator_seed_files.zip
+ui_redesign/
+figma_calendar/
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/

@@ -1,5 +1,7 @@
 {
-  "activity_count": 102,
+  "activity_count": 100,
+  "activity_family_count": 50,
+  "availability_block_count": 327,
   "availability_coverage": {
     "coverage_end_exclusive": "2026-09-01",
     "coverage_start": "2026-06-01",
@@ -17,21 +19,46 @@
     "missing_months": [],
     "passed": true
   },
+  "availability_resource_type_counts": {
+    "equipment": 10,
+    "location": 9,
+    "member_blocked": 100,
+    "member_location": 2,
+    "member_travel": 3,
+    "provider": 200,
+    "travel_window": 3
+  },
   "checks": {
+    "active_data_omits_removed_goal_actions": {
+      "message": "Active activities and families omit removed goal actions.",
+      "passed": true
+    },
+    "activity_family_goal_action_references_resolve": {
+      "message": "All activity family goal action references resolve.",
+      "passed": true
+    },
+    "activity_family_targets_present": {
+      "message": "Activity family targets are complete.",
+      "passed": true
+    },
+    "activity_goal_action_references_resolve": {
+      "message": "All activity goal action references resolve.",
+      "passed": true
+    },
     "all_modalities_present": {
       "message": "Present modalities: consultation, fitness, food, medication, therapy.",
       "passed": true
     },
     "at_least_100_activities": {
-      "message": "Found 102 activities.",
-      "passed": true
-    },
-    "at_least_60_primary_activities": {
-      "message": "Found 87 primary activities.",
+      "message": "Found 100 activities.",
       "passed": true
     },
     "availability_covers_planning_months": {
       "message": "Availability coverage spans expected months 2026-06, 2026-07, 2026-08.",
+      "passed": true
+    },
+    "availability_distribution_matches_targets": {
+      "message": "Availability resource-type counts match target ranges.",
       "passed": true
     },
     "availability_has_3_months": {
@@ -39,19 +66,39 @@
       "passed": true
     },
     "availability_has_blocks": {
-      "message": "Found 1755 availability blocks.",
+      "message": "Found 327 availability blocks.",
+      "passed": true
+    },
+    "availability_has_realistic_block_density": {
+      "message": "Availability coverage found 327 blocks; expected 225-375 concrete scheduler-facing blocks for a 3-month demo.",
+      "passed": true
+    },
+    "availability_keeps_equipment_compact": {
+      "message": "Found 10 equipment blocks; expected 30 or fewer so equipment does not dominate the audit data.",
       "passed": true
     },
     "equipment_references_resolve": {
       "message": "All equipment references resolve.",
       "passed": true
     },
+    "exactly_50_activity_families": {
+      "message": "Found 50 activity families.",
+      "passed": true
+    },
+    "goal_taxonomy_replaces_travel_continuity": {
+      "message": "Travel-continuity action removed and replacement goal actions are present.",
+      "passed": true
+    },
     "location_references_resolve": {
       "message": "All location references resolve.",
       "passed": true
     },
+    "member_has_goal_actions": {
+      "message": "Found 8 goal actions.",
+      "passed": true
+    },
     "member_has_journey_phases": {
-      "message": "Found 5 journey phases.",
+      "message": "Found 7 journey phases.",
       "passed": true
     },
     "provider_references_resolve": {
@@ -60,6 +107,10 @@
     },
     "substitution_references_resolve": {
       "message": "All substitution references resolve.",
+      "passed": true
+    },
+    "substitution_target_alignment": {
+      "message": "Substitutions preserve family-level counted targets.",
       "passed": true
     },
     "unique_activity_ids": {
@@ -75,6 +126,6 @@
     "medication",
     "therapy"
   ],
-  "primary_activity_count": 87,
+  "primary_activity_count": 49,
   "status": "pass"
 }

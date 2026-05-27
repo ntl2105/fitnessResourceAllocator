@@ -1,84 +1,122 @@
 {
   "frictions": [
     {
-      "friction_id": "friction_planned_travel_good_facilities",
-      "name": "Planned travel with better facilities",
-      "description": "Hong Kong travel has hotel gym and pool access but no trusted in-person physio or lab access.",
-      "linked_resource_ids": [
+      "friction_id": "friction_planned_travel_better_facilities_001",
+      "name": "Planned Travel with Enhanced Facilities",
+      "description": "During the planned Hong Kong travel window, Marcus has access to a well-equipped hotel gym and pool, enabling most fitness routines. However, there is no in-person trusted physio or lab access, and most provider support is remote. Restaurant meals dominate, with only limited chef-prepped options.",
+      "affected_travel_window_ids": [
         "travel_hk_2026_06"
       ],
-      "scheduler_expectation": "Use hotel-gym or remote substitutions; move labs outside travel."
+      "date_range": {
+        "start": "2026-06-19T10:00:00+08:00",
+        "end": "2026-06-25T20:00:00+08:00"
+      },
+      "scheduler_expectation": "Scheduler should prioritize hotel gym/pool for fitness, adapt meal planning to restaurant-heavy context, and route all provider consults to remote. In-person labs and physio sessions should not be scheduled during this window."
     },
     {
-      "friction_id": "friction_last_minute_travel_limited_facilities",
-      "name": "Last-minute travel with limited facilities",
-      "description": "Jakarta escalation has no reliable gym and restaurant-based meals.",
-      "linked_resource_ids": [
+      "friction_id": "friction_last_minute_travel_limited_facilities_001",
+      "name": "Last-Minute Travel with Limited Facilities",
+      "description": "During the urgent Jakarta trip, Marcus only has access to his hotel room and remote support. There is no usable hotel gym, no chef or trusted local providers, and most meals are restaurant-based. Increased work stress and energy drop are expected.",
+      "affected_travel_window_ids": [
         "travel_jakarta_2026_08"
       ],
-      "scheduler_expectation": "Use remote coaching, hotel-room mobility, prepared-food rules, or unschedule high-load activities."
-    },
-    {
-      "friction_id": "friction_provider_mismatch_morning_preference",
-      "name": "Provider availability mismatch with member preferences",
-      "description": "Member prefers morning exercise, but the primary trainer has limited morning availability.",
-      "linked_resource_ids": [
-        "provider_trainer_001"
-      ],
-      "scheduler_expectation": "Try evening slots, remote trainer, or alternate days before unscheduling."
-    },
-    {
-      "friction_id": "friction_lab_disrupted_by_travel",
-      "name": "Lab or consultation disruption during travel",
-      "description": "Fasting labs cannot be completed during travel because no partner lab is configured at travel destinations.",
-      "linked_resource_ids": [
-        "provider_lab_001",
-        "eq_lab_draw_station"
-      ],
-      "scheduler_expectation": "Schedule labs before travel and physician follow-up after labs."
-    },
-    {
-      "friction_id": "friction_food_prep_dependency",
-      "name": "Food prep dependency requiring chef or member prep",
-      "description": "High-protein prepared meals require chef or member prep before consumption.",
-      "linked_resource_ids": [
-        "provider_chef_001",
-        "eq_meal_prep_kit"
-      ],
-      "scheduler_expectation": "Place prep before meals, use no-prep substitution, or mark unsupported."
-    },
-    {
-      "friction_id": "friction_sauna_maintenance",
-      "name": "Equipment or facility unavailability",
-      "description": "Sauna is unavailable during a July maintenance window.",
-      "linked_resource_ids": [
-        "eq_sauna"
-      ],
       "date_range": {
-        "start": "2026-07-08",
-        "end": "2026-07-14"
+        "start": "2026-08-13T06:00:00+08:00",
+        "end": "2026-08-16T21:00:00+07:00"
       },
-      "scheduler_expectation": "Use breathwork, mobility, or ice bath if appropriate."
+      "scheduler_expectation": "Scheduler should substitute all fitness with bodyweight or portable-band routines, rely on remote coach/dietitian, and expect some activities to be unscheduled or substituted. Structured meal adherence may drop; chef-prepped meals are unavailable."
     },
     {
-      "friction_id": "friction_office_to_gym_buffer",
-      "name": "Physical-location travel-time conflict",
-      "description": "Office-to-gym transfer requires at least 15 minutes.",
+      "friction_id": "friction_provider_availability_mismatch_001",
+      "name": "Provider Availability Mismatch with Member Preferences",
+      "description": "Marcus prefers early morning or early evening sessions for fitness and consultations. However, the Elyx Performance Trainer and Physiotherapist have limited early morning slots, and the Dietitian and Physician are only available during office hours. This causes conflicts with Marcus's preferred exercise and review times.",
       "linked_resource_ids": [
-        "office",
-        "gym"
+        "provider_trainer_01",
+        "provider_physio_01",
+        "provider_dietitian_01",
+        "provider_physician_01"
       ],
-      "scheduler_expectation": "Reject gym activities starting immediately after office blocks."
+      "date_range": null,
+      "scheduler_expectation": "Scheduler may need to schedule some sessions outside Marcus's preferred windows or delay/reschedule certain provider-led activities. Expect some member-preferred slots to be unavailable."
     },
     {
-      "friction_id": "friction_skipped_high_load_recovery",
-      "name": "Skipped or substituted high-load activity requiring recovery adjustment",
-      "description": "If high-load lower-body training is skipped after travel fatigue or knee discomfort, a recovery adjustment should be applied.",
+      "friction_id": "friction_lab_consult_disruption_travel_001",
+      "name": "Lab or Consultation Disruption During Travel",
+      "description": "Lab draws and in-person physician reviews are only possible at the Singapore clinic or lab. During all travel windows, these services are unavailable. Remote consults are possible, but labs must be rescheduled.",
       "linked_resource_ids": [
-        "provider_physio_001",
-        "provider_recovery_001"
+        "provider_lab_01",
+        "provider_physician_01",
+        "clinic",
+        "lab"
       ],
-      "scheduler_expectation": "Create or select lower-load recovery task and trace the adjustment."
+      "affected_travel_window_ids": [
+        "travel_hk_2026_06",
+        "travel_tokyo_2026_07",
+        "travel_jakarta_2026_08"
+      ],
+      "date_range": null,
+      "scheduler_expectation": "Scheduler should avoid scheduling lab draws or in-person physician reviews during travel. If due, these should be rescheduled before or after travel, or substituted with remote consults where possible."
+    },
+    {
+      "friction_id": "friction_food_prep_dependency_001",
+      "name": "Food Prep Dependency on Chef or Member",
+      "description": "Structured metabolic meals require either chef-prep at home/office or Marcus to assemble meals himself (up to 2x per week). During travel, chef-prepped meals are unavailable, and Marcus is unwilling to do meal prep in hotel settings.",
+      "linked_resource_ids": [
+        "provider_chef_01",
+        "eq_kitchen_home",
+        "home",
+        "office"
+      ],
+      "affected_travel_window_ids": [
+        "travel_hk_2026_06",
+        "travel_tokyo_2026_07",
+        "travel_jakarta_2026_08"
+      ],
+      "date_range": null,
+      "scheduler_expectation": "Scheduler should only schedule chef-prepped or member-assembled structured meals at home/office, and use restaurant or travel-compatible meal options during travel. Some structured meal targets may be missed during travel."
+    },
+    {
+      "friction_id": "friction_equipment_facility_unavailability_001",
+      "name": "Equipment or Facility Unavailability",
+      "description": "Certain equipment (e.g., strength machines, rower) and facilities (e.g., gym, pool) are only available at home or gym locations. During the Tokyo trip, the hotel gym has only basic equipment. During Jakarta travel, there is no usable gym at all.",
+      "linked_resource_ids": [
+        "eq_strength_machines_gym",
+        "eq_rower_gym",
+        "eq_basic_gym_hotel_tokyo",
+        "eq_pool_hotel_hk",
+        "gym",
+        "travel_hotel"
+      ],
+      "affected_travel_window_ids": [
+        "travel_tokyo_2026_07",
+        "travel_jakarta_2026_08"
+      ],
+      "date_range": null,
+      "scheduler_expectation": "Scheduler should substitute unavailable equipment with bodyweight or portable-band routines during travel, and avoid scheduling equipment-dependent activities in locations where the equipment is not present."
+    },
+    {
+      "friction_id": "friction_post_travel_fatigue_001",
+      "name": "Post-Travel Fatigue After Location Change Over 3 Hours",
+      "description": "After travel windows involving flights over 3 hours (e.g., Singapore to Hong Kong or Tokyo), Marcus experiences moderate fatigue and lower-back tightness. High-load or lower-body training should be avoided for 24 hours post-arrival.",
+      "affected_travel_window_ids": [
+        "travel_hk_2026_06",
+        "travel_tokyo_2026_07"
+      ],
+      "date_range": null,
+      "scheduler_expectation": "Scheduler should avoid scheduling high-load or heavy lower-body activities for 24 hours after arrival, and instead prioritize mobility, stretching, or recovery sessions."
+    },
+    {
+      "friction_id": "friction_skipped_high_load_recovery_adjustment_001",
+      "name": "Skipped or Substituted High-Load Activity Requiring Recovery Adjustment",
+      "description": "If Marcus skips or substitutes a high-load strength or aerobic session (especially after travel or during pain escalation), the plan should automatically schedule a recovery or mobility session and flag for care-team follow-up.",
+      "linked_resource_ids": [
+        "provider_trainer_01",
+        "provider_physio_01",
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "date_range": null,
+      "scheduler_expectation": "Scheduler should detect skipped or substituted high-load activities and insert appropriate recovery/mobility sessions, possibly triggering a remote coach or physio check-in."
     }
   ]
 }

@@ -1,0 +1,22 @@
+.env
+.env.*
+.git
+.pytest_cache
+.venv
+venv
+__pycache__
+*.py[cod]
+
+tests
+docs
+prompts
+figma_calendar
+ui_redesign
+
+Programming Assignment.docx
+resource_allocator_seed_files.zip
+
+data/generated/stage01_member_profile
+data/generated/stage02_resource_universe
+data/generated/stage03_known_frictions
+data/generated/stage04_availability

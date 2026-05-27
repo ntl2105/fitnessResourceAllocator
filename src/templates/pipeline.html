@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elyx Pipeline Story</title>
+  <link rel="stylesheet" href="/static/pipeline.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Synthetic Data Pipeline</p>
+      <h1>Elyx Pipeline Story</h1>
+    </div>
+    <nav>
+      <a href="/calendar">Calendar</a>
+      <a href="/profile">Profile</a>
+      <a href="/pipeline">Pipeline</a>
+      <a href="/summary">Summary</a>
+      <a href="/audit">Audit</a>
+    </nav>
+  </header>
+
+  <main class="pipeline-page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Current Member</p>
+        <h2>{{ story.member_name }}</h2>
+        <p>
+          A staged, human-readable view of what the generator produced, what it
+          means for {{ story.member_name }}, and what reviewers should validate
+          before trusting the final calendar.
+        </p>
+      </div>
+      <div class="hero-status">
+        <span class="status status-{{ story.status }}">{{ story.status }}</span>
+        <span class="hero-meta">{{ story.stages | length }} stages tracked</span>
+      </div>
+    </section>
+
+    <div class="pipeline-layout">
+      <aside class="stage-rail" aria-label="Pipeline stage navigation">
+        <p class="rail-title">Stages</p>
+        {% for stage in story.stages %}
+        <a href="#{{ stage.stage_id }}" class="rail-link">
+          <span class="rail-number">{{ "%02d"|format(loop.index) }}</span>
+          <span>{{ stage.title }}</span>
+        </a>
+        {% endfor %}
+      </aside>
+
+      <section class="stage-stack" aria-label="Pipeline stage boards">
+        {% for stage in story.stages %}
+        <article id="{{ stage.stage_id }}" class="stage-board stage-{{ stage.status }}">
+          <div class="stage-marker">{{ "%02d"|format(loop.index) }}</div>
+
+          <div class="stage-content">
+            <header class="stage-header">
+              <div>
+                <p class="stage-id">{{ stage.stage_id }}</p>
+                <h2>{{ stage.title }}</h2>
+              </div>
+              <span class="status status-{{ stage.status }}">{{ stage.status }}</span>
+            </header>
+
+            <section class="fact-strip" aria-label="{{ stage.title }} generated facts">
+              {% for item in stage.generated[:4] %}
+              <div class="fact-pill">{{ item }}</div>
+              {% endfor %}
+            </section>
+
+            <div class="stage-grid">
+              <section class="insight-panel">
+                <h3>Meaning For {{ story.member_name }}</h3>
+                <ul>
+                  {% for item in stage.meaning_for_member %}
+                  <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              </section>
+
+              <section class="validation-panel">
+                <h3>Validation Focus</h3>
+                <ul>
+                  {% for item in stage.validation_focus %}
+                  <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              </section>
+            </div>
+
+            <details class="generated-details">
+              <summary>Generated Details</summary>
+              <ul>
+                {% for item in stage.generated %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </details>
+
+            <footer class="source-row">
+              <span>Sources</span>
+              <div class="source-chips">
+                {% for source_file in stage.source_files %}
+                <code>{{ source_file }}</code>
+                {% endfor %}
+              </div>
+            </footer>
+          </div>
+        </article>
+        {% endfor %}
+      </section>
+    </div>
+  </main>
+</body>
+</html>

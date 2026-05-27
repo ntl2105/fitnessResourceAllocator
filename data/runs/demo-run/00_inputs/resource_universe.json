@@ -1,31 +1,113 @@
 {
   "providers": [
     {
-      "provider_id": "provider_trainer_001",
+      "provider_id": "provider_trainer_01",
       "provider_type": "trainer",
-      "display_name": "Maya Tan",
+      "display_name": "Kai Tan",
+      "credentials": [
+        "CSCS",
+        "corrective_exercise_specialist"
+      ],
+      "specialties": [
+        "strength_and_conditioning",
+        "knee_safe_training",
+        "travel_fitness_adaptation"
+      ],
+      "care_team_role": "performance_trainer",
+      "team_group": "allied_health",
+      "continuity_scope": "Owns strength progression, aerobic training adaptations, and trainer-to-physio handoffs.",
+      "handoff_partner_provider_ids": [
+        "provider_physio_01",
+        "provider_physician_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "fitness"
+        "in_person",
+        "remote",
+        "travel_adapted"
       ],
       "location_ids": [
         "gym",
+        "home",
+        "office",
+        "remote",
+        "travel_hotel"
+      ],
+      "remote_supported": true,
+      "travel_compatible": true,
+      "care_context_supported": [
+        "strength",
+        "mobility",
+        "aerobic",
+        "travel_fitness",
+        "post_travel_adaptation"
+      ],
+      "notes": "Specializes in data-driven strength and lower-body modified routines. Supports remote coaching and travel adaptation."
+    },
+    {
+      "provider_id": "provider_strength_coach_01",
+      "provider_type": "trainer",
+      "display_name": "Amelia Wong",
+      "credentials": [
+        "CSCS",
+        "strength_and_power_coach"
+      ],
+      "specialties": [
+        "gym_strength_progression",
+        "resistance_training_technique",
+        "knee_safe_loading"
+      ],
+      "care_team_role": "strength_coach",
+      "team_group": "allied_health",
+      "continuity_scope": "Delivers gym-based strength sessions when the primary performance trainer is unavailable; follows Kai's progression plan.",
+      "handoff_partner_provider_ids": [
+        "provider_trainer_01",
+        "provider_physio_01",
+        "provider_remote_coach_01"
+      ],
+      "modalities_supported": [
+        "in_person",
+        "remote"
+      ],
+      "location_ids": [
+        "gym",
+        "home",
         "remote"
       ],
       "remote_supported": true,
       "travel_compatible": false,
       "care_context_supported": [
-        "knee limitation summary",
-        "training goal",
-        "physio restrictions"
+        "strength",
+        "mobility",
+        "knee_safe_training",
+        "provider_unavailable_substitution"
       ],
-      "notes": "Primary trainer; limited morning slots despite member preference."
+      "notes": "Secondary strength coach for gym and home sessions; useful when Kai is unavailable or when extra strength coverage is needed."
     },
     {
-      "provider_id": "provider_trainer_remote_001",
+      "provider_id": "provider_travel_trainer_01",
       "provider_type": "trainer",
-      "display_name": "Remote travel trainer pool",
+      "display_name": "Ravi Patel",
+      "credentials": [
+        "NASM-CPT",
+        "travel_fitness_specialist"
+      ],
+      "specialties": [
+        "hotel_gym_training",
+        "bodyweight_conditioning",
+        "remote_travel_adaptation"
+      ],
+      "care_team_role": "travel_trainer",
+      "team_group": "allied_health",
+      "continuity_scope": "Delivers remote and hotel-gym substitutions during travel windows; keeps strength/cardio intent intact when facilities change.",
+      "handoff_partner_provider_ids": [
+        "provider_trainer_01",
+        "provider_physio_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "fitness"
+        "remote",
+        "travel_adapted"
       ],
       "location_ids": [
         "remote",
@@ -34,516 +116,522 @@
       "remote_supported": true,
       "travel_compatible": true,
       "care_context_supported": [
-        "travel constraints",
-        "form check notes"
+        "travel_fitness",
+        "hotel_gym_substitution",
+        "bodyweight_conditioning",
+        "equipment_unavailable_substitution"
       ],
-      "notes": "Used when the member is traveling or primary trainer is unavailable."
+      "notes": "Travel trainer for hotel-gym and remote sessions when Marcus is away from Singapore or normal facilities are unavailable."
     },
     {
-      "provider_id": "provider_physio_001",
+      "provider_id": "provider_physio_01",
       "provider_type": "physiotherapist",
-      "display_name": "Dr. Leena Rao",
+      "display_name": "Daniel Koh",
+      "credentials": [
+        "MSc Physiotherapy",
+        "sports_rehabilitation"
+      ],
+      "specialties": [
+        "knee_pain_rehabilitation",
+        "lower_back_resilience",
+        "post_travel_mobility"
+      ],
+      "care_team_role": "physiotherapist",
+      "team_group": "allied_health",
+      "continuity_scope": "Owns pain escalation review, movement restrictions, and rehab-to-training progression.",
+      "handoff_partner_provider_ids": [
+        "provider_trainer_01",
+        "provider_physician_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "consultation",
-        "fitness"
+        "in_person",
+        "remote"
       ],
       "location_ids": [
         "clinic",
+        "gym",
+        "home",
+        "office",
         "remote"
       ],
       "remote_supported": true,
       "travel_compatible": false,
       "care_context_supported": [
-        "knee assessment",
-        "back mobility",
-        "return-to-training guidance"
+        "mobility",
+        "pain_review",
+        "post_travel_recovery"
       ],
-      "notes": "Provides movement restrictions and handoff notes to trainer."
+      "notes": "Knee and lower-back rehab focus. Coordinates handoff with trainer after pain or travel events."
     },
     {
-      "provider_id": "provider_dietitian_001",
+      "provider_id": "provider_dietitian_01",
       "provider_type": "dietitian",
-      "display_name": "Grace Lim",
+      "display_name": "Priya Shah",
+      "credentials": [
+        "registered_dietitian",
+        "sports_nutrition_certificate"
+      ],
+      "specialties": [
+        "metabolic_nutrition",
+        "CGM_informed_meal_planning",
+        "travel_restaurant_strategy"
+      ],
+      "care_team_role": "registered_dietitian",
+      "team_group": "allied_health",
+      "continuity_scope": "Owns structured meal targets, restaurant/travel food strategy, and nutrition interpretation after labs or CGM review.",
+      "handoff_partner_provider_ids": [
+        "provider_physician_01",
+        "provider_chef_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "consultation",
-        "food"
+        "in_person",
+        "remote"
       ],
       "location_ids": [
+        "clinic",
+        "home",
+        "office",
         "remote",
-        "clinic"
+        "travel_hotel"
       ],
       "remote_supported": true,
       "travel_compatible": true,
       "care_context_supported": [
-        "metabolic summary",
-        "food preferences",
-        "travel schedule"
+        "nutrition_review",
+        "structured_meals",
+        "travel_meal_adaptation"
       ],
-      "notes": "Primary dietitian."
+      "notes": "Provides concise nutrition summaries and meal adaptation, especially for travel and restaurant-heavy weeks."
     },
     {
-      "provider_id": "provider_physician_001",
+      "provider_id": "provider_physician_01",
       "provider_type": "physician",
-      "display_name": "Dr. Aaron Koh",
+      "display_name": "Dr. Aisha Menon",
+      "credentials": [
+        "MBBS",
+        "MRCGP",
+        "preventive_medicine"
+      ],
+      "specialties": [
+        "preventive_cardiometabolic_medicine",
+        "metabolic_risk_review",
+        "clinical_protocol_governance"
+      ],
+      "care_team_role": "lead_physician",
+      "team_group": "specialist_clinical",
+      "continuity_scope": "Owns clinical interpretation, preventive screening decisions, and escalation guidance for the Allied Health team.",
+      "handoff_partner_provider_ids": [
+        "provider_dietitian_01",
+        "provider_physio_01",
+        "provider_trainer_01",
+        "provider_lab_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "consultation",
-        "medication"
+        "in_person",
+        "remote"
       ],
       "location_ids": [
         "clinic",
+        "office",
         "remote"
       ],
       "remote_supported": true,
       "travel_compatible": false,
       "care_context_supported": [
-        "lab summary",
-        "medication list",
-        "risk flags"
+        "periodic_review",
+        "lab_followup",
+        "protocol_modification"
       ],
-      "notes": "Reviews labs and medication/supplement safety."
+      "notes": "Concise review and preventive oversight for metabolic and fitness trending. Remote available during travel windows."
     },
     {
-      "provider_id": "provider_lab_001",
+      "provider_id": "provider_lab_01",
       "provider_type": "phlebotomist",
-      "display_name": "Partner Diagnostics Lab Team",
+      "display_name": "Elyx Partner Lab - Singapore",
+      "credentials": [
+        "MOH_registered_lab_partner"
+      ],
+      "specialties": [
+        "fasted_blood_draw",
+        "preventive_biomarker_panel",
+        "sample_coordination"
+      ],
+      "care_team_role": "clinical_lab_partner",
+      "team_group": "clinical_operations",
+      "continuity_scope": "Owns sample collection logistics and passes lab status to physician and dietitian.",
+      "handoff_partner_provider_ids": [
+        "provider_physician_01",
+        "provider_dietitian_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "consultation"
+        "on_site_lab"
       ],
       "location_ids": [
+        "clinic",
         "lab"
       ],
       "remote_supported": false,
       "travel_compatible": false,
       "care_context_supported": [
-        "lab order",
-        "fasting status"
+        "lab_draw",
+        "preventive_screening"
       ],
-      "notes": "Fasting lab availability is weekday mornings only."
+      "notes": "Handles all synthetic baseline labs and periodic screening. Not available during travel or abroad."
     },
     {
-      "provider_id": "provider_chef_001",
+      "provider_id": "provider_chef_01",
       "provider_type": "chef",
-      "display_name": "Elyx meal prep chef",
+      "display_name": "Chef Liyang (Home/Local Meals)",
+      "credentials": [
+        "private_chef",
+        "metabolic_meal_prep"
+      ],
+      "specialties": [
+        "high_protein_meal_prep",
+        "office_meal_delivery",
+        "dietitian_brief_execution"
+      ],
+      "care_team_role": "private_chef",
+      "team_group": "lifestyle_support",
+      "continuity_scope": "Executes dietitian meal briefs during non-travel periods; does not provide clinical advice.",
+      "handoff_partner_provider_ids": [
+        "provider_dietitian_01",
+        "provider_remote_coach_01"
+      ],
       "modalities_supported": [
-        "food"
+        "in_person",
+        "prepped_dropoff"
       ],
       "location_ids": [
-        "home"
+        "home",
+        "office"
       ],
       "remote_supported": false,
       "travel_compatible": false,
       "care_context_supported": [
-        "meal plan",
-        "food preferences",
-        "prep instructions"
+        "meal_prep",
+        "nutrition_briefing"
       ],
-      "notes": "Limited prep windows; supports batch prep but not daily cooking."
+      "notes": "Prepares metabolic-structured meals, up to 2 home-prepped sessions weekly; non-travel periods only."
     },
     {
-      "provider_id": "provider_healthcoach_001",
-      "provider_type": "coach",
-      "display_name": "Sofia Ng",
+      "provider_id": "provider_remote_coach_01",
+      "provider_type": "remote_coach_pool",
+      "display_name": "Maya Rao",
+      "credentials": [
+        "NBC-HWC",
+        "behavior_change_coaching"
+      ],
+      "specialties": [
+        "behavior_coaching",
+        "adherence_barrier_resolution",
+        "travel_friction_planning"
+      ],
+      "care_team_role": "health_coach",
+      "team_group": "allied_health",
+      "continuity_scope": "Owns weekly behavior coaching, friction resolution, missed-session follow-up, and care-team coordination prompts.",
+      "handoff_partner_provider_ids": [
+        "provider_physician_01",
+        "provider_dietitian_01",
+        "provider_physio_01",
+        "provider_trainer_01"
+      ],
       "modalities_supported": [
-        "consultation",
-        "medication",
-        "food",
-        "fitness"
+        "remote"
       ],
       "location_ids": [
-        "remote"
+        "remote",
+        "travel_hotel"
       ],
       "remote_supported": true,
       "travel_compatible": true,
       "care_context_supported": [
-        "adherence summary",
-        "upcoming travel",
-        "missed tasks"
+        "adherence_support",
+        "recovery_checkin",
+        "routine_travel_fallback"
       ],
-      "notes": "Supports reminders and weekly plan review."
-    },
-    {
-      "provider_id": "provider_recovery_001",
-      "provider_type": "therapist",
-      "display_name": "Recovery therapist",
-      "modalities_supported": [
-        "therapy",
-        "consultation"
-      ],
-      "location_ids": [
-        "clinic",
-        "remote"
-      ],
-      "remote_supported": true,
-      "travel_compatible": false,
-      "care_context_supported": [
-        "sleep trend",
-        "recent load",
-        "pain trend"
-      ],
-      "notes": "Optional support for recovery after missed or high-load sessions."
+      "notes": "Remote pool supports check-ins, fatigue/mobility logs, travel substitutions, and care-team continuity."
     }
   ],
   "equipment": [
     {
-      "equipment_id": "eq_gym_strength",
-      "equipment_type": "strength_equipment",
-      "display_name": "Full strength training equipment",
+      "equipment_id": "eq_dumbbells_home",
+      "equipment_type": "dumbbells_fixed",
+      "display_name": "Home Dumbbells (5-15kg pairs)",
       "location_ids": [
-        "gym"
+        "home"
       ],
       "travel_compatible": false,
       "availability_required": true,
-      "notes": "Required for heavy strength sessions."
+      "notes": "Enables modified strength routines at home."
     },
     {
-      "equipment_id": "eq_stationary_bike",
-      "equipment_type": "cardio_equipment",
-      "display_name": "Stationary bike",
+      "equipment_id": "eq_mini_band",
+      "equipment_type": "mini_band_portable",
+      "display_name": "Mini Resistance Bands (portable)",
       "location_ids": [
         "gym",
-        "travel_hotel"
-      ],
-      "travel_compatible": true,
-      "availability_required": true,
-      "notes": "Useful for knee-safe cardio."
-    },
-    {
-      "equipment_id": "eq_pool",
-      "equipment_type": "cardio_facility",
-      "display_name": "Swimming pool",
-      "location_ids": [
-        "gym",
-        "travel_hotel"
-      ],
-      "travel_compatible": true,
-      "availability_required": true,
-      "notes": "Available in higher-resource travel."
-    },
-    {
-      "equipment_id": "eq_sauna",
-      "equipment_type": "recovery_facility",
-      "display_name": "Sauna",
-      "location_ids": [
-        "gym",
-        "clinic"
-      ],
-      "travel_compatible": false,
-      "availability_required": true,
-      "notes": "Unavailable during July maintenance."
-    },
-    {
-      "equipment_id": "eq_ice_bath",
-      "equipment_type": "recovery_facility",
-      "display_name": "Ice bath",
-      "location_ids": [
-        "clinic"
-      ],
-      "travel_compatible": false,
-      "availability_required": true,
-      "notes": "Clinic-based recovery option."
-    },
-    {
-      "equipment_id": "eq_cgm",
-      "equipment_type": "wearable_sensor",
-      "display_name": "Continuous glucose monitor",
-      "location_ids": [
         "home",
         "office",
         "travel_hotel"
       ],
       "travel_compatible": true,
-      "availability_required": true,
-      "notes": "Supports meal experiments."
-    },
-    {
-      "equipment_id": "eq_sleep_tracker",
-      "equipment_type": "wearable_sensor",
-      "display_name": "Wearable sleep tracker",
-      "location_ids": [
-        "home",
-        "travel_hotel"
-      ],
-      "travel_compatible": true,
       "availability_required": false,
-      "notes": "Used for sleep and recovery metrics."
-    },
-    {
-      "equipment_id": "eq_bp_monitor",
-      "equipment_type": "home_device",
-      "display_name": "Blood pressure monitor",
-      "location_ids": [
-        "home"
-      ],
-      "travel_compatible": false,
-      "availability_required": true,
-      "notes": "Used for home BP checks."
-    },
-    {
-      "equipment_id": "eq_resistance_bands",
-      "equipment_type": "portable_fitness",
-      "display_name": "Resistance bands",
-      "location_ids": [
-        "home",
-        "travel_hotel"
-      ],
-      "travel_compatible": true,
-      "availability_required": false,
-      "notes": "Portable substitution equipment."
+      "notes": "For hotel/office mobility and knee-safe strength work. Often brought during travel."
     },
     {
       "equipment_id": "eq_yoga_mat",
-      "equipment_type": "portable_fitness",
-      "display_name": "Yoga mat",
+      "equipment_type": "mat_portable",
+      "display_name": "Yoga/Exercise Mat",
       "location_ids": [
+        "gym",
         "home",
         "travel_hotel"
       ],
       "travel_compatible": true,
       "availability_required": false,
-      "notes": "Mobility and breathwork."
+      "notes": "Facilitates stretching and recovery, including post-travel."
     },
     {
-      "equipment_id": "eq_meal_prep_kit",
-      "equipment_type": "food_prep",
-      "display_name": "Meal prep containers and kitchen kit",
+      "equipment_id": "eq_rower_gym",
+      "equipment_type": "rower_fixed",
+      "display_name": "Concept2 Rower (Gym)",
       "location_ids": [
-        "home"
+        "gym"
+      ],
+      "travel_compatible": false,
+      "availability_required": false,
+      "notes": "Cardio conditioning option for knee-safe aerobic."
+    },
+    {
+      "equipment_id": "eq_strength_machines_gym",
+      "equipment_type": "strength_machine_fixed",
+      "display_name": "Selectorized Strength Machines",
+      "location_ids": [
+        "gym"
       ],
       "travel_compatible": false,
       "availability_required": true,
-      "notes": "Needed for batch prep."
+      "notes": "Supports safe, knee-modified resistance sessions."
     },
     {
-      "equipment_id": "eq_lab_draw_station",
-      "equipment_type": "lab_equipment",
-      "display_name": "Blood draw station",
+      "equipment_id": "eq_pool_hotel_hk",
+      "equipment_type": "pool_fixed",
+      "display_name": "Hotel Pool (Hong Kong)",
       "location_ids": [
+        "travel_hotel"
+      ],
+      "travel_compatible": false,
+      "availability_required": false,
+      "notes": "Low-impact aerobic and recovery option during HK trip."
+    },
+    {
+      "equipment_id": "eq_basic_gym_hotel_tokyo",
+      "equipment_type": "basic_gym_fixed",
+      "display_name": "Basic Hotel Gym Equipment (Tokyo)",
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "travel_compatible": false,
+      "availability_required": true,
+      "notes": "Limited hotel gym: free weights up to 10kg, treadmill, and mat."
+    },
+    {
+      "equipment_id": "eq_bodyweight",
+      "equipment_type": "bodyweight",
+      "display_name": "Bodyweight/No Equipment",
+      "location_ids": [
+        "gym",
+        "home",
+        "office",
+        "travel_hotel"
+      ],
+      "travel_compatible": true,
+      "availability_required": false,
+      "notes": "Always available as fallback. Used for travel-adapted and flare-up recovery routines."
+    },
+    {
+      "equipment_id": "eq_lab_kits",
+      "equipment_type": "lab_kit_fixed",
+      "display_name": "Lab Collection Kit (Clinic/Lab)",
+      "location_ids": [
+        "clinic",
         "lab"
       ],
       "travel_compatible": false,
       "availability_required": true,
-      "notes": "Required for fasting labs."
+      "notes": "Synthetic: used for all on-site lab draws."
+    },
+    {
+      "equipment_id": "eq_kitchen_home",
+      "equipment_type": "kitchen_fixed",
+      "display_name": "Home Kitchen Prep Area",
+      "location_ids": [
+        "home"
+      ],
+      "travel_compatible": false,
+      "availability_required": true,
+      "notes": "Chef and Marcus use for structured meal prep twice per week."
     }
   ],
   "locations": [
     {
-      "location_id": "home",
-      "location_type": "home",
-      "display_name": "Member home",
+      "location_id": "clinic",
+      "location_type": "clinic",
+      "display_name": "Elyx Partner Clinic (Singapore)",
       "timezone": "Asia/Singapore",
       "travel_compatible": false,
       "available_equipment_ids": [
-        "eq_bp_monitor",
-        "eq_resistance_bands",
-        "eq_yoga_mat",
-        "eq_meal_prep_kit",
-        "eq_sleep_tracker"
+        "eq_lab_kits"
       ],
-      "notes": "Primary morning/evening location."
-    },
-    {
-      "location_id": "office",
-      "location_type": "office",
-      "display_name": "Singapore office",
-      "timezone": "Asia/Singapore",
-      "travel_compatible": false,
-      "available_equipment_ids": [
-        "eq_cgm"
-      ],
-      "notes": "Main work location."
+      "notes": "Clinic consults, in-person physician review, and lab draws."
     },
     {
       "location_id": "gym",
       "location_type": "gym",
-      "display_name": "Elyx partner gym",
+      "display_name": "Preferred Gym (Singapore)",
       "timezone": "Asia/Singapore",
       "travel_compatible": false,
       "available_equipment_ids": [
-        "eq_gym_strength",
-        "eq_stationary_bike",
-        "eq_pool",
-        "eq_sauna"
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_rower_gym",
+        "eq_strength_machines_gym",
+        "eq_yoga_mat"
       ],
-      "notes": "Primary fitness location."
+      "notes": "Strength, aerobic, and trainer- or physio-led sessions. Most equipment available."
     },
     {
-      "location_id": "clinic",
-      "location_type": "clinic",
-      "display_name": "Elyx clinic",
+      "location_id": "home",
+      "location_type": "home",
+      "display_name": "Marcus's Home (Singapore)",
       "timezone": "Asia/Singapore",
       "travel_compatible": false,
       "available_equipment_ids": [
-        "eq_ice_bath",
-        "eq_sauna"
+        "eq_bodyweight",
+        "eq_dumbbells_home",
+        "eq_kitchen_home",
+        "eq_mini_band",
+        "eq_yoga_mat"
       ],
-      "notes": "Consults and recovery therapy."
+      "notes": "Primary training, chef prep, and recovery. Physio visits and remote consults available."
     },
     {
       "location_id": "lab",
       "location_type": "lab",
-      "display_name": "Partner diagnostics lab",
+      "display_name": "Core Clinical Lab (Singapore)",
       "timezone": "Asia/Singapore",
       "travel_compatible": false,
       "available_equipment_ids": [
-        "eq_lab_draw_station"
+        "eq_lab_kits"
       ],
-      "notes": "Fasting lab draws."
+      "notes": "Primary location for baseline and periodic labs."
     },
     {
-      "location_id": "travel_hotel",
-      "location_type": "travel_hotel",
-      "display_name": "Travel hotel or hotel gym",
+      "location_id": "office",
+      "location_type": "office",
+      "display_name": "Marcus's Office (Singapore)",
       "timezone": "Asia/Singapore",
-      "travel_compatible": true,
+      "travel_compatible": false,
       "available_equipment_ids": [
-        "eq_stationary_bike",
-        "eq_pool",
-        "eq_resistance_bands",
-        "eq_yoga_mat",
-        "eq_sleep_tracker"
+        "eq_bodyweight",
+        "eq_mini_band"
       ],
-      "notes": "Facility quality varies by destination."
+      "notes": "Daytime work hours; short, low-complexity movement or remote consult only."
+    },
+    {
+      "location_id": "restaurant",
+      "location_type": "restaurant",
+      "display_name": "Structured Restaurant Meal",
+      "timezone": "Asia/Singapore",
+      "travel_compatible": false,
+      "available_equipment_ids": [],
+      "notes": "Used for structured restaurant meals during normal Singapore weeks when chef-prepped or office delivery meals are unavailable."
     },
     {
       "location_id": "remote",
       "location_type": "remote",
-      "display_name": "Remote/video",
-      "timezone": "Asia/Singapore",
+      "display_name": "Remote/Virtual",
+      "timezone": null,
       "travel_compatible": true,
       "available_equipment_ids": [],
-      "notes": "Remote provider delivery."
+      "notes": "Used for remote consults, telemedicine, or non-specific travel fallback."
+    },
+    {
+      "location_id": "travel_hotel",
+      "location_type": "travel_hotel",
+      "display_name": "Hotel (Hong Kong)",
+      "timezone": "Asia/Hong_Kong",
+      "travel_compatible": true,
+      "available_equipment_ids": [
+        "eq_basic_gym_hotel_tokyo",
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_pool_hotel_hk",
+        "eq_yoga_mat"
+      ],
+      "notes": "High-resource travel: hotel gym and pool. Trainer, dietitian, and remote coach available by remote.; Moderate-resource travel: limited gym, mainly bodyweight and portable gear. Provider pool remote-only.; Low-resource travel: no gym, minimal equipment, remote only."
     }
   ],
   "travel_windows": [
     {
       "travel_window_id": "travel_hk_2026_06",
-      "travel_id": "travel_hk_2026_06",
+      "start": "2026-06-19T10:00:00+08:00",
+      "end": "2026-06-25T20:00:00+08:00",
       "travel_type": "planned",
-      "type": "planned",
-      "destination": "Hong Kong",
-      "start": "2026-06-17T08:00:00+08:00",
-      "end": "2026-06-21T21:00:00+08:00",
-      "purpose": "Investor meetings",
+      "origin_location_id": "home",
+      "destination_label": "Hotel (Hong Kong)",
+      "estimated_travel_duration_hours": 4,
+      "arrival_fatigue_risk": "moderate",
       "available_location_ids": [
-        "travel_hotel",
-        "remote"
+        "remote",
+        "travel_hotel"
       ],
       "member_location_override": "travel_hotel",
-      "expected_facilities": [
-        "hotel_gym",
-        "hotel_pool",
-        "remote_consultation_supported"
-      ],
-      "limitations": [
-        "no trusted in-person physiotherapist",
-        "no lab access planned",
-        "two likely client dinners"
-      ],
-      "notes": "Higher-resource planned travel case with useful hotel facilities but limited provider continuity."
+      "notes": "Planned high-resource travel. Hotel gym and pool available; care coordination shifts mostly remote except chef-prepped meals."
     },
     {
       "travel_window_id": "travel_tokyo_2026_07",
-      "travel_id": "travel_tokyo_2026_07",
+      "start": "2026-07-22T07:15:00+08:00",
+      "end": "2026-07-29T21:15:00+09:00",
       "travel_type": "planned",
-      "type": "planned",
-      "destination": "Tokyo",
-      "start": "2026-07-22T07:30:00+08:00",
-      "end": "2026-07-29T22:30:00+08:00",
-      "purpose": "Board meetings and client visits",
+      "origin_location_id": "home",
+      "destination_label": "Hotel (Tokyo)",
+      "estimated_travel_duration_hours": 6.5,
+      "arrival_fatigue_risk": "moderate",
       "available_location_ids": [
-        "travel_hotel",
-        "remote"
+        "remote",
+        "travel_hotel"
       ],
       "member_location_override": "travel_hotel",
-      "expected_facilities": [
-        "basic_hotel_gym",
-        "walking_routes",
-        "remote_consultation_supported"
-      ],
-      "limitations": [
-        "limited equipment",
-        "unpredictable dinners",
-        "likely reduced sleep"
-      ],
-      "notes": "Moderate-resource planned travel case."
+      "notes": "Moderate-resource travel. Meals partly chef-prepped, most fitness sessions require adaptation."
     },
     {
       "travel_window_id": "travel_jakarta_2026_08",
-      "travel_id": "travel_jakarta_2026_08",
+      "start": "2026-08-13T06:00:00+08:00",
+      "end": "2026-08-16T21:00:00+07:00",
       "travel_type": "last_minute",
-      "type": "last_minute",
-      "destination": "Jakarta",
-      "start": "2026-08-12T06:30:00+08:00",
-      "end": "2026-08-15T23:00:00+08:00",
-      "purpose": "Urgent client escalation",
+      "origin_location_id": "home",
+      "destination_label": "Hotel (Jakarta)",
+      "estimated_travel_duration_hours": 2,
+      "arrival_fatigue_risk": "high",
       "available_location_ids": [
-        "travel_hotel",
-        "remote"
+        "remote",
+        "travel_hotel"
       ],
       "member_location_override": "travel_hotel",
-      "expected_facilities": [
-        "hotel_room",
-        "remote_consultation_supported"
-      ],
-      "limitations": [
-        "no reliable gym",
-        "no known allied health provider",
-        "high work stress",
-        "restaurant-based meals"
-      ],
-      "notes": "Low-resource last-minute travel case designed to force substitutions or unscheduled tasks."
+      "notes": "Low-resource travel, mainly supports travel-compatible movement and remote check-ins. Designed to force substitutions and unscheduled support tasks."
     }
   ],
   "travel_time_rules": [
     {
-      "from_location_id": "home",
-      "to_location_id": "office",
-      "minutes": 25
-    },
-    {
       "from_location_id": "office",
       "to_location_id": "gym",
       "minutes": 15
-    },
-    {
-      "from_location_id": "gym",
-      "to_location_id": "office",
-      "minutes": 15
-    },
-    {
-      "from_location_id": "home",
-      "to_location_id": "gym",
-      "minutes": 12
-    },
-    {
-      "from_location_id": "office",
-      "to_location_id": "clinic",
-      "minutes": 20
-    },
-    {
-      "from_location_id": "home",
-      "to_location_id": "clinic",
-      "minutes": 25
-    },
-    {
-      "from_location_id": "home",
-      "to_location_id": "lab",
-      "minutes": 20
-    },
-    {
-      "from_location_id": "office",
-      "to_location_id": "lab",
-      "minutes": 18
-    },
-    {
-      "from_location_id": "clinic",
-      "to_location_id": "gym",
-      "minutes": 10
-    },
-    {
-      "from_location_id": "remote",
-      "to_location_id": "remote",
-      "minutes": 0
     }
   ]
 }

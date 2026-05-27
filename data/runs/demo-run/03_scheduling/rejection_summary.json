@@ -1,354 +1,146 @@
 {
-  "act_002": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
+  "act_b01_travel_meal_adherence_check_photo_review_sub": {
+    "rejected_candidate_count": 233,
+    "unscheduled_count": 12
   },
-  "act_003": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
+  "act_b01_travel_meal_adherence_check_primary": {
+    "rejected_candidate_count": 367,
+    "unscheduled_count": 14
   },
-  "act_004": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
+  "act_b02_cardio_walking_office_primary": {
+    "rejected_candidate_count": 28,
+    "unscheduled_count": 7
   },
-  "act_005": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
-  },
-  "act_006": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
-  },
-  "act_007": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
-  },
-  "act_008": {
-    "rejected_candidate_count": 7,
-    "unscheduled_count": 1
-  },
-  "act_009": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_011": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_012": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_014": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_015": {
-    "rejected_candidate_count": 92,
-    "unscheduled_count": 8
-  },
-  "act_016": {
-    "rejected_candidate_count": 4,
-    "unscheduled_count": 1
-  },
-  "act_017": {
-    "rejected_candidate_count": 358,
-    "unscheduled_count": 26
-  },
-  "act_018": {
-    "rejected_candidate_count": 16,
-    "unscheduled_count": 1
-  },
-  "act_019": {
-    "rejected_candidate_count": 14,
-    "unscheduled_count": 1
-  },
-  "act_022": {
-    "rejected_candidate_count": 932,
-    "unscheduled_count": 35
-  },
-  "act_023": {
-    "rejected_candidate_count": 256,
-    "unscheduled_count": 10
-  },
-  "act_024": {
-    "rejected_candidate_count": 1064,
-    "unscheduled_count": 39
-  },
-  "act_025": {
-    "rejected_candidate_count": 360,
-    "unscheduled_count": 13
-  },
-  "act_026": {
-    "rejected_candidate_count": 360,
-    "unscheduled_count": 13
-  },
-  "act_027": {
-    "rejected_candidate_count": 1068,
-    "unscheduled_count": 26
-  },
-  "act_028": {
-    "rejected_candidate_count": 540,
-    "unscheduled_count": 40
-  },
-  "act_029": {
-    "rejected_candidate_count": 360,
-    "unscheduled_count": 26
-  },
-  "act_030": {
-    "rejected_candidate_count": 174,
-    "unscheduled_count": 13
-  },
-  "act_031": {
-    "rejected_candidate_count": 348,
-    "unscheduled_count": 13
-  },
-  "act_032": {
-    "rejected_candidate_count": 724,
-    "unscheduled_count": 27
-  },
-  "act_033": {
-    "rejected_candidate_count": 1432,
-    "unscheduled_count": 53
-  },
-  "act_034": {
-    "rejected_candidate_count": 1800,
-    "unscheduled_count": 66
-  },
-  "act_035": {
-    "rejected_candidate_count": 716,
-    "unscheduled_count": 26
-  },
-  "act_036": {
-    "rejected_candidate_count": 344,
-    "unscheduled_count": 13
-  },
-  "act_037": {
-    "rejected_candidate_count": 1076,
-    "unscheduled_count": 40
-  },
-  "act_038": {
-    "rejected_candidate_count": 180,
-    "unscheduled_count": 13
-  },
-  "act_039": {
-    "rejected_candidate_count": 176,
-    "unscheduled_count": 13
-  },
-  "act_040": {
-    "rejected_candidate_count": 174,
-    "unscheduled_count": 13
-  },
-  "act_041": {
-    "rejected_candidate_count": 348,
-    "unscheduled_count": 13
-  },
-  "act_042": {
-    "rejected_candidate_count": 623,
-    "unscheduled_count": 92
-  },
-  "act_043": {
-    "rejected_candidate_count": 1113,
-    "unscheduled_count": 56
-  },
-  "act_044": {
-    "rejected_candidate_count": 623,
-    "unscheduled_count": 92
-  },
-  "act_045": {
-    "rejected_candidate_count": 42,
-    "unscheduled_count": 2
-  },
-  "act_046": {
-    "rejected_candidate_count": 258,
-    "unscheduled_count": 13
-  },
-  "act_049": {
-    "rejected_candidate_count": 12,
-    "unscheduled_count": 1
-  },
-  "act_050": {
-    "rejected_candidate_count": 1869,
-    "unscheduled_count": 92
-  },
-  "act_052": {
-    "rejected_candidate_count": 138,
-    "unscheduled_count": 4
-  },
-  "act_053": {
-    "rejected_candidate_count": 1246,
-    "unscheduled_count": 92
-  },
-  "act_056": {
-    "rejected_candidate_count": 258,
-    "unscheduled_count": 13
-  },
-  "act_057": {
-    "rejected_candidate_count": 1246,
-    "unscheduled_count": 92
-  },
-  "act_058": {
-    "rejected_candidate_count": 1246,
-    "unscheduled_count": 92
-  },
-  "act_059": {
-    "rejected_candidate_count": 348,
-    "unscheduled_count": 9
-  },
-  "act_060": {
+  "act_b02_cardio_zone2_gym_home_sub": {
     "rejected_candidate_count": 18,
     "unscheduled_count": 3
   },
-  "act_061": {
-    "rejected_candidate_count": 1869,
-    "unscheduled_count": 92
-  },
-  "act_062": {
-    "rejected_candidate_count": 276,
-    "unscheduled_count": 14
-  },
-  "act_063": {
-    "rejected_candidate_count": 276,
-    "unscheduled_count": 14
-  },
-  "act_064": {
-    "rejected_candidate_count": 276,
-    "unscheduled_count": 14
-  },
-  "act_065": {
-    "rejected_candidate_count": 63,
+  "act_b02_cardio_zone2_gym_primary": {
+    "rejected_candidate_count": 18,
     "unscheduled_count": 3
   },
-  "act_066": {
-    "rejected_candidate_count": 276,
-    "unscheduled_count": 14
-  },
-  "act_067": {
-    "rejected_candidate_count": 1869,
-    "unscheduled_count": 92
-  },
-  "act_068": {
-    "rejected_candidate_count": 276,
-    "unscheduled_count": 14
-  },
-  "act_069": {
-    "rejected_candidate_count": 63,
+  "act_b02_cardio_zone2_gym_time_sub": {
+    "rejected_candidate_count": 12,
     "unscheduled_count": 3
   },
-  "act_070": {
-    "rejected_candidate_count": 344,
-    "unscheduled_count": 13
+  "act_b02_cardio_zone2_home_primary": {
+    "rejected_candidate_count": 28,
+    "unscheduled_count": 2
   },
-  "act_072": {
-    "rejected_candidate_count": 176,
-    "unscheduled_count": 13
+  "act_b03_strength_bodyweight_travel_substitution_primary": {
+    "rejected_candidate_count": 20,
+    "unscheduled_count": 2
   },
-  "act_074": {
-    "rejected_candidate_count": 2,
-    "unscheduled_count": 1
-  },
-  "act_075": {
-    "rejected_candidate_count": 384,
-    "unscheduled_count": 29
-  },
-  "act_076": {
-    "rejected_candidate_count": 429,
-    "unscheduled_count": 63
-  },
-  "act_077": {
-    "rejected_candidate_count": 184,
-    "unscheduled_count": 14
-  },
-  "act_078": {
-    "rejected_candidate_count": 174,
-    "unscheduled_count": 13
-  },
-  "act_079": {
-    "rejected_candidate_count": 174,
-    "unscheduled_count": 13
-  },
-  "act_080": {
-    "rejected_candidate_count": 896,
-    "unscheduled_count": 66
-  },
-  "act_081": {
-    "rejected_candidate_count": 1575,
-    "unscheduled_count": 78
-  },
-  "act_082": {
-    "rejected_candidate_count": 88,
-    "unscheduled_count": 13
-  },
-  "act_083": {
-    "rejected_candidate_count": 180,
-    "unscheduled_count": 13
-  },
-  "act_084": {
-    "rejected_candidate_count": 1246,
-    "unscheduled_count": 92
-  },
-  "act_085": {
-    "rejected_candidate_count": 538,
-    "unscheduled_count": 40
-  },
-  "act_086": {
-    "rejected_candidate_count": 86,
-    "unscheduled_count": 13
-  },
-  "act_087": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_089": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_090": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_091": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_092": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
-  },
-  "act_093": {
-    "rejected_candidate_count": 178,
-    "unscheduled_count": 26
-  },
-  "act_094": {
-    "rejected_candidate_count": 360,
-    "unscheduled_count": 26
-  },
-  "act_095": {
-    "rejected_candidate_count": 122,
+  "act_b03_strength_home_strength_primary": {
+    "rejected_candidate_count": 90,
     "unscheduled_count": 9
   },
-  "act_096": {
-    "rejected_candidate_count": 716,
-    "unscheduled_count": 53
+  "act_b03_strength_home_strength_travel": {
+    "rejected_candidate_count": 192,
+    "unscheduled_count": 8
   },
-  "act_098": {
-    "rejected_candidate_count": 356,
-    "unscheduled_count": 26
+  "act_b03_strength_hotel_gym_strength_bodyweight": {
+    "rejected_candidate_count": 84,
+    "unscheduled_count": 6
   },
-  "act_099": {
-    "rejected_candidate_count": 21,
+  "act_b03_strength_hotel_gym_strength_primary": {
+    "rejected_candidate_count": 120,
+    "unscheduled_count": 10
+  },
+  "act_b03_strength_mobility_pain_recovery_checkin_primary": {
+    "rejected_candidate_count": 126,
     "unscheduled_count": 3
   },
-  "act_100": {
-    "rejected_candidate_count": 21,
-    "unscheduled_count": 3
+  "act_b03_strength_trainer_gym_primary": {
+    "rejected_candidate_count": 136,
+    "unscheduled_count": 13
   },
-  "act_101": {
+  "act_b03_strength_trainer_gym_remote": {
+    "rejected_candidate_count": 136,
+    "unscheduled_count": 13
+  },
+  "act_b04_recovery_evening_mobility_home_primary": {
     "rejected_candidate_count": 42,
+    "unscheduled_count": 2
+  },
+  "act_b04_recovery_evening_mobility_home_sub_time_conflict": {
+    "rejected_candidate_count": 112,
+    "unscheduled_count": 2
+  },
+  "act_b04_recovery_remote_coach_recovery_checkin_async_sleep_note_sub": {
+    "rejected_candidate_count": 21,
+    "unscheduled_count": 1
+  },
+  "act_b04_recovery_remote_coach_recovery_checkin_primary": {
+    "rejected_candidate_count": 21,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_adherence_checkin_support_message_check_sub": {
+    "rejected_candidate_count": 210,
+    "unscheduled_count": 5
+  },
+  "act_b05_clinical_adherence_checkin_support_primary": {
+    "rejected_candidate_count": 210,
+    "unscheduled_count": 5
+  },
+  "act_b05_clinical_biometric_review_support_async_summary_sub": {
+    "rejected_candidate_count": 147,
     "unscheduled_count": 3
   },
-  "act_102": {
-    "rejected_candidate_count": 92,
-    "unscheduled_count": 14
+  "act_b05_clinical_biometric_review_support_primary": {
+    "rejected_candidate_count": 147,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_dietitian_lab_followup_primary": {
+    "rejected_candidate_count": 49,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_dietitian_lab_followup_sub_timeconflict": {
+    "rejected_candidate_count": 35,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_dietitian_review_monthly_primary": {
+    "rejected_candidate_count": 98,
+    "unscheduled_count": 2
+  },
+  "act_b05_clinical_dietitian_review_monthly_sub_remote": {
+    "rejected_candidate_count": 98,
+    "unscheduled_count": 2
+  },
+  "act_b05_clinical_lab_reschedule_coordination_facility_change_sub": {
+    "rejected_candidate_count": 399,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_lab_reschedule_coordination_primary": {
+    "rejected_candidate_count": 399,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_physician_review_due_week_primary": {
+    "rejected_candidate_count": 42,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_physio_reassessment_post_travel_primary": {
+    "rejected_candidate_count": 35,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_physio_reassessment_post_travel_sub_inperson": {
+    "rejected_candidate_count": 98,
+    "unscheduled_count": 1
+  },
+  "act_b05_clinical_remote_care_team_handoff_primary": {
+    "rejected_candidate_count": 126,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_remote_care_team_handoff_sub_provider_unavailable": {
+    "rejected_candidate_count": 168,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_trainer_physio_handoff_async_handoff_sub": {
+    "rejected_candidate_count": 210,
+    "unscheduled_count": 3
+  },
+  "act_b05_clinical_trainer_physio_handoff_primary": {
+    "rejected_candidate_count": 210,
+    "unscheduled_count": 3
   }
 }

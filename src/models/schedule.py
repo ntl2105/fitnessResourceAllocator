@@ -30,6 +30,8 @@ class ScheduledTask(FlexibleModel):
     activity_id: str
     start: datetime
     end: datetime
+    activity_type: str | None = None
+    load_level: str | None = None
     location_id: str | None = None
     provider_ids: list[str] = []
     equipment_ids: list[str] = []
@@ -41,6 +43,7 @@ class PersonalizedPlan(FlexibleModel):
     run_id: str | None = None
     tasks: list[ScheduledTask] = []
     metadata: dict[str, Any] = {}
+    goal_report: dict[str, Any] | None = None
 
 
 class CalendarRow(FlexibleModel):
@@ -57,3 +60,4 @@ class CalendarRow(FlexibleModel):
     substitution_status: str
     trace_id: str | None = None
     compact_group_key: str | None = None
+    original_target_date: date | None = None
