@@ -6,6 +6,21 @@ This document explains how the assignment dataset was generated, why the generat
 was staged, what was corrected during generation, and which validation checks were
 used before treating the dataset as ready.
 
+The process is intentionally structured around four review goals:
+
+- **Plausibility:** each stage adds realistic constraints for a high-touch
+  healthspan member journey, including providers, travel, food access,
+  fatigue, equipment, and location state.
+- **Traceability:** every major handoff is written as an inspectable artifact so
+  reviewers can see how the final calendar relates back to profile, resources,
+  activity families, availability, and scheduler traces.
+- **Modularity:** profile, resource universe, known frictions, availability,
+  activity-family blueprinting, batch generation, validation, scheduling, and
+  calendar rendering are separate steps rather than one opaque prompt.
+- **Repeatability:** the same staged prompts and build scripts can be reused
+  with a different seed profile to generate a new member-specific resource
+  universe, activity board, availability model, and scheduled run.
+
 ## Dataset Purpose
 
 The dataset supports a three-month scheduling and resource-allocation demo for the

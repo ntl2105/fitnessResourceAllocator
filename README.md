@@ -24,6 +24,15 @@ Reviewer path: `Profile -> Activity Board -> Calendar -> Recap`.
 - Same-family substitutions with decision traces.
 - Final hard-constraint audit: `pass`, `0` violations.
 
+## Data Generation Strategy
+
+The dataset was designed as a repeatable generation pipeline, not a one-off static fixture.
+
+- **Plausibility:** prompts separate member profile, resources, frictions, availability, and activity families so each layer can encode realistic healthspan constraints before scheduling.
+- **Traceability:** generated artifacts are staged and validated; the app serves the resulting profile, activity board, calendar rows, decision traces, recap, and constraint audit.
+- **Modularity:** care activities are generated in five domain batches, then flattened into scheduler-facing prescriptions without losing family/substitution relationships.
+- **Repeatability:** a new seed profile can follow the same prompt stages and build scripts to produce a new member profile, resource universe, availability model, activity board, and calendar run.
+
 ## Project Layout
 
 - `data/` - canonical input data used by the demo.
