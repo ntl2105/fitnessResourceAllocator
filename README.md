@@ -41,6 +41,7 @@ python scripts/build_demo_run.py
 ```
 
 The staged generation process is documented in [docs/assignment_dataset_generation.md](docs/assignment_dataset_generation.md).
+Scheduler behavior and known design debt are documented in [docs/scheduler_implementation_note.md](docs/scheduler_implementation_note.md).
 
 This runs:
 
