@@ -59,9 +59,10 @@ Use stable IDs:
 
 Copy or normalize travel windows from the member profile. Preserve their meaning. Use stable `travel_window_id` values.
 
-## Travel-state rules
+## Transition And Travel-State Rules
 
-Keep `travel_time_rules` present for schema compatibility, but keep it minimal for this version.
+Use `travel_time_rules` to represent practical same-day transition buffers that
+the scheduler must honor between local locations.
 
 The current schema expects each travel-time rule to include:
 
@@ -69,7 +70,22 @@ The current schema expects each travel-time rule to include:
 - `to_location_id`
 - `minutes`
 
-Use a minimal compatibility rule such as `office` to `gym` with `15` minutes. Do not build a detailed transportation model. The important scheduling constraint for now is member location state and travel fatigue after travel over 3 hours, not exact commute buffers.
+Include transition rules for relevant pairs such as:
+
+- `home` to/from `office`
+- `home` to/from `gym`
+- `office` to/from `gym`
+- `home` or `office` to/from `clinic`
+- `home` or `office` to/from `lab`
+- `home` to/from `restaurant`
+
+Use realistic but coarse buffers, such as 15-45 minutes. These are not meant to
+be a full transportation model; they exist so the scheduler can reject
+back-to-back rows in different locations.
+
+Do not model airport transfers as member calendar rows. Travel windows should
+still be represented as exact travel-state intervals, and post-arrival fatigue
+after travel over 3 hours should remain a scheduling constraint.
 
 ## Important constraint
 

@@ -86,7 +86,12 @@ Check:
 - load distribution supports recovery and avoids unrealistic clustering
 - known frictions are represented in activities or scheduling constraints
 - travel over 3 hours creates visible lower-load, recovery, or reduced-capacity logic on the arrival day or next day
-- the board does not require exact commute/transport-time modeling for this version
+- activity locations are compatible with WFH dates, exact travel windows, and
+  provider/resource availability assumptions
+- local transition buffers are expected between different in-person locations;
+  the board should not rely on impossible back-to-back home, office, gym,
+  restaurant, clinic, or lab rows
+- airport transfers should not appear as member-facing calendar tasks
 - care handoff metadata is present when provider coordination is needed
 - there are no obvious duplicated, contradictory, or clinically implausible prescriptions
 

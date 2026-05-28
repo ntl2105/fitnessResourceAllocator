@@ -82,6 +82,8 @@ Patterns must cover 3 months and include:
 - clinic, gym, lab, and facility operating windows
 - planned travel windows
 - last-minute travel windows
+- WFH date overrides
+- occasional member unavailability during preferred fitness windows
 
 ## Realism Rules
 
@@ -99,7 +101,11 @@ Patterns must cover 3 months and include:
 - Planned travel should have better resources than last-minute travel.
 - Travel over 3 hours should create a fatigue or reduced-readiness context on
   the arrival day.
-- Do not model exact airport transfers or commute-time buffers in this version.
+- Travel location state should apply only inside exact travel-window timestamps,
+  not automatically to the whole calendar date.
+- WFH days should hard-ban office-location activities.
+- Do not model airport transfers as scheduled member activities. Local
+  transition buffers are modeled in `resource_universe.travel_time_rules`.
 
 ## Expansion Expectations
 

@@ -1,6 +1,7 @@
 # Resource Universe Rules
 
-The resource universe defines every concrete provider, equipment item, location, travel window, and minimal travel-state rule that later files may reference.
+The resource universe defines every concrete provider, equipment item, location,
+travel window, and local transition-buffer rule that later files may reference.
 
 After this stage, later generation stages must only reference IDs present in `resource_universe.json` or the member profile's travel windows.
 
@@ -49,9 +50,11 @@ Use stable location IDs such as:
 - `travel_hotel`
 - `remote`
 
-## Travel-state rules
+## Transition And Travel-State Rules
 
-Keep `travel_time_rules` present for compatibility, but keep it minimal for this version.
+Use `travel_time_rules` for practical same-day transition buffers between
+relevant local locations. These buffers let the scheduler reject impossible
+back-to-back rows in different places.
 
 Example:
 
@@ -59,11 +62,15 @@ Example:
 {
   "from_location_id": "office",
   "to_location_id": "gym",
-  "minutes": 15
+  "minutes": 30
 }
 ```
 
-Do not build a detailed transportation graph yet. The important constraints are where the member is, which resources are available in that location state, and whether travel over 3 hours should bias the plan toward lower-load or recovery activities.
+Include coarse rules for common local moves such as home, office, gym,
+restaurant, clinic, and lab. Do not model airport transfers as member-facing
+calendar tasks. Exact travel windows should still define when the member is in
+travel state, and travel over 3 hours should bias the plan toward lower-load or
+recovery activities.
 
 ## Provider rules
 

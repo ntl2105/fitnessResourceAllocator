@@ -83,6 +83,8 @@ Availability patterns must cover:
 - planned travel windows
 - last-minute travel windows
 - arrival-day low-readiness context after travel over 3 hours
+- WFH date overrides when the member works from home
+- occasional member unavailability during otherwise preferred fitness windows
 
 ## Resource-Specific Generation
 
@@ -99,6 +101,8 @@ compatible expanded availability:
 - location is available, if constrained
 - travel state and location compatibility are valid
 - remote delivery is supported when used
+- WFH dates do not allow office-location activities
+- arrival-fatigue windows restrict medium/high-load activity
 
 ## Realism Requirements
 
@@ -112,10 +116,14 @@ compatible expanded availability:
 - Equipment/facility availability should include at least one limitation matching
   known frictions.
 - Travel windows should create travel-compatible member/resource availability.
+- Travel windows should apply only during their exact start/end timestamps, not
+  automatically to the full calendar date.
 - Planned travel should have better resources than last-minute travel.
 - On the arrival day for any travel window over 3 hours, include a
   `member_blocked` fatigue or low-readiness pattern.
-- Do not model exact airport transfers or commute-time buffers in this version.
+- Use WFH `member_location` date overrides for exactly two non-travel Fridays.
+- Do not model airport transfers as scheduled activities. Local commute and
+  transition buffers are handled through `resource_universe.travel_time_rules`.
 
 ## Output Size
 
@@ -150,8 +158,9 @@ Location availability must normally use broad date-range patterns, not weekly
 opening-hour patterns. Do not create weekly location patterns for home, office,
 gym, clinic, or lab.
 
-Member blocked availability should be one weekday work pattern plus two
-recurring one-day non-work blockers plus exact fatigue/travel date ranges.
+Member blocked availability should include one weekday work pattern, recurring
+Sunday family/meal-planning time, occasional preferred-fitness-window blockers,
+and exact fatigue/travel date ranges.
 
 Provider availability must include no more than 12 total weekly day entries
 across all provider patterns, so provider blocks land in the 120-200 range.
