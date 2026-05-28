@@ -18,6 +18,7 @@ venv/
 
 # Generated artifacts
 data/generated/
+data/chatgpt-calendar-rework-input/
 
 # Local-only handoff notes
 CODEX_HANDOFF.md
