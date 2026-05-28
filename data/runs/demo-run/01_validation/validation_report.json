@@ -1,7 +1,7 @@
 {
-  "activity_count": 100,
+  "activity_count": 101,
   "activity_family_count": 50,
-  "availability_block_count": 327,
+  "availability_block_count": 343,
   "availability_coverage": {
     "coverage_end_exclusive": "2026-09-01",
     "coverage_start": "2026-06-01",
@@ -22,10 +22,11 @@
   "availability_resource_type_counts": {
     "equipment": 10,
     "location": 9,
-    "member_blocked": 100,
+    "member_blocked": 99,
     "member_location": 2,
     "member_travel": 3,
-    "provider": 200,
+    "provider": 216,
+    "scheduling_rule": 1,
     "travel_window": 3
   },
   "checks": {
@@ -50,7 +51,7 @@
       "passed": true
     },
     "at_least_100_activities": {
-      "message": "Found 100 activities.",
+      "message": "Found 101 activities.",
       "passed": true
     },
     "availability_covers_planning_months": {
@@ -66,11 +67,11 @@
       "passed": true
     },
     "availability_has_blocks": {
-      "message": "Found 327 availability blocks.",
+      "message": "Found 343 availability blocks.",
       "passed": true
     },
     "availability_has_realistic_block_density": {
-      "message": "Availability coverage found 327 blocks; expected 225-375 concrete scheduler-facing blocks for a 3-month demo.",
+      "message": "Availability coverage found 343 blocks; expected 225-375 concrete scheduler-facing blocks for a 3-month demo.",
       "passed": true
     },
     "availability_keeps_equipment_compact": {
@@ -126,6 +127,6 @@
     "medication",
     "therapy"
   ],
-  "primary_activity_count": 49,
+  "primary_activity_count": 50,
   "status": "pass"
 }

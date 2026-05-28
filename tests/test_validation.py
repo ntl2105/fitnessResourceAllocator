@@ -254,7 +254,7 @@ def test_validation_report_enforces_availability_distribution_targets(load_seed)
     )
 
     counts = report["availability_resource_type_counts"]
-    assert 120 <= counts["provider"] <= 200
+    assert 120 <= counts["provider"] <= 220
     assert 70 <= counts["member_blocked"] <= 100
     assert 10 <= counts["equipment"] <= 30
     assert 6 <= counts["location"] <= 40

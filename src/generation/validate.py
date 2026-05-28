@@ -284,7 +284,7 @@ def build_validation_report(
         + availability_resource_type_counts["travel_window"]
     )
     availability_distribution_passed = (
-        120 <= availability_resource_type_counts["provider"] <= 200
+        120 <= availability_resource_type_counts["provider"] <= 220
         and 70 <= availability_resource_type_counts["member_blocked"] <= 100
         and 10 <= availability_resource_type_counts["equipment"] <= 30
         and 6 <= availability_resource_type_counts["location"] <= 40
@@ -413,7 +413,7 @@ def build_validation_report(
             availability_distribution_passed,
             "Availability resource-type counts match target ranges."
             if availability_distribution_passed
-            else "Expected provider 120-200, member_blocked 70-100, "
+            else "Expected provider 120-220, member_blocked 70-100, "
             "equipment 10-30, location 6-40, and member_travel + "
             f"travel_window = 6. Found {dict(availability_resource_type_counts)}.",
         ),

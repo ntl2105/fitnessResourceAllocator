@@ -8486,7 +8486,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8495,7 +8496,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8512,7 +8513,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8521,7 +8523,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8538,7 +8540,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8547,7 +8550,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8564,7 +8567,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8573,7 +8577,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8590,7 +8594,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8599,7 +8604,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8616,7 +8621,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8625,7 +8631,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8642,7 +8648,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8651,7 +8658,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8668,7 +8675,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8677,7 +8685,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8694,7 +8702,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8703,7 +8712,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8720,7 +8729,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8729,7 +8739,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8746,7 +8756,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8755,7 +8766,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8772,7 +8783,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8781,7 +8793,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8798,7 +8810,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8807,7 +8820,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8824,7 +8837,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8833,7 +8847,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8850,7 +8864,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8859,7 +8874,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8876,7 +8891,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8885,7 +8901,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8902,7 +8918,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8911,7 +8928,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8928,7 +8945,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8937,7 +8955,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8954,7 +8972,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8963,7 +8982,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -8980,7 +8999,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -8989,7 +9009,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9006,7 +9026,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9015,7 +9036,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9032,7 +9053,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9041,7 +9063,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9058,7 +9080,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9067,7 +9090,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9084,7 +9107,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9093,7 +9117,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9110,7 +9134,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9119,7 +9144,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9136,7 +9161,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9145,7 +9171,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9162,7 +9188,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9171,7 +9198,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9188,7 +9215,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9197,7 +9225,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9214,7 +9242,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9223,7 +9252,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9240,7 +9269,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9249,7 +9279,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9266,7 +9296,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9275,7 +9306,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9292,7 +9323,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9301,7 +9333,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9318,7 +9350,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9327,7 +9360,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9344,7 +9377,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9353,7 +9387,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9370,7 +9404,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9379,7 +9414,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9396,7 +9431,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9405,7 +9441,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9422,7 +9458,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9431,7 +9468,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9448,7 +9485,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9457,7 +9495,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9474,7 +9512,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9483,7 +9522,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9500,7 +9539,8 @@
     "goal_tags": [
       "aerobic_conditioning",
       "walking",
-      "remote_support"
+      "home_support",
+      "wfh"
     ],
     "is_substitution": true,
     "priority": 113,
@@ -9509,7 +9549,7 @@
         "eq_bodyweight"
       ],
       "location_ids": [
-        "remote"
+        "home"
       ],
       "provider_ids": []
     },
@@ -9521,7 +9561,16 @@
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9540,14 +9589,23 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260601_001"
+    "target_date": "2026-06-08",
+    "target_week": "2026-W24",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260608_001"
   },
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9566,14 +9624,23 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260706_002"
+    "target_date": "2026-07-13",
+    "target_week": "2026-W29",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260713_002"
   },
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9592,14 +9659,23 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260803_003"
+    "target_date": "2026-08-10",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_primary_20260810_003"
   },
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_async_log_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9618,14 +9694,23 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260601_001"
+    "target_date": "2026-06-08",
+    "target_week": "2026-W24",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260608_001"
   },
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_async_log_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9644,14 +9729,23 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260706_002"
+    "target_date": "2026-07-13",
+    "target_week": "2026-W29",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260713_002"
   },
   {
     "activity_family_id": "b02_cardio_remote_coach_progression_review",
     "activity_id": "act_b02_cardio_remote_coach_progression_review_async_log_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "goal_action_id": "ga_aerobic_conditioning_weekly",
+        "lookback_days": 14,
+        "minimum_sessions": 1,
+        "must_exist": true,
+        "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+        "type": "recent_session_data"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "aerobic_conditioning",
@@ -9670,9 +9764,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260803_003"
+    "target_date": "2026-08-10",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b02_cardio_remote_coach_progression_review_async_log_sub_20260810_003"
   },
   {
     "activity_family_id": "b03_strength_trainer_gym",
@@ -10560,67 +10654,9 @@
       "provider_ids": []
     },
     "status": "pending",
-    "target_date": "2026-06-07",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260607_002"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
     "target_date": "2026-06-09",
     "target_week": "2026-W24",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260609_003"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-14",
-    "target_week": "2026-W24",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260614_004"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260609_002"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10649,36 +10685,7 @@
     "status": "pending",
     "target_date": "2026-06-16",
     "target_week": "2026-W25",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260616_005"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-21",
-    "target_week": "2026-W25",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260621_006"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260616_003"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10707,36 +10714,7 @@
     "status": "pending",
     "target_date": "2026-06-23",
     "target_week": "2026-W26",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260623_007"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-28",
-    "target_week": "2026-W26",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260628_008"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260623_004"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10765,36 +10743,7 @@
     "status": "pending",
     "target_date": "2026-06-30",
     "target_week": "2026-W27",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260630_009"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-05",
-    "target_week": "2026-W27",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260705_010"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260630_005"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10823,36 +10772,7 @@
     "status": "pending",
     "target_date": "2026-07-07",
     "target_week": "2026-W28",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260707_011"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-12",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260712_012"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260707_006"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10881,36 +10801,7 @@
     "status": "pending",
     "target_date": "2026-07-14",
     "target_week": "2026-W29",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260714_013"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-19",
-    "target_week": "2026-W29",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260719_014"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260714_007"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10939,36 +10830,7 @@
     "status": "pending",
     "target_date": "2026-07-21",
     "target_week": "2026-W30",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260721_015"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-26",
-    "target_week": "2026-W30",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260726_016"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260721_008"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -10997,36 +10859,7 @@
     "status": "pending",
     "target_date": "2026-07-28",
     "target_week": "2026-W31",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260728_017"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-02",
-    "target_week": "2026-W31",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260802_018"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260728_009"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11055,36 +10888,7 @@
     "status": "pending",
     "target_date": "2026-08-04",
     "target_week": "2026-W32",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260804_019"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-09",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260809_020"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260804_010"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11113,36 +10917,7 @@
     "status": "pending",
     "target_date": "2026-08-11",
     "target_week": "2026-W33",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260811_021"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-16",
-    "target_week": "2026-W33",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260816_022"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260811_011"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11171,36 +10946,7 @@
     "status": "pending",
     "target_date": "2026-08-18",
     "target_week": "2026-W34",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260818_023"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-23",
-    "target_week": "2026-W34",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260823_024"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260818_012"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11229,36 +10975,7 @@
     "status": "pending",
     "target_date": "2026-08-25",
     "target_week": "2026-W35",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260825_025"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_primary",
-    "dependencies": [],
-    "duration_minutes": 45,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "home_based"
-    ],
-    "is_substitution": false,
-    "priority": 183,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_dumbbells_home",
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "home"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-30",
-    "target_week": "2026-W35",
-    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260830_026"
+    "task_instance_id": "task_act_b03_strength_home_strength_primary_20260825_013"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11314,67 +11031,9 @@
       "provider_ids": []
     },
     "status": "pending",
-    "target_date": "2026-06-03",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260603_002"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
     "target_date": "2026-06-09",
     "target_week": "2026-W24",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260609_003"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-10",
-    "target_week": "2026-W24",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260610_004"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260609_002"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11403,36 +11062,7 @@
     "status": "pending",
     "target_date": "2026-06-16",
     "target_week": "2026-W25",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260616_005"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-17",
-    "target_week": "2026-W25",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260617_006"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260616_003"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11461,36 +11091,7 @@
     "status": "pending",
     "target_date": "2026-06-23",
     "target_week": "2026-W26",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260623_007"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-06-24",
-    "target_week": "2026-W26",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260624_008"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260623_004"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11519,36 +11120,7 @@
     "status": "pending",
     "target_date": "2026-06-30",
     "target_week": "2026-W27",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260630_009"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-01",
-    "target_week": "2026-W27",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260701_010"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260630_005"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11577,36 +11149,7 @@
     "status": "pending",
     "target_date": "2026-07-07",
     "target_week": "2026-W28",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260707_011"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-08",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260708_012"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260707_006"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11635,36 +11178,7 @@
     "status": "pending",
     "target_date": "2026-07-14",
     "target_week": "2026-W29",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260714_013"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-15",
-    "target_week": "2026-W29",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260715_014"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260714_007"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11693,36 +11207,7 @@
     "status": "pending",
     "target_date": "2026-07-21",
     "target_week": "2026-W30",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260721_015"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-22",
-    "target_week": "2026-W30",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260722_016"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260721_008"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11751,36 +11236,7 @@
     "status": "pending",
     "target_date": "2026-07-28",
     "target_week": "2026-W31",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260728_017"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-07-29",
-    "target_week": "2026-W31",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260729_018"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260728_009"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11809,36 +11265,7 @@
     "status": "pending",
     "target_date": "2026-08-04",
     "target_week": "2026-W32",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260804_019"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-05",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260805_020"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260804_010"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11867,36 +11294,7 @@
     "status": "pending",
     "target_date": "2026-08-11",
     "target_week": "2026-W33",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260811_021"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-12",
-    "target_week": "2026-W33",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260812_022"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260811_011"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11925,36 +11323,7 @@
     "status": "pending",
     "target_date": "2026-08-18",
     "target_week": "2026-W34",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260818_023"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-19",
-    "target_week": "2026-W34",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260819_024"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260818_012"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -11983,36 +11352,7 @@
     "status": "pending",
     "target_date": "2026-08-25",
     "target_week": "2026-W35",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260825_025"
-  },
-  {
-    "activity_family_id": "b03_strength_home_strength",
-    "activity_id": "act_b03_strength_home_strength_travel",
-    "dependencies": [],
-    "duration_minutes": 35,
-    "goal_tags": [
-      "strength",
-      "knee_safe",
-      "travel_adapted"
-    ],
-    "is_substitution": true,
-    "priority": 184,
-    "required_resources": {
-      "equipment_ids": [
-        "eq_bodyweight",
-        "eq_mini_band",
-        "eq_yoga_mat"
-      ],
-      "location_ids": [
-        "travel_hotel",
-        "remote"
-      ],
-      "provider_ids": []
-    },
-    "status": "pending",
-    "target_date": "2026-08-26",
-    "target_week": "2026-W35",
-    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260826_026"
+    "task_instance_id": "task_act_b03_strength_home_strength_travel_20260825_013"
   },
   {
     "activity_family_id": "b03_strength_home_strength",
@@ -12025,7 +11365,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12055,7 +11395,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12085,7 +11425,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12115,7 +11455,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12145,7 +11485,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12175,7 +11515,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12205,7 +11545,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12235,7 +11575,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12265,7 +11605,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12295,7 +11635,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12325,7 +11665,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12355,7 +11695,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12385,7 +11725,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12415,7 +11755,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12445,7 +11785,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12475,7 +11815,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12505,7 +11845,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12535,7 +11875,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12565,7 +11905,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12595,7 +11935,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12625,7 +11965,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12655,7 +11995,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12685,7 +12025,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12715,7 +12055,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12745,7 +12085,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -12775,7 +12115,7 @@
       "hotel_gym",
       "travel_continuity"
     ],
-    "is_substitution": true,
+    "is_substitution": false,
     "priority": 183,
     "required_resources": {
       "equipment_ids": [
@@ -13740,7 +13080,19 @@
   {
     "activity_family_id": "b03_strength_physio_assessment_due",
     "activity_id": "act_b03_strength_physio_assessment_due_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain escalation details",
+          "current movement plan",
+          "recent training load notes",
+          "mobility limitation summary"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 30,
     "goal_tags": [
       "physio_assessment",
@@ -13771,7 +13123,19 @@
   {
     "activity_family_id": "b03_strength_physio_assessment_due",
     "activity_id": "act_b03_strength_physio_assessment_due_remote",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain escalation details",
+          "current movement plan",
+          "recent training load notes",
+          "mobility limitation summary"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 30,
     "goal_tags": [
       "physio_assessment",
@@ -13815,13 +13179,13 @@
         "travel_hotel"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physio_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260601_001"
+    "target_date": "2026-06-19",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260619_001"
   },
   {
     "activity_family_id": "b03_strength_mobility_pain_recovery_checkin",
@@ -13843,13 +13207,13 @@
         "travel_hotel"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physio_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260706_002"
+    "target_date": "2026-07-24",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260724_002"
   },
   {
     "activity_family_id": "b03_strength_mobility_pain_recovery_checkin",
@@ -13871,13 +13235,13 @@
         "travel_hotel"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physio_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260803_003"
+    "target_date": "2026-08-21",
+    "target_week": "2026-W34",
+    "task_instance_id": "task_act_b03_strength_mobility_pain_recovery_checkin_primary_20260821_003"
   },
   {
     "activity_family_id": "b04_recovery_evening_mobility_home",
@@ -15470,9 +14834,121 @@
       "provider_ids": []
     },
     "status": "pending",
+    "target_date": "2026-06-21",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260621_002"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-06-22",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260622_003"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
     "target_date": "2026-07-23",
     "target_week": "2026-W30",
-    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260723_002"
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260723_004"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-24",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260724_005"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-25",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260725_006"
   },
   {
     "activity_family_id": "b04_recovery_evening_mobility_travel",
@@ -15500,7 +14976,63 @@
     "status": "pending",
     "target_date": "2026-08-14",
     "target_week": "2026-W33",
-    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260814_003"
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260814_007"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-15",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260815_008"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_primary",
+    "dependencies": [],
+    "duration_minutes": 20,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": false,
+    "priority": 263,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band",
+        "eq_yoga_mat"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-16",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_primary_20260816_009"
   },
   {
     "activity_family_id": "b04_recovery_evening_mobility_travel",
@@ -15552,9 +15084,117 @@
       "provider_ids": []
     },
     "status": "pending",
+    "target_date": "2026-06-21",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260621_002"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-06-22",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260622_003"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
     "target_date": "2026-07-23",
     "target_week": "2026-W30",
-    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260723_002"
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260723_004"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-24",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260724_005"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-25",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260725_006"
   },
   {
     "activity_family_id": "b04_recovery_evening_mobility_travel",
@@ -15581,7 +15221,61 @@
     "status": "pending",
     "target_date": "2026-08-14",
     "target_week": "2026-W33",
-    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260814_003"
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260814_007"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-15",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260815_008"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_mobility_travel",
+    "activity_id": "act_b04_recovery_evening_mobility_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 15,
+    "goal_tags": [
+      "travel",
+      "mobility",
+      "recovery"
+    ],
+    "is_substitution": true,
+    "priority": 264,
+    "required_resources": {
+      "equipment_ids": [
+        "eq_bodyweight",
+        "eq_mini_band"
+      ],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-16",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_mobility_travel_sub_facility_unavailable_20260816_009"
   },
   {
     "activity_family_id": "b04_recovery_sleep_routine_support",
@@ -17095,9 +16789,101 @@
       "provider_ids": []
     },
     "status": "pending",
+    "target_date": "2026-06-21",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260621_002"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-06-22",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260622_003"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
     "target_date": "2026-07-23",
     "target_week": "2026-W30",
-    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260723_002"
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260723_004"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-24",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260724_005"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-07-25",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260725_006"
   },
   {
     "activity_family_id": "b04_recovery_evening_routine_travel",
@@ -17120,7 +16906,53 @@
     "status": "pending",
     "target_date": "2026-08-14",
     "target_week": "2026-W33",
-    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260814_003"
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260814_007"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-15",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260815_008"
+  },
+  {
+    "activity_family_id": "b04_recovery_evening_routine_travel",
+    "activity_id": "act_b04_recovery_evening_routine_travel_sub_facility_unavailable",
+    "dependencies": [],
+    "duration_minutes": 8,
+    "goal_tags": [
+      "travel",
+      "sleep_quality"
+    ],
+    "is_substitution": true,
+    "priority": 271,
+    "required_resources": {
+      "equipment_ids": [],
+      "location_ids": [
+        "travel_hotel"
+      ],
+      "provider_ids": []
+    },
+    "status": "pending",
+    "target_date": "2026-08-16",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b04_recovery_evening_routine_travel_sub_facility_unavailable_20260816_009"
   },
   {
     "activity_family_id": "b05_clinical_lab_draw_due_week",
@@ -17128,9 +16960,27 @@
     "dependencies": [
       {
         "must_happen": "before",
-        "notes": "Member must fast for at least 8 hours prior to lab draw.",
+        "notes": "Member must fast for at least 8 hours before the lab draw.",
         "offset_minutes_min": 480,
         "type": "fasting"
+      },
+      {
+        "blocked_activity_types": [
+          "food"
+        ],
+        "blocked_goal_tags": [
+          "breakfast",
+          "structured_meal"
+        ],
+        "blocked_meal_slots": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "must_happen": "before",
+        "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+        "scope": "same_calendar_day_before_lab_draw",
+        "skip_reason_code": "fasting_lab_same_morning",
+        "type": "same_day_meal_exclusion"
       }
     ],
     "duration_minutes": 30,
@@ -17163,9 +17013,27 @@
     "dependencies": [
       {
         "must_happen": "before",
-        "notes": "Member must fast for at least 8 hours prior to lab draw.",
+        "notes": "Member must fast for at least 8 hours before the lab draw.",
         "offset_minutes_min": 480,
         "type": "fasting"
+      },
+      {
+        "blocked_activity_types": [
+          "food"
+        ],
+        "blocked_goal_tags": [
+          "breakfast",
+          "structured_meal"
+        ],
+        "blocked_meal_slots": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "must_happen": "before",
+        "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+        "scope": "same_calendar_day_before_lab_draw",
+        "skip_reason_code": "fasting_lab_same_morning",
+        "type": "same_day_meal_exclusion"
       }
     ],
     "duration_minutes": 30,
@@ -17202,6 +17070,17 @@
         "notes": "Physician review must occur after lab results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab results",
+          "current medication/supplement list",
+          "metabolic goal summary",
+          "recent symptoms or adverse events"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 30,
@@ -17236,6 +17115,17 @@
         "notes": "Remote review must occur after lab results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab results",
+          "current medication/supplement list",
+          "metabolic goal summary",
+          "recent symptoms or adverse events"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 25,
@@ -17263,7 +17153,20 @@
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 25,
     "goal_tags": [
       "measurement",
@@ -17282,14 +17185,27 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260601_001"
+    "target_date": "2026-06-09",
+    "target_week": "2026-W24",
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260609_001"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 25,
     "goal_tags": [
       "measurement",
@@ -17308,14 +17224,27 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
+    "target_date": "2026-07-07",
     "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260706_002"
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260707_002"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 25,
     "goal_tags": [
       "measurement",
@@ -17334,14 +17263,27 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260803_003"
+    "target_date": "2026-08-11",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_primary_20260811_003"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_sub_remote",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "measurement",
@@ -17361,14 +17303,27 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260601_001"
+    "target_date": "2026-06-09",
+    "target_week": "2026-W24",
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260609_001"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_sub_remote",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "measurement",
@@ -17388,14 +17343,27 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
+    "target_date": "2026-07-07",
     "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260706_002"
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260707_002"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_review_monthly",
     "activity_id": "act_b05_clinical_dietitian_review_monthly_sub_remote",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "measurement",
@@ -17415,14 +17383,26 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260803_003"
+    "target_date": "2026-08-11",
+    "target_week": "2026-W33",
+    "task_instance_id": "task_act_b05_clinical_dietitian_review_monthly_sub_remote_20260811_003"
   },
   {
     "activity_family_id": "b05_clinical_physio_reassessment_post_travel",
     "activity_id": "act_b05_clinical_physio_reassessment_post_travel_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "travel summary",
+          "current mobility goal",
+          "recent training load notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 25,
     "goal_tags": [
       "measurement",
@@ -17441,14 +17421,26 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_physio_reassessment_post_travel_primary_20260601_001"
+    "target_date": "2026-06-26",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b05_clinical_physio_reassessment_post_travel_primary_20260626_001"
   },
   {
     "activity_family_id": "b05_clinical_physio_reassessment_post_travel",
     "activity_id": "act_b05_clinical_physio_reassessment_post_travel_sub_inperson",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "travel summary",
+          "current mobility goal",
+          "recent training load notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 30,
     "goal_tags": [
       "measurement",
@@ -17468,14 +17460,26 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_physio_reassessment_post_travel_sub_inperson_20260601_001"
+    "target_date": "2026-06-26",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b05_clinical_physio_reassessment_post_travel_sub_inperson_20260626_001"
   },
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17501,7 +17505,19 @@
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17527,7 +17543,19 @@
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17553,7 +17581,19 @@
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_facility_change_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17579,7 +17619,19 @@
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_facility_change_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17605,7 +17657,19 @@
   {
     "activity_family_id": "b05_clinical_lab_reschedule_coordination",
     "activity_id": "act_b05_clinical_lab_reschedule_coordination_facility_change_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17631,7 +17695,20 @@
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17646,18 +17723,31 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260601_001"
+    "target_date": "2026-06-18",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260618_001"
   },
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17672,18 +17762,31 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260706_002"
+    "target_date": "2026-07-23",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260723_002"
   },
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17698,18 +17801,31 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260803_003"
+    "target_date": "2026-08-20",
+    "target_week": "2026-W34",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_primary_20260820_003"
   },
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_async_summary_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17724,18 +17840,31 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260601_001"
+    "target_date": "2026-06-18",
+    "target_week": "2026-W25",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260618_001"
   },
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_async_summary_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17750,18 +17879,31 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260706_002"
+    "target_date": "2026-07-23",
+    "target_week": "2026-W30",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260723_002"
   },
   {
     "activity_family_id": "b05_clinical_biometric_review_support",
     "activity_id": "act_b05_clinical_biometric_review_support_async_summary_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "support",
@@ -17776,18 +17918,30 @@
         "remote"
       ],
       "provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260803_003"
+    "target_date": "2026-08-20",
+    "target_week": "2026-W34",
+    "task_instance_id": "task_act_b05_clinical_biometric_review_support_async_summary_sub_20260820_003"
   },
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17815,7 +17969,19 @@
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17843,7 +18009,19 @@
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 20,
     "goal_tags": [
       "support",
@@ -17871,7 +18049,19 @@
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_async_handoff_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -17898,7 +18088,19 @@
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_async_handoff_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -17925,7 +18127,19 @@
   {
     "activity_family_id": "b05_clinical_trainer_physio_handoff",
     "activity_id": "act_b05_clinical_trainer_physio_handoff_async_handoff_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -17952,7 +18166,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -17978,7 +18204,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18004,7 +18242,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18030,7 +18280,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18056,7 +18318,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18082,7 +18356,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18108,7 +18394,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18134,7 +18432,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18160,7 +18470,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18186,7 +18508,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18212,7 +18546,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18238,7 +18584,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18264,7 +18622,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18290,7 +18660,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18316,7 +18698,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18342,7 +18736,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18368,7 +18774,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18394,7 +18812,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18420,7 +18850,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18446,7 +18888,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18472,7 +18926,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18498,7 +18964,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18524,7 +19002,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18550,7 +19040,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18576,7 +19078,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18602,7 +19116,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18628,7 +19154,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18654,7 +19192,19 @@
   {
     "activity_family_id": "b05_clinical_adherence_checkin_support",
     "activity_id": "act_b05_clinical_adherence_checkin_support_message_check_sub",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "support",
@@ -18687,6 +19237,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 20,
@@ -18707,9 +19268,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260601_001"
+    "target_date": "2026-06-23",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260623_001"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_lab_followup",
@@ -18721,6 +19282,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 20,
@@ -18741,9 +19313,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260706_002"
+    "target_date": "2026-07-28",
+    "target_week": "2026-W31",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260728_002"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_lab_followup",
@@ -18755,6 +19327,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 20,
@@ -18775,9 +19358,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260803_003"
+    "target_date": "2026-08-25",
+    "target_week": "2026-W35",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_primary_20260825_003"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_lab_followup",
@@ -18789,6 +19372,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 15,
@@ -18809,9 +19403,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-06-01",
-    "target_week": "2026-W23",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260601_001"
+    "target_date": "2026-06-23",
+    "target_week": "2026-W26",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260623_001"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_lab_followup",
@@ -18823,6 +19417,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 15,
@@ -18843,9 +19448,9 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-07-06",
-    "target_week": "2026-W28",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260706_002"
+    "target_date": "2026-07-28",
+    "target_week": "2026-W31",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260728_002"
   },
   {
     "activity_family_id": "b05_clinical_dietitian_lab_followup",
@@ -18857,6 +19462,17 @@
         "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
         "offset_minutes_min": 60,
         "type": "prerequisite_activity"
+      },
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ],
+        "type": "required_context_available"
       }
     ],
     "duration_minutes": 15,
@@ -18877,14 +19493,26 @@
       ]
     },
     "status": "pending",
-    "target_date": "2026-08-03",
-    "target_week": "2026-W32",
-    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260803_003"
+    "target_date": "2026-08-25",
+    "target_week": "2026-W35",
+    "task_instance_id": "task_act_b05_clinical_dietitian_lab_followup_sub_timeconflict_20260825_003"
   },
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "measurement",
@@ -18911,7 +19539,19 @@
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "measurement",
@@ -18938,7 +19578,19 @@
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_primary",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 15,
     "goal_tags": [
       "measurement",
@@ -18965,7 +19617,19 @@
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_sub_provider_unavailable",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "measurement",
@@ -18992,7 +19656,19 @@
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_sub_provider_unavailable",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "measurement",
@@ -19019,7 +19695,19 @@
   {
     "activity_family_id": "b05_clinical_remote_care_team_handoff",
     "activity_id": "act_b05_clinical_remote_care_team_handoff_sub_provider_unavailable",
-    "dependencies": [],
+    "dependencies": [
+      {
+        "must_exist": true,
+        "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ],
+        "type": "required_context_available"
+      }
+    ],
     "duration_minutes": 10,
     "goal_tags": [
       "measurement",
@@ -22727,53 +23415,55 @@
   },
   {
     "activity_family_id": "meal_coverage_breakfast_20260619",
-    "activity_id": "act_b01_breakfast_travel_hotel_primary",
+    "activity_id": "act_b01_breakfast_chef_home_primary",
     "dependencies": [],
-    "duration_minutes": 15,
+    "duration_minutes": 20,
     "goal_tags": [
       "structured_meal",
       "breakfast",
-      "travel",
-      "support"
+      "metabolic_health"
     ],
     "is_substitution": false,
     "priority": 0,
     "required_resources": {
-      "equipment_ids": [],
+      "equipment_ids": [
+        "eq_kitchen_home"
+      ],
       "location_ids": [
-        "travel_hotel"
+        "home"
       ],
       "provider_ids": []
     },
     "status": "pending",
     "target_date": "2026-06-19",
     "target_week": "2026-W25",
-    "task_instance_id": "task_meal_coverage_act_b01_breakfast_travel_hotel_primary_20260619"
+    "task_instance_id": "task_meal_coverage_act_b01_breakfast_chef_home_primary_20260619"
   },
   {
     "activity_family_id": "meal_coverage_breakfast_20260619",
-    "activity_id": "act_b01_breakfast_travel_hotel_restaurant",
+    "activity_id": "act_b01_breakfast_home_lowprep",
     "dependencies": [],
-    "duration_minutes": 15,
+    "duration_minutes": 10,
     "goal_tags": [
       "structured_meal",
       "breakfast",
-      "travel",
-      "support"
+      "metabolic_health"
     ],
     "is_substitution": false,
     "priority": 1,
     "required_resources": {
-      "equipment_ids": [],
+      "equipment_ids": [
+        "eq_kitchen_home"
+      ],
       "location_ids": [
-        "travel_hotel"
+        "home"
       ],
       "provider_ids": []
     },
     "status": "pending",
     "target_date": "2026-06-19",
     "target_week": "2026-W25",
-    "task_instance_id": "task_meal_coverage_act_b01_breakfast_travel_hotel_restaurant_20260619"
+    "task_instance_id": "task_meal_coverage_act_b01_breakfast_home_lowprep_20260619"
   },
   {
     "activity_family_id": "meal_coverage_lunch_20260619",
@@ -29097,53 +29787,55 @@
   },
   {
     "activity_family_id": "meal_coverage_breakfast_20260722",
-    "activity_id": "act_b01_breakfast_travel_hotel_restaurant",
+    "activity_id": "act_b01_breakfast_chef_home_primary",
     "dependencies": [],
-    "duration_minutes": 15,
+    "duration_minutes": 20,
     "goal_tags": [
       "structured_meal",
       "breakfast",
-      "travel",
-      "support"
+      "metabolic_health"
     ],
     "is_substitution": false,
     "priority": 0,
     "required_resources": {
-      "equipment_ids": [],
+      "equipment_ids": [
+        "eq_kitchen_home"
+      ],
       "location_ids": [
-        "travel_hotel"
+        "home"
       ],
       "provider_ids": []
     },
     "status": "pending",
     "target_date": "2026-07-22",
     "target_week": "2026-W30",
-    "task_instance_id": "task_meal_coverage_act_b01_breakfast_travel_hotel_restaurant_20260722"
+    "task_instance_id": "task_meal_coverage_act_b01_breakfast_chef_home_primary_20260722"
   },
   {
     "activity_family_id": "meal_coverage_breakfast_20260722",
-    "activity_id": "act_b01_breakfast_travel_hotel_primary",
+    "activity_id": "act_b01_breakfast_home_lowprep",
     "dependencies": [],
-    "duration_minutes": 15,
+    "duration_minutes": 10,
     "goal_tags": [
       "structured_meal",
       "breakfast",
-      "travel",
-      "support"
+      "metabolic_health"
     ],
     "is_substitution": false,
     "priority": 1,
     "required_resources": {
-      "equipment_ids": [],
+      "equipment_ids": [
+        "eq_kitchen_home"
+      ],
       "location_ids": [
-        "travel_hotel"
+        "home"
       ],
       "provider_ids": []
     },
     "status": "pending",
     "target_date": "2026-07-22",
     "target_week": "2026-W30",
-    "task_instance_id": "task_meal_coverage_act_b01_breakfast_travel_hotel_primary_20260722"
+    "task_instance_id": "task_meal_coverage_act_b01_breakfast_home_lowprep_20260722"
   },
   {
     "activity_family_id": "meal_coverage_lunch_20260722",

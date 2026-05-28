@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from calendar import monthrange
 from collections import Counter
-from datetime import date, time, timedelta
+from datetime import date, datetime, time, timedelta
 from typing import Any
 
 from src.models.availability import AvailabilityData
@@ -167,6 +167,9 @@ def meal_coverage_candidates(
 ) -> list[dict[str, Any]]:
     ranked: list[tuple[int, dict[str, Any]]] = []
     for activity in activities:
+        skip_adjustment = activity.get("skip_adjustment")
+        if isinstance(skip_adjustment, dict) and skip_adjustment.get("is_skip"):
+            continue
         location_ranks = [
             location_preferences.index(location)
             for location in activity.get("allowed_locations", [])
@@ -199,7 +202,11 @@ def meal_coverage_candidates(
 def meal_location_preferences(
     target_date: date, meal_slot: str, availability: AvailabilityData
 ) -> list[str]:
-    override = member_location_override(target_date, availability)
+    override = member_location_override(
+        target_date,
+        availability,
+        meal_reference_time(meal_slot),
+    )
     if override == "travel_hotel":
         return ["travel_hotel"]
     if override == "home" or target_date.weekday() >= 5:
@@ -211,9 +218,29 @@ def meal_location_preferences(
     return ["home", "office"]
 
 
-def member_location_override(target_date: date, availability: AvailabilityData) -> str | None:
+def meal_reference_time(meal_slot: str) -> time:
+    return {
+        "breakfast": time(7, 0),
+        "lunch": time(12, 0),
+        "dinner": time(19, 0),
+    }.get(meal_slot, time(12, 0))
+
+
+def member_location_override(
+    target_date: date,
+    availability: AvailabilityData,
+    reference_time: time | None = None,
+) -> str | None:
     for block in availability.availability_blocks:
-        if block.resource_type == "member_travel" and block_covers_date(block, target_date):
+        reference_start = (
+            datetime.combine(target_date, reference_time, tzinfo=block.start.tzinfo)
+            if reference_time is not None
+            else None
+        )
+        if block.resource_type == "member_travel" and (
+            (reference_start is not None and block.start <= reference_start < block.end)
+            or (reference_start is None and block_covers_date(block, target_date))
+        ):
             return block.location_id or "travel_hotel"
     for block in availability.availability_blocks:
         if block.resource_type == "member_location" and block_covers_date(block, target_date):
@@ -361,13 +388,21 @@ def monthly_dates(
         return []
     weekdays = preferred_weekdays(frequency) or [horizon_start.weekday()]
     preferred_week = frequency.get("preferred_week")
+    preferred_weeks = frequency.get("preferred_weeks") or []
     dates: list[date] = []
     cursor = date(horizon_start.year, horizon_start.month, 1)
+    month_index = 0
 
     while cursor < horizon_end:
-        month_dates = dates_for_month(cursor.year, cursor.month, weekdays, preferred_week)
+        month_preferred_week = (
+            preferred_weeks[month_index % len(preferred_weeks)]
+            if preferred_weeks
+            else preferred_week
+        )
+        month_dates = dates_for_month(cursor.year, cursor.month, weekdays, month_preferred_week)
         dates.extend([day for day in month_dates if horizon_start <= day < horizon_end][:count])
         cursor = add_months(cursor, 1)
+        month_index += 1
 
     return dates
 

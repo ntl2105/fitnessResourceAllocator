@@ -54,6 +54,12 @@ def monday_start(value: date) -> date:
     return value - timedelta(days=value.weekday())
 
 
+def planning_horizon_week_start(availability: dict[str, Any]) -> date | None:
+    if not availability.get("planning_start_date"):
+        return None
+    return monday_start(date.fromisoformat(availability["planning_start_date"]))
+
+
 def build_calendar_interface(
     calendar_rows: list[dict[str, Any]],
     availability: dict[str, Any],
@@ -77,12 +83,14 @@ def build_calendar_interface(
         rows_by_week[monday_start(row_date)].append(row)
 
     unscheduled_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
+    planning_start_week = planning_horizon_week_start(availability)
     for trace in traces:
         if trace.get("final_status") != "unscheduled":
             continue
-        unscheduled_by_week[
-            unscheduled_week_start(trace, plan_tasks, activity_metadata)
-        ].append(trace)
+        week_start = unscheduled_week_start(trace, plan_tasks, activity_metadata)
+        if planning_start_week is not None and week_start < planning_start_week:
+            week_start = planning_start_week
+        unscheduled_by_week[week_start].append(trace)
 
     blocked_by_week: dict[date, list[dict[str, Any]]] = defaultdict(list)
     for block in availability.get("availability_blocks", []):
@@ -193,6 +201,7 @@ def build_calendar_interface(
             member_profile,
             availability,
             weeks,
+            personalized_plan,
         ),
         "weeks": weeks,
         "rejection_summary": rejection_summary,
@@ -306,7 +315,12 @@ def three_month_recap(
     member_profile: dict[str, Any] | None,
     availability: dict[str, Any],
     weeks: list[dict[str, Any]],
+    personalized_plan: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    goal_report = (personalized_plan or {}).get("goal_report")
+    if goal_report:
+        return scheduler_goal_report_recap(goal_report, member_profile, availability, weeks)
+
     weekly_actions = normalized_goal_actions(member_profile)
     horizon = recap_horizon(member_profile, availability, weeks)
     action_rows = recap_action_rows(
@@ -327,6 +341,171 @@ def three_month_recap(
         },
         "goals": goals,
     }
+
+
+def scheduler_goal_report_recap(
+    goal_report: dict[str, Any],
+    member_profile: dict[str, Any] | None,
+    availability: dict[str, Any],
+    weeks: list[dict[str, Any]],
+) -> dict[str, Any]:
+    horizon = recap_horizon(member_profile, availability, weeks)
+    action_lookup = {
+        action["goal_action_id"]: action
+        for action in normalized_goal_actions(member_profile)
+    }
+    action_rows = scheduler_goal_action_rows(goal_report, action_lookup)
+    goals = recap_goal_rows(member_profile, action_rows)
+    status_counts = Counter(action["status"] for action in action_rows)
+    validation_rows = validation_recap_rows(goal_report.get("weekly_validation", []))
+    validation_failed_count = sum(row["failed_count"] for row in validation_rows)
+    validation_total_count = sum(row["period_count"] for row in validation_rows)
+    summary = goal_report.get("summary", {})
+    return {
+        "source": "scheduler_goal_report",
+        "horizon": {
+            **horizon,
+            "start_date": goal_report.get("horizon_start") or horizon.get("start_date"),
+            "end_date": goal_report.get("horizon_end_exclusive") or horizon.get("end_date"),
+        },
+        "totals": {
+            "goal_count": len(goals),
+            "action_count": len(action_rows),
+            "on_track": status_counts["on_track"],
+            "at_risk": status_counts["at_risk"],
+            "missed": status_counts["missed"],
+            "over_target": status_counts["over_target"],
+            "support_only": status_counts["support_only"],
+            "weekly_met_count": summary.get("weekly_met_count", 0),
+            "weekly_total_count": summary.get("weekly_total_count", 0),
+            "three_month_met_count": summary.get("three_month_met_count", 0),
+            "three_month_total_count": summary.get("three_month_total_count", 0),
+            "validation_failed_count": validation_failed_count,
+            "validation_total_count": validation_total_count,
+        },
+        "goals": goals,
+        "validation": validation_rows,
+    }
+
+
+def scheduler_goal_action_rows(
+    goal_report: dict[str, Any],
+    action_lookup: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    rows_by_action: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in goal_report.get("weekly", []):
+        rows_by_action[item["goal_action_id"]].append({**item, "period": "weekly"})
+    for item in goal_report.get("three_month", []):
+        rows_by_action[item["goal_action_id"]].append({**item, "period": "3_month"})
+
+    action_order = {action_id: index for index, action_id in enumerate(action_lookup)}
+    rows = []
+    for action_id, report_rows in sorted(
+        rows_by_action.items(),
+        key=lambda item: (action_order.get(item[0], 999), item[0]),
+    ):
+        action = action_lookup.get(action_id, {})
+        raw_scheduled_total = sum(float(item.get("scheduled_units", 0)) for item in report_rows)
+        target_total = sum(float(item.get("target_units", 0)) for item in report_rows)
+        counted_scheduled_total = sum(
+            min(float(item.get("scheduled_units", 0)), float(item.get("target_units", 0)))
+            for item in report_rows
+        )
+        remaining = sum(
+            max(float(item.get("target_units", 0)) - float(item.get("scheduled_units", 0)), 0)
+            for item in report_rows
+        )
+        extra = sum(
+            max(float(item.get("scheduled_units", 0)) - float(item.get("target_units", 0)), 0)
+            for item in report_rows
+        )
+        met_count = sum(1 for item in report_rows if item.get("met"))
+        period_count = len(report_rows)
+        missed_count = period_count - met_count
+        completion_percent = (
+            None
+            if target_total <= 0
+            else round((counted_scheduled_total / target_total) * 100)
+        )
+        period = report_rows[0].get("period", action.get("period", "weekly"))
+        rows.append(
+            {
+                "weekly_goal_action_id": action_id,
+                "goal_action_id": action_id,
+                "goal_id": action.get("goal_id"),
+                "label": action.get("label") or report_rows[0].get("label") or action_id,
+                "role": action.get("role"),
+                "notes": action.get("notes", ""),
+                "support_only": bool(action.get("support_only")),
+                "period": period,
+                "target_units": number_for_display(report_rows[0].get("target_units", 0)),
+                "target_per_week": number_for_display(report_rows[0].get("target_units", 0))
+                if period == "weekly"
+                else None,
+                "horizon_target": number_for_display(target_total),
+                "scheduled": number_for_display(counted_scheduled_total),
+                "scheduled_total": number_for_display(raw_scheduled_total),
+                "remaining": number_for_display(remaining),
+                "blocked_instances": 0,
+                "substitutions": 0,
+                "extra_scheduled": number_for_display(extra),
+                "support_scheduled": 0,
+                "support_blocked": 0,
+                "weeks_with_coverage": sum(
+                    1 for item in report_rows if float(item.get("scheduled_units", 0)) > 0
+                ),
+                "period_count": period_count,
+                "periods_met": met_count,
+                "periods_missed": missed_count,
+                "completion_percent": completion_percent,
+                "status": scheduler_goal_status(period_count, met_count, raw_scheduled_total),
+                "top_activities": [],
+            }
+        )
+    return rows
+
+
+def scheduler_goal_status(
+    period_count: int,
+    met_count: int,
+    scheduled_total: float,
+) -> str:
+    if period_count == 0:
+        return "no_activity"
+    if met_count == period_count:
+        return "on_track"
+    if scheduled_total <= 0:
+        return "missed"
+    return "at_risk"
+
+
+def validation_recap_rows(validation_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in validation_items:
+        grouped[item["check_id"]].append(item)
+    rows = []
+    for check_id, items in sorted(grouped.items()):
+        met_count = sum(1 for item in items if item.get("met"))
+        failed = [item for item in items if not item.get("met")]
+        rows.append(
+            {
+                "check_id": check_id,
+                "label": items[0].get("label") or check_id,
+                "period_count": len(items),
+                "met_count": met_count,
+                "failed_count": len(failed),
+                "status": "on_track" if not failed else "at_risk",
+                "failed_examples": [
+                    {
+                        "week": item.get("week"),
+                        "actual_units": number_for_display(item.get("actual_units", 0)),
+                        "expected_units": number_for_display(item.get("expected_units", 0)),
+                    }
+                    for item in failed[:3]
+                ],
+            }
+        )
+    return rows
 
 
 def recap_horizon(
@@ -927,8 +1106,11 @@ def activity_view(
         "substitution_status": row["substitution_status"],
         "trace_id": row.get("trace_id"),
         "provider_summary": provider_summary(task, providers or {}),
-        "prep_summary": compact_prep_summary(activity),
+        "provider_summary": provider_summary(task, providers or {}),
+        "facilitator_summary": facilitator_summary(activity, task, providers or {}),
+        "prep_summary": prep_summary(activity),
         "meal_summary": compact_meal_summary(activity),
+        "reason_summary": activity_reason_summary(row, trace, activity),
         "travel_to": None,
         "badges": badges_for(row, flags),
         "scenario_flags": flags,
@@ -975,6 +1157,7 @@ def compact_habit_title(title: str) -> str:
         "Morning CGM check and log": "CGM check",
         "Daily hydration and electrolyte protocol": "hydration",
         "Morning supplement protocol with breakfast": "supplements with breakfast",
+        "🔔 Daily supplement protocol with breakfast or dinner": "🔔 supplement reminder with meal",
         "Evening medication protocol with dinner": "medication with dinner",
     }
     return replacements.get(normalized, normalized)
@@ -1019,7 +1202,7 @@ def annotate_travel_transitions(
 
 def starts_away_from_home(activity: dict[str, Any]) -> bool:
     location = activity.get("location_id")
-    return bool(location and location not in {"home", "remote"})
+    return bool(location and location not in {"home", "remote", "travel_hotel"})
 
 
 def first_location_travel_label(
@@ -1040,7 +1223,7 @@ def travel_transition_label(
     to_location = activity.get("location_id")
     if not from_location or not to_location or from_location == to_location:
         return None
-    if "remote" in {from_location, to_location} or to_location == "home":
+    if "remote" in {from_location, to_location} or to_location in {"home", "travel_hotel"}:
         return None
     minutes = travel_minutes_between(travel_time_rules, from_location, to_location)
     destination = location_display(to_location)
@@ -1179,9 +1362,25 @@ def provider_display_name(display_name: str) -> str:
     return display_name
 
 
+def facilitator_summary(
+    activity: dict[str, Any], task: dict[str, Any] | None, providers: dict[str, dict[str, Any]]
+) -> str | None:
+    provider = provider_summary(task, providers)
+    if provider:
+        return f"Facilitated by {provider}"
+    facilitator = activity.get("facilitator_type")
+    if facilitator in {"member", "self"}:
+        return "Self-led"
+    if facilitator == "self_or_remote_coach":
+        return "Self-led or remote coach-guided"
+    if facilitator:
+        return f"Facilitated by {display_token(facilitator)}"
+    if activity.get("activity_type") in {"fitness", "therapy", "consultation"}:
+        return "Self-led"
+    return None
+
+
 def prep_summary(activity: dict[str, Any]) -> str | None:
-    if activity.get("activity_type") != "food":
-        return None
     for dependency in activity.get("dependencies", []):
         if not isinstance(dependency, dict) or dependency.get("type") != "prep_task":
             continue
@@ -1194,11 +1393,36 @@ def prep_summary(activity: dict[str, Any]) -> str | None:
         if offset:
             timing.append(f"{offset}m before")
         return f"Prep: {actor}{' · ' + ' · '.join(timing) if timing else ''}"
+    title = str(activity.get("title", "")).lower()
+    goal_tags = {str(tag).lower() for tag in activity.get("goal_tags", [])}
+    if "fasting" in goal_tags or "lab draw" in title:
+        return "Prep: fast 8 hours before the lab draw"
+    if "supplement" in title:
+        return "Prep: keep supplement pack ready with breakfast or dinner"
+    if activity.get("raw_clinical_data_required") or "review" in title:
+        return "Prep: recent logs and notes ready"
+    if activity.get("activity_type") == "fitness":
+        equipment = activity.get("required_equipment_ids") or []
+        if equipment:
+            labels = ", ".join(display_token(item).removeprefix("eq ") for item in equipment[:3])
+            return f"Prep: equipment ready ({labels})"
+        return "Prep: workout clothes and recovery water"
+    if activity.get("activity_type") == "therapy":
+        return "Prep: quiet space, mat, and pain notes"
     if activity.get("prep_required"):
         return "Prep required"
-    source = activity.get("prep_source") or activity.get("dining_source")
-    if source:
-        return f"Source: {display_token(source)}"
+    if activity.get("activity_type") == "food":
+        source = (
+            activity.get("prep_source")
+            or (activity.get("meal_metadata") or {}).get("prep_source")
+            or activity.get("dining_source")
+        )
+        if source:
+            if str(source) == "none":
+                return "Prep: no member prep"
+            return f"Prep: {display_token(source)}"
+    if activity:
+        return "Prep: no special prep"
     return None
 
 
@@ -1237,6 +1461,45 @@ def display_token(value: Any) -> str:
     return str(value).replace("_", " ")
 
 
+def activity_reason_summary(
+    row: dict[str, Any], trace: dict[str, Any] | None, activity: dict[str, Any]
+) -> str | None:
+    skip_reason = row.get("skip_reason_text")
+    if skip_reason:
+        return f"Chosen: {skip_reason}"
+    if row.get("substitution_status") == "substitution":
+        notes = activity.get("substitution_notes") or activity.get("substitution_reason")
+        if notes:
+            return f"Chosen: backup because {notes[:120]}"
+        return "Chosen: backup activity after the primary option was blocked"
+    activity_type = row.get("activity_type")
+    location = display_token(row.get("location_id") or row.get("mode") or "")
+    if activity_type == "food":
+        meal_slot = activity.get("meal_slot") or (activity.get("meal_metadata") or {}).get("meal_slot")
+        return f"Chosen: daily {display_token(meal_slot or 'meal')} coverage at {location}"
+    if activity_type == "medication":
+        return "Chosen: daily adherence reminder tied to a meal"
+    if activity_type == "fitness":
+        equipment = set(activity.get("required_equipment_ids") or [])
+        if "eq_basic_gym_hotel_tokyo" in equipment:
+            return "Chosen: hotel gym is the best available travel fitness resource"
+        if "eq_pool_hotel_hk" in equipment:
+            return "Chosen: hotel pool is the best available travel aerobic resource"
+        return "Chosen: supports the weekly fitness target in an available slot"
+    if activity_type == "consultation":
+        if activity.get("required_provider_ids"):
+            return "Chosen: provider-led review/check-in cadence"
+        return "Chosen: scheduled care-team follow-through"
+    if activity_type == "therapy":
+        goal_tags = {str(tag).lower() for tag in activity.get("goal_tags", [])}
+        if "travel" in goal_tags:
+            return "Chosen: fatigue reduction is prioritized during travel weeks"
+        return "Chosen: recovery/mobility coverage for the week"
+    if trace and trace.get("policy_fit_summary"):
+        return "Chosen: " + str(trace["policy_fit_summary"])[:120]
+    return None
+
+
 def prep_actor_label(dependency: dict[str, Any]) -> str:
     provider_type = dependency.get("provider_type")
     member = bool(dependency.get("can_be_done_by_member"))
@@ -1265,6 +1528,7 @@ def display_title(raw_title: str) -> str:
         "Trainer care-plan handoff review": "Trainer handoff",
         "Remote trainer check-in before/after aerobic session": "Aerobic readiness check-in",
         "Remote coach check-in before/after aerobic session": "Aerobic readiness check-in",
+        "Daily supplement protocol with breakfast or dinner": "🔔 Daily supplement protocol with breakfast or dinner",
     }
     if raw_title in title_overrides:
         return title_overrides[raw_title]
@@ -1329,8 +1593,8 @@ def goal_summary(
     for trace in traces:
         if trace.get("final_status") != "unscheduled":
             continue
-        task = plan_tasks.get(trace.get("task_instance_id", ""))
-        activity = activities.get(trace.get("activity_id", ""))
+        task = plan_tasks.get(trace.get("task_instance_id", "")) or {}
+        activity = activities.get(trace.get("activity_id", "")) or {}
         goals = task.get("goal_tags", []) if task else activity.get("goal_tags", [])
         for goal in goals:
             unscheduled_by_goal[goal] += 1

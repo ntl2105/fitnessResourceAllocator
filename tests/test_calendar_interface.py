@@ -211,6 +211,27 @@ def test_build_calendar_interface_groups_rows_and_member_blocked_overlays():
     assert block["label"] == "Work block."
 
 
+def test_calendar_clamps_unscheduled_fallback_week_to_planning_horizon():
+    view_model = build_calendar_interface(
+        [],
+        {"availability_blocks": [], "planning_start_date": "2026-06-01"},
+        [
+            {
+                "trace_id": "trace_unscheduled",
+                "activity_id": "act_missing",
+                "task_instance_id": "task_missing",
+                "final_status": "unscheduled",
+                "rejected_candidates": [],
+                "constraint_checks": [],
+                "dependency_checks": [],
+            }
+        ],
+        {},
+    )
+
+    assert view_model["weeks"][0]["start_date"] == "2026-06-01"
+
+
 def test_calendar_marks_travel_between_different_locations():
     calendar_rows = [
         {
@@ -331,6 +352,44 @@ def test_calendar_marks_travel_to_first_non_home_activity():
     assert first_activity["travel_to"] == "🚇 Travel to clinic · 20m"
 
 
+def test_calendar_does_not_mark_visual_travel_to_hotel():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_hotel_breakfast",
+            "date": "2026-06-20",
+            "start_time": "07:30",
+            "end_time": "08:00",
+            "title": "Hotel breakfast",
+            "activity_type": "food",
+            "goal_tags": ["breakfast"],
+            "load_level": "low",
+            "location_id": "travel_hotel",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_hotel_breakfast",
+        },
+        {
+            "calendar_row_id": "row_hotel_pool",
+            "date": "2026-06-20",
+            "start_time": "10:00",
+            "end_time": "10:30",
+            "title": "Hotel pool swim",
+            "activity_type": "fitness",
+            "goal_tags": ["travel"],
+            "load_level": "medium",
+            "location_id": "travel_hotel",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_hotel_pool",
+        },
+    ]
+
+    view_model = build_calendar_interface(calendar_rows, {"availability_blocks": []}, [], {})
+
+    activities = view_model["weeks"][0]["activities"]
+    assert [activity["travel_to"] for activity in activities] == [None, None]
+
+
 def test_activity_view_resolves_provider_and_clean_display_title():
     calendar_rows = [
         {
@@ -441,7 +500,41 @@ def test_provider_summary_suppresses_travel_pool_wording_on_cards():
     assert activity["provider_summary"] == "Remote trainer pool, trainer"
 
 
-def test_food_activity_card_omits_meal_tracking_and_source_summaries():
+def test_self_and_member_facilitator_wording_is_normalized():
+    calendar_rows = [
+        {
+            "calendar_row_id": "row_task_1",
+            "date": "2026-06-01",
+            "start_time": "07:00",
+            "end_time": "07:30",
+            "title": "Mobility reset",
+            "activity_type": "therapy",
+            "goal_tags": ["recovery"],
+            "load_level": "low",
+            "location_id": "home",
+            "mode": "in_person",
+            "substitution_status": "primary",
+            "trace_id": "trace_1",
+        }
+    ]
+    personalized_plan = {"tasks": [{"task_id": "task_1", "activity_id": "act_1"}]}
+
+    for facilitator_type in ("member", "self"):
+        view_model = build_calendar_interface(
+            calendar_rows,
+            {"availability_blocks": []},
+            [],
+            {},
+            personalized_plan,
+            {"providers": []},
+            {"activities": [{"activity_id": "act_1", "facilitator_type": facilitator_type}]},
+        )
+
+        activity = view_model["weeks"][0]["activities"][0]
+        assert activity["facilitator_summary"] == "Self-led"
+
+
+def test_food_activity_card_shows_prep_without_meal_tracking_or_source_label():
     calendar_rows = [
         {
             "calendar_row_id": "row_task_breakfast",
@@ -500,11 +593,12 @@ def test_food_activity_card_omits_meal_tracking_and_source_summaries():
     )
 
     activity = view_model["weeks"][0]["activities"][0]
-    assert activity["prep_summary"] is None
+    assert activity["prep_summary"] == "Prep: chef or member · 30m prep · 30m before"
     assert activity["meal_summary"] is None
+    assert activity["reason_summary"] == "Chosen: daily breakfast coverage at home"
 
 
-def test_food_activity_card_omits_source_without_required_prep():
+def test_food_activity_card_shows_human_prep_source_without_source_label():
     calendar_rows = [
         {
             "calendar_row_id": "row_task_lunch",
@@ -547,8 +641,9 @@ def test_food_activity_card_omits_source_without_required_prep():
     )
 
     activity = view_model["weeks"][0]["activities"][0]
-    assert activity["prep_summary"] is None
+    assert activity["prep_summary"] == "Prep: member assembled"
     assert activity["meal_summary"] is None
+    assert "Source:" not in activity["prep_summary"]
 
 
 def test_low_complexity_medication_habits_are_compacted_out_of_activity_cards():
@@ -1143,6 +1238,192 @@ def test_three_month_recap_handles_weekly_and_three_month_goal_actions():
     targets = {row["goal_action_id"]: row["horizon_target"] for row in rows}
     assert targets["ga_cardio_weekly"] == 26
     assert targets["ga_clinical_review"] == 1
+
+
+def test_three_month_recap_prefers_scheduler_goal_report_for_final_tally():
+    member_profile = {
+        "scheduling_rules": {
+            "planning_start_date": "2026-06-01",
+            "planning_months": 1,
+        },
+        "goals": [
+            {"goal_id": "goal_cardio", "name": "Improve aerobic base", "priority": 1}
+        ],
+        "goal_actions": [
+            {
+                "goal_action_id": "ga_cardio_weekly",
+                "goal_id": "goal_cardio",
+                "label": "Complete cardio",
+                "target": {"period": "weekly", "units": 2, "unit_label": "sessions"},
+            },
+            {
+                "goal_action_id": "ga_review_3month",
+                "goal_id": "goal_cardio",
+                "label": "Complete review",
+                "target": {"period": "3_month", "units": 1, "unit_label": "review"},
+            },
+        ],
+    }
+    personalized_plan = {
+        "tasks": [],
+        "goal_report": {
+            "horizon_start": "2026-06-01",
+            "horizon_end_exclusive": "2026-07-01",
+            "summary": {
+                "weekly_met_count": 1,
+                "weekly_total_count": 2,
+                "three_month_met_count": 1,
+                "three_month_total_count": 1,
+            },
+            "weekly": [
+                {
+                    "goal_action_id": "ga_cardio_weekly",
+                    "label": "Complete cardio",
+                    "week": "2026-W23",
+                    "scheduled_units": 2,
+                    "target_units": 2,
+                    "unit_label": "sessions",
+                    "met": True,
+                },
+                {
+                    "goal_action_id": "ga_cardio_weekly",
+                    "label": "Complete cardio",
+                    "week": "2026-W24",
+                    "scheduled_units": 1,
+                    "target_units": 2,
+                    "unit_label": "sessions",
+                    "met": False,
+                },
+            ],
+            "three_month": [
+                {
+                    "goal_action_id": "ga_review_3month",
+                    "label": "Complete review",
+                    "scheduled_units": 1,
+                    "target_units": 1,
+                    "unit_label": "review",
+                    "met": True,
+                }
+            ],
+            "weekly_validation": [
+                {
+                    "check_id": "aerobic_sessions_target",
+                    "label": "Aerobic sessions",
+                    "week": "2026-W23",
+                    "actual_units": 2,
+                    "expected_units": 2,
+                    "met": True,
+                },
+                {
+                    "check_id": "aerobic_sessions_target",
+                    "label": "Aerobic sessions",
+                    "week": "2026-W24",
+                    "actual_units": 1,
+                    "expected_units": 2,
+                    "met": False,
+                },
+            ],
+        },
+    }
+
+    view_model = build_calendar_interface(
+        [],
+        {"availability_blocks": [], "planning_start_date": "2026-06-01", "planning_months": 1},
+        [],
+        {},
+        personalized_plan,
+        {"providers": []},
+        {"activities": []},
+        member_profile,
+    )
+
+    recap = view_model["three_month_recap"]
+    assert recap["source"] == "scheduler_goal_report"
+    assert recap["totals"]["weekly_met_count"] == 1
+    assert recap["totals"]["weekly_total_count"] == 2
+    assert recap["totals"]["three_month_met_count"] == 1
+    assert recap["totals"]["validation_failed_count"] == 1
+
+    action = recap["goals"][0]["actions"][0]
+    assert action["goal_action_id"] == "ga_cardio_weekly"
+    assert action["scheduled"] == 3
+    assert action["horizon_target"] == 4
+    assert action["periods_met"] == 1
+    assert action["periods_missed"] == 1
+    assert action["status"] == "at_risk"
+
+
+def test_scheduler_goal_report_recap_does_not_let_weekly_overage_hide_missed_periods():
+    member_profile = {
+        "scheduling_rules": {
+            "planning_start_date": "2026-06-01",
+            "planning_months": 1,
+        },
+        "goals": [
+            {"goal_id": "goal_adherence", "name": "Improve adherence", "priority": 1}
+        ],
+        "goal_actions": [
+            {
+                "goal_action_id": "ga_behavior_weekly",
+                "goal_id": "goal_adherence",
+                "label": "Complete behavior coaching",
+                "target": {"period": "weekly", "units": 1, "unit_label": "touchpoint"},
+            }
+        ],
+    }
+    personalized_plan = {
+        "tasks": [],
+        "goal_report": {
+            "horizon_start": "2026-06-01",
+            "horizon_end_exclusive": "2026-07-01",
+            "summary": {
+                "weekly_met_count": 1,
+                "weekly_total_count": 2,
+                "three_month_met_count": 0,
+                "three_month_total_count": 0,
+            },
+            "weekly": [
+                {
+                    "goal_action_id": "ga_behavior_weekly",
+                    "label": "Complete behavior coaching",
+                    "week": "2026-W23",
+                    "scheduled_units": 3,
+                    "target_units": 1,
+                    "unit_label": "touchpoint",
+                    "met": True,
+                },
+                {
+                    "goal_action_id": "ga_behavior_weekly",
+                    "label": "Complete behavior coaching",
+                    "week": "2026-W24",
+                    "scheduled_units": 0,
+                    "target_units": 1,
+                    "unit_label": "touchpoint",
+                    "met": False,
+                },
+            ],
+        },
+    }
+
+    view_model = build_calendar_interface(
+        [],
+        {"availability_blocks": [], "planning_start_date": "2026-06-01", "planning_months": 1},
+        [],
+        {},
+        personalized_plan,
+        {"providers": []},
+        {"activities": []},
+        member_profile,
+    )
+
+    action = view_model["three_month_recap"]["goals"][0]["actions"][0]
+    assert action["scheduled"] == 1
+    assert action["scheduled_total"] == 3
+    assert action["horizon_target"] == 2
+    assert action["completion_percent"] == 50
+    assert action["extra_scheduled"] == 2
+    assert action["periods_met"] == 1
+    assert action["status"] == "at_risk"
 
 
 def test_calendar_interface_uses_period_aware_goal_actions_without_legacy_weekly_actions():

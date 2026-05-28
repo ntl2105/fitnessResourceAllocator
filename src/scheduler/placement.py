@@ -21,6 +21,12 @@ DEFAULT_TIMES = [
     time(18, 45),
 ]
 
+FITNESS_FALLBACK_TIMES = [
+    time(19, 15),
+    time(19, 30),
+    time(19, 50),
+]
+
 
 def sort_tasks(tasks: Iterable[TaskInstance]) -> list[TaskInstance]:
     return sorted(
@@ -74,7 +80,7 @@ def candidate_times_for_date(
         and task.target_date is not None
         and candidate_date > task.target_date
     ):
-        return sorted(times)
+        return times
     return times
 
 
@@ -87,6 +93,9 @@ def candidate_times(
     frequency = activity.get("frequency", {})
     preferred_windows = parsed_preferred_windows(frequency)
     times = preferred_times(frequency) or list(DEFAULT_TIMES)
+    if activity.get("activity_type") == "fitness":
+        times.extend(DEFAULT_TIMES)
+        times.extend(FITNESS_FALLBACK_TIMES)
     for start, end in preferred_windows:
         times.extend(window_times(start, end, task.duration_minutes))
     candidate_dates_set = set(dates)

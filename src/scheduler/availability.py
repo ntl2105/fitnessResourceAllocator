@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import Any
 
 from src.models.availability import AvailabilityData
 from src.models.schedule import TaskInstance
@@ -37,7 +38,10 @@ def check_required_resources(
             (
                 block
                 for block in availability.availability_blocks
-                if block.resource_id == resource_id and block.start <= start and block.end >= end
+                if block.resource_id == resource_id
+                and block.start <= start
+                and block.end >= end
+                and resource_location_matches(block, candidate_location_id)
             ),
             None,
         )
@@ -95,11 +99,11 @@ def location_available_check(
             passed=True,
             reason=reason,
         )
-    if location_id == "travel_hotel" and member_travel_covers_date(start, availability):
+    if location_id == "travel_hotel" and member_travel_covers_slot(start, end, availability):
         return ConstraintCheck(
             name=f"location_available:{location_id}",
             passed=True,
-            reason="Travel hotel is the member-context location for this travel date.",
+            reason="Travel hotel is the member-context location for this active travel slot.",
         )
 
     matching_block = next(
@@ -124,9 +128,24 @@ def location_available_check(
     )
 
 
-def member_travel_covers_date(start: datetime, availability: AvailabilityData) -> bool:
+def resource_location_matches(block: Any, candidate_location_id: str | None) -> bool:
+    block_location = getattr(block, "location_id", None)
+    resource_type = getattr(block, "resource_type", None)
+    if not candidate_location_id or not block_location:
+        return True
+    if resource_type == "provider":
+        return block_location == candidate_location_id or (
+            candidate_location_id == "remote" and bool(getattr(block, "remote_supported", False))
+        )
+    if resource_type == "equipment":
+        return block_location == candidate_location_id or block_location == "portable"
+    return True
+
+
+def member_travel_covers_slot(start: datetime, end: datetime, availability: AvailabilityData) -> bool:
     return any(
         block.resource_type in {"member_travel", "travel_window"}
-        and block.start.date() <= start.date() <= block.end.date()
+        and start < block.end
+        and end > block.start
         for block in availability.availability_blocks
     )

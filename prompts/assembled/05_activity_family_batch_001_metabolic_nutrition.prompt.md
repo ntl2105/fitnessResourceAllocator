@@ -2183,9 +2183,64 @@ Examples:
   ],
   "travel_time_rules": [
     {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "restaurant"
+    },
+    {
+      "from_location_id": "restaurant",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "office",
+      "minutes": 40,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 40,
+      "to_location_id": "office"
+    },
+    {
       "from_location_id": "office",
       "minutes": 15,
       "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 15,
+      "to_location_id": "office"
+    },
+    {
+      "from_location_id": "clinic",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "clinic"
+    },
+    {
+      "from_location_id": "lab",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "lab"
     }
   ],
   "travel_windows": [

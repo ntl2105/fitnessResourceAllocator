@@ -613,7 +613,8 @@ def api_calendar_interface() -> Any:
     resource_universe = _load_run_json_or_root("resource_universe.json")
     action_plan = _load_run_json_or_root("action_plan.json")
     member_profile = _load_run_json_or_root("member_profile.json")
-    return build_calendar_interface(
+    constraint_audit = load_json(RUN_DIR / "04_calendar" / "constraint_violations.json")
+    interface = build_calendar_interface(
         calendar_rows,
         availability,
         traces,
@@ -623,6 +624,8 @@ def api_calendar_interface() -> Any:
         action_plan,
         member_profile,
     )
+    interface["constraint_audit"] = constraint_audit
+    return interface
 
 
 @app.get("/api/traces/{trace_id}")

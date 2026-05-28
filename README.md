@@ -1,4 +1,4 @@
-# Elyx Resource Allocator
+# Resource Allocator
 
 Synthetic resource-allocation demo for an Elyx-style healthspan member journey. The project turns member goals, providers, locations, availability, and activity families into a 3-month scheduled calendar with decision traces.
 

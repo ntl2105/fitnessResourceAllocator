@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "member_blocked_windows",
+    "exact_travel_window_location",
+    "wfh_office_ban",
+    "arrival_fatigue_load",
+    "provider_location_availability",
+    "same_day_location_transition_buffer"
+  ],
+  "status": "pass",
+  "violation_count": 0,
+  "violations": []
+}

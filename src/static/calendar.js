@@ -2,6 +2,7 @@ const state = {
   model: null,
   weekIndex: 0,
   activeScenario: null,
+  modelSignature: null,
 };
 
 const root = document.getElementById("calendar-root");
@@ -61,6 +62,7 @@ function renderScenarioChips() {
 }
 
 function render() {
+  if (!state.model) return;
   const week = state.model.weeks[state.weekIndex];
   weekLabel.textContent = week ? week.label : "No scheduled weeks";
   renderScenarioChips();
@@ -82,9 +84,68 @@ function render() {
   `;
 }
 
+function recapSignature(model) {
+  return JSON.stringify({
+    totals: model.three_month_recap?.totals || {},
+    goals: (model.three_month_recap?.goals || []).map((goal) => ({
+      goal_id: goal.goal_id,
+      status: goal.status,
+      actions: (goal.actions || []).map((action) => ({
+        action_id: action.action_id,
+        actual: action.actual,
+        target: action.target,
+        status: action.status,
+      })),
+    })),
+    weekCount: model.three_month_recap?.horizon?.week_count || 0,
+    rowCount: (model.weeks || []).reduce(
+      (total, week) => total + (week.activities || []).length + (week.habit_blocks || []).length,
+      0
+    ),
+  });
+}
+
+function applyCalendarModel(model) {
+  const previousWeekStart = state.model?.weeks?.[state.weekIndex]?.start_date;
+  const nextWeekIndex = previousWeekStart
+    ? Math.max(0, (model.weeks || []).findIndex((week) => week.start_date === previousWeekStart))
+    : state.weekIndex;
+  const nextSignature = recapSignature(model);
+
+  state.model = model;
+  state.weekIndex = Math.min(
+    Math.max(nextWeekIndex, 0),
+    Math.max((model.weeks || []).length - 1, 0)
+  );
+  state.modelSignature = nextSignature;
+  renderThreeMonthRecap(model.three_month_recap);
+  renderMemberProfile(model.member_profile);
+  renderActivityBoard(model.activity_board);
+  render();
+}
+
+function loadCalendarInterface({silent = false} = {}) {
+  return fetch(root.dataset.source, {cache: "no-store"})
+    .then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    })
+    .then((model) => {
+      const nextSignature = recapSignature(model);
+      if (silent && state.modelSignature === nextSignature) return;
+      applyCalendarModel(model);
+    })
+    .catch((error) => {
+      if (!silent) {
+        grid.innerHTML = `<div class="empty-state">Failed to load calendar interface: ${escapeHtml(error.message)}</div>`;
+      }
+    });
+}
+
 function renderMemberProfile(profile) {
   if (!profileRoot || !profile) return;
   const identity = profile.identity || {};
+  const goals = (profile.goals || []).map(renderProfileGoal).join("");
   profileRoot.innerHTML = `
     <section class="profile-hero">
       <div>
@@ -101,16 +162,44 @@ function renderMemberProfile(profile) {
         `).join("")}
       </div>
     </section>
-    <section class="member-profile-grid">
-      ${renderProfileSection("Goals", "profile-goal-grid", (profile.goals || []).map(renderProfileGoal).join(""))}
-      ${renderProfileFacts("Preferences", profile.preferences)}
-      ${renderProfileFacts("Dietary Access", profile.dietary_access)}
-      ${renderProfileFacts("Constraints", profile.constraints)}
-      ${renderProfileFacts("Baseline Snapshot", profile.baseline)}
-      ${renderProfileTimeline(profile.journey_phases)}
-      ${renderTravelWindows(profile.travel_windows)}
-      ${renderProviderUniverse(profile.provider_universe)}
-      ${renderProfileFacts("Scheduling Rules", profile.scheduling_rules)}
+    <section class="profile-band profile-band-priority">
+      <div class="profile-band-header">
+        <div>
+          <div class="eyebrow">Planning Inputs</div>
+          <h3>Goals and Scheduler Rules</h3>
+        </div>
+      </div>
+      <div class="member-profile-grid profile-priority-grid">
+        ${renderProfileSection("Goals", "profile-goal-grid", goals)}
+        ${renderProfileFacts("Scheduling Rules", profile.scheduling_rules)}
+      </div>
+    </section>
+    <section class="profile-band">
+      <div class="profile-band-header">
+        <div>
+          <div class="eyebrow">Operating Context</div>
+          <h3>Preferences, Constraints, Access</h3>
+        </div>
+      </div>
+      <div class="member-profile-grid profile-context-grid">
+        ${renderProfileFacts("Preferences", profile.preferences)}
+        ${renderProfileFacts("Constraints", profile.constraints)}
+        ${renderProfileFacts("Dietary Access", profile.dietary_access)}
+        ${renderProfileFacts("Baseline Snapshot", profile.baseline)}
+      </div>
+    </section>
+    <section class="profile-band">
+      <div class="profile-band-header">
+        <div>
+          <div class="eyebrow">Resources and Timeline</div>
+          <h3>Journey, Travel, Providers</h3>
+        </div>
+      </div>
+      <div class="member-profile-grid profile-resource-grid">
+        ${renderProfileTimeline(profile.journey_phases)}
+        ${renderTravelWindows(profile.travel_windows)}
+        ${renderProviderUniverse(profile.provider_universe)}
+      </div>
     </section>
   `;
 }
@@ -123,23 +212,120 @@ function renderThreeMonthRecap(recap) {
   }
   const totals = recap.totals || {};
   const horizon = recap.horizon || {};
+  const validation = recap.validation || [];
+  const audit = state.model?.constraint_audit || {};
   recapRoot.innerHTML = `
     <section class="recap-hero">
       <div>
         <div class="eyebrow">Three-Month Recap</div>
-        <h2>Goal Coverage After Scheduling</h2>
-        <p>Shows how the full planning horizon converts Marcus's goals into scheduled activity coverage, substitutions, excess work, and remaining gaps.</p>
+        <h2>Final Scheduler Tally</h2>
+        <p>Shows the scheduler's final goal report: weekly target pass rate, three-month target pass rate, validation misses, and remaining gaps.</p>
       </div>
       <div class="recap-stat-grid">
         <div class="recap-stat"><span>Horizon</span><strong>${escapeHtml(horizon.label || "n/a")}</strong></div>
-        <div class="recap-stat"><span>Goals</span><strong>${escapeHtml(totals.goal_count || 0)}</strong></div>
-        <div class="recap-stat"><span>Actions</span><strong>${escapeHtml(totals.action_count || 0)}</strong></div>
-        <div class="recap-stat"><span>At Risk</span><strong>${escapeHtml((totals.at_risk || 0) + (totals.missed || 0))}</strong></div>
+        <div class="recap-stat"><span>Weekly Targets Met</span><strong>${escapeHtml(formatRatio(totals.weekly_met_count, totals.weekly_total_count))}</strong></div>
+        <div class="recap-stat"><span>3-Month Targets Met</span><strong>${escapeHtml(formatRatio(totals.three_month_met_count, totals.three_month_total_count))}</strong></div>
+        <div class="recap-stat"><span>Validation Misses</span><strong>${escapeHtml(`${totals.validation_failed_count || 0} of ${totals.validation_total_count || 0}`)}</strong></div>
+        <div class="recap-stat"><span>Constraint Violations</span><strong>${escapeHtml(audit.violation_count || 0)}</strong></div>
+        <div class="recap-stat"><span>Goal Actions</span><strong>${escapeHtml(totals.action_count || 0)}</strong></div>
+        <div class="recap-stat"><span>Not Fully Met</span><strong>${escapeHtml((totals.at_risk || 0) + (totals.missed || 0))}</strong></div>
       </div>
     </section>
+    ${renderRecapExplainer()}
+    ${renderConstraintAudit(audit)}
+    ${validation.length ? renderValidationRecap(validation) : ""}
     <section class="recap-grid">
       ${(recap.goals || []).map(renderRecapGoal).join("")}
     </section>
+  `;
+}
+
+function renderConstraintAudit(audit) {
+  if (!audit) return "";
+  const violations = audit.violations || [];
+  return `
+    <section class="recap-validation">
+      <header>
+        <div>
+          <div class="eyebrow">Final Calendar Audit</div>
+          <h3>Hard Constraint Violations: ${escapeHtml(audit.violation_count || 0)}</h3>
+        </div>
+      </header>
+      ${
+        violations.length
+          ? `<div class="recap-validation-grid">${violations.slice(0, 6).map((item) => `
+              <article class="recap-validation-item status-at_risk">
+                <strong>${escapeHtml(item.check_id)}</strong>
+                <span>${escapeHtml(item.date || "")} · ${escapeHtml(item.title || "")}</span>
+                <em>${escapeHtml(item.message || "")}</em>
+              </article>
+            `).join("")}</div>`
+          : '<p class="empty-state">No hard constraint violations found in the generated calendar.</p>'
+      }
+    </section>
+  `;
+}
+
+function formatRatio(value, total) {
+  if (total == null || Number(total) === 0) return "n/a";
+  return `${value || 0} / ${total}`;
+}
+
+function renderValidationRecap(validation) {
+  return `
+    <section class="recap-validation">
+      <header>
+        <div>
+          <div class="eyebrow">Assignment Validation</div>
+          <h3>Weekly Constraint Checks</h3>
+        </div>
+      </header>
+      <div class="recap-validation-grid">
+        ${validation.map(renderValidationItem).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderRecapExplainer() {
+  const items = [
+    ["Weekly Targets Met", "Weekly goal periods that hit their scheduled target."],
+    ["3-Month Targets Met", "Longer-horizon goal actions that hit their 3-month target."],
+    ["Validation Misses", "Assignment constraint checks that did not fully pass across weeks."],
+    ["Not Fully Met", "Goal actions with some missing weekly or horizon coverage, not necessarily complete failure."],
+    ["Periods Met", "For weekly goals, ISO weeks that met target; for 3-month goals, whether the full period met target."],
+    ["Scheduled / Target", "Counted credit compared with expected units. Extra units in one weekly period do not compensate for missed periods elsewhere."],
+    ["Substitutions", "Scheduled alternatives that preserved the goal intent when the primary option could not be used."],
+    ["Blocked", "Task instances that the scheduler could not place after checking policy and resource constraints."],
+  ];
+  return `
+    <section class="recap-explainer">
+      <div>
+        <div class="eyebrow">How To Read This</div>
+        <h3>Recap Field Guide</h3>
+      </div>
+      <dl>
+        ${items.map(([label, description]) => `
+          <div>
+            <dt>${escapeHtml(label)}</dt>
+            <dd>${escapeHtml(description)}</dd>
+          </div>
+        `).join("")}
+      </dl>
+    </section>
+  `;
+}
+
+function renderValidationItem(item) {
+  const examples = (item.failed_examples || [])
+    .map((example) => `${example.week}: ${example.actual_units}/${example.expected_units}`)
+    .join("; ");
+  return `
+    <article class="recap-validation-item status-${escapeHtml(item.status)}">
+      <strong>${escapeHtml(item.label)}</strong>
+      <span>${escapeHtml(item.met_count || 0)} of ${escapeHtml(item.period_count || 0)} periods met</span>
+      ${examples ? `<em>${escapeHtml(examples)}</em>` : ""}
+    </article>
   `;
 }
 
@@ -152,7 +338,7 @@ function renderRecapGoal(goal) {
           <h3>${escapeHtml(goal.label)}</h3>
           ${goal.description ? `<p>${escapeHtml(goal.description)}</p>` : ""}
         </div>
-        <strong>${escapeHtml(goal.status.replaceAll("_", " "))}</strong>
+        <strong>${escapeHtml(displayStatus(goal.status))}</strong>
       </header>
       <div class="recap-action-list">
         ${(goal.actions || []).map(renderRecapAction).join("")}
@@ -161,11 +347,26 @@ function renderRecapGoal(goal) {
   `;
 }
 
+function displayStatus(status) {
+  const labels = {
+    at_risk: "not fully met",
+    missed: "missed",
+    on_track: "met",
+    over_target: "over target",
+    support_only: "support only",
+    no_activity: "no activity",
+  };
+  return labels[status] || String(status || "unknown").replaceAll("_", " ");
+}
+
 function renderRecapAction(action) {
   const progressLabel = action.support_only
     ? `${action.support_scheduled || 0} support scheduled`
-    : `${action.scheduled} of ${action.horizon_target} target`;
+    : `${action.scheduled} of ${action.horizon_target} counted target`;
   const completion = action.completion_percent == null ? "" : `${action.completion_percent}%`;
+  const periodText = action.period_count
+    ? `${action.periods_met || 0}/${action.period_count} periods met`
+    : "";
   const activityText = (action.top_activities || [])
     .map((item) => `${item.title} (${item.count})`)
     .join("; ");
@@ -174,10 +375,11 @@ function renderRecapAction(action) {
       <div class="recap-action-main">
         <strong>${escapeHtml(action.label)}</strong>
         <span>${escapeHtml(progressLabel)}${completion ? ` · ${escapeHtml(completion)}` : ""}</span>
+        ${action.extra_scheduled ? `<em>${escapeHtml(action.scheduled_total)} total scheduled; extra instances do not cover missed periods.</em>` : ""}
         ${activityText ? `<em>${escapeHtml(activityText)}</em>` : ""}
       </div>
       <div class="recap-action-metrics">
-        <span>${escapeHtml(action.weeks_with_coverage || 0)} weeks covered</span>
+        <span>${escapeHtml(periodText || `${action.weeks_with_coverage || 0} weeks covered`)}</span>
         <span>${escapeHtml(action.substitutions || 0)} substitutions</span>
         <span>${escapeHtml(action.blocked_instances || 0)} blocked</span>
         ${action.extra_scheduled ? `<span>${escapeHtml(action.extra_scheduled)} extra</span>` : ""}
@@ -555,9 +757,10 @@ function renderActivity(activity) {
       <div class="activity-time">${escapeHtml(activity.start_time)}-${escapeHtml(activity.end_time)}</div>
       <div class="activity-title">${escapeHtml(activity.title)}</div>
       <div class="activity-meta">${escapeHtml(activity.activity_type)} · ${escapeHtml(activity.location_id || activity.mode)} · ${escapeHtml(activity.load_level)}</div>
-      ${activity.provider_summary ? `<div class="activity-provider">${escapeHtml(activity.provider_summary)}</div>` : ""}
+      ${activity.facilitator_summary ? `<div class="activity-provider" data-provider-summary="${escapeHtml(activity.provider_summary || "")}">${escapeHtml(activity.facilitator_summary)}</div>` : ""}
       ${activity.meal_summary ? `<div class="activity-value">${escapeHtml(activity.meal_summary)}</div>` : ""}
       ${activity.prep_summary ? `<div class="activity-prep">${escapeHtml(activity.prep_summary)}</div>` : ""}
+      ${activity.reason_summary ? `<div class="activity-reason">${escapeHtml(activity.reason_summary)}</div>` : ""}
       <div class="badges">${badges}</div>
     </button>
   `;
@@ -660,17 +863,7 @@ grid.addEventListener("click", (event) => {
   openTrace(activity.dataset.traceId, activity.dataset.title);
 });
 
-fetch(root.dataset.source)
-  .then((response) => response.json())
-  .then((model) => {
-    state.model = model;
-    renderThreeMonthRecap(model.three_month_recap);
-    renderMemberProfile(model.member_profile);
-    renderActivityBoard(model.activity_board);
-    render();
-  })
-  .catch((error) => {
-    grid.innerHTML = `<div class="empty-state">Failed to load calendar interface: ${escapeHtml(error.message)}</div>`;
-  });
+loadCalendarInterface();
+setInterval(() => loadCalendarInterface({silent: true}), 10000);
 
 setupCalendarTabs();

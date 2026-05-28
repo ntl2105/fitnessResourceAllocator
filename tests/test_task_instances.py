@@ -2,7 +2,7 @@ from datetime import date
 from datetime import datetime, timezone
 
 from src.models.availability import AvailabilityBlock, AvailabilityData
-from src.scheduler.task_instances import expand_primary_activities
+from src.scheduler.task_instances import expand_primary_activities, occurrence_dates
 
 
 def test_expands_primary_and_substitution_activities_for_supported_frequency_types():
@@ -101,6 +101,22 @@ def test_expands_primary_and_substitution_activities_for_supported_frequency_typ
     substitution_task = next(task for task in tasks if task.activity_id == "substitution")
     assert substitution_task.is_substitution is True
     assert substitution_task.activity_family_id == "fam_once"
+
+
+def test_monthly_frequency_can_use_per_month_preferred_week_sequence():
+    dates = occurrence_dates(
+        {
+            "type": "monthly",
+            "count": 1,
+            "preferred_days": ["tuesday"],
+            "preferred_week": "second",
+            "preferred_weeks": ["second", "first", "second"],
+        },
+        date(2026, 6, 1),
+        date(2026, 9, 1),
+    )
+
+    assert dates == [date(2026, 6, 9), date(2026, 7, 7), date(2026, 8, 11)]
 
 
 def test_expanded_task_preserves_activity_fields_and_required_resources(load_seed):

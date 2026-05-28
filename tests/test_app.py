@@ -32,7 +32,11 @@ def test_core_pages_and_api_artifacts_are_available():
     assert calendar_response.status_code == 200
     assert "Elyx Weekly Calendar" in calendar_response.text
     assert "/api/calendar/interface" in calendar_response.text
-    assert "/profile" in calendar_response.text
+    assert "<nav>" not in calendar_response.text
+    assert 'class="calendar-tab active" data-tab-target="profile-panel"' in calendar_response.text
+    assert calendar_response.text.index('data-tab-target="profile-panel"') < calendar_response.text.index('data-tab-target="activity-board-panel"')
+    assert calendar_response.text.index('data-tab-target="activity-board-panel"') < calendar_response.text.index('data-tab-target="calendar-panel"')
+    assert calendar_response.text.index('data-tab-target="calendar-panel"') < calendar_response.text.index('data-tab-target="recap-panel"')
     assert 'data-tab-target="calendar-panel"' in calendar_response.text
     assert 'data-tab-target="recap-panel"' in calendar_response.text
     assert 'data-tab-target="profile-panel"' in calendar_response.text
@@ -61,6 +65,11 @@ def test_core_pages_and_api_artifacts_are_available():
 def test_trace_lookup_and_run_file_endpoint():
     rows = client.get("/api/runs/latest/files/04_calendar/calendar_rows.json").json()
     trace_id = rows[0]["trace_id"]
+    constraint_audit = client.get(
+        "/api/runs/latest/files/04_calendar/constraint_violations.json"
+    ).json()
+    assert constraint_audit["status"] == "pass"
+    assert constraint_audit["violation_count"] == 0
 
     trace_response = client.get(f"/api/traces/{trace_id}")
     assert trace_response.status_code == 200
@@ -149,6 +158,11 @@ def test_calendar_page_bootstraps_weekly_interface_assets():
     assert 'id="recap-panel"' in response.text
     assert 'id="profile-panel"' in response.text
     assert 'id="calendar-panel"' in response.text
+    assert 'class="calendar-tab active" data-tab-target="profile-panel"' in response.text
+    assert response.text.index('data-tab-target="profile-panel"') < response.text.index('data-tab-target="activity-board-panel"')
+    assert response.text.index('data-tab-target="activity-board-panel"') < response.text.index('data-tab-target="calendar-panel"')
+    assert response.text.index('data-tab-target="calendar-panel"') < response.text.index('data-tab-target="recap-panel"')
+    assert "<nav>" not in response.text
 
 
 def test_calendar_renderer_uses_day_agenda_without_absolute_time_grid():
@@ -173,13 +187,33 @@ def test_calendar_renderer_supports_profile_tab_on_same_page():
     assert "calendar-tab active" in js_response.text
     assert "renderThreeMonthRecap" in js_response.text
     assert "three_month_recap" in js_response.text
+    assert "Final Scheduler Tally" in js_response.text
+    assert "Weekly Targets Met" in js_response.text
+    assert "Not Fully Met" in js_response.text
+    assert "Constraint Violations" in js_response.text
+    assert "Final Calendar Audit" in js_response.text
+    assert "counted target" in js_response.text
+    assert "extra instances do not cover missed periods" in js_response.text
+    assert "displayStatus" in js_response.text
+    assert "renderValidationRecap" in js_response.text
+    assert "renderRecapExplainer" in js_response.text
+    assert "Recap Field Guide" in js_response.text
+    assert "loadCalendarInterface" in js_response.text
+    assert 'cache: "no-store"' in js_response.text
+    assert "setInterval(() => loadCalendarInterface({silent: true}), 10000)" in js_response.text
+    assert ".recap-explainer" in css_response.text
     assert "renderMemberProfile" in js_response.text
     assert "renderProviderUniverse" in js_response.text
     assert "member_profile" in js_response.text
+    assert "Operating Context" in js_response.text
+    assert "Resources and Timeline" in js_response.text
     assert "profile-goal-grid" in js_response.text
     assert ".calendar-tabs" in css_response.text
     assert ".recap-grid" in css_response.text
     assert ".member-profile-grid" in css_response.text
+    assert ".profile-band" in css_response.text
+    assert ".profile-context-grid" in css_response.text
+    assert ".profile-resource-grid" in css_response.text
     assert ".profile-provider-grid" in css_response.text
     assert ".profile-timeline" in css_response.text
     assert ".tab-panel[hidden]" in css_response.text

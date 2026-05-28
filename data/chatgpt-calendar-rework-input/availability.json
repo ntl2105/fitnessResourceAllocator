@@ -165,11 +165,21 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
+      "resource_type": "scheduling_rule",
       "start": "2026-06-01T08:30:00+08:00",
       "end": "2026-06-01T18:30:00+08:00",
       "timezone": "Asia/Singapore",
@@ -202,7 +212,7 @@
     },
     {
       "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
+      "resource_type": "scheduling_rule",
       "start": "2026-06-02T08:30:00+08:00",
       "end": "2026-06-02T18:30:00+08:00",
       "timezone": "Asia/Singapore",
@@ -231,7 +241,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -254,28 +274,6 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
-    },
-    {
-      "resource_id": "provider_physio_01",
-      "resource_type": "provider",
-      "start": "2026-06-03T18:00:00+08:00",
-      "end": "2026-06-03T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Daniel available for a focused trainer-physio handoff."
-    },
-    {
-      "resource_id": "provider_trainer_01",
-      "resource_type": "provider",
-      "start": "2026-06-03T18:00:00+08:00",
-      "end": "2026-06-03T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Kai available for a focused trainer-physio handoff."
     },
     {
       "resource_id": "provider_trainer_01",
@@ -341,7 +339,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -412,13 +420,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-06-07T11:00:00+08:00",
-      "end": "2026-06-07T12:00:00+08:00",
+      "start": "2026-06-07T20:30:00+08:00",
+      "end": "2026-06-07T22:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
     },
     {
       "resource_id": "provider_lab_01",
@@ -429,7 +437,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -495,7 +513,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -542,17 +570,6 @@
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
     },
     {
-      "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
-      "start": "2026-06-11T06:55:00+08:00",
-      "end": "2026-06-11T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
-    },
-    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-06-11T07:30:00+08:00",
@@ -586,7 +603,18 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_elyx_marcus_001",
+      "resource_id": "member_1",
+      "resource_type": "member_blocked",
+      "start": "2026-06-11T06:55:00+08:00",
+      "end": "2026-06-11T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
+    },
+    {
+      "resource_id": "member_1",
       "resource_type": "member_blocked",
       "start": "2026-06-11T20:15:00+08:00",
       "end": "2026-06-11T21:00:00+08:00",
@@ -605,7 +633,24 @@
       "location_id": "home",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "WFH day. Member location override: home."
+      "notes": "WFH day. Member location override: home Office-location activities are not valid on this date; substitute to home/remote or reject with reason.",
+      "allowed_location_ids": [
+        "home",
+        "remote"
+      ],
+      "disallowed_location_ids": [
+        "office"
+      ],
+      "wfh_location_rule": {
+        "wfh": true,
+        "office_location_activities_allowed": false,
+        "office_activity_resolution": "substitute_to_home_or_reject_with_reason",
+        "preferred_substitution_locations": [
+          "home",
+          "remote"
+        ],
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     },
     {
       "resource_id": "provider_lab_01",
@@ -616,7 +661,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -627,7 +682,7 @@
       "location_id": "home",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "WFH core work hours; member unavailable for healthspan activities except low-complexity remote/office/home tasks."
+      "notes": "WFH core work hours; member unavailable for healthspan activities except low-complexity home or remote tasks. Office-location activities are invalid on this WFH date."
     },
     {
       "resource_id": "provider_physio_01",
@@ -685,17 +740,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-06-14T11:00:00+08:00",
-      "end": "2026-06-14T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-06-15T07:30:00+08:00",
@@ -704,7 +748,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -770,7 +824,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -858,7 +922,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -917,7 +991,7 @@
     },
     {
       "resource_id": "member_elyx_marcus_001",
-      "resource_type": "scheduling_rule",
+      "resource_type": "member_blocked",
       "start": "2026-06-19T14:00:00+08:00",
       "end": "2026-06-20T10:00:00+08:00",
       "timezone": "Asia/Hong_Kong",
@@ -1015,17 +1089,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-06-21T11:00:00+08:00",
-      "end": "2026-06-21T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_travel_trainer_01",
       "resource_type": "provider",
       "start": "2026-06-22T07:00:00+08:00",
@@ -1045,7 +1108,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1122,7 +1195,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1210,7 +1293,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1279,17 +1372,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-06-28T11:00:00+08:00",
-      "end": "2026-06-28T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-06-29T07:30:00+08:00",
@@ -1298,7 +1380,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1364,7 +1456,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1452,7 +1554,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1523,13 +1635,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-07-05T11:00:00+08:00",
-      "end": "2026-07-05T12:00:00+08:00",
+      "start": "2026-07-05T20:30:00+08:00",
+      "end": "2026-07-05T22:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
     },
     {
       "resource_id": "provider_lab_01",
@@ -1540,7 +1652,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1606,7 +1728,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1631,28 +1763,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_physio_01",
-      "resource_type": "provider",
-      "start": "2026-07-08T18:00:00+08:00",
-      "end": "2026-07-08T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Daniel available for a focused trainer-physio handoff."
-    },
-    {
-      "resource_id": "provider_trainer_01",
-      "resource_type": "provider",
-      "start": "2026-07-08T18:00:00+08:00",
-      "end": "2026-07-08T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Kai available for a focused trainer-physio handoff."
-    },
-    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-07-08T18:45:00+08:00",
@@ -1673,17 +1783,6 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
-    },
-    {
-      "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
-      "start": "2026-07-09T06:55:00+08:00",
-      "end": "2026-07-09T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
     },
     {
       "resource_id": "provider_trainer_01",
@@ -1719,7 +1818,18 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_elyx_marcus_001",
+      "resource_id": "member_1",
+      "resource_type": "member_blocked",
+      "start": "2026-07-09T06:55:00+08:00",
+      "end": "2026-07-09T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
+    },
+    {
+      "resource_id": "member_1",
       "resource_type": "member_blocked",
       "start": "2026-07-09T20:15:00+08:00",
       "end": "2026-07-09T21:00:00+08:00",
@@ -1738,7 +1848,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1807,17 +1927,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-07-12T11:00:00+08:00",
-      "end": "2026-07-12T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-07-13T07:30:00+08:00",
@@ -1826,7 +1935,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1892,7 +2011,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -1980,7 +2109,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2049,17 +2188,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-07-19T11:00:00+08:00",
-      "end": "2026-07-19T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-07-20T07:30:00+08:00",
@@ -2068,7 +2196,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2178,7 +2316,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2299,7 +2447,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2368,17 +2526,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-07-26T11:00:00+08:00",
-      "end": "2026-07-26T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_travel_trainer_01",
       "resource_type": "provider",
       "start": "2026-07-27T07:00:00+09:00",
@@ -2398,7 +2545,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2475,7 +2632,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2563,7 +2730,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2634,13 +2811,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-08-02T11:00:00+08:00",
-      "end": "2026-08-02T12:00:00+08:00",
+      "start": "2026-08-02T20:30:00+08:00",
+      "end": "2026-08-02T22:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
     },
     {
       "resource_id": "provider_lab_01",
@@ -2651,7 +2828,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2717,7 +2904,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2740,28 +2937,6 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
-    },
-    {
-      "resource_id": "provider_physio_01",
-      "resource_type": "provider",
-      "start": "2026-08-05T18:00:00+08:00",
-      "end": "2026-08-05T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Daniel available for a focused trainer-physio handoff."
-    },
-    {
-      "resource_id": "provider_trainer_01",
-      "resource_type": "provider",
-      "start": "2026-08-05T18:00:00+08:00",
-      "end": "2026-08-05T18:30:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "remote",
-      "remote_supported": true,
-      "travel_compatible": true,
-      "notes": "Kai available for a focused trainer-physio handoff."
     },
     {
       "resource_id": "provider_trainer_01",
@@ -2827,7 +3002,24 @@
       "location_id": "home",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "WFH day. Member location override: home."
+      "notes": "WFH day. Member location override: home Office-location activities are not valid on this date; substitute to home/remote or reject with reason.",
+      "allowed_location_ids": [
+        "home",
+        "remote"
+      ],
+      "disallowed_location_ids": [
+        "office"
+      ],
+      "wfh_location_rule": {
+        "wfh": true,
+        "office_location_activities_allowed": false,
+        "office_activity_resolution": "substitute_to_home_or_reject_with_reason",
+        "preferred_substitution_locations": [
+          "home",
+          "remote"
+        ],
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     },
     {
       "resource_id": "provider_lab_01",
@@ -2838,7 +3030,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2849,7 +3051,7 @@
       "location_id": "home",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "WFH core work hours; member unavailable for healthspan activities except low-complexity remote/office/home tasks."
+      "notes": "WFH core work hours; member unavailable for healthspan activities except low-complexity home or remote tasks. Office-location activities are invalid on this WFH date."
     },
     {
       "resource_id": "provider_physio_01",
@@ -2907,17 +3109,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-08-09T11:00:00+08:00",
-      "end": "2026-08-09T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-08-10T07:30:00+08:00",
@@ -2926,7 +3117,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -2992,7 +3193,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3124,7 +3335,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3215,17 +3436,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-08-16T11:00:00+08:00",
-      "end": "2026-08-16T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-08-17T07:30:00+08:00",
@@ -3234,7 +3444,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3300,7 +3520,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3347,17 +3577,6 @@
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
     },
     {
-      "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
-      "start": "2026-08-20T06:55:00+08:00",
-      "end": "2026-08-20T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
-    },
-    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-08-20T07:30:00+08:00",
@@ -3391,7 +3610,18 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_elyx_marcus_001",
+      "resource_id": "member_1",
+      "resource_type": "member_blocked",
+      "start": "2026-08-20T06:55:00+08:00",
+      "end": "2026-08-20T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
+    },
+    {
+      "resource_id": "member_1",
       "resource_type": "member_blocked",
       "start": "2026-08-20T20:15:00+08:00",
       "end": "2026-08-20T21:00:00+08:00",
@@ -3410,7 +3640,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3479,17 +3719,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-08-23T11:00:00+08:00",
-      "end": "2026-08-23T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-08-24T07:30:00+08:00",
@@ -3498,7 +3727,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3564,7 +3803,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3652,7 +3901,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3721,17 +3980,6 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
-      "resource_id": "provider_strength_coach_01",
-      "resource_type": "provider",
-      "start": "2026-08-30T11:00:00+08:00",
-      "end": "2026-08-30T12:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "gym",
-      "remote_supported": true,
-      "travel_compatible": false,
-      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
-    },
-    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-08-31T07:30:00+08:00",
@@ -3740,7 +3988,17 @@
       "location_id": "lab",
       "remote_supported": false,
       "travel_compatible": false,
-      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel."
+      "notes": "Lab available for phlebotomy and screening. Only at Singapore lab; not available during travel. Requires 8h fasting for metabolic lab draw; no breakfast/caloric meal before lab on the same day.",
+      "fasting_lab_metadata": {
+        "fasting_required": true,
+        "fasting_hours_required": 8,
+        "no_caloric_meal_before_lab_same_day": true,
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
     },
     {
       "resource_id": "member_elyx_marcus_001",
@@ -3774,6 +4032,100 @@
       "remote_supported": true,
       "travel_compatible": true,
       "notes": "Remote coach pool available for adherence/recovery check-in. Supports travel and post-travel adaptation."
+    },
+    {
+      "resource_id": "member_elyx_marcus_001",
+      "resource_type": "scheduling_rule",
+      "start": "2026-06-12T00:00:00+08:00",
+      "end": "2026-06-13T00:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "office",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "WFH location rule: office-location activities are invalid all day. Substitute to home/remote or reject with reason_code=wfh_no_office_location_activity.",
+      "blocked_reason_code": "wfh_no_office_location_activity",
+      "allowed_substitution_location_ids": [
+        "home",
+        "remote"
+      ]
+    },
+    {
+      "resource_id": "member_elyx_marcus_001",
+      "resource_type": "scheduling_rule",
+      "start": "2026-08-07T00:00:00+08:00",
+      "end": "2026-08-08T00:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "office",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "WFH location rule: office-location activities are invalid all day. Substitute to home/remote or reject with reason_code=wfh_no_office_location_activity.",
+      "blocked_reason_code": "wfh_no_office_location_activity",
+      "allowed_substitution_location_ids": [
+        "home",
+        "remote"
+      ]
+    },
+    {
+      "resource_id": "rule_fasting_lab_no_breakfast_before_draw",
+      "resource_type": "scheduling_rule",
+      "start": "2026-06-01T00:00:00+08:00",
+      "end": "2026-09-01T00:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Global rule: metabolic lab draw requires 8 hours fasting. Do not schedule breakfast, caloric beverages, caloric supplements, or caloric meals before a same-day lab draw; generate explicit skipped-breakfast row with reason_code=fasting_lab_same_morning.",
+      "rule_metadata": {
+        "applies_to_activity_id": "act_b05_clinical_lab_draw_due_week_primary",
+        "fasting_hours_required": 8,
+        "blocked_activity_types_before_lab_same_day": [
+          "food"
+        ],
+        "blocked_meal_slots_before_lab": [
+          "breakfast"
+        ],
+        "calendar_skip_reason_required": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      }
+    },
+    {
+      "resource_id": "rule_weekly_fitness_targets",
+      "resource_type": "scheduling_rule",
+      "start": "2026-06-01T00:00:00+08:00",
+      "end": "2026-09-01T00:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Global rule: target 2 aerobic sessions/week, 2 strength sessions/week, and 4 recovery actions/week. Walking breaks never satisfy strength. Avoid weeks with only walks unless non-walk options are impossible, and record why.",
+      "rule_metadata": {
+        "aerobic_sessions_target_per_week": 2,
+        "strength_sessions_target_per_week": 2,
+        "recovery_actions_target_per_week": 4,
+        "walking_breaks_count_as_strength": false,
+        "avoid_walk_only_weeks": true,
+        "walk_only_week_requires_reason": true
+      }
+    },
+    {
+      "resource_id": "rule_wfh_no_office_activities",
+      "resource_type": "scheduling_rule",
+      "start": "2026-06-01T00:00:00+08:00",
+      "end": "2026-09-01T00:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Global rule: on WFH/member_location=home dates, do not schedule office-location activities. Substitute office walking breaks to home walking breaks or reject/unschedule with reason_code=wfh_no_office_location_activity.",
+      "rule_metadata": {
+        "applies_on_resource_type": "member_location",
+        "member_location_id": "home",
+        "disallowed_location_ids": [
+          "office"
+        ],
+        "substitute_office_walking_break_to_activity_id": "act_b02_cardio_walking_office_remote_sub",
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     }
   ]
 }

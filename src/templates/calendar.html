@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Elyx Weekly Calendar</title>
-  <link rel="stylesheet" href="/static/calendar.css?v=meal-value-1">
+  <link rel="stylesheet" href="/static/calendar.css?v=recap-auto-refresh-1">
 </head>
 <body>
   <header class="app-header">
@@ -12,24 +12,29 @@
       <h1>Elyx Weekly Calendar</h1>
       <p>{{ row_count }} scheduled rows from the latest run</p>
     </div>
-    <nav>
-      <a href="/calendar">Calendar</a>
-      <a href="/profile">Profile</a>
-      <a href="/pipeline">Pipeline</a>
-      <a href="/summary">Summary</a>
-      <a href="/audit">Audit</a>
-    </nav>
   </header>
 
   <main>
     <section class="calendar-tabs" aria-label="Calendar views">
-      <button type="button" class="calendar-tab active" data-tab-target="calendar-panel">Calendar</button>
-      <button type="button" class="calendar-tab" data-tab-target="recap-panel">Recap</button>
-      <button type="button" class="calendar-tab" data-tab-target="profile-panel">Profile</button>
+      <button type="button" class="calendar-tab active" data-tab-target="profile-panel">Profile</button>
       <button type="button" class="calendar-tab" data-tab-target="activity-board-panel">Activity Board</button>
+      <button type="button" class="calendar-tab" data-tab-target="calendar-panel">Calendar</button>
+      <button type="button" class="calendar-tab" data-tab-target="recap-panel">Recap</button>
     </section>
 
-    <section id="calendar-panel" class="tab-panel">
+    <section id="profile-panel" class="tab-panel profile-panel">
+      <div id="member-profile-root" class="member-profile-root">
+        <p class="empty-state">Profile content loads from the calendar interface model.</p>
+      </div>
+    </section>
+
+    <section id="activity-board-panel" class="tab-panel" hidden>
+      <div id="activity-board-root" class="activity-board-root">
+        <p class="empty-state">Activity board loads from the calendar interface model.</p>
+      </div>
+    </section>
+
+    <section id="calendar-panel" class="tab-panel" hidden>
       <div id="calendar-root" data-source="/api/calendar/interface" data-display-mode="agenda">
         <section class="toolbar">
           <button type="button" id="previous-week">Previous Week</button>
@@ -59,18 +64,6 @@
         <p class="empty-state">Recap loads from the calendar interface model.</p>
       </div>
     </section>
-
-    <section id="profile-panel" class="tab-panel profile-panel" hidden>
-      <div id="member-profile-root" class="member-profile-root">
-        <p class="empty-state">Profile content loads from the calendar interface model.</p>
-      </div>
-    </section>
-
-    <section id="activity-board-panel" class="tab-panel" hidden>
-      <div id="activity-board-root" class="activity-board-root">
-        <p class="empty-state">Activity board loads from the calendar interface model.</p>
-      </div>
-    </section>
   </main>
 
   <aside id="trace-drawer" class="trace-drawer" aria-hidden="true">
@@ -84,6 +77,6 @@
     <div id="drawer-content" class="drawer-content"></div>
   </aside>
 
-  <script src="/static/calendar.js?v=meal-value-1" defer></script>
+  <script src="/static/calendar.js?v=recap-auto-refresh-1" defer></script>
 </body>
 </html>

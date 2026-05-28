@@ -629,9 +629,64 @@
   ],
   "travel_time_rules": [
     {
+      "from_location_id": "home",
+      "to_location_id": "restaurant",
+      "minutes": 25
+    },
+    {
+      "from_location_id": "restaurant",
+      "to_location_id": "home",
+      "minutes": 25
+    },
+    {
+      "from_location_id": "home",
+      "to_location_id": "gym",
+      "minutes": 25
+    },
+    {
+      "from_location_id": "gym",
+      "to_location_id": "home",
+      "minutes": 25
+    },
+    {
+      "from_location_id": "office",
+      "to_location_id": "home",
+      "minutes": 40
+    },
+    {
+      "from_location_id": "home",
+      "to_location_id": "office",
+      "minutes": 40
+    },
+    {
       "from_location_id": "office",
       "to_location_id": "gym",
       "minutes": 15
+    },
+    {
+      "from_location_id": "gym",
+      "to_location_id": "office",
+      "minutes": 15
+    },
+    {
+      "from_location_id": "clinic",
+      "to_location_id": "home",
+      "minutes": 30
+    },
+    {
+      "from_location_id": "home",
+      "to_location_id": "clinic",
+      "minutes": 30
+    },
+    {
+      "from_location_id": "lab",
+      "to_location_id": "home",
+      "minutes": 30
+    },
+    {
+      "from_location_id": "home",
+      "to_location_id": "lab",
+      "minutes": 30
     }
   ]
 }

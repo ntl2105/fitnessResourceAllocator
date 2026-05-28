@@ -2183,9 +2183,64 @@ Examples:
   ],
   "travel_time_rules": [
     {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "restaurant"
+    },
+    {
+      "from_location_id": "restaurant",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "office",
+      "minutes": 40,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 40,
+      "to_location_id": "office"
+    },
+    {
       "from_location_id": "office",
       "minutes": 15,
       "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 15,
+      "to_location_id": "office"
+    },
+    {
+      "from_location_id": "clinic",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "clinic"
+    },
+    {
+      "from_location_id": "lab",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "lab"
     }
   ],
   "travel_windows": [
@@ -2705,7 +2760,7 @@ Existing activity summaries from previous accepted batches:
     "intent": "lunch",
     "meal_slot": "lunch",
     "primary_activity_id": "act_b01_lunch_member_assembled_home_primary",
-    "primary_title": "Member-assembled lunch at home"
+    "primary_title": "Simple high-protein lunch at home"
   },
   {
     "activity_family_id": "b01_nutrition_dinner_chef_home",
@@ -2733,7 +2788,7 @@ Existing activity summaries from previous accepted batches:
     "intent": "dinner",
     "meal_slot": "dinner",
     "primary_activity_id": "act_b01_dinner_restaurant_primary",
-    "primary_title": "Structured restaurant dinner"
+    "primary_title": "Balanced restaurant dinner"
   },
   {
     "activity_family_id": "b01_nutrition_dinner_travel_hotel",

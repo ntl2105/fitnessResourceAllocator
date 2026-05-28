@@ -256,6 +256,28 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
+      "resource_id": "provider_physio_01",
+      "resource_type": "provider",
+      "start": "2026-06-03T18:00:00+08:00",
+      "end": "2026-06-03T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Daniel available for a focused trainer-physio handoff."
+    },
+    {
+      "resource_id": "provider_trainer_01",
+      "resource_type": "provider",
+      "start": "2026-06-03T18:00:00+08:00",
+      "end": "2026-06-03T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Kai available for a focused trainer-physio handoff."
+    },
+    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-06-03T18:45:00+08:00",
@@ -390,13 +412,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-06-07T20:30:00+08:00",
-      "end": "2026-06-07T22:00:00+08:00",
+      "start": "2026-06-07T11:00:00+08:00",
+      "end": "2026-06-07T12:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -520,6 +542,17 @@
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
     },
     {
+      "resource_id": "member_elyx_marcus_001",
+      "resource_type": "member_blocked",
+      "start": "2026-06-11T06:55:00+08:00",
+      "end": "2026-06-11T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
+    },
+    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-06-11T07:30:00+08:00",
@@ -553,18 +586,7 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_1",
-      "resource_type": "member_blocked",
-      "start": "2026-06-11T06:55:00+08:00",
-      "end": "2026-06-11T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
-    },
-    {
-      "resource_id": "member_1",
+      "resource_id": "member_elyx_marcus_001",
       "resource_type": "member_blocked",
       "start": "2026-06-11T20:15:00+08:00",
       "end": "2026-06-11T21:00:00+08:00",
@@ -661,6 +683,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-06-14T11:00:00+08:00",
+      "end": "2026-06-14T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -884,7 +917,7 @@
     },
     {
       "resource_id": "member_elyx_marcus_001",
-      "resource_type": "member_blocked",
+      "resource_type": "scheduling_rule",
       "start": "2026-06-19T14:00:00+08:00",
       "end": "2026-06-20T10:00:00+08:00",
       "timezone": "Asia/Hong_Kong",
@@ -980,6 +1013,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-06-21T11:00:00+08:00",
+      "end": "2026-06-21T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_travel_trainer_01",
@@ -1235,6 +1279,17 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-06-28T11:00:00+08:00",
+      "end": "2026-06-28T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+    },
+    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-06-29T07:30:00+08:00",
@@ -1468,13 +1523,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-07-05T20:30:00+08:00",
-      "end": "2026-07-05T22:00:00+08:00",
+      "start": "2026-07-05T11:00:00+08:00",
+      "end": "2026-07-05T12:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -1576,6 +1631,28 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
+      "resource_id": "provider_physio_01",
+      "resource_type": "provider",
+      "start": "2026-07-08T18:00:00+08:00",
+      "end": "2026-07-08T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Daniel available for a focused trainer-physio handoff."
+    },
+    {
+      "resource_id": "provider_trainer_01",
+      "resource_type": "provider",
+      "start": "2026-07-08T18:00:00+08:00",
+      "end": "2026-07-08T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Kai available for a focused trainer-physio handoff."
+    },
+    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-07-08T18:45:00+08:00",
@@ -1596,6 +1673,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
+    },
+    {
+      "resource_id": "member_elyx_marcus_001",
+      "resource_type": "member_blocked",
+      "start": "2026-07-09T06:55:00+08:00",
+      "end": "2026-07-09T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
     },
     {
       "resource_id": "provider_trainer_01",
@@ -1631,18 +1719,7 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_1",
-      "resource_type": "member_blocked",
-      "start": "2026-07-09T06:55:00+08:00",
-      "end": "2026-07-09T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
-    },
-    {
-      "resource_id": "member_1",
+      "resource_id": "member_elyx_marcus_001",
       "resource_type": "member_blocked",
       "start": "2026-07-09T20:15:00+08:00",
       "end": "2026-07-09T21:00:00+08:00",
@@ -1728,6 +1805,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-07-12T11:00:00+08:00",
+      "end": "2026-07-12T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -1959,6 +2047,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-07-19T11:00:00+08:00",
+      "end": "2026-07-19T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -2269,6 +2368,17 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-07-26T11:00:00+08:00",
+      "end": "2026-07-26T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+    },
+    {
       "resource_id": "provider_travel_trainer_01",
       "resource_type": "provider",
       "start": "2026-07-27T07:00:00+09:00",
@@ -2524,13 +2634,13 @@
     {
       "resource_id": "provider_strength_coach_01",
       "resource_type": "provider",
-      "start": "2026-08-02T20:30:00+08:00",
-      "end": "2026-08-02T22:00:00+08:00",
+      "start": "2026-08-02T11:00:00+08:00",
+      "end": "2026-08-02T12:00:00+08:00",
       "timezone": "Asia/Singapore",
       "location_id": "gym",
       "remote_supported": true,
       "travel_compatible": false,
-      "notes": "Amelia limited Sunday availability for trainer-led strength without stacking after Saturday cardio."
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -2630,6 +2740,28 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_physio_01",
+      "resource_type": "provider",
+      "start": "2026-08-05T18:00:00+08:00",
+      "end": "2026-08-05T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Daniel available for a focused trainer-physio handoff."
+    },
+    {
+      "resource_id": "provider_trainer_01",
+      "resource_type": "provider",
+      "start": "2026-08-05T18:00:00+08:00",
+      "end": "2026-08-05T18:30:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "remote",
+      "remote_supported": true,
+      "travel_compatible": true,
+      "notes": "Kai available for a focused trainer-physio handoff."
     },
     {
       "resource_id": "provider_trainer_01",
@@ -2773,6 +2905,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-08-09T11:00:00+08:00",
+      "end": "2026-08-09T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -3072,6 +3215,17 @@
       "notes": "Chef available for home meal prep. Not available during travel windows."
     },
     {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-08-16T11:00:00+08:00",
+      "end": "2026-08-16T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
+    },
+    {
       "resource_id": "provider_lab_01",
       "resource_type": "provider",
       "start": "2026-08-17T07:30:00+08:00",
@@ -3193,6 +3347,17 @@
       "notes": "Recurring late investor/cross-region call; member unavailable for activities."
     },
     {
+      "resource_id": "member_elyx_marcus_001",
+      "resource_type": "member_blocked",
+      "start": "2026-08-20T06:55:00+08:00",
+      "end": "2026-08-20T08:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "home",
+      "remote_supported": false,
+      "travel_compatible": false,
+      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
+    },
+    {
       "resource_id": "provider_trainer_01",
       "resource_type": "provider",
       "start": "2026-08-20T07:30:00+08:00",
@@ -3226,18 +3391,7 @@
       "notes": "Physician available for in-person or remote review at clinic. Not available during travel."
     },
     {
-      "resource_id": "member_1",
-      "resource_type": "member_blocked",
-      "start": "2026-08-20T06:55:00+08:00",
-      "end": "2026-08-20T08:00:00+08:00",
-      "timezone": "Asia/Singapore",
-      "location_id": "home",
-      "remote_supported": false,
-      "travel_compatible": false,
-      "notes": "Occasional member conflict during planned fitness slot; reschedule fitness later the same evening or the next day."
-    },
-    {
-      "resource_id": "member_1",
+      "resource_id": "member_elyx_marcus_001",
       "resource_type": "member_blocked",
       "start": "2026-08-20T20:15:00+08:00",
       "end": "2026-08-20T21:00:00+08:00",
@@ -3323,6 +3477,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-08-23T11:00:00+08:00",
+      "end": "2026-08-23T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",
@@ -3554,6 +3719,17 @@
       "remote_supported": false,
       "travel_compatible": false,
       "notes": "Chef available for home meal prep. Not available during travel windows."
+    },
+    {
+      "resource_id": "provider_strength_coach_01",
+      "resource_type": "provider",
+      "start": "2026-08-30T11:00:00+08:00",
+      "end": "2026-08-30T12:00:00+08:00",
+      "timezone": "Asia/Singapore",
+      "location_id": "gym",
+      "remote_supported": true,
+      "travel_compatible": false,
+      "notes": "Amelia Sunday midday availability for facilitated strength without late-evening training."
     },
     {
       "resource_id": "provider_lab_01",

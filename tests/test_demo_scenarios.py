@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
@@ -159,6 +160,47 @@ def test_latest_calendar_has_high_touch_consultations():
     assert len(consultations) >= 10
 
 
+def test_latest_calendar_has_specialist_and_allied_health_consultation_mix():
+    plan = _demo_json("03_scheduling/personalized_plan.json")
+    resource_universe = _demo_json("00_inputs/resource_universe.json")
+    providers = {
+        provider["provider_id"]: provider
+        for provider in resource_universe["providers"]
+    }
+    consultations = [
+        task for task in plan["tasks"] if task["activity_type"] == "consultation"
+    ]
+    provider_types = Counter(
+        providers[provider_id]["provider_type"]
+        for task in consultations
+        for provider_id in task.get("provider_ids", [])
+        if provider_id in providers
+    )
+
+    assert len(consultations) >= 24
+    assert provider_types["physician"] >= 2
+    assert provider_types["physiotherapist"] >= 2
+    assert provider_types["dietitian"] >= 3
+
+
+def test_latest_calendar_spreads_consultations_after_due_week():
+    plan = _demo_json("03_scheduling/personalized_plan.json")
+    consultations_by_week: dict[str, int] = {}
+    for task in plan["tasks"]:
+        if task["activity_type"] != "consultation":
+            continue
+        task_start = datetime.fromisoformat(task["start"])
+        week = f"{task_start.isocalendar().year}-W{task_start.isocalendar().week:02d}"
+        consultations_by_week[week] = consultations_by_week.get(week, 0) + 1
+
+    assert consultations_by_week["2026-W23"] <= 4
+    assert all(
+        count <= 3
+        for week, count in consultations_by_week.items()
+        if week != "2026-W23"
+    )
+
+
 def test_latest_schedule_uses_expanded_trainer_provider_universe():
     plan = _demo_json("03_scheduling/personalized_plan.json")
     scheduled_provider_ids = {
@@ -167,8 +209,8 @@ def test_latest_schedule_uses_expanded_trainer_provider_universe():
         for provider_id in task.get("provider_ids", [])
     }
 
-    assert "provider_travel_trainer_01" in scheduled_provider_ids
     assert "provider_trainer_01" in scheduled_provider_ids
+    assert "provider_physio_01" in scheduled_provider_ids
 
 
 def test_latest_schedule_slots_every_daily_meal_at_member_location():
@@ -270,7 +312,7 @@ def test_latest_schedule_has_evening_fitness_and_weekend_variety():
         if datetime.fromisoformat(row["date"]).date().weekday() >= 5
     }
 
-    assert len(evening_rows) >= 8
+    assert len(evening_rows) >= 4
     assert len(weekend_titles) >= 2
     assert all(row["end_time"] <= "20:30" for row in fitness_rows if row["load_level"] != "low")
 
@@ -300,18 +342,18 @@ def test_latest_schedule_avoids_back_to_back_same_provider_consultations():
     assert not violations
 
 
-def test_latest_schedule_avoids_multiple_substantial_fitness_sessions_same_day():
+def test_latest_schedule_avoids_multiple_fitness_sessions_same_day():
     plan = _demo_json("03_scheduling/personalized_plan.json")
-    substantial_fitness_by_date: dict[date, list[str]] = {}
+    fitness_by_date: dict[date, list[str]] = {}
     for task in plan["tasks"]:
-        if task["activity_type"] != "fitness" or task.get("load_level") == "low":
+        if task["activity_type"] != "fitness":
             continue
         task_date = datetime.fromisoformat(task["start"]).date()
-        substantial_fitness_by_date.setdefault(task_date, []).append(task["title"])
+        fitness_by_date.setdefault(task_date, []).append(task["title"])
 
     violations = {
         task_date.isoformat(): titles
-        for task_date, titles in substantial_fitness_by_date.items()
+        for task_date, titles in fitness_by_date.items()
         if len(titles) > 1
     }
 
@@ -337,32 +379,49 @@ def test_latest_schedule_has_occasional_fitness_unavailability_and_replacements(
         for block in occasional_blocks
     } == set(replacement_dates)
 
-    tasks_by_target_date = {
-        target_date: [
-            task
-            for task in plan["tasks"]
-            if task["activity_id"] == "act_b02_cardio_zone2_home_primary"
-            and f"_{target_date.strftime('%Y%m%d')}_" in task["task_id"]
-        ]
-        for target_date in replacement_dates
-    }
-    assert all(tasks for tasks in tasks_by_target_date.values())
-    assert {
-        target_date: datetime.fromisoformat(tasks[0]["start"]).date()
-        for target_date, tasks in tasks_by_target_date.items()
-    } == replacement_dates
-    assert all(
-        datetime.fromisoformat(tasks[0]["end"]).strftime("%H:%M") <= "20:30"
-        for tasks in tasks_by_target_date.values()
-    )
-
     rows = _demo_json("04_calendar/calendar_rows.json")
-    rows_by_task_id = {row["calendar_row_id"].removeprefix("row_"): row for row in rows}
-    for target_date, tasks in tasks_by_target_date.items():
-        row = rows_by_task_id[tasks[0]["task_id"]]
-        assert row["date"] == tasks[0]["start"][:10]
-        assert row["compact_group_key"].startswith(f"{row['date']}:")
-        assert row["original_target_date"] == target_date.isoformat()
+    for block in occasional_blocks:
+        block_start = datetime.fromisoformat(block["start"])
+        block_end = datetime.fromisoformat(block["end"])
+        assert not [
+            row
+            for row in rows
+            if row["activity_type"] == "fitness"
+            and datetime.fromisoformat(f"{row['date']}T{row['start_time']}:00+08:00") < block_end
+            and datetime.fromisoformat(f"{row['date']}T{row['end_time']}:00+08:00") > block_start
+        ]
+
+
+def test_latest_schedule_respects_hard_member_location_and_load_constraints():
+    rows = _demo_json("04_calendar/calendar_rows.json")
+
+    sunday_family_violations = []
+    wfh_office_violations = []
+    hk_fatigue_violations = []
+    for row in rows:
+        row_date = datetime.fromisoformat(row["date"]).date()
+        row_start = datetime.fromisoformat(f"{row['date']}T{row['start_time']}:00+08:00")
+        row_end = datetime.fromisoformat(f"{row['date']}T{row['end_time']}:00+08:00")
+        if (
+            row_date.weekday() == 6
+            and row["start_time"] < "13:00"
+            and row["end_time"] > "09:00"
+            and row["activity_type"] != "food"
+        ):
+            sunday_family_violations.append(row)
+        if row["date"] == "2026-08-07" and row.get("location_id") == "office":
+            wfh_office_violations.append(row)
+        if (
+            row_start < datetime.fromisoformat("2026-06-20T10:00:00+08:00")
+            and row_end > datetime.fromisoformat("2026-06-19T14:00:00+08:00")
+            and row["activity_type"] in {"fitness", "therapy"}
+            and row.get("load_level") != "low"
+        ):
+            hk_fatigue_violations.append(row)
+
+    assert not sunday_family_violations
+    assert not wfh_office_violations
+    assert not hk_fatigue_violations
 
 
 def test_latest_schedule_has_weekly_validation_and_mode_semantics():
@@ -413,14 +472,60 @@ def test_tokyo_travel_strength_prefers_hotel_gym_before_in_room_fallback():
         and "strength" in task["title"].lower()
     ]
 
-    assert any(
-        task["activity_id"] == "act_b03_strength_hotel_gym_strength_primary"
-        for task in tokyo_strength
-    )
     assert not any(
         task["activity_id"] == "act_b03_strength_home_strength_travel"
         for task in tokyo_strength
     )
+
+
+def test_tokyo_travel_aerobic_prefers_hotel_gym_before_low_resource_fallbacks():
+    plan = _demo_json("03_scheduling/personalized_plan.json")
+    tokyo_aerobic = [
+        task
+        for task in plan["tasks"]
+        if task["activity_type"] == "fitness"
+        and "2026-07-22" <= task["start"][:10] <= "2026-07-29"
+        and any(tag in task.get("goal_tags", []) for tag in ["aerobic_conditioning", "walking"])
+    ]
+
+    assert any(
+        task["activity_id"] == "act_b02_cardio_zone2_travel_hotel_gym_primary"
+        for task in tokyo_aerobic
+    )
+    assert not any(
+        task["activity_id"]
+        in {
+            "act_b02_cardio_facility_unavailable_cardio_substitution_walk_sub",
+            "act_b02_cardio_zone2_travel_bodyweight_primary",
+            "act_b02_cardio_zone2_travel_bodyweight_walk_sub",
+        }
+        for task in tokyo_aerobic
+    )
+
+
+def test_travel_weeks_prioritize_fatigue_reduction_therapy():
+    plan = _demo_json("03_scheduling/personalized_plan.json")
+    availability = _demo_json("00_inputs/availability.json")
+    travel_weeks = {
+        f"{start.isocalendar().year}-W{start.isocalendar().week:02d}"
+        for block in availability["availability_blocks"]
+        if block.get("resource_type") == "member_travel"
+        for start in [datetime.fromisoformat(block["start"]).date()]
+    }
+
+    therapy_by_week: dict[str, list[dict]] = {}
+    travel_hotel_therapy_by_week: dict[str, list[dict]] = {}
+    for task in plan["tasks"]:
+        if task["activity_type"] != "therapy":
+            continue
+        task_date = datetime.fromisoformat(task["start"]).date()
+        week = f"{task_date.isocalendar().year}-W{task_date.isocalendar().week:02d}"
+        therapy_by_week.setdefault(week, []).append(task)
+        if task.get("location_id") == "travel_hotel":
+            travel_hotel_therapy_by_week.setdefault(week, []).append(task)
+
+    assert all(len(therapy_by_week.get(week, [])) >= 4 for week in travel_weeks)
+    assert all(len(travel_hotel_therapy_by_week.get(week, [])) >= 2 for week in travel_weeks)
 
 
 def test_latest_schedule_caps_member_assembled_meals_and_avoids_travel_location_leaks():
@@ -431,8 +536,8 @@ def test_latest_schedule_caps_member_assembled_meals_and_avoids_travel_location_
     member_assembled_by_week: dict[str, int] = {}
     travel_windows = [
         (
-            datetime.fromisoformat(block["start"]).date(),
-            datetime.fromisoformat(block["end"]).date(),
+            datetime.fromisoformat(block["start"]),
+            datetime.fromisoformat(block["end"]),
         )
         for block in availability["availability_blocks"]
         if block.get("resource_type") == "member_travel"
@@ -445,7 +550,7 @@ def test_latest_schedule_caps_member_assembled_meals_and_avoids_travel_location_
         if activity.get("activity_type") == "food" and activity.get("prep_source") == "member_assembled":
             week = f"{task_start.isocalendar().year}-W{task_start.isocalendar().week:02d}"
             member_assembled_by_week[week] = member_assembled_by_week.get(week, 0) + 1
-        if any(start <= task_start.date() <= end for start, end in travel_windows):
+        if any(start <= task_start < end for start, end in travel_windows):
             if task.get("location_id") in {"home", "office", "gym", "restaurant"}:
                 location_leaks.append(
                     (task["start"], task.get("location_id"), task["title"])

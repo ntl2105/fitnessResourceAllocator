@@ -28,6 +28,8 @@ def evaluate_policy(
         same_provider_consultation_spacing_check(task, start, end, scheduled_tasks, activity),
         meal_slot_exclusivity_check(start, scheduled_tasks, activity),
         location_compatibility_check(start, end, scheduled_tasks, activity),
+        wfh_location_check(start, end, candidate_location_id, availability),
+        arrival_fatigue_load_check(start, end, activity, availability),
         member_availability_check(start, end, availability, activity, candidate_location_id, task),
         member_travel_location_check(start, end, candidate_location_id, availability),
         active_travel_required_check(start, end, activity, availability),
@@ -657,6 +659,82 @@ def member_availability_check(
     )
 
 
+def wfh_location_check(
+    start: datetime,
+    end: datetime,
+    candidate_location_id: str | None,
+    availability: AvailabilityData | None,
+) -> ConstraintCheck:
+    if availability is None or candidate_location_id != "office":
+        return ConstraintCheck(
+            name="wfh_location",
+            passed=True,
+            reason="No WFH office-location restriction applies.",
+        )
+    wfh_block = next(
+        (
+            block
+            for block in availability.availability_blocks
+            if block.resource_type == "member_location"
+            and block.location_id == "home"
+            and block.start.date() <= start.date() <= block.end.date()
+        ),
+        None,
+    )
+    return ConstraintCheck(
+        name="wfh_location",
+        passed=wfh_block is None,
+        reason=(
+            "Candidate is not on a WFH-only date."
+            if wfh_block is None
+            else "Rejected office activity because this date is marked work-from-home."
+        ),
+    )
+
+
+def arrival_fatigue_load_check(
+    start: datetime,
+    end: datetime,
+    activity: dict[str, Any] | None,
+    availability: AvailabilityData | None,
+) -> ConstraintCheck:
+    activity = activity or {}
+    if availability is None or activity.get("activity_type") not in {"fitness", "therapy"}:
+        return ConstraintCheck(
+            name="arrival_fatigue_load",
+            passed=True,
+            reason="Activity is not constrained by arrival fatigue.",
+        )
+    restriction = next(
+        (
+            block
+            for block in availability.availability_blocks
+            if block.resource_type in {"member_blocked", "scheduling_rule", "member_load_restriction"}
+            and "arrival fatigue" in (block.notes or "").lower()
+            and intervals_overlap(start, end, block.start, block.end)
+        ),
+        None,
+    )
+    if restriction is None or activity.get("load_level") == "low":
+        return ConstraintCheck(
+            name="arrival_fatigue_load",
+            passed=True,
+            reason=(
+                "Candidate does not overlap an arrival-fatigue load restriction."
+                if restriction is None
+                else "Low-load recovery/mobility is allowed during arrival fatigue."
+            ),
+        )
+    return ConstraintCheck(
+        name="arrival_fatigue_load",
+        passed=False,
+        reason=(
+            "Rejected medium/high-load movement during arrival-fatigue window; "
+            "only low-load recovery or mobility is allowed."
+        ),
+    )
+
+
 def allows_low_complexity_workday_exception(
     notes: str,
     activity: dict[str, Any] | None,
@@ -664,6 +742,7 @@ def allows_low_complexity_workday_exception(
 ) -> bool:
     if "except low-complexity remote tasks" not in notes and (
         "except low-complexity remote/office/home tasks" not in notes
+        and "except low-complexity home or remote tasks" not in notes
     ):
         return False
     if candidate_location_id not in {"remote", "office", "home"}:
@@ -713,22 +792,6 @@ def member_travel_location_check(
         None,
     )
     if overlapping is None:
-        same_day = travel_window_on_date(start, availability)
-        if same_day is not None:
-            allowed_locations = {"remote", "travel_hotel"}
-            if same_day.location_id:
-                allowed_locations.add(same_day.location_id)
-            passed = candidate_location_id in allowed_locations
-            return ConstraintCheck(
-                name="member_travel_location",
-                passed=passed,
-                reason=(
-                    f"Candidate location {candidate_location_id} is allowed on member travel day."
-                    if passed
-                    else f"Candidate location {candidate_location_id} rejected on member travel day; "
-                    f"allowed locations are {sorted(allowed_locations)}."
-                ),
-            )
         return ConstraintCheck(
             name="member_travel_location",
             passed=True,
@@ -764,9 +827,7 @@ def active_travel_required_check(
             reason="Activity does not require an active travel window.",
         )
 
-    active_travel = active_travel_window(start, end, availability) or travel_window_on_date(
-        start, availability
-    )
+    active_travel = active_travel_window(start, end, availability)
     return ConstraintCheck(
         name="active_travel_required",
         passed=active_travel is not None,

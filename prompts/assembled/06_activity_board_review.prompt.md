@@ -1492,9 +1492,64 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
   ],
   "travel_time_rules": [
     {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "restaurant"
+    },
+    {
+      "from_location_id": "restaurant",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 25,
+      "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 25,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "office",
+      "minutes": 40,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 40,
+      "to_location_id": "office"
+    },
+    {
       "from_location_id": "office",
       "minutes": 15,
       "to_location_id": "gym"
+    },
+    {
+      "from_location_id": "gym",
+      "minutes": 15,
+      "to_location_id": "office"
+    },
+    {
+      "from_location_id": "clinic",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "clinic"
+    },
+    {
+      "from_location_id": "lab",
+      "minutes": 30,
+      "to_location_id": "home"
+    },
+    {
+      "from_location_id": "home",
+      "minutes": 30,
+      "to_location_id": "lab"
     }
   ],
   "travel_windows": [
@@ -1699,7 +1754,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Covers core structured breakfast at home with chef prep or low-prep fallback.",
-        "Substitution counts toward weekly meal target if chef prep is unavailable."
+        "Substitution counts toward weekly meal target if chef prep is unavailable.",
+        "If a fasting lab draw is scheduled before breakfast, replace breakfast with act_b01_breakfast_skip_for_fasting_lab and record the skip reason."
       ],
       "goal_action_ids": [
         "ga_structured_meals_weekly"
@@ -1726,6 +1782,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "dining_source": "home",
         "duration_minutes": 20,
         "facilitator_type": "chef",
+        "fasting_lab_scheduling_constraint": {
+          "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+          "calendar_skip_reason_required": true,
+          "do_not_schedule_before_fasting_lab_same_day": true,
+          "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "skip_reason_code": "fasting_lab_same_morning"
+        },
         "food_provider_id": "provider_chef_01",
         "frequency": {
           "count": 5,
@@ -1764,6 +1827,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "home",
+          "facilitator_type": "chef",
+          "meal_slot": "breakfast",
+          "prep_source": "chef_prepped"
+        },
         "meal_slot": "breakfast",
         "metrics_to_collect": [
           "meal_completion",
@@ -1783,9 +1852,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "share_with_provider_types": [
           "dietitian"
         ],
-        "skip_adjustment": false,
+        "skip_adjustment": {
+          "allowed_for_fasting_lab": true,
+          "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+          "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+        },
         "substitution_activity_ids": [
-          "act_b01_breakfast_home_lowprep"
+          "act_b01_breakfast_home_lowprep",
+          "act_b01_breakfast_skip_for_fasting_lab"
         ],
         "title": "Chef-prepared high-protein breakfast",
         "weekly_primary_cap": 4
@@ -1806,6 +1880,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "dining_source": "home",
           "duration_minutes": 10,
           "facilitator_type": "member",
+          "fasting_lab_scheduling_constraint": {
+            "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+            "calendar_skip_reason_required": true,
+            "do_not_schedule_before_fasting_lab_same_day": true,
+            "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+            "skip_reason_code": "fasting_lab_same_morning"
+          },
           "frequency": {
             "count": 0,
             "preferred_days": [],
@@ -1837,6 +1918,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "home",
+            "facilitator_type": "member",
+            "meal_slot": "breakfast",
+            "prep_source": "member_assembled"
+          },
           "meal_slot": "breakfast",
           "metrics_to_collect": [
             "meal_completion",
@@ -1855,7 +1942,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "share_with_provider_types": [
             "dietitian"
           ],
-          "skip_adjustment": false,
+          "skip_adjustment": {
+            "allowed_for_fasting_lab": true,
+            "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+            "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+          },
           "substitution_activity_ids": [],
           "substitution_for_activity_id": "act_b01_breakfast_chef_home_primary",
           "substitution_notes": "Preserves structured, high-protein breakfast intent when chef prep is unavailable or time is limited.",
@@ -1873,6 +1964,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prefer_activity_id": "act_b01_breakfast_home_lowprep",
           "reason": "Allows structured breakfast completion when chef prep is not feasible or time is constrained.",
           "when": "chef unavailable or member has early meeting"
+        },
+        {
+          "prefer_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "reason": "Breakfast would break the 8-hour fasting requirement for same-morning metabolic labs.",
+          "when": "fasting lab draw is scheduled before breakfast on the same day"
         }
       ]
     },
@@ -1889,7 +1985,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Backup for breakfast when at office early or home prep unavailable.",
-        "Does not count toward core meal target unless explicitly scheduled as a structured meal."
+        "Does not count toward core meal target unless explicitly scheduled as a structured meal.",
+        "If a fasting lab draw is scheduled before breakfast, replace breakfast with act_b01_breakfast_skip_for_fasting_lab and record the skip reason.",
+        "On WFH dates, do not schedule office-location meals; use home fallback or reject with wfh_no_office_location_activity."
       ],
       "goal_action_ids": [
         "ga_structured_meals_weekly"
@@ -1917,6 +2015,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "dining_source": "office",
         "duration_minutes": 10,
         "facilitator_type": "chef",
+        "fasting_lab_scheduling_constraint": {
+          "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+          "calendar_skip_reason_required": true,
+          "do_not_schedule_before_fasting_lab_same_day": true,
+          "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "skip_reason_code": "fasting_lab_same_morning"
+        },
         "food_provider_id": "provider_chef_01",
         "frequency": {
           "count": 0,
@@ -1950,6 +2055,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "office",
+          "facilitator_type": "chef",
+          "meal_slot": "breakfast",
+          "prep_source": "chef_prepped"
+        },
         "meal_slot": "breakfast",
         "metrics_to_collect": [
           "meal_completion",
@@ -1966,11 +2077,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "share_with_provider_types": [
           "dietitian"
         ],
-        "skip_adjustment": false,
+        "skip_adjustment": {
+          "allowed_for_fasting_lab": true,
+          "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+          "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+        },
         "substitution_activity_ids": [
-          "act_b01_breakfast_office_member_assembled"
+          "act_b01_breakfast_office_member_assembled",
+          "act_b01_breakfast_skip_for_fasting_lab",
+          "act_b01_breakfast_home_lowprep"
         ],
-        "title": "Office-delivered breakfast"
+        "title": "Office-delivered breakfast",
+        "wfh_scheduling_constraint": {
+          "calendar_rejection_reason_required_if_no_substitution": true,
+          "on_member_location_home_day": "do_not_schedule_office_location",
+          "preferred_substitution_activity_id": "act_b01_breakfast_home_lowprep",
+          "rejection_reason_code": "wfh_no_office_location_activity"
+        }
       },
       "substitution_activities": [
         {
@@ -1989,6 +2112,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "dining_source": "office",
           "duration_minutes": 10,
           "facilitator_type": "member",
+          "fasting_lab_scheduling_constraint": {
+            "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+            "calendar_skip_reason_required": true,
+            "do_not_schedule_before_fasting_lab_same_day": true,
+            "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+            "skip_reason_code": "fasting_lab_same_morning"
+          },
           "frequency": {
             "count": 0,
             "preferred_days": [],
@@ -2021,6 +2151,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "office",
+            "facilitator_type": "member",
+            "meal_slot": "breakfast",
+            "prep_source": "member_assembled",
+            "structured_meal": true
+          },
           "meal_slot": "breakfast",
           "metrics_to_collect": [
             "meal_completion"
@@ -2036,7 +2173,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "share_with_provider_types": [
             "dietitian"
           ],
-          "skip_adjustment": false,
+          "skip_adjustment": {
+            "allowed_for_fasting_lab": true,
+            "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+            "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+          },
           "substitution_activity_ids": [],
           "substitution_for_activity_id": "act_b01_breakfast_office_delivery_primary",
           "substitution_notes": "Preserves breakfast intent at office when delivery is unavailable or time is limited.",
@@ -2044,7 +2185,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "prep_unavailable",
             "time_conflict"
           ],
-          "title": "Member-assembled breakfast at office"
+          "title": "Simple high-protein breakfast at office"
         }
       ],
       "substitution_rules": [
@@ -2052,6 +2193,16 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prefer_activity_id": "act_b01_breakfast_office_member_assembled",
           "reason": "Allows member to still complete a breakfast at office when delivery fails or is delayed.",
           "when": "office delivery unavailable or member arrives before delivery window"
+        },
+        {
+          "prefer_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "reason": "Breakfast would break the 8-hour fasting requirement for same-morning metabolic labs.",
+          "when": "fasting lab draw is scheduled before breakfast on the same day"
+        },
+        {
+          "prefer_activity_id": "act_b01_breakfast_home_lowprep",
+          "reason": "WFH day makes office-location meal invalid; use home meal fallback instead.",
+          "when": "member_location override is home or WFH day is active"
         }
       ]
     },
@@ -2068,7 +2219,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Travel hotel breakfast (buffet or room service) as substitution for structured home breakfast.",
-        "Does not add to normal-week denominator; supports travel continuity."
+        "Does not add to normal-week denominator; supports travel continuity.",
+        "If a fasting lab draw is scheduled before breakfast, replace breakfast with act_b01_breakfast_skip_for_fasting_lab and record the skip reason."
       ],
       "goal_action_ids": [
         "ga_structured_meals_weekly"
@@ -2096,6 +2248,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "dining_source": "hotel_buffet",
         "duration_minutes": 15,
         "facilitator_type": "member",
+        "fasting_lab_scheduling_constraint": {
+          "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+          "calendar_skip_reason_required": true,
+          "do_not_schedule_before_fasting_lab_same_day": true,
+          "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "skip_reason_code": "fasting_lab_same_morning"
+        },
         "frequency": {
           "count": 0,
           "preferred_days": [],
@@ -2128,6 +2287,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_006"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "hotel_buffet",
+          "facilitator_type": "member",
+          "meal_slot": "breakfast",
+          "prep_source": "none"
+        },
         "meal_slot": "breakfast",
         "metrics_to_collect": [
           "meal_completion",
@@ -2144,9 +2309,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "share_with_provider_types": [
           "dietitian"
         ],
-        "skip_adjustment": false,
+        "skip_adjustment": {
+          "allowed_for_fasting_lab": true,
+          "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+          "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+        },
         "substitution_activity_ids": [
-          "act_b01_breakfast_travel_hotel_restaurant"
+          "act_b01_breakfast_travel_hotel_restaurant",
+          "act_b01_breakfast_skip_for_fasting_lab"
         ],
         "title": "Hotel buffet or room-service breakfast (travel)"
       },
@@ -2166,6 +2336,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "dining_source": "restaurant",
           "duration_minutes": 15,
           "facilitator_type": "member",
+          "fasting_lab_scheduling_constraint": {
+            "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+            "calendar_skip_reason_required": true,
+            "do_not_schedule_before_fasting_lab_same_day": true,
+            "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+            "skip_reason_code": "fasting_lab_same_morning"
+          },
           "frequency": {
             "count": 0,
             "preferred_days": [],
@@ -2198,6 +2375,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_006"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "restaurant",
+            "facilitator_type": "member",
+            "meal_slot": "breakfast",
+            "prep_source": "none"
+          },
           "meal_slot": "breakfast",
           "metrics_to_collect": [
             "meal_completion"
@@ -2213,7 +2396,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "share_with_provider_types": [
             "dietitian"
           ],
-          "skip_adjustment": false,
+          "skip_adjustment": {
+            "allowed_for_fasting_lab": true,
+            "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+            "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+          },
           "substitution_activity_ids": [],
           "substitution_for_activity_id": "act_b01_breakfast_travel_hotel_primary",
           "substitution_notes": "Preserves travel breakfast intent when hotel buffet or room service is unavailable.",
@@ -2231,6 +2418,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prefer_activity_id": "act_b01_breakfast_travel_hotel_restaurant",
           "reason": "Allows Marcus to complete breakfast during travel when hotel options are not available.",
           "when": "hotel buffet or room service unavailable during travel"
+        },
+        {
+          "prefer_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "reason": "Breakfast would break the 8-hour fasting requirement for same-morning metabolic labs.",
+          "when": "fasting lab draw is scheduled before breakfast on the same day"
         }
       ]
     },
@@ -2247,7 +2439,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Covers core structured lunch via office delivery or chef-prepped packed meal.",
-        "Substitution counts toward weekly meal target if chef or delivery is unavailable."
+        "Substitution counts toward weekly meal target if chef or delivery is unavailable.",
+        "On WFH dates, do not schedule office-location meals; use home fallback or reject with wfh_no_office_location_activity."
       ],
       "goal_action_ids": [
         "ga_structured_meals_weekly"
@@ -2315,6 +2508,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "office",
+          "facilitator_type": "chef",
+          "meal_slot": "lunch",
+          "prep_source": "chef_prepped"
+        },
         "meal_slot": "lunch",
         "metrics_to_collect": [
           "meal_completion",
@@ -2334,10 +2533,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "skip_adjustment": false,
         "substitution_activity_ids": [
-          "act_b01_lunch_office_member_assembled"
+          "act_b01_lunch_office_member_assembled",
+          "act_b01_lunch_member_assembled_home_primary"
         ],
         "title": "Chef-prepped or delivered office lunch",
-        "weekly_primary_cap": 4
+        "weekly_primary_cap": 4,
+        "wfh_scheduling_constraint": {
+          "calendar_rejection_reason_required_if_no_substitution": true,
+          "on_member_location_home_day": "do_not_schedule_office_location",
+          "preferred_substitution_activity_id": "act_b01_lunch_member_assembled_home_primary",
+          "rejection_reason_code": "wfh_no_office_location_activity"
+        }
       },
       "substitution_activities": [
         {
@@ -2388,6 +2594,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "office",
+            "facilitator_type": "member",
+            "meal_slot": "lunch",
+            "prep_source": "member_assembled",
+            "structured_meal": true
+          },
           "meal_slot": "lunch",
           "metrics_to_collect": [
             "meal_completion"
@@ -2411,7 +2624,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "prep_unavailable",
             "time_conflict"
           ],
-          "title": "Member-assembled lunch at office",
+          "title": "Balanced office lunch bowl",
           "variety_role": "planned_variety",
           "weekly_variety_min": 1
         }
@@ -2421,6 +2634,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prefer_activity_id": "act_b01_lunch_office_member_assembled",
           "reason": "Allows Marcus to complete a structured lunch at office when chef or delivery is unavailable.",
           "when": "chef or office delivery unavailable or time-constrained"
+        },
+        {
+          "prefer_activity_id": "act_b01_lunch_member_assembled_home_primary",
+          "reason": "WFH day makes office-location meal invalid; use home meal fallback instead.",
+          "when": "member_location override is home or WFH day is active"
         }
       ]
     },
@@ -2497,6 +2715,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_006"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "restaurant",
+          "facilitator_type": "member",
+          "meal_slot": "lunch",
+          "prep_source": "none"
+        },
         "meal_slot": "lunch",
         "metrics_to_collect": [
           "meal_completion",
@@ -2567,6 +2791,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_006"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "room_service",
+            "facilitator_type": "member",
+            "meal_slot": "lunch",
+            "prep_source": "none"
+          },
           "meal_slot": "lunch",
           "metrics_to_collect": [
             "meal_completion"
@@ -2675,6 +2905,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "home",
+          "facilitator_type": "member",
+          "meal_slot": "lunch",
+          "prep_source": "member_assembled",
+          "structured_meal": true
+        },
         "meal_slot": "lunch",
         "metrics_to_collect": [
           "meal_completion"
@@ -2696,7 +2933,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b01_lunch_home_no_prep"
         ],
-        "title": "Member-assembled lunch at home"
+        "title": "Simple high-protein lunch at home"
       },
       "substitution_activities": [
         {
@@ -2746,6 +2983,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "home",
+            "facilitator_type": "member",
+            "meal_slot": "lunch",
+            "prep_source": "none",
+            "structured_meal": true
+          },
           "meal_slot": "lunch",
           "metrics_to_collect": [
             "meal_completion"
@@ -2768,7 +3012,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "substitution_reason_codes": [
             "prep_unavailable"
           ],
-          "title": "No-prep lunch at home"
+          "title": "Quick protein lunch at home"
         }
       ],
       "substitution_rules": [
@@ -2858,6 +3102,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "home",
+          "facilitator_type": "chef",
+          "meal_slot": "dinner",
+          "prep_source": "chef_prepped"
+        },
         "meal_slot": "dinner",
         "metrics_to_collect": [
           "meal_completion",
@@ -2932,6 +3182,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "restaurant",
+            "facilitator_type": "member",
+            "meal_slot": "dinner",
+            "prep_source": "none",
+            "structured_meal": true
+          },
           "meal_slot": "dinner",
           "metrics_to_collect": [
             "meal_completion"
@@ -2955,7 +3212,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "prep_unavailable",
             "time_conflict"
           ],
-          "title": "Structured restaurant dinner",
+          "title": "Balanced restaurant dinner",
           "variety_role": "planned_variety",
           "weekly_variety_min": 1
         }
@@ -3040,6 +3297,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "restaurant",
+          "facilitator_type": "member",
+          "meal_slot": "dinner",
+          "prep_source": "none",
+          "structured_meal": true
+        },
         "meal_slot": "dinner",
         "metrics_to_collect": [
           "meal_completion"
@@ -3059,7 +3323,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b01_dinner_restaurant_no_prep"
         ],
-        "title": "Structured restaurant dinner"
+        "title": "Balanced restaurant dinner"
       },
       "substitution_activities": [
         {
@@ -3109,6 +3373,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "restaurant",
+            "facilitator_type": "member",
+            "meal_slot": "dinner",
+            "prep_source": "none",
+            "structured_meal": true
+          },
           "meal_slot": "dinner",
           "metrics_to_collect": [
             "meal_completion"
@@ -3132,7 +3403,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "prep_unavailable",
             "time_conflict"
           ],
-          "title": "No-prep restaurant dinner"
+          "title": "Quick restaurant dinner"
         }
       ],
       "substitution_rules": [
@@ -3216,6 +3487,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_006"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": "restaurant",
+          "facilitator_type": "member",
+          "meal_slot": "dinner",
+          "prep_source": "none"
+        },
         "meal_slot": "dinner",
         "metrics_to_collect": [
           "meal_completion",
@@ -3286,6 +3563,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_006"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": "room_service",
+            "facilitator_type": "member",
+            "meal_slot": "dinner",
+            "prep_source": "none"
+          },
           "meal_slot": "dinner",
           "metrics_to_collect": [
             "meal_completion"
@@ -3336,7 +3619,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Supports meal timing and structure around fasting labs.",
         "Does not count as a meal; only supports meal scheduling logic.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Fasting lab days must produce an explicit breakfast skip row with skip_reason_code=fasting_lab_same_morning when breakfast would otherwise occur before labs."
       ],
       "goal_action_ids": [
         "ga_structured_meals_weekly"
@@ -3391,6 +3675,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_007"
         ],
         "load_level": "low",
+        "meal_metadata": {
+          "dining_source": null,
+          "facilitator_type": "member",
+          "meal_slot": null,
+          "prep_source": null
+        },
         "metrics_to_collect": [
           "meal_timing_adherence"
         ],
@@ -3406,7 +3696,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "skip_adjustment": false,
         "substitution_activity_ids": [
-          "act_b01_fasting_aware_meal_support_remote_check_sub"
+          "act_b01_fasting_aware_meal_support_remote_check_sub",
+          "act_b01_breakfast_skip_for_fasting_lab"
         ],
         "title": "Fasting-aware meal timing support"
       },
@@ -3455,10 +3746,26 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_007"
           ],
           "load_level": "low",
+          "meal_metadata": {
+            "dining_source": null,
+            "facilitator_type": "member",
+            "meal_slot": null,
+            "prep_source": null
+          },
           "metrics_to_collect": [
             "meal_timing_adherence"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "lab schedule"
+            ]
+          },
+          "prep_required": true,
           "priority": 88,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -3485,6 +3792,105 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "title": "Remote fasting meal timing check",
           "variety_role": "planned_variety",
           "weekly_variety_min": 1
+        },
+        {
+          "activity_family_id": "b01_nutrition_fasting_aware_meal_support",
+          "activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "activity_type": "food",
+          "allowed_locations": [
+            "home",
+            "clinic",
+            "remote"
+          ],
+          "care_context_required": [
+            "lab schedule",
+            "fasting start time"
+          ],
+          "dependencies": [
+            {
+              "activity_id": "act_b05_clinical_lab_draw_due_week_primary",
+              "must_happen": "after",
+              "notes": "Use only on a day with a scheduled fasting lab draw before the normal breakfast window closes.",
+              "type": "same_day_activity_context"
+            }
+          ],
+          "details": "Explicit skipped breakfast row for a fasting metabolic lab draw. Water only until the lab draw is complete; first caloric meal should be scheduled after labs.",
+          "duration_minutes": 0,
+          "facilitator_type": "member",
+          "frequency": {
+            "count": 0,
+            "preferred_days": [],
+            "preferred_time_windows": [
+              "06:30-10:00"
+            ],
+            "type": "constraint_scoped"
+          },
+          "goal_contributions": [
+            {
+              "counts_toward_weekly_target": false,
+              "goal_action_id": "ga_structured_meals_weekly",
+              "goal_id": "goal_metabolic_health",
+              "notes": "Skipped breakfast does not count as a structured meal; it preserves fasting validity for metabolic lab draw.",
+              "role": "skip",
+              "unit": "activity",
+              "value": 0
+            }
+          ],
+          "goal_tags": [
+            "fasting",
+            "breakfast",
+            "skip",
+            "metabolic_review"
+          ],
+          "is_primary": false,
+          "journey_phase_applicability": [
+            "phase_marcus_001",
+            "phase_marcus_007"
+          ],
+          "load_level": "low",
+          "meal_slot": "breakfast",
+          "metrics_to_collect": [
+            "skip_reason_recorded",
+            "fasting_confirmed"
+          ],
+          "prep_metadata": {
+            "calendar_skip_reason_required": true,
+            "due_before_minutes": 720,
+            "missing_data_policy": "do_not_schedule_skip_without_lab_draw",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "fasting_lab_breakfast_skip",
+            "required_inputs": [
+              "lab schedule",
+              "fasting start time"
+            ],
+            "skip_reason_code": "fasting_lab_same_morning"
+          },
+          "prep_required": true,
+          "priority": 10,
+          "raw_clinical_data_required": false,
+          "remote_allowed": true,
+          "required_equipment_ids": [],
+          "required_provider_ids": [],
+          "same_day_repeat_allowed": false,
+          "share_with_provider_types": [
+            "dietitian",
+            "physician"
+          ],
+          "skip_adjustment": {
+            "is_skip": true,
+            "reschedule_first_meal_after_activity": true,
+            "skip_reason_code": "fasting_lab_same_morning",
+            "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting.",
+            "valid_only_before_activity_id": "act_b05_clinical_lab_draw_due_week_primary"
+          },
+          "substitution_activity_ids": [],
+          "substitution_for_activity_id": "act_b01_breakfast_chef_home_primary",
+          "substitution_notes": "Use instead of breakfast when a fasting lab draw is scheduled before breakfast.",
+          "substitution_reason_codes": [
+            "fasting_lab_same_morning"
+          ],
+          "title": "Skip breakfast for fasting lab draw"
         }
       ],
       "substitution_rules": [
@@ -3492,6 +3898,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prefer_activity_id": "act_b01_fasting_aware_meal_support_remote_check_sub",
           "reason": "Preserves fasting-aware meal timing support when the member is remote or lab timing shifts.",
           "when": "remote_delivery_needed or time_conflict"
+        },
+        {
+          "prefer_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+          "reason": "Preserves 8-hour fasting validity for metabolic lab draw and creates an explicit skipped-breakfast calendar row.",
+          "when": "fasting lab draw is scheduled before breakfast or before first caloric meal"
         }
       ]
     },
@@ -3576,7 +3987,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "protocol_completion",
           "miss_reason"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "context_review",
+          "required_inputs": [
+            "current supplement protocol"
+          ]
+        },
+        "prep_required": true,
         "priority": 90,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -3648,7 +4069,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "protocol_completion",
             "miss_reason"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "current supplement protocol"
+            ]
+          },
+          "prep_required": true,
           "priority": 93,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -3753,7 +4184,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "adherence_score",
           "barrier_notes"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "context_review",
+          "required_inputs": [
+            "travel window",
+            "recent meal log"
+          ]
+        },
+        "prep_required": true,
         "priority": 95,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -3788,7 +4230,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "dependencies": [],
           "details": "Asynchronous dietitian or coach review of travel meal photos and notes to keep structured eating aligned with metabolic goals.",
           "duration_minutes": 10,
-          "facilitator_type": "remote_coach_pool",
+          "facilitator_type": "dietitian",
           "frequency": {
             "count": 1,
             "preferred_time_windows": [
@@ -3819,7 +4261,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "adherence_score",
             "barrier_notes"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "travel window",
+              "recent meal log"
+            ]
+          },
+          "prep_required": true,
           "priority": 98,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -3868,7 +4321,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Primary gym-based aerobic session with realistic home and time-based substitutions.",
-        "Substitutions count toward the same weekly aerobic conditioning target."
+        "Substitutions count toward the same weekly aerobic conditioning target.",
+        "Core aerobic plan target is 2 sessions/week across gym + home aerobic families."
       ],
       "goal_action_ids": [
         "ga_aerobic_conditioning_weekly"
@@ -4129,7 +4583,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Enables a shorter session to maintain aerobic intent.",
           "when": "Time conflict prevents full session (e.g., after office hours with travel buffer)"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b02_cardio_zone2_home",
@@ -4144,7 +4606,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Primary home-based aerobic session with travel-compatible substitution.",
-        "Substitution counts toward weekly aerobic conditioning target."
+        "Substitution counts toward weekly aerobic conditioning target.",
+        "Core aerobic plan target is 2 sessions/week across gym + home aerobic families."
       ],
       "goal_action_ids": [
         "ga_aerobic_conditioning_weekly"
@@ -4167,6 +4630,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "dependencies": [],
         "details": "Home-based aerobic session using stationary bike, brisk walking, or bodyweight circuit. Self-led, knee-safe.",
+        "does_not_count_toward_goal_action_ids": [
+          "ga_strength_sessions_weekly"
+        ],
         "duration_minutes": 40,
         "facilitator_type": "self",
         "frequency": {
@@ -4232,7 +4698,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b02_cardio_zone2_home_travel_sub"
         ],
-        "title": "Zone 2 aerobic session at home (cycling or brisk walk)"
+        "title": "Zone 2 aerobic session at home (cycling or brisk walk)",
+        "walking_activity_metadata": {
+          "counts_as_full_aerobic_session": true,
+          "counts_as_strength": false,
+          "walk_only_week_reason_field": "calendar_week_validation_reason",
+          "walk_only_week_requires_reason": true
+        }
       },
       "substitution_activities": [
         {
@@ -4325,7 +4797,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Preserves aerobic conditioning using travel-compatible bodyweight/band circuit.",
           "when": "Home unavailable due to travel or facility issue"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b02_cardio_zone2_travel_hotel_gym",
@@ -4378,13 +4858,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_aerobic_conditioning_weekly",
             "goal_id": "goal_metabolic_health",
-            "notes": "Travel substitution; supports continuity but does not add to denominator.",
-            "role": "support",
+            "notes": "Travel hotel gym aerobic session counts toward weekly aerobic conditioning.",
+            "role": "core",
             "unit": "activity",
-            "value": 0
+            "value": 1
           },
           {
             "counts_toward_weekly_target": true,
@@ -4569,13 +5049,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_aerobic_conditioning_weekly",
             "goal_id": "goal_metabolic_health",
-            "notes": "Travel substitution; supports continuity but does not add to denominator.",
-            "role": "support",
+            "notes": "Hotel pool aerobic session counts toward weekly aerobic conditioning.",
+            "role": "core",
             "unit": "activity",
-            "value": 0
+            "value": 1
           },
           {
             "counts_toward_weekly_target": true,
@@ -4637,6 +5117,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "dependencies": [],
           "details": "Brisk walking session outside or in hotel corridors during travel when no equipment is available.",
+          "does_not_count_toward_goal_action_ids": [
+            "ga_strength_sessions_weekly"
+          ],
           "duration_minutes": 30,
           "facilitator_type": "self",
           "frequency": {
@@ -4651,6 +5134,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             {
               "counts_toward_weekly_target": true,
               "goal_action_id": "ga_aerobic_conditioning_weekly",
+              "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
               "value": 1
             }
           ],
@@ -4663,6 +5147,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "journey_phase_applicability": [
             "phase_marcus_006"
           ],
+          "last_resort_substitution_metadata": {
+            "avoid_week_with_only_walks_unless_impossible": true,
+            "calendar_reason_required_if_scheduled": true,
+            "last_resort": true,
+            "prefer_non_walk_aerobic_before_walk": true,
+            "reason_code_examples": [
+              "facility_unavailable",
+              "equipment_unavailable",
+              "travel_window",
+              "time_conflict",
+              "pain_or_fatigue"
+            ]
+          },
           "load_level": "low",
           "metrics_to_collect": [
             "completion",
@@ -4693,7 +5190,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "facility_unavailable",
             "equipment_unavailable"
           ],
-          "title": "Brisk walking session near hotel"
+          "title": "Brisk walking session near hotel",
+          "walking_activity_metadata": {
+            "counts_as_full_aerobic_session": true,
+            "counts_as_strength": false,
+            "walk_only_week_reason_field": "calendar_week_validation_reason",
+            "walk_only_week_requires_reason": true
+          }
         }
       ],
       "substitution_rules": [
@@ -4755,13 +5258,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_aerobic_conditioning_weekly",
             "goal_id": "goal_metabolic_health",
-            "notes": "Travel substitution; supports continuity but does not add to denominator.",
-            "role": "support",
+            "notes": "Hotel pool aerobic session counts toward weekly aerobic conditioning.",
+            "role": "core",
             "unit": "activity",
-            "value": 0
+            "value": 1
           },
           {
             "counts_toward_weekly_target": true,
@@ -4905,8 +5408,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "unit_label": "sessions"
       },
       "family_validation_notes": [
-        "Office walking breaks with remote work substitution.",
-        "Support-only; does not count toward aerobic session denominator."
+        "Office walking breaks are support-only and do not count toward aerobic session denominator.",
+        "Walking breaks never count toward strength sessions.",
+        "On WFH dates, office walking breaks must be converted to home walking breaks or rejected/unscheduled with a reason."
       ],
       "goal_action_ids": [
         "ga_aerobic_conditioning_weekly"
@@ -4929,6 +5433,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "dependencies": [],
         "details": "Short walking or movement break during office hours to support aerobic activity when full session is not possible.",
+        "does_not_count_toward_goal_action_ids": [
+          "ga_strength_sessions_weekly"
+        ],
         "duration_minutes": 10,
         "facilitator_type": "self",
         "frequency": {
@@ -4949,7 +5456,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "counts_toward_weekly_target": false,
             "goal_action_id": "ga_aerobic_conditioning_weekly",
             "goal_id": "goal_metabolic_health",
-            "notes": "Office walking breaks support aerobic adherence but do not count as full session.",
+            "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
             "role": "support",
             "unit": "activity",
             "value": 0
@@ -4966,6 +5473,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "phase_marcus_003",
           "phase_marcus_007"
         ],
+        "last_resort_substitution_metadata": {
+          "avoid_week_with_only_walks_unless_impossible": true,
+          "calendar_reason_required_if_scheduled": true,
+          "last_resort": true,
+          "prefer_non_walk_aerobic_before_walk": true,
+          "reason_code_examples": [
+            "facility_unavailable",
+            "equipment_unavailable",
+            "travel_window",
+            "time_conflict",
+            "pain_or_fatigue"
+          ]
+        },
         "load_level": "low",
         "metrics_to_collect": [
           "completion"
@@ -4992,7 +5512,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b02_cardio_walking_office_remote_sub"
         ],
-        "title": "Short walking or movement break at office"
+        "title": "Short walking or movement break at office",
+        "walking_activity_metadata": {
+          "counts_as_full_aerobic_session": false,
+          "counts_as_strength": false,
+          "walk_only_week_reason_field": "calendar_week_validation_reason",
+          "walk_only_week_requires_reason": true
+        },
+        "wfh_scheduling_constraint": {
+          "calendar_rejection_reason_required": true,
+          "if_substitution_unavailable": "reject_or_unschedule",
+          "on_member_location_home_day": "do_not_schedule_office_location",
+          "preferred_substitution_activity_id": "act_b02_cardio_walking_office_remote_sub",
+          "rejection_reason_code": "wfh_no_office_location_activity"
+        }
       },
       "substitution_activities": [
         {
@@ -5000,13 +5533,16 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "activity_id": "act_b02_cardio_walking_office_remote_sub",
           "activity_type": "fitness",
           "allowed_locations": [
-            "remote"
+            "home"
           ],
           "care_context_required": [
             "current aerobic goal"
           ],
           "dependencies": [],
-          "details": "Short walking break during remote work days to support aerobic adherence.",
+          "details": "Short walking or movement break at home during WFH days to support movement without scheduling an office-location activity.",
+          "does_not_count_toward_goal_action_ids": [
+            "ga_strength_sessions_weekly"
+          ],
           "duration_minutes": 10,
           "facilitator_type": "self",
           "frequency": {
@@ -5027,7 +5563,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
               "counts_toward_weekly_target": false,
               "goal_action_id": "ga_aerobic_conditioning_weekly",
               "goal_id": "goal_metabolic_health",
-              "notes": "Remote walking breaks support adherence but do not count as full session.",
+              "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
               "role": "support",
               "unit": "activity",
               "value": 0
@@ -5036,7 +5572,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "goal_tags": [
             "aerobic_conditioning",
             "walking",
-            "remote_support"
+            "home_support",
+            "wfh"
           ],
           "is_primary": false,
           "journey_phase_applicability": [
@@ -5044,6 +5581,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_003",
             "phase_marcus_007"
           ],
+          "last_resort_substitution_metadata": {
+            "avoid_week_with_only_walks_unless_impossible": true,
+            "calendar_reason_required_if_scheduled": true,
+            "last_resort": true,
+            "prefer_non_walk_aerobic_before_walk": true,
+            "reason_code_examples": [
+              "facility_unavailable",
+              "equipment_unavailable",
+              "travel_window",
+              "time_conflict",
+              "pain_or_fatigue"
+            ]
+          },
           "load_level": "low",
           "metrics_to_collect": [
             "completion"
@@ -5051,7 +5601,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "prep_required": false,
           "priority": 113,
           "raw_clinical_data_required": false,
-          "remote_allowed": true,
+          "remote_allowed": false,
           "required_equipment_ids": [
             "eq_bodyweight"
           ],
@@ -5067,21 +5617,47 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           },
           "substitution_activity_ids": [],
           "substitution_for_activity_id": "act_b02_cardio_walking_office_primary",
-          "substitution_notes": "Preserves aerobic support intent when office is unavailable.",
+          "substitution_notes": "Preserves movement-break intent on WFH days without using office location.",
           "substitution_reason_codes": [
+            "wfh_location_override",
             "facility_unavailable",
             "time_conflict"
           ],
-          "title": "Short walking break during remote work"
+          "title": "Short walking break at home during WFH",
+          "walking_activity_metadata": {
+            "counts_as_full_aerobic_session": false,
+            "counts_as_strength": false,
+            "walk_only_week_reason_field": "calendar_week_validation_reason",
+            "walk_only_week_requires_reason": true
+          },
+          "wfh_scheduling_constraint": {
+            "calendar_substitution_reason_required": true,
+            "replaces_office_location_activity": true,
+            "substitution_reason_code": "wfh_location_override",
+            "valid_on_member_location_home_day": true
+          }
         }
       ],
       "substitution_rules": [
         {
           "prefer_activity_id": "act_b02_cardio_walking_office_remote_sub",
-          "reason": "Preserves aerobic support intent with remote walking breaks.",
+          "reason": "WFH day means office-location activities are invalid; use home walking break instead.",
+          "when": "member_location override is home or WFH day is active"
+        },
+        {
+          "prefer_activity_id": "act_b02_cardio_walking_office_remote_sub",
+          "reason": "Preserves aerobic support intent with home walking breaks.",
           "when": "Office unavailable or working remotely"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b02_cardio_remote_coach_progression_review",
@@ -5096,8 +5672,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Remote coach review is support-only and does not count toward aerobic session denominator.",
-        "No substitutions needed.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Review requires recent aerobic session data; do not schedule if no aerobic session log exists in the lookback window.",
+        "Asynchronous log review is the fallback when live review cannot be scheduled."
       ],
       "goal_action_ids": [
         "ga_aerobic_conditioning_weekly"
@@ -5116,21 +5692,35 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "remote"
         ],
         "care_context_required": [
-          "recent aerobic session data"
+          "recent aerobic session data",
+          "session duration",
+          "RPE",
+          "average heart rate if available",
+          "barriers or missed-session notes"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "goal_action_id": "ga_aerobic_conditioning_weekly",
+            "lookback_days": 14,
+            "minimum_sessions": 1,
+            "must_exist": true,
+            "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+            "type": "recent_session_data"
+          }
+        ],
         "details": "Remote check-in with Elyx health coach to review aerobic session adherence, barriers, and plan adjustments.",
         "duration_minutes": 20,
         "facilitator_type": "remote_coach_pool",
         "frequency": {
           "count": 1,
           "preferred_days": [
-            "first_monday"
+            "monday"
           ],
           "preferred_time_windows": [
             "09:00-09:30",
             "19:00-20:00"
           ],
+          "preferred_week": "second",
           "type": "monthly"
         },
         "goal_contributions": [
@@ -5166,7 +5756,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "coach_notes",
           "next_action"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "lookback_days": 14,
+          "minimum_recent_sessions": 1,
+          "missing_data_policy": "defer_review_until_recent_aerobic_session_data_exists",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "aerobic_progression_data_review",
+          "required_inputs": [
+            "recent aerobic session data",
+            "session duration",
+            "RPE",
+            "average heart rate if available",
+            "barriers or missed-session notes"
+          ],
+          "required_recent_activity_goal_action_id": "ga_aerobic_conditioning_weekly",
+          "requires_recent_activity_data": true
+        },
+        "prep_required": true,
         "priority": 114,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -5198,21 +5806,35 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "remote"
           ],
           "care_context_required": [
-            "recent aerobic session data"
+            "recent aerobic session data",
+            "session duration",
+            "RPE",
+            "average heart rate if available",
+            "barriers or missed-session notes"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "goal_action_id": "ga_aerobic_conditioning_weekly",
+              "lookback_days": 14,
+              "minimum_sessions": 1,
+              "must_exist": true,
+              "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+              "type": "recent_session_data"
+            }
+          ],
           "details": "Coach reviews wearable or session notes asynchronously and adjusts the next aerobic target when schedules prevent a live review.",
           "duration_minutes": 10,
           "facilitator_type": "remote_coach_pool",
           "frequency": {
             "count": 1,
             "preferred_days": [
-              "first_monday"
+              "monday"
             ],
             "preferred_time_windows": [
               "09:00-09:30",
               "19:00-20:00"
             ],
+            "preferred_week": "second",
             "type": "monthly"
           },
           "goal_contributions": [
@@ -5248,7 +5870,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "coach_notes",
             "next_action"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "lookback_days": 14,
+            "minimum_recent_sessions": 1,
+            "missing_data_policy": "defer_review_until_recent_aerobic_session_data_exists",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "aerobic_progression_data_review",
+            "required_inputs": [
+              "recent aerobic session data",
+              "session duration",
+              "RPE",
+              "average heart rate if available",
+              "barriers or missed-session notes"
+            ],
+            "required_recent_activity_goal_action_id": "ga_aerobic_conditioning_weekly",
+            "requires_recent_activity_data": true
+          },
+          "prep_required": true,
           "priority": 117,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -5573,12 +6213,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "period": "weekly",
         "substitutions_count": true,
         "support_counts": false,
-        "target_units": 2,
+        "target_units": 0,
         "unit_label": "sessions"
       },
       "family_validation_notes": [
         "Facility-unavailable aerobic session with walking fallback.",
-        "Both count toward aerobic conditioning denominator if primary is blocked."
+        "Both count toward aerobic conditioning denominator if primary is blocked.",
+        "Fallback family must not create extra aerobic demand; use only when a core aerobic session is blocked."
       ],
       "goal_action_ids": [
         "ga_aerobic_conditioning_weekly"
@@ -5684,6 +6325,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "dependencies": [],
           "details": "Brisk walking session outdoors or in hotel corridors when all other aerobic options are blocked.",
+          "does_not_count_toward_goal_action_ids": [
+            "ga_strength_sessions_weekly"
+          ],
           "duration_minutes": 30,
           "facilitator_type": "self",
           "frequency": {
@@ -5703,7 +6347,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
               "counts_toward_weekly_target": true,
               "goal_action_id": "ga_aerobic_conditioning_weekly",
               "goal_id": "goal_metabolic_health",
-              "notes": "Counts as aerobic conditioning if all other options are blocked.",
+              "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
               "role": "core",
               "unit": "activity",
               "value": 1
@@ -5720,6 +6364,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "phase_marcus_003",
             "phase_marcus_005"
           ],
+          "last_resort_substitution_metadata": {
+            "avoid_week_with_only_walks_unless_impossible": true,
+            "calendar_reason_required_if_scheduled": true,
+            "last_resort": true,
+            "prefer_non_walk_aerobic_before_walk": true,
+            "reason_code_examples": [
+              "facility_unavailable",
+              "equipment_unavailable",
+              "travel_window",
+              "time_conflict",
+              "pain_or_fatigue"
+            ]
+          },
           "load_level": "low",
           "metrics_to_collect": [
             "completion",
@@ -5751,7 +6408,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "equipment_unavailable",
             "time_conflict"
           ],
-          "title": "Brisk walking session (facility/equipment unavailable)"
+          "title": "Brisk walking session (facility/equipment unavailable)",
+          "walking_activity_metadata": {
+            "counts_as_full_aerobic_session": true,
+            "counts_as_strength": false,
+            "walk_only_week_reason_field": "calendar_week_validation_reason",
+            "walk_only_week_requires_reason": true
+          }
         }
       ],
       "substitution_rules": [
@@ -5760,7 +6423,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Preserves aerobic intent with brisk walking when all other options are blocked.",
           "when": "All equipment and facilities unavailable (travel, maintenance, or time conflict)"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b03_strength_trainer_gym",
@@ -5776,7 +6447,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Primary gym-based trainer session is core for weekly strength goal.",
         "Remote substitution is valid for provider/facility/time constraints.",
-        "Mobility or lower-load adjustment required if pain/fatigue emerges."
+        "Mobility or lower-load adjustment required if pain/fatigue emerges.",
+        "Core strength plan target is 2 sessions/week across trainer-led + home strength families."
       ],
       "goal_action_ids": [
         "ga_strength_sessions_weekly"
@@ -5973,7 +6645,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Remote trainer-led session preserves core strength intent using available equipment.",
           "when": "Trainer or gym facility is unavailable, or time conflict prevents in-person session."
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b03_strength_home_strength",
@@ -5989,7 +6669,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Home-based session is core for weekly strength goal.",
         "Travel-adapted substitution is valid for facility/equipment/time constraints.",
-        "Mobility or lower-load adjustment required if pain/fatigue emerges."
+        "Mobility or lower-load adjustment required if pain/fatigue emerges.",
+        "Core strength plan target is 2 sessions/week across trainer-led + home strength families."
       ],
       "goal_action_ids": [
         "ga_strength_sessions_weekly"
@@ -6017,7 +6698,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "duration_minutes": 45,
         "facilitator_type": "member",
         "frequency": {
-          "count": 2,
+          "count": 1,
           "preferred_days": [
             "tuesday",
             "sunday"
@@ -6102,7 +6783,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "duration_minutes": 35,
           "facilitator_type": "member",
           "frequency": {
-            "count": 2,
+            "count": 1,
             "preferred_days": [
               "tuesday",
               "sunday",
@@ -6186,7 +6867,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Travel-adapted session preserves strength intent using portable equipment.",
           "when": "Home or equipment is unavailable, or time conflict prevents home session."
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      }
     },
     {
       "activity_family_id": "b03_strength_hotel_gym_strength",
@@ -6259,7 +6948,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "hotel_gym",
           "travel_continuity"
         ],
-        "is_primary": false,
+        "is_primary": true,
         "journey_phase_applicability": [
           "phase_marcus_002",
           "phase_marcus_004"
@@ -6451,13 +7140,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_strength_sessions_weekly",
             "goal_id": "goal_strength_and_mobility",
-            "notes": "Bodyweight/band session supports travel continuity when no gym/equipment is available.",
-            "role": "support",
+            "notes": "Ravi-led bodyweight/band session counts toward weekly strength only for low-resource travel when no hotel gym is available.",
+            "role": "core",
             "unit": "session",
-            "value": 0
+            "value": 1
           }
         ],
         "goal_tags": [
@@ -6801,7 +7490,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Physio assessment counts toward 3-month review goal when due.",
-        "Remote substitution is valid for provider unavailability."
+        "Remote substitution is valid for provider unavailability.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -6823,9 +7513,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "recent pain escalation details",
-          "current movement plan"
+          "current movement plan",
+          "recent training load notes",
+          "mobility limitation summary"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent pain escalation details",
+              "current movement plan",
+              "recent training load notes",
+              "mobility limitation summary"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "In-person physiotherapist assessment to review knee/back status and update movement plan after travel or when clinically indicated.",
         "duration_minutes": 30,
         "facilitator_type": "physiotherapist",
@@ -6870,7 +7574,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "mobility_score",
           "provider_notes"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent pain escalation details",
+            "current movement plan",
+            "recent training load notes",
+            "mobility limitation summary"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -6903,9 +7620,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "recent pain escalation details",
-            "current movement plan"
+            "current movement plan",
+            "recent training load notes",
+            "mobility limitation summary"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent pain escalation details",
+                "current movement plan",
+                "recent training load notes",
+                "mobility limitation summary"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Remote video assessment with physiotherapist to review pain and update movement plan after escalation or travel.",
           "duration_minutes": 30,
           "facilitator_type": "physiotherapist",
@@ -6950,7 +7681,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "mobility_score",
             "provider_notes"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent pain escalation details",
+              "current movement plan",
+              "recent training load notes",
+              "mobility limitation summary"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -7332,7 +8076,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "RPE",
             "pain_level"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "recent pain/fatigue details"
+            ]
+          },
+          "prep_required": true,
           "priority": 195,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -7407,14 +8161,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "current pain/mobility status"
         ],
         "dependencies": [],
-        "details": "Remote check-in with coach or physio to review pain, mobility, and recovery after travel or missed high-load session.",
+        "details": "Physiotherapist check-in to review pain, mobility, and recovery after travel or missed high-load session.",
         "duration_minutes": 15,
-        "facilitator_type": "remote_coach_pool",
+        "facilitator_type": "physiotherapist",
         "frequency": {
           "count": 1,
+          "preferred_days": [
+            "friday"
+          ],
           "preferred_time_windows": [
-            "20:00-21:30",
+            "16:00-18:00",
             "19:00-20:00"
+          ],
+          "preferred_week": "third",
+          "preferred_weeks": [
+            "third",
+            "fourth",
+            "third"
           ],
           "type": "monthly"
         },
@@ -7449,13 +8212,24 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "mobility_score",
           "next_actions"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "context_review",
+          "required_inputs": [
+            "recent travel or skipped session details",
+            "current pain/mobility status"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
         "required_equipment_ids": [],
         "required_provider_ids": [
-          "provider_remote_coach_01"
+          "provider_physio_01"
         ],
         "same_day_repeat_allowed": false,
         "share_with_provider_types": [
@@ -7466,7 +8240,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b03_strength_mobility_pain_recovery_checkin_pain_note_sub"
         ],
-        "title": "Remote coach or physio check-in after travel or skipped session"
+        "title": "Physiotherapist recovery check-in after travel or skipped session"
       },
       "substitution_activities": [
         {
@@ -7523,7 +8297,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "mobility_score",
             "next_actions"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "recent travel or skipped session details",
+              "current pain/mobility status"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -7567,12 +8352,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "period": "weekly",
         "substitutions_count": true,
         "support_counts": false,
-        "target_units": 2,
+        "target_units": 0,
         "unit_label": "sessions"
       },
       "family_validation_notes": [
         "Trainer-unavailable strength alternative is support-only unless scheduled as core.",
-        "Remote coach substitution is valid for provider unavailability."
+        "Remote coach substitution is valid for provider unavailability.",
+        "Fallback family must not create extra strength demand; use only when a core strength session is blocked."
       ],
       "goal_action_ids": [
         "ga_strength_sessions_weekly"
@@ -7726,7 +8512,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "RPE",
             "knee_discomfort"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "current knee/back status",
+              "approved protocol"
+            ]
+          },
+          "prep_required": true,
           "priority": 198,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -7777,7 +8574,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Primary activity is a home-based evening mobility/recovery session for sleep support.",
         "Substitution is a remote-guided, shorter session for time or provider constraints.",
-        "Both count toward the weekly recovery/sleep goal."
+        "Both count toward the weekly recovery/sleep goal.",
+        "Core recovery target is 4 actions/week across evening mobility + sleep wind-down families."
       ],
       "goal_action_ids": [
         "ga_sleep_recovery_weekly"
@@ -7954,7 +8752,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Shorter remote-guided session maintains recovery intent with less time and location constraint.",
           "when": "member has late work obligations or is unable to complete full home routine"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      },
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_evening_mobility_travel",
@@ -7970,7 +8784,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Primary activity is a hotel-based evening mobility/recovery session for travel windows.",
         "Substitution is an in-room session for facility unavailability or late arrival.",
-        "Both are travel adaptations and do not count toward normal-week denominator."
+        "Both are travel adaptations and count toward recovery goals during travel weeks because fatigue management is higher priority while travelling."
       ],
       "goal_action_ids": [
         "ga_sleep_recovery_weekly",
@@ -7999,7 +8813,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "duration_minutes": 20,
         "facilitator_type": "self_or_remote_coach",
         "frequency": {
-          "count": 1,
+          "count": 3,
           "preferred_time_windows": [
             "20:00-21:30"
           ],
@@ -8007,13 +8821,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_sleep_recovery_weekly",
             "goal_id": "goal_sleep_recovery",
-            "notes": "Travel adaptation; does not count toward normal-week denominator.",
+            "notes": "Travel mobility counts toward weekly recovery because fatigue reduction is especially important during travel weeks.",
             "role": "recovery",
             "unit": "activity",
-            "value": 0
+            "value": 1
           },
           {
             "counts_toward_weekly_target": true,
@@ -8080,7 +8894,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "duration_minutes": 15,
           "facilitator_type": "self",
           "frequency": {
-            "count": 1,
+            "count": 3,
             "preferred_time_windows": [
               "21:00-22:15"
             ],
@@ -8141,7 +8955,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "In-room session ensures recovery intent is preserved despite facility constraints.",
           "when": "hotel gym or facilities are unavailable or member arrives late"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_sleep_routine_support",
@@ -8157,7 +8979,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Primary activity is a home-based sleep wind-down routine.",
         "No substitutions; counts toward weekly recovery/sleep goal.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Core recovery target is 4 actions/week across evening mobility + sleep wind-down families."
       ],
       "goal_action_ids": [
         "ga_sleep_recovery_weekly"
@@ -8319,7 +9142,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Preserves sleep-routine intent when Marcus is away from home.",
           "when": "travel_window"
         }
-      ]
+      ],
+      "weekly_fitness_validation": {
+        "aerobic_sessions_target_per_week": 2,
+        "avoid_walk_only_weeks": true,
+        "recovery_actions_target_per_week": 4,
+        "strength_sessions_target_per_week": 2,
+        "walk_only_week_requires_reason": true,
+        "walking_breaks_count_as_strength": false
+      },
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_post_travel_fatigue_adjustment",
@@ -8335,7 +9174,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Primary activity is a post-travel fatigue recovery session at home.",
         "Substitution is a shorter, lower-load session for severe fatigue or pain.",
-        "Both are travel adaptations and do not count toward normal-week denominator."
+        "Both are travel adaptations and count toward recovery goals during travel weeks because fatigue management is higher priority while travelling."
       ],
       "goal_action_ids": [
         "ga_sleep_recovery_weekly",
@@ -8364,7 +9203,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "duration_minutes": 25,
         "facilitator_type": "self_or_remote_coach",
         "frequency": {
-          "count": 1,
+          "count": 3,
           "preferred_time_windows": [
             "18:45-20:00"
           ],
@@ -8503,7 +9342,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Shorter session maintains recovery focus with lower load.",
           "when": "member experiences severe fatigue or pain after travel"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_breathwork_support",
@@ -8673,7 +9520,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Preserves stress-regulation intent with a lower-friction delivery mode.",
           "when": "time_conflict or remote_delivery_needed"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_remote_coach_recovery_checkin",
@@ -8750,7 +9605,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "fatigue_score",
           "sleep_quality"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "context_review",
+          "required_inputs": [
+            "travel fatigue",
+            "recent sleep duration"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -8821,7 +9687,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "fatigue_score",
             "sleep_quality"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "context_review",
+            "required_inputs": [
+              "travel fatigue",
+              "recent sleep duration"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -8854,7 +9731,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Preserves recovery check-in support when live coach availability is limited.",
           "when": "time_conflict or travel_window"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_evening_routine_travel",
@@ -8904,13 +9789,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         },
         "goal_contributions": [
           {
-            "counts_toward_weekly_target": false,
+            "counts_toward_weekly_target": true,
             "goal_action_id": "ga_sleep_recovery_weekly",
             "goal_id": "goal_sleep_recovery",
-            "notes": "Travel adaptation; does not count toward normal-week denominator.",
+            "notes": "Travel sleep routine counts toward weekly recovery because fatigue reduction is especially important during travel weeks.",
             "role": "recovery",
             "unit": "activity",
-            "value": 0
+            "value": 1
           }
         ],
         "goal_tags": [
@@ -8961,7 +9846,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "duration_minutes": 8,
           "facilitator_type": "self",
           "frequency": {
-            "count": 1,
+            "count": 3,
             "preferred_time_windows": [
               "22:15-22:30"
             ],
@@ -8969,13 +9854,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           },
           "goal_contributions": [
             {
-              "counts_toward_weekly_target": false,
+              "counts_toward_weekly_target": true,
               "goal_action_id": "ga_sleep_recovery_weekly",
               "goal_id": "goal_sleep_recovery",
-              "notes": "Travel adaptation; does not count toward normal-week denominator.",
+              "notes": "Short hotel wind-down counts toward weekly recovery when travel fatigue makes the full routine impractical.",
               "role": "recovery",
               "unit": "activity",
-              "value": 0
+              "value": 1
             }
           ],
           "goal_tags": [
@@ -9020,7 +9905,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Shortened routine maintains sleep support intent with minimal time.",
           "when": "member is too fatigued or arrives late during travel"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b04_recovery_load_adjustment_after_poor_sleep",
@@ -9030,13 +9923,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "period": "weekly",
         "substitutions_count": true,
         "support_counts": false,
-        "target_units": 4,
+        "target_units": 0,
         "unit_label": "actions"
       },
       "family_validation_notes": [
         "Primary activity is a load adjustment and recovery protocol after poor sleep or fatigue.",
         "Substitution is a short mobility or breathwork session for lower-load need.",
-        "Both are recovery adaptations and do not count as core actions."
+        "Both are recovery adaptations and do not count as core actions.",
+        "Poor-sleep load adjustment is fallback logic and must not create four extra recovery actions."
       ],
       "goal_action_ids": [
         "ga_sleep_recovery_weekly"
@@ -9214,7 +10108,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "reason": "Shorter, lower-load session maintains recovery intent.",
           "when": "member has poor sleep, pain, or fatigue and cannot complete planned higher-load activity"
         }
-      ]
+      ],
+      "weekly_recovery_target_metadata": {
+        "core_counting_families": [
+          "b04_recovery_evening_mobility_home",
+          "b04_recovery_sleep_routine_support"
+        ],
+        "fallback_families_do_not_create_extra_demand": true,
+        "target_actions_per_week": 4
+      }
     },
     {
       "activity_family_id": "b05_clinical_lab_draw_due_week",
@@ -9229,7 +10131,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Lab draw is only possible at the Singapore clinic; travel or facility unavailability triggers rescheduling.",
-        "Fasting dependency and early morning window ensure clinical validity for metabolic review."
+        "Metabolic review lab draw requires at least 8 hours fasting.",
+        "No breakfast, caloric beverage, caloric supplement, or other caloric meal may be scheduled before the lab draw on the same calendar day.",
+        "If breakfast is skipped for the lab draw, the generated calendar row must include skip_reason_code=fasting_lab_same_morning."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -9250,23 +10154,72 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "care_context_required": [
           "recent medication/supplement list",
           "last meal time",
+          "fasting start time",
           "current metabolic goal"
         ],
         "dependencies": [
           {
             "must_happen": "before",
-            "notes": "Member must fast for at least 8 hours prior to lab draw.",
+            "notes": "Member must fast for at least 8 hours before the lab draw.",
             "offset_minutes_min": 480,
             "type": "fasting"
+          },
+          {
+            "blocked_activity_types": [
+              "food"
+            ],
+            "blocked_goal_tags": [
+              "breakfast",
+              "structured_meal"
+            ],
+            "blocked_meal_slots": [
+              "breakfast"
+            ],
+            "calendar_skip_reason_required": true,
+            "must_happen": "before",
+            "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+            "scope": "same_calendar_day_before_lab_draw",
+            "skip_reason_code": "fasting_lab_same_morning",
+            "type": "same_day_meal_exclusion"
           }
         ],
-        "details": "Fasting blood panel for metabolic markers. Must be scheduled at the Elyx Partner Clinic during due week. Requires fasting for at least 8 hours prior.",
+        "details": "Fasting blood panel for metabolic markers at the Elyx Partner Clinic. Requires at least 8 hours fasting. Do not schedule breakfast, caloric beverages, caloric supplements, or any caloric meal before the lab draw on the same day.",
         "duration_minutes": 30,
         "facilitator_type": "phlebotomist",
+        "fasting_hours_required": 8,
+        "fasting_metadata": {
+          "allowed_during_fast": [
+            "water",
+            "non-caloric prescribed medication only if approved by clinician"
+          ],
+          "confirmation_fields": [
+            "last_meal_time",
+            "fasting_start_time",
+            "fasting_confirmed"
+          ],
+          "fasting_hours_required": 8,
+          "fasting_required": true,
+          "fasting_window_minutes_min": 480,
+          "not_allowed_before_lab_same_day": [
+            "breakfast",
+            "caloric beverages",
+            "caloric supplements",
+            "caloric meals"
+          ],
+          "same_day_meal_rule": {
+            "calendar_skip_reason_required": true,
+            "no_caloric_food_before_lab": true,
+            "skip_meal_slots_before_lab": [
+              "breakfast"
+            ],
+            "skip_reason_code": "fasting_lab_same_morning",
+            "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+          }
+        },
+        "fasting_required": true,
         "frequency": {
           "preferred_time_windows": [
-            "07:00-10:00",
-            "19:00-20:00"
+            "07:30-10:00"
           ],
           "type": "once",
           "window_days": 7
@@ -9301,8 +10254,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "metrics_to_collect": [
           "completion",
           "fasting_confirmed",
+          "last_meal_time",
           "lab_panel_collected"
         ],
+        "prep_metadata": {
+          "calendar_skip_reason_required_for_blocked_breakfast": true,
+          "due_before_minutes": 720,
+          "fasting_hours_required": 8,
+          "fasting_required": true,
+          "missing_data_policy": "reschedule_lab_draw_until_fasting_confirmed",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "fasting_lab_prep",
+          "required_inputs": [
+            "recent medication/supplement list",
+            "last meal time",
+            "fasting start time",
+            "current metabolic goal"
+          ],
+          "requires_no_caloric_meal_before_activity": true,
+          "skip_reason_code": "fasting_lab_same_morning"
+        },
         "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": true,
@@ -9335,23 +10307,72 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "care_context_required": [
             "recent medication/supplement list",
             "last meal time",
+            "fasting start time",
             "current metabolic goal"
           ],
           "dependencies": [
             {
               "must_happen": "before",
-              "notes": "Member must fast for at least 8 hours prior to lab draw.",
+              "notes": "Member must fast for at least 8 hours before the lab draw.",
               "offset_minutes_min": 480,
               "type": "fasting"
+            },
+            {
+              "blocked_activity_types": [
+                "food"
+              ],
+              "blocked_goal_tags": [
+                "breakfast",
+                "structured_meal"
+              ],
+              "blocked_meal_slots": [
+                "breakfast"
+              ],
+              "calendar_skip_reason_required": true,
+              "must_happen": "before",
+              "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+              "scope": "same_calendar_day_before_lab_draw",
+              "skip_reason_code": "fasting_lab_same_morning",
+              "type": "same_day_meal_exclusion"
             }
           ],
-          "details": "Lab draw is rescheduled to the nearest available window before or after travel due to clinic or provider unavailability.",
+          "details": "Lab draw rescheduled to the nearest valid morning window before or after travel. Requires at least 8 hours fasting. Do not schedule breakfast, caloric beverages, caloric supplements, or any caloric meal before the lab draw on the same day.",
           "duration_minutes": 30,
           "facilitator_type": "phlebotomist",
+          "fasting_hours_required": 8,
+          "fasting_metadata": {
+            "allowed_during_fast": [
+              "water",
+              "non-caloric prescribed medication only if approved by clinician"
+            ],
+            "confirmation_fields": [
+              "last_meal_time",
+              "fasting_start_time",
+              "fasting_confirmed"
+            ],
+            "fasting_hours_required": 8,
+            "fasting_required": true,
+            "fasting_window_minutes_min": 480,
+            "not_allowed_before_lab_same_day": [
+              "breakfast",
+              "caloric beverages",
+              "caloric supplements",
+              "caloric meals"
+            ],
+            "same_day_meal_rule": {
+              "calendar_skip_reason_required": true,
+              "no_caloric_food_before_lab": true,
+              "skip_meal_slots_before_lab": [
+                "breakfast"
+              ],
+              "skip_reason_code": "fasting_lab_same_morning",
+              "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+            }
+          },
+          "fasting_required": true,
           "frequency": {
             "preferred_time_windows": [
-              "07:00-10:00",
-              "19:00-20:00"
+              "07:30-10:00"
             ],
             "type": "once",
             "window_days": 14
@@ -9386,8 +10407,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "metrics_to_collect": [
             "completion",
             "fasting_confirmed",
+            "last_meal_time",
             "lab_panel_collected"
           ],
+          "prep_metadata": {
+            "calendar_skip_reason_required_for_blocked_breakfast": true,
+            "due_before_minutes": 720,
+            "fasting_hours_required": 8,
+            "fasting_required": true,
+            "missing_data_policy": "reschedule_lab_draw_until_fasting_confirmed",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "fasting_lab_prep",
+            "required_inputs": [
+              "recent medication/supplement list",
+              "last meal time",
+              "fasting start time",
+              "current metabolic goal"
+            ],
+            "requires_no_caloric_meal_before_activity": true,
+            "skip_reason_code": "fasting_lab_same_morning"
+          },
           "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": true,
@@ -9436,7 +10476,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Physician review must follow lab completion; remote review is valid when travel or provider constraints exist.",
-        "Counts toward the 3-month clinical review target."
+        "Counts toward the 3-month clinical review target.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -9457,7 +10498,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "care_context_required": [
           "recent lab results",
           "current medication/supplement list",
-          "metabolic goal summary"
+          "metabolic goal summary",
+          "recent symptoms or adverse events"
         ],
         "dependencies": [
           {
@@ -9466,6 +10508,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "notes": "Physician review must occur after lab results are available.",
             "offset_minutes_min": 60,
             "type": "prerequisite_activity"
+          },
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent lab results",
+              "current medication/supplement list",
+              "metabolic goal summary",
+              "recent symptoms or adverse events"
+            ],
+            "type": "required_context_available"
           }
         ],
         "details": "In-person physician review at the clinic after labs are completed. Focus on metabolic markers and protocol updates.",
@@ -9511,7 +10564,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "provider_notes",
           "next_actions"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent lab results",
+            "current medication/supplement list",
+            "metabolic goal summary",
+            "recent symptoms or adverse events"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": true,
         "remote_allowed": false,
@@ -9541,7 +10607,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "care_context_required": [
             "recent lab results",
             "current medication/supplement list",
-            "metabolic goal summary"
+            "metabolic goal summary",
+            "recent symptoms or adverse events"
           ],
           "dependencies": [
             {
@@ -9550,6 +10617,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
               "notes": "Remote review must occur after lab results are available.",
               "offset_minutes_min": 60,
               "type": "prerequisite_activity"
+            },
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent lab results",
+                "current medication/supplement list",
+                "metabolic goal summary",
+                "recent symptoms or adverse events"
+              ],
+              "type": "required_context_available"
             }
           ],
           "details": "Remote video or phone review with physician after labs, used when travel or provider unavailability prevents in-person review.",
@@ -9596,7 +10674,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "provider_notes",
             "next_actions"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent lab results",
+              "current medication/supplement list",
+              "metabolic goal summary",
+              "recent symptoms or adverse events"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": true,
           "remote_allowed": true,
@@ -9642,7 +10733,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Monthly dietitian review is required for ongoing nutrition adaptation.",
-        "Remote review is valid when provider or member is unavailable for in-person."
+        "Remote review is valid when provider or member is unavailable for in-person.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -9663,18 +10755,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "care_context_required": [
           "recent meal logs",
           "travel meal summary",
-          "current nutrition goal"
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent meal logs",
+              "travel meal summary",
+              "current nutrition goal",
+              "current supplement list",
+              "recent CGM or fasting glucose notes if available"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Monthly review with dietitian to adapt nutrition plan, review meal adherence, and address travel or restaurant meal strategies.",
         "duration_minutes": 25,
         "facilitator_type": "dietitian",
         "frequency": {
           "count": 1,
+          "preferred_days": [
+            "tuesday"
+          ],
           "preferred_time_windows": [
             "10:00-11:00",
             "18:00-19:00",
             "19:00-20:00"
+          ],
+          "preferred_week": "second",
+          "preferred_weeks": [
+            "second",
+            "first",
+            "second"
           ],
           "type": "monthly"
         },
@@ -9711,7 +10827,21 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "provider_notes",
           "nutrition_adherence"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent meal logs",
+            "travel meal summary",
+            "current nutrition goal",
+            "current supplement list",
+            "recent CGM or fasting glucose notes if available"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -9742,18 +10872,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "care_context_required": [
             "recent meal logs",
             "travel meal summary",
-            "current nutrition goal"
+            "current nutrition goal",
+            "current supplement list",
+            "recent CGM or fasting glucose notes if available"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent meal logs",
+                "travel meal summary",
+                "current nutrition goal",
+                "current supplement list",
+                "recent CGM or fasting glucose notes if available"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Remote video or phone review with dietitian, used when travel or provider unavailability prevents in-person review.",
           "duration_minutes": 20,
           "facilitator_type": "dietitian",
           "frequency": {
             "count": 1,
+            "preferred_days": [
+              "tuesday"
+            ],
             "preferred_time_windows": [
               "10:00-11:00",
               "18:00-19:00",
               "19:00-20:00"
+            ],
+            "preferred_week": "second",
+            "preferred_weeks": [
+              "second",
+              "first",
+              "second"
             ],
             "type": "monthly"
           },
@@ -9790,7 +10944,21 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "provider_notes",
             "nutrition_adherence"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent meal logs",
+              "travel meal summary",
+              "current nutrition goal",
+              "current supplement list",
+              "recent CGM or fasting glucose notes if available"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -9835,7 +11003,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Physio reassessment is required after travel.",
-        "Remote is primary due to travel context, but in-person is valid when feasible."
+        "Remote is primary due to travel context, but in-person is valid when feasible.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -9856,17 +11025,31 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "care_context_required": [
           "recent pain log",
           "travel summary",
-          "current mobility goal"
+          "current mobility goal",
+          "recent training load notes"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent pain log",
+              "travel summary",
+              "current mobility goal",
+              "recent training load notes"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Remote physio assessment to review mobility, pain, and post-travel adaptation. Used after travel.",
         "duration_minutes": 25,
         "facilitator_type": "physiotherapist",
         "frequency": {
           "preferred_time_windows": [
-            "08:00-09:00",
+            "16:00-18:00",
             "19:00-20:00"
           ],
+          "target_date": "2026-06-26",
           "type": "once",
           "window_days": 7
         },
@@ -9903,7 +11086,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "mobility_score",
           "pain_level"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent pain log",
+            "travel summary",
+            "current mobility goal",
+            "recent training load notes"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -9933,18 +11129,32 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "care_context_required": [
             "recent pain log",
             "travel summary",
-            "current mobility goal"
+            "current mobility goal",
+            "recent training load notes"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent pain log",
+                "travel summary",
+                "current mobility goal",
+                "recent training load notes"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "In-person physio assessment at home or gym, used when remote review is not possible after travel.",
           "duration_minutes": 30,
           "facilitator_type": "physiotherapist",
           "frequency": {
             "preferred_time_windows": [
-              "08:00-09:00",
+              "16:00-18:00",
               "18:45-20:00",
               "19:00-20:00"
             ],
+            "target_date": "2026-06-26",
             "type": "once",
             "window_days": 7
           },
@@ -9981,7 +11191,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "mobility_score",
             "pain_level"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent pain log",
+              "travel summary",
+              "current mobility goal",
+              "recent training load notes"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": false,
@@ -10026,7 +11249,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Lab reschedule coordination is support-only and does not count toward the review denominator.",
         "Occurs only when lab draw is blocked by travel or facility unavailability.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -10046,9 +11270,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "lab due date",
-          "travel window summary"
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "lab due date",
+              "travel window summary",
+              "clinic availability",
+              "fasting feasibility window"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Remote care-team coordination to reschedule lab draws when travel or facility unavailability occurs. Member is notified of new lab date.",
         "duration_minutes": 15,
         "facilitator_type": "remote_coach_pool",
@@ -10092,7 +11330,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "completion",
           "lab_reschedule_confirmed"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "lab due date",
+            "travel window summary",
+            "clinic availability",
+            "fasting feasibility window"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -10121,9 +11372,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "lab due date",
-            "travel window summary"
+            "travel window summary",
+            "clinic availability",
+            "fasting feasibility window"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "lab due date",
+                "travel window summary",
+                "clinic availability",
+                "fasting feasibility window"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Care team coordinates an alternate lab booking when the preferred lab or due-week window becomes unavailable.",
           "duration_minutes": 15,
           "facilitator_type": "remote_coach_pool",
@@ -10167,7 +11432,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "completion",
             "lab_reschedule_confirmed"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "lab due date",
+              "travel window summary",
+              "clinic availability",
+              "fasting feasibility window"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -10217,7 +11495,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Biometric review is support-only and does not count toward the review denominator.",
         "Occurs monthly to support care-team context and member feedback.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -10237,17 +11516,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "recent biometric data",
-          "goal progress summary"
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
         ],
-        "dependencies": [],
-        "details": "Remote care-team review of biometric data (weight, sleep, activity, CGM if available) with summary sent to member and providers.",
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent biometric data",
+              "goal progress summary",
+              "sleep summary",
+              "activity summary",
+              "CGM data if available"
+            ],
+            "type": "required_context_available"
+          }
+        ],
+        "details": "Physician-led review of biometric data (weight, sleep, activity, CGM if available) with summary sent to member and providers.",
         "duration_minutes": 20,
-        "facilitator_type": "remote_coach_pool",
+        "facilitator_type": "physician",
         "frequency": {
           "count": 1,
+          "preferred_days": [
+            "thursday"
+          ],
           "preferred_time_windows": [
             "09:00-11:00",
             "19:00-20:00"
+          ],
+          "preferred_week": "third",
+          "preferred_weeks": [
+            "third",
+            "fourth",
+            "third"
           ],
           "type": "monthly"
         },
@@ -10283,13 +11587,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "completion",
           "biometric_summary_sent"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent biometric data",
+            "goal progress summary",
+            "sleep summary",
+            "activity summary",
+            "CGM data if available"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
         "required_equipment_ids": [],
         "required_provider_ids": [
-          "provider_remote_coach_01"
+          "provider_physician_01"
         ],
         "same_day_repeat_allowed": false,
         "share_with_provider_types": [
@@ -10301,7 +11619,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "substitution_activity_ids": [
           "act_b05_clinical_biometric_review_support_async_summary_sub"
         ],
-        "title": "Care-team biometric review and summary (remote)"
+        "title": "Physician biometric review and care-plan summary (remote)"
       },
       "substitution_activities": [
         {
@@ -10313,17 +11631,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "recent biometric data",
-            "goal progress summary"
+            "goal progress summary",
+            "sleep summary",
+            "activity summary",
+            "CGM data if available"
           ],
-          "dependencies": [],
-          "details": "Care team reviews CGM, sleep, and session notes asynchronously and summarizes flags for physician or dietitian follow-up.",
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent biometric data",
+                "goal progress summary",
+                "sleep summary",
+                "activity summary",
+                "CGM data if available"
+              ],
+              "type": "required_context_available"
+            }
+          ],
+          "details": "Physician reviews CGM, sleep, and session notes asynchronously and summarizes flags for physician or dietitian follow-up.",
           "duration_minutes": 15,
-          "facilitator_type": "remote_coach_pool",
+          "facilitator_type": "physician",
           "frequency": {
             "count": 1,
+            "preferred_days": [
+              "thursday"
+            ],
             "preferred_time_windows": [
               "09:00-11:00",
               "19:00-20:00"
+            ],
+            "preferred_week": "third",
+            "preferred_weeks": [
+              "third",
+              "fourth",
+              "third"
             ],
             "type": "monthly"
           },
@@ -10359,13 +11702,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "completion",
             "biometric_summary_sent"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent biometric data",
+              "goal progress summary",
+              "sleep summary",
+              "activity summary",
+              "CGM data if available"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
           "required_equipment_ids": [],
           "required_provider_ids": [
-            "provider_remote_coach_01"
+            "provider_physician_01"
           ],
           "same_day_repeat_allowed": false,
           "share_with_provider_types": [
@@ -10385,7 +11742,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "remote_delivery_needed",
             "time_conflict"
           ],
-          "title": "Async biometric summary review"
+          "title": "Async physician biometric summary review"
         }
       ],
       "substitution_rules": [
@@ -10410,7 +11767,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Trainer-physio handoff is support-only and does not count toward the review denominator.",
         "Occurs after travel or when clinically indicated in the clinical follow-up phase.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -10431,9 +11789,22 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "care_context_required": [
           "recent pain log",
           "mobility status",
-          "training plan update"
+          "training plan update",
+          "recent strength progression log"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent pain log",
+              "mobility status",
+              "training plan update",
+              "recent strength progression log"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Remote care-team handoff between trainer and physiotherapist after travel or when clinically indicated, to coordinate safe return to training.",
         "duration_minutes": 20,
         "facilitator_type": "remote_coach_pool",
@@ -10476,7 +11847,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "completion",
           "handoff_notes"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent pain log",
+            "mobility status",
+            "training plan update",
+            "recent strength progression log"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -10508,12 +11892,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "care_context_required": [
             "recent pain log",
             "mobility status",
-            "training plan update"
+            "training plan update",
+            "recent strength progression log"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent pain log",
+                "mobility status",
+                "training plan update",
+                "recent strength progression log"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Trainer and physio exchange knee-pain and load notes asynchronously before the next strength progression.",
           "duration_minutes": 10,
-          "facilitator_type": "remote_coach_pool",
+          "facilitator_type": "physiotherapist",
           "frequency": {
             "count": 1,
             "preferred_time_windows": [
@@ -10553,7 +11950,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "completion",
             "handoff_notes"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent pain log",
+              "mobility status",
+              "training plan update",
+              "recent strength progression log"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -10604,7 +12014,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "family_validation_notes": [
         "Weekly adherence check-in is support-only and does not count toward the review denominator.",
         "Remote coach is always available for this support task.",
-        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families."
+        "Includes an additional first-run repair substitution to meet the 100+ scheduler-facing activity requirement without adding families.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_adherence_support_weekly"
@@ -10624,9 +12035,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "recent adherence log",
-          "protocol checklist"
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent adherence log",
+              "protocol checklist",
+              "missed-session reasons",
+              "meal/supplement completion notes"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Remote check-in to review adherence to meal, training, and supplement protocols. Provides support and flags for care-team follow-up if needed.",
         "duration_minutes": 10,
         "facilitator_type": "remote_coach_pool",
@@ -10672,7 +12097,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "adherence_score",
           "flagged_issues"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent adherence log",
+            "protocol checklist",
+            "missed-session reasons",
+            "meal/supplement completion notes"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -10702,9 +12140,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "recent adherence log",
-            "protocol checklist"
+            "protocol checklist",
+            "missed-session reasons",
+            "meal/supplement completion notes"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent adherence log",
+                "protocol checklist",
+                "missed-session reasons",
+                "meal/supplement completion notes"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Brief message-based adherence check-in to resolve barriers after missed sessions, travel disruption, or meal-prep gaps.",
           "duration_minutes": 10,
           "facilitator_type": "remote_coach_pool",
@@ -10750,7 +12202,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "adherence_score",
             "flagged_issues"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent adherence log",
+              "protocol checklist",
+              "missed-session reasons",
+              "meal/supplement completion notes"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -10800,7 +12265,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Dietitian lab follow-up is required after labs or CGM review.",
-        "Remote and rescheduled windows are valid when provider or member is unavailable."
+        "Remote and rescheduled windows are valid when provider or member is unavailable.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month"
@@ -10820,7 +12286,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "recent lab or CGM results",
-          "nutrition adherence summary"
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
         ],
         "dependencies": [
           {
@@ -10829,6 +12297,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
             "offset_minutes_min": 60,
             "type": "prerequisite_activity"
+          },
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent lab or CGM results",
+              "nutrition adherence summary",
+              "current supplement list",
+              "recent meal logs"
+            ],
+            "type": "required_context_available"
           }
         ],
         "details": "Remote dietitian follow-up after lab or CGM review to adjust nutrition plan and address metabolic markers.",
@@ -10836,11 +12315,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "facilitator_type": "dietitian",
         "frequency": {
           "count": 1,
+          "preferred_days": [
+            "tuesday"
+          ],
           "preferred_time_windows": [
             "10:00-11:00",
             "18:00-19:00",
             "19:00-20:00"
           ],
+          "preferred_week": "fourth",
           "type": "monthly"
         },
         "goal_contributions": [
@@ -10875,7 +12358,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "provider_notes",
           "nutrition_plan_update"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent lab or CGM results",
+            "nutrition adherence summary",
+            "current supplement list",
+            "recent meal logs"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -10903,7 +12399,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "recent lab or CGM results",
-            "nutrition adherence summary"
+            "nutrition adherence summary",
+            "current supplement list",
+            "recent meal logs"
           ],
           "dependencies": [
             {
@@ -10912,6 +12410,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
               "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
               "offset_minutes_min": 60,
               "type": "prerequisite_activity"
+            },
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent lab or CGM results",
+                "nutrition adherence summary",
+                "current supplement list",
+                "recent meal logs"
+              ],
+              "type": "required_context_available"
             }
           ],
           "details": "Remote dietitian follow-up is rescheduled to a later window due to provider or member time conflict.",
@@ -10919,10 +12428,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "facilitator_type": "dietitian",
           "frequency": {
             "count": 1,
+            "preferred_days": [
+              "tuesday"
+            ],
             "preferred_time_windows": [
               "18:00-19:00",
               "19:00-20:00"
             ],
+            "preferred_week": "fourth",
             "type": "monthly"
           },
           "goal_contributions": [
@@ -10957,7 +12470,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "provider_notes",
             "nutrition_plan_update"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent lab or CGM results",
+              "nutrition adherence summary",
+              "current supplement list",
+              "recent meal logs"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -11002,7 +12528,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "family_validation_notes": [
         "Care-team handoff is required during travel or remote delivery to ensure plan continuity.",
-        "Asynchronous delivery is valid when provider is unavailable for live remote handoff."
+        "Asynchronous delivery is valid when provider is unavailable for live remote handoff.",
+        "Activities in this family require prep/context metadata before scheduling."
       ],
       "goal_action_ids": [
         "ga_clinical_review_3month",
@@ -11024,9 +12551,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         ],
         "care_context_required": [
           "recent travel summary",
-          "plan adaptation notes"
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
         ],
-        "dependencies": [],
+        "dependencies": [
+          {
+            "must_exist": true,
+            "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+            "required_inputs": [
+              "recent travel summary",
+              "plan adaptation notes",
+              "missed or substituted activity log",
+              "current medication/supplement list"
+            ],
+            "type": "required_context_available"
+          }
+        ],
         "details": "Remote care-team handoff to coordinate plan changes during travel or remote delivery. Ensures continuity of clinical review and adaptation.",
         "duration_minutes": 15,
         "facilitator_type": "remote_coach_pool",
@@ -11072,7 +12613,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "handoff_notes",
           "plan_update"
         ],
-        "prep_required": false,
+        "prep_metadata": {
+          "due_before_minutes": 1440,
+          "missing_data_policy": "reschedule_or_convert_to_async_review",
+          "owner": "care_team_or_activity_facilitator",
+          "prep_required": true,
+          "prep_type": "clinical_context_review",
+          "required_inputs": [
+            "recent travel summary",
+            "plan adaptation notes",
+            "missed or substituted activity log",
+            "current medication/supplement list"
+          ]
+        },
+        "prep_required": true,
         "priority": 125,
         "raw_clinical_data_required": false,
         "remote_allowed": true,
@@ -11104,9 +12658,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           ],
           "care_context_required": [
             "recent travel summary",
-            "plan adaptation notes"
+            "plan adaptation notes",
+            "missed or substituted activity log",
+            "current medication/supplement list"
           ],
-          "dependencies": [],
+          "dependencies": [
+            {
+              "must_exist": true,
+              "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+              "required_inputs": [
+                "recent travel summary",
+                "plan adaptation notes",
+                "missed or substituted activity log",
+                "current medication/supplement list"
+              ],
+              "type": "required_context_available"
+            }
+          ],
           "details": "Care-team handoff is completed asynchronously (e.g., via secure message or app) when provider is unavailable for live remote handoff.",
           "duration_minutes": 10,
           "facilitator_type": "remote_coach_pool",
@@ -11151,7 +12719,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
             "handoff_notes",
             "plan_update"
           ],
-          "prep_required": false,
+          "prep_metadata": {
+            "due_before_minutes": 1440,
+            "missing_data_policy": "reschedule_or_convert_to_async_review",
+            "owner": "care_team_or_activity_facilitator",
+            "prep_required": true,
+            "prep_type": "clinical_context_review",
+            "required_inputs": [
+              "recent travel summary",
+              "plan adaptation notes",
+              "missed or substituted activity log",
+              "current medication/supplement list"
+            ]
+          },
+          "prep_required": true,
           "priority": 126,
           "raw_clinical_data_required": false,
           "remote_allowed": true,
@@ -11213,6 +12794,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "home",
       "duration_minutes": 20,
       "facilitator_type": "chef",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "food_provider_id": "provider_chef_01",
       "frequency": {
         "count": 5,
@@ -11251,6 +12839,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "home",
+        "facilitator_type": "chef",
+        "meal_slot": "breakfast",
+        "prep_source": "chef_prepped"
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion",
@@ -11270,9 +12864,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [
-        "act_b01_breakfast_home_lowprep"
+        "act_b01_breakfast_home_lowprep",
+        "act_b01_breakfast_skip_for_fasting_lab"
       ],
       "title": "Chef-prepared high-protein breakfast",
       "weekly_primary_cap": 4
@@ -11292,6 +12891,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "home",
       "duration_minutes": 10,
       "facilitator_type": "member",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "frequency": {
         "count": 0,
         "preferred_days": [],
@@ -11323,6 +12929,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "home",
+        "facilitator_type": "member",
+        "meal_slot": "breakfast",
+        "prep_source": "member_assembled"
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion",
@@ -11341,7 +12953,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [],
       "substitution_for_activity_id": "act_b01_breakfast_chef_home_primary",
       "substitution_notes": "Preserves structured, high-protein breakfast intent when chef prep is unavailable or time is limited.",
@@ -11369,6 +12985,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "office",
       "duration_minutes": 10,
       "facilitator_type": "chef",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "food_provider_id": "provider_chef_01",
       "frequency": {
         "count": 0,
@@ -11402,6 +13025,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "office",
+        "facilitator_type": "chef",
+        "meal_slot": "breakfast",
+        "prep_source": "chef_prepped"
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion",
@@ -11418,11 +13047,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [
-        "act_b01_breakfast_office_member_assembled"
+        "act_b01_breakfast_office_member_assembled",
+        "act_b01_breakfast_skip_for_fasting_lab",
+        "act_b01_breakfast_home_lowprep"
       ],
-      "title": "Office-delivered breakfast"
+      "title": "Office-delivered breakfast",
+      "wfh_scheduling_constraint": {
+        "calendar_rejection_reason_required_if_no_substitution": true,
+        "on_member_location_home_day": "do_not_schedule_office_location",
+        "preferred_substitution_activity_id": "act_b01_breakfast_home_lowprep",
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     },
     {
       "activity_family_id": "b01_nutrition_breakfast_office_delivery",
@@ -11440,6 +13081,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "office",
       "duration_minutes": 10,
       "facilitator_type": "member",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "frequency": {
         "count": 0,
         "preferred_days": [],
@@ -11472,6 +13120,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "office",
+        "facilitator_type": "member",
+        "meal_slot": "breakfast",
+        "prep_source": "member_assembled",
+        "structured_meal": true
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion"
@@ -11487,7 +13142,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [],
       "substitution_for_activity_id": "act_b01_breakfast_office_delivery_primary",
       "substitution_notes": "Preserves breakfast intent at office when delivery is unavailable or time is limited.",
@@ -11495,7 +13154,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "prep_unavailable",
         "time_conflict"
       ],
-      "title": "Member-assembled breakfast at office"
+      "title": "Simple high-protein breakfast at office"
     },
     {
       "activity_family_id": "b01_nutrition_breakfast_travel_hotel",
@@ -11513,6 +13172,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "hotel_buffet",
       "duration_minutes": 15,
       "facilitator_type": "member",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "frequency": {
         "count": 0,
         "preferred_days": [],
@@ -11545,6 +13211,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "hotel_buffet",
+        "facilitator_type": "member",
+        "meal_slot": "breakfast",
+        "prep_source": "none"
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion",
@@ -11561,9 +13233,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [
-        "act_b01_breakfast_travel_hotel_restaurant"
+        "act_b01_breakfast_travel_hotel_restaurant",
+        "act_b01_breakfast_skip_for_fasting_lab"
       ],
       "title": "Hotel buffet or room-service breakfast (travel)"
     },
@@ -11582,6 +13259,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dining_source": "restaurant",
       "duration_minutes": 15,
       "facilitator_type": "member",
+      "fasting_lab_scheduling_constraint": {
+        "blocked_when_activity_id_scheduled_same_morning": "act_b05_clinical_lab_draw_due_week_primary",
+        "calendar_skip_reason_required": true,
+        "do_not_schedule_before_fasting_lab_same_day": true,
+        "replacement_activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "frequency": {
         "count": 0,
         "preferred_days": [],
@@ -11614,6 +13298,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "breakfast",
+        "prep_source": "none"
+      },
       "meal_slot": "breakfast",
       "metrics_to_collect": [
         "meal_completion"
@@ -11629,7 +13319,11 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "share_with_provider_types": [
         "dietitian"
       ],
-      "skip_adjustment": false,
+      "skip_adjustment": {
+        "allowed_for_fasting_lab": true,
+        "fasting_lab_skip_reason_code": "fasting_lab_same_morning",
+        "fasting_lab_skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+      },
       "substitution_activity_ids": [],
       "substitution_for_activity_id": "act_b01_breakfast_travel_hotel_primary",
       "substitution_notes": "Preserves travel breakfast intent when hotel buffet or room service is unavailable.",
@@ -11697,6 +13391,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "office",
+        "facilitator_type": "chef",
+        "meal_slot": "lunch",
+        "prep_source": "chef_prepped"
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion",
@@ -11716,10 +13416,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "skip_adjustment": false,
       "substitution_activity_ids": [
-        "act_b01_lunch_office_member_assembled"
+        "act_b01_lunch_office_member_assembled",
+        "act_b01_lunch_member_assembled_home_primary"
       ],
       "title": "Chef-prepped or delivered office lunch",
-      "weekly_primary_cap": 4
+      "weekly_primary_cap": 4,
+      "wfh_scheduling_constraint": {
+        "calendar_rejection_reason_required_if_no_substitution": true,
+        "on_member_location_home_day": "do_not_schedule_office_location",
+        "preferred_substitution_activity_id": "act_b01_lunch_member_assembled_home_primary",
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     },
     {
       "activity_family_id": "b01_nutrition_lunch_office_delivery",
@@ -11769,6 +13476,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "office",
+        "facilitator_type": "member",
+        "meal_slot": "lunch",
+        "prep_source": "member_assembled",
+        "structured_meal": true
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion"
@@ -11792,7 +13506,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "prep_unavailable",
         "time_conflict"
       ],
-      "title": "Member-assembled lunch at office",
+      "title": "Balanced office lunch bowl",
       "variety_role": "planned_variety",
       "weekly_variety_min": 1
     },
@@ -11844,6 +13558,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "lunch",
+        "prep_source": "none"
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion",
@@ -11913,6 +13633,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "room_service",
+        "facilitator_type": "member",
+        "meal_slot": "lunch",
+        "prep_source": "none"
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion"
@@ -11987,6 +13713,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "home",
+        "facilitator_type": "member",
+        "meal_slot": "lunch",
+        "prep_source": "member_assembled",
+        "structured_meal": true
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion"
@@ -12008,7 +13741,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b01_lunch_home_no_prep"
       ],
-      "title": "Member-assembled lunch at home"
+      "title": "Simple high-protein lunch at home"
     },
     {
       "activity_family_id": "b01_nutrition_lunch_member_assembled_home",
@@ -12057,6 +13790,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "home",
+        "facilitator_type": "member",
+        "meal_slot": "lunch",
+        "prep_source": "none",
+        "structured_meal": true
+      },
       "meal_slot": "lunch",
       "metrics_to_collect": [
         "meal_completion"
@@ -12079,7 +13819,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_reason_codes": [
         "prep_unavailable"
       ],
-      "title": "No-prep lunch at home"
+      "title": "Quick protein lunch at home"
     },
     {
       "activity_family_id": "b01_nutrition_dinner_chef_home",
@@ -12135,6 +13875,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "home",
+        "facilitator_type": "chef",
+        "meal_slot": "dinner",
+        "prep_source": "chef_prepped"
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion",
@@ -12208,6 +13954,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "dinner",
+        "prep_source": "none",
+        "structured_meal": true
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion"
@@ -12231,7 +13984,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "prep_unavailable",
         "time_conflict"
       ],
-      "title": "Structured restaurant dinner",
+      "title": "Balanced restaurant dinner",
       "variety_role": "planned_variety",
       "weekly_variety_min": 1
     },
@@ -12282,6 +14035,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "dinner",
+        "prep_source": "none",
+        "structured_meal": true
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion"
@@ -12301,7 +14061,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b01_dinner_restaurant_no_prep"
       ],
-      "title": "Structured restaurant dinner"
+      "title": "Balanced restaurant dinner"
     },
     {
       "activity_family_id": "b01_nutrition_dinner_restaurant",
@@ -12350,6 +14110,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "dinner",
+        "prep_source": "none",
+        "structured_meal": true
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion"
@@ -12373,7 +14140,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "prep_unavailable",
         "time_conflict"
       ],
-      "title": "No-prep restaurant dinner"
+      "title": "Quick restaurant dinner"
     },
     {
       "activity_family_id": "b01_nutrition_dinner_travel_hotel",
@@ -12423,6 +14190,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "restaurant",
+        "facilitator_type": "member",
+        "meal_slot": "dinner",
+        "prep_source": "none"
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion",
@@ -12492,6 +14265,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_006"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": "room_service",
+        "facilitator_type": "member",
+        "meal_slot": "dinner",
+        "prep_source": "none"
+      },
       "meal_slot": "dinner",
       "metrics_to_collect": [
         "meal_completion"
@@ -12563,6 +14342,12 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": null,
+        "facilitator_type": "member",
+        "meal_slot": null,
+        "prep_source": null
+      },
       "metrics_to_collect": [
         "meal_timing_adherence"
       ],
@@ -12578,7 +14363,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "skip_adjustment": false,
       "substitution_activity_ids": [
-        "act_b01_fasting_aware_meal_support_remote_check_sub"
+        "act_b01_fasting_aware_meal_support_remote_check_sub",
+        "act_b01_breakfast_skip_for_fasting_lab"
       ],
       "title": "Fasting-aware meal timing support"
     },
@@ -12626,10 +14412,26 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_007"
       ],
       "load_level": "low",
+      "meal_metadata": {
+        "dining_source": null,
+        "facilitator_type": "member",
+        "meal_slot": null,
+        "prep_source": null
+      },
       "metrics_to_collect": [
         "meal_timing_adherence"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "lab schedule"
+        ]
+      },
+      "prep_required": true,
       "priority": 88,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -12656,6 +14458,105 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "title": "Remote fasting meal timing check",
       "variety_role": "planned_variety",
       "weekly_variety_min": 1
+    },
+    {
+      "activity_family_id": "b01_nutrition_fasting_aware_meal_support",
+      "activity_id": "act_b01_breakfast_skip_for_fasting_lab",
+      "activity_type": "food",
+      "allowed_locations": [
+        "home",
+        "clinic",
+        "remote"
+      ],
+      "care_context_required": [
+        "lab schedule",
+        "fasting start time"
+      ],
+      "dependencies": [
+        {
+          "activity_id": "act_b05_clinical_lab_draw_due_week_primary",
+          "must_happen": "after",
+          "notes": "Use only on a day with a scheduled fasting lab draw before the normal breakfast window closes.",
+          "type": "same_day_activity_context"
+        }
+      ],
+      "details": "Explicit skipped breakfast row for a fasting metabolic lab draw. Water only until the lab draw is complete; first caloric meal should be scheduled after labs.",
+      "duration_minutes": 0,
+      "facilitator_type": "member",
+      "frequency": {
+        "count": 0,
+        "preferred_days": [],
+        "preferred_time_windows": [
+          "06:30-10:00"
+        ],
+        "type": "constraint_scoped"
+      },
+      "goal_contributions": [
+        {
+          "counts_toward_weekly_target": false,
+          "goal_action_id": "ga_structured_meals_weekly",
+          "goal_id": "goal_metabolic_health",
+          "notes": "Skipped breakfast does not count as a structured meal; it preserves fasting validity for metabolic lab draw.",
+          "role": "skip",
+          "unit": "activity",
+          "value": 0
+        }
+      ],
+      "goal_tags": [
+        "fasting",
+        "breakfast",
+        "skip",
+        "metabolic_review"
+      ],
+      "is_primary": false,
+      "journey_phase_applicability": [
+        "phase_marcus_001",
+        "phase_marcus_007"
+      ],
+      "load_level": "low",
+      "meal_slot": "breakfast",
+      "metrics_to_collect": [
+        "skip_reason_recorded",
+        "fasting_confirmed"
+      ],
+      "prep_metadata": {
+        "calendar_skip_reason_required": true,
+        "due_before_minutes": 720,
+        "missing_data_policy": "do_not_schedule_skip_without_lab_draw",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "fasting_lab_breakfast_skip",
+        "required_inputs": [
+          "lab schedule",
+          "fasting start time"
+        ],
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
+      "prep_required": true,
+      "priority": 10,
+      "raw_clinical_data_required": false,
+      "remote_allowed": true,
+      "required_equipment_ids": [],
+      "required_provider_ids": [],
+      "same_day_repeat_allowed": false,
+      "share_with_provider_types": [
+        "dietitian",
+        "physician"
+      ],
+      "skip_adjustment": {
+        "is_skip": true,
+        "reschedule_first_meal_after_activity": true,
+        "skip_reason_code": "fasting_lab_same_morning",
+        "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting.",
+        "valid_only_before_activity_id": "act_b05_clinical_lab_draw_due_week_primary"
+      },
+      "substitution_activity_ids": [],
+      "substitution_for_activity_id": "act_b01_breakfast_chef_home_primary",
+      "substitution_notes": "Use instead of breakfast when a fasting lab draw is scheduled before breakfast.",
+      "substitution_reason_codes": [
+        "fasting_lab_same_morning"
+      ],
+      "title": "Skip breakfast for fasting lab draw"
     },
     {
       "activity_family_id": "b01_nutrition_supplement_protocol_support",
@@ -12713,7 +14614,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "protocol_completion",
         "miss_reason"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "current supplement protocol"
+        ]
+      },
+      "prep_required": true,
       "priority": 90,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -12784,7 +14695,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "protocol_completion",
         "miss_reason"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "current supplement protocol"
+        ]
+      },
+      "prep_required": true,
       "priority": 93,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -12855,7 +14776,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "adherence_score",
         "barrier_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "travel window",
+          "recent meal log"
+        ]
+      },
+      "prep_required": true,
       "priority": 95,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -12889,7 +14821,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "dependencies": [],
       "details": "Asynchronous dietitian or coach review of travel meal photos and notes to keep structured eating aligned with metabolic goals.",
       "duration_minutes": 10,
-      "facilitator_type": "remote_coach_pool",
+      "facilitator_type": "dietitian",
       "frequency": {
         "count": 1,
         "preferred_time_windows": [
@@ -12920,7 +14852,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "adherence_score",
         "barrier_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "travel window",
+          "recent meal log"
+        ]
+      },
+      "prep_required": true,
       "priority": 98,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -13196,6 +15139,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "dependencies": [],
       "details": "Home-based aerobic session using stationary bike, brisk walking, or bodyweight circuit. Self-led, knee-safe.",
+      "does_not_count_toward_goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
       "duration_minutes": 40,
       "facilitator_type": "self",
       "frequency": {
@@ -13261,7 +15207,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b02_cardio_zone2_home_travel_sub"
       ],
-      "title": "Zone 2 aerobic session at home (cycling or brisk walk)"
+      "title": "Zone 2 aerobic session at home (cycling or brisk walk)",
+      "walking_activity_metadata": {
+        "counts_as_full_aerobic_session": true,
+        "counts_as_strength": false,
+        "walk_only_week_reason_field": "calendar_week_validation_reason",
+        "walk_only_week_requires_reason": true
+      }
     },
     {
       "activity_family_id": "b02_cardio_zone2_home",
@@ -13371,13 +15323,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Travel substitution; supports continuity but does not add to denominator.",
-          "role": "support",
+          "notes": "Travel hotel gym aerobic session counts toward weekly aerobic conditioning.",
+          "role": "core",
           "unit": "activity",
-          "value": 0
+          "value": 1
         },
         {
           "counts_toward_weekly_target": true,
@@ -13527,13 +15479,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Travel substitution; supports continuity but does not add to denominator.",
-          "role": "support",
+          "notes": "Hotel pool aerobic session counts toward weekly aerobic conditioning.",
+          "role": "core",
           "unit": "activity",
-          "value": 0
+          "value": 1
         },
         {
           "counts_toward_weekly_target": true,
@@ -13594,6 +15546,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "dependencies": [],
       "details": "Brisk walking session outside or in hotel corridors during travel when no equipment is available.",
+      "does_not_count_toward_goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
       "duration_minutes": 30,
       "facilitator_type": "self",
       "frequency": {
@@ -13608,6 +15563,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         {
           "counts_toward_weekly_target": true,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
+          "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
           "value": 1
         }
       ],
@@ -13620,6 +15576,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "journey_phase_applicability": [
         "phase_marcus_006"
       ],
+      "last_resort_substitution_metadata": {
+        "avoid_week_with_only_walks_unless_impossible": true,
+        "calendar_reason_required_if_scheduled": true,
+        "last_resort": true,
+        "prefer_non_walk_aerobic_before_walk": true,
+        "reason_code_examples": [
+          "facility_unavailable",
+          "equipment_unavailable",
+          "travel_window",
+          "time_conflict",
+          "pain_or_fatigue"
+        ]
+      },
       "load_level": "low",
       "metrics_to_collect": [
         "completion",
@@ -13650,7 +15619,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "facility_unavailable",
         "equipment_unavailable"
       ],
-      "title": "Brisk walking session near hotel"
+      "title": "Brisk walking session near hotel",
+      "walking_activity_metadata": {
+        "counts_as_full_aerobic_session": true,
+        "counts_as_strength": false,
+        "walk_only_week_reason_field": "calendar_week_validation_reason",
+        "walk_only_week_requires_reason": true
+      }
     },
     {
       "activity_family_id": "b02_cardio_swim_pool_hotel_hk",
@@ -13677,13 +15652,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Travel substitution; supports continuity but does not add to denominator.",
-          "role": "support",
+          "notes": "Hotel pool aerobic session counts toward weekly aerobic conditioning.",
+          "role": "core",
           "unit": "activity",
-          "value": 0
+          "value": 1
         },
         {
           "counts_toward_weekly_target": true,
@@ -13817,6 +15792,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "dependencies": [],
       "details": "Short walking or movement break during office hours to support aerobic activity when full session is not possible.",
+      "does_not_count_toward_goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
       "duration_minutes": 10,
       "facilitator_type": "self",
       "frequency": {
@@ -13837,7 +15815,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "counts_toward_weekly_target": false,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Office walking breaks support aerobic adherence but do not count as full session.",
+          "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
           "role": "support",
           "unit": "activity",
           "value": 0
@@ -13854,6 +15832,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_003",
         "phase_marcus_007"
       ],
+      "last_resort_substitution_metadata": {
+        "avoid_week_with_only_walks_unless_impossible": true,
+        "calendar_reason_required_if_scheduled": true,
+        "last_resort": true,
+        "prefer_non_walk_aerobic_before_walk": true,
+        "reason_code_examples": [
+          "facility_unavailable",
+          "equipment_unavailable",
+          "travel_window",
+          "time_conflict",
+          "pain_or_fatigue"
+        ]
+      },
       "load_level": "low",
       "metrics_to_collect": [
         "completion"
@@ -13880,20 +15871,36 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b02_cardio_walking_office_remote_sub"
       ],
-      "title": "Short walking or movement break at office"
+      "title": "Short walking or movement break at office",
+      "walking_activity_metadata": {
+        "counts_as_full_aerobic_session": false,
+        "counts_as_strength": false,
+        "walk_only_week_reason_field": "calendar_week_validation_reason",
+        "walk_only_week_requires_reason": true
+      },
+      "wfh_scheduling_constraint": {
+        "calendar_rejection_reason_required": true,
+        "if_substitution_unavailable": "reject_or_unschedule",
+        "on_member_location_home_day": "do_not_schedule_office_location",
+        "preferred_substitution_activity_id": "act_b02_cardio_walking_office_remote_sub",
+        "rejection_reason_code": "wfh_no_office_location_activity"
+      }
     },
     {
       "activity_family_id": "b02_cardio_walking_office",
       "activity_id": "act_b02_cardio_walking_office_remote_sub",
       "activity_type": "fitness",
       "allowed_locations": [
-        "remote"
+        "home"
       ],
       "care_context_required": [
         "current aerobic goal"
       ],
       "dependencies": [],
-      "details": "Short walking break during remote work days to support aerobic adherence.",
+      "details": "Short walking or movement break at home during WFH days to support movement without scheduling an office-location activity.",
+      "does_not_count_toward_goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
       "duration_minutes": 10,
       "facilitator_type": "self",
       "frequency": {
@@ -13914,7 +15921,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "counts_toward_weekly_target": false,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Remote walking breaks support adherence but do not count as full session.",
+          "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
           "role": "support",
           "unit": "activity",
           "value": 0
@@ -13923,7 +15930,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "goal_tags": [
         "aerobic_conditioning",
         "walking",
-        "remote_support"
+        "home_support",
+        "wfh"
       ],
       "is_primary": false,
       "journey_phase_applicability": [
@@ -13931,6 +15939,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_003",
         "phase_marcus_007"
       ],
+      "last_resort_substitution_metadata": {
+        "avoid_week_with_only_walks_unless_impossible": true,
+        "calendar_reason_required_if_scheduled": true,
+        "last_resort": true,
+        "prefer_non_walk_aerobic_before_walk": true,
+        "reason_code_examples": [
+          "facility_unavailable",
+          "equipment_unavailable",
+          "travel_window",
+          "time_conflict",
+          "pain_or_fatigue"
+        ]
+      },
       "load_level": "low",
       "metrics_to_collect": [
         "completion"
@@ -13938,7 +15959,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "prep_required": false,
       "priority": 113,
       "raw_clinical_data_required": false,
-      "remote_allowed": true,
+      "remote_allowed": false,
       "required_equipment_ids": [
         "eq_bodyweight"
       ],
@@ -13954,12 +15975,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "substitution_activity_ids": [],
       "substitution_for_activity_id": "act_b02_cardio_walking_office_primary",
-      "substitution_notes": "Preserves aerobic support intent when office is unavailable.",
+      "substitution_notes": "Preserves movement-break intent on WFH days without using office location.",
       "substitution_reason_codes": [
+        "wfh_location_override",
         "facility_unavailable",
         "time_conflict"
       ],
-      "title": "Short walking break during remote work"
+      "title": "Short walking break at home during WFH",
+      "walking_activity_metadata": {
+        "counts_as_full_aerobic_session": false,
+        "counts_as_strength": false,
+        "walk_only_week_reason_field": "calendar_week_validation_reason",
+        "walk_only_week_requires_reason": true
+      },
+      "wfh_scheduling_constraint": {
+        "calendar_substitution_reason_required": true,
+        "replaces_office_location_activity": true,
+        "substitution_reason_code": "wfh_location_override",
+        "valid_on_member_location_home_day": true
+      }
     },
     {
       "activity_family_id": "b02_cardio_remote_coach_progression_review",
@@ -13969,21 +16003,35 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "remote"
       ],
       "care_context_required": [
-        "recent aerobic session data"
+        "recent aerobic session data",
+        "session duration",
+        "RPE",
+        "average heart rate if available",
+        "barriers or missed-session notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "goal_action_id": "ga_aerobic_conditioning_weekly",
+          "lookback_days": 14,
+          "minimum_sessions": 1,
+          "must_exist": true,
+          "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+          "type": "recent_session_data"
+        }
+      ],
       "details": "Remote check-in with Elyx health coach to review aerobic session adherence, barriers, and plan adjustments.",
       "duration_minutes": 20,
       "facilitator_type": "remote_coach_pool",
       "frequency": {
         "count": 1,
         "preferred_days": [
-          "first_monday"
+          "monday"
         ],
         "preferred_time_windows": [
           "09:00-09:30",
           "19:00-20:00"
         ],
+        "preferred_week": "second",
         "type": "monthly"
       },
       "goal_contributions": [
@@ -14019,7 +16067,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "coach_notes",
         "next_action"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "lookback_days": 14,
+        "minimum_recent_sessions": 1,
+        "missing_data_policy": "defer_review_until_recent_aerobic_session_data_exists",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "aerobic_progression_data_review",
+        "required_inputs": [
+          "recent aerobic session data",
+          "session duration",
+          "RPE",
+          "average heart rate if available",
+          "barriers or missed-session notes"
+        ],
+        "required_recent_activity_goal_action_id": "ga_aerobic_conditioning_weekly",
+        "requires_recent_activity_data": true
+      },
+      "prep_required": true,
       "priority": 114,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -14050,21 +16116,35 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "remote"
       ],
       "care_context_required": [
-        "recent aerobic session data"
+        "recent aerobic session data",
+        "session duration",
+        "RPE",
+        "average heart rate if available",
+        "barriers or missed-session notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "goal_action_id": "ga_aerobic_conditioning_weekly",
+          "lookback_days": 14,
+          "minimum_sessions": 1,
+          "must_exist": true,
+          "notes": "Coach progression review requires at least one recent aerobic session log in the prior 14 days.",
+          "type": "recent_session_data"
+        }
+      ],
       "details": "Coach reviews wearable or session notes asynchronously and adjusts the next aerobic target when schedules prevent a live review.",
       "duration_minutes": 10,
       "facilitator_type": "remote_coach_pool",
       "frequency": {
         "count": 1,
         "preferred_days": [
-          "first_monday"
+          "monday"
         ],
         "preferred_time_windows": [
           "09:00-09:30",
           "19:00-20:00"
         ],
+        "preferred_week": "second",
         "type": "monthly"
       },
       "goal_contributions": [
@@ -14100,7 +16180,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "coach_notes",
         "next_action"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "lookback_days": 14,
+        "minimum_recent_sessions": 1,
+        "missing_data_policy": "defer_review_until_recent_aerobic_session_data_exists",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "aerobic_progression_data_review",
+        "required_inputs": [
+          "recent aerobic session data",
+          "session duration",
+          "RPE",
+          "average heart rate if available",
+          "barriers or missed-session notes"
+        ],
+        "required_recent_activity_goal_action_id": "ga_aerobic_conditioning_weekly",
+        "requires_recent_activity_data": true
+      },
+      "prep_required": true,
       "priority": 117,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -14440,6 +16538,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "dependencies": [],
       "details": "Brisk walking session outdoors or in hotel corridors when all other aerobic options are blocked.",
+      "does_not_count_toward_goal_action_ids": [
+        "ga_strength_sessions_weekly"
+      ],
       "duration_minutes": 30,
       "facilitator_type": "self",
       "frequency": {
@@ -14459,7 +16560,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "counts_toward_weekly_target": true,
           "goal_action_id": "ga_aerobic_conditioning_weekly",
           "goal_id": "goal_metabolic_health",
-          "notes": "Counts as aerobic conditioning if all other options are blocked.",
+          "notes": "Walking does not count as strength. It may count as an aerobic fallback only when non-walk aerobic options are impossible; scheduler must record why if the week would otherwise contain only walks.",
           "role": "core",
           "unit": "activity",
           "value": 1
@@ -14476,6 +16577,19 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "phase_marcus_003",
         "phase_marcus_005"
       ],
+      "last_resort_substitution_metadata": {
+        "avoid_week_with_only_walks_unless_impossible": true,
+        "calendar_reason_required_if_scheduled": true,
+        "last_resort": true,
+        "prefer_non_walk_aerobic_before_walk": true,
+        "reason_code_examples": [
+          "facility_unavailable",
+          "equipment_unavailable",
+          "travel_window",
+          "time_conflict",
+          "pain_or_fatigue"
+        ]
+      },
       "load_level": "low",
       "metrics_to_collect": [
         "completion",
@@ -14507,7 +16621,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "equipment_unavailable",
         "time_conflict"
       ],
-      "title": "Brisk walking session (facility/equipment unavailable)"
+      "title": "Brisk walking session (facility/equipment unavailable)",
+      "walking_activity_metadata": {
+        "counts_as_full_aerobic_session": true,
+        "counts_as_strength": false,
+        "walk_only_week_reason_field": "calendar_week_validation_reason",
+        "walk_only_week_requires_reason": true
+      }
     },
     {
       "activity_family_id": "b03_strength_trainer_gym",
@@ -14702,7 +16822,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 45,
       "facilitator_type": "member",
       "frequency": {
-        "count": 2,
+        "count": 1,
         "preferred_days": [
           "tuesday",
           "sunday"
@@ -14786,7 +16906,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 35,
       "facilitator_type": "member",
       "frequency": {
-        "count": 2,
+        "count": 1,
         "preferred_days": [
           "tuesday",
           "sunday",
@@ -14904,7 +17024,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "hotel_gym",
         "travel_continuity"
       ],
-      "is_primary": false,
+      "is_primary": true,
       "journey_phase_applicability": [
         "phase_marcus_002",
         "phase_marcus_004"
@@ -15060,13 +17180,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_strength_sessions_weekly",
           "goal_id": "goal_strength_and_mobility",
-          "notes": "Bodyweight/band session supports travel continuity when no gym/equipment is available.",
-          "role": "support",
+          "notes": "Ravi-led bodyweight/band session counts toward weekly strength only for low-resource travel when no hotel gym is available.",
+          "role": "core",
           "unit": "session",
-          "value": 0
+          "value": 1
         }
       ],
       "goal_tags": [
@@ -15361,9 +17481,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent pain escalation details",
-        "current movement plan"
+        "current movement plan",
+        "recent training load notes",
+        "mobility limitation summary"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain escalation details",
+            "current movement plan",
+            "recent training load notes",
+            "mobility limitation summary"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "In-person physiotherapist assessment to review knee/back status and update movement plan after travel or when clinically indicated.",
       "duration_minutes": 30,
       "facilitator_type": "physiotherapist",
@@ -15408,7 +17542,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "provider_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain escalation details",
+          "current movement plan",
+          "recent training load notes",
+          "mobility limitation summary"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -15439,9 +17586,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent pain escalation details",
-        "current movement plan"
+        "current movement plan",
+        "recent training load notes",
+        "mobility limitation summary"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain escalation details",
+            "current movement plan",
+            "recent training load notes",
+            "mobility limitation summary"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote video assessment with physiotherapist to review pain and update movement plan after escalation or travel.",
       "duration_minutes": 30,
       "facilitator_type": "physiotherapist",
@@ -15486,7 +17647,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "provider_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain escalation details",
+          "current movement plan",
+          "recent training load notes",
+          "mobility limitation summary"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -15794,7 +17968,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "RPE",
         "pain_level"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "recent pain/fatigue details"
+        ]
+      },
+      "prep_required": true,
       "priority": 195,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -15833,14 +18017,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "current pain/mobility status"
       ],
       "dependencies": [],
-      "details": "Remote check-in with coach or physio to review pain, mobility, and recovery after travel or missed high-load session.",
+      "details": "Physiotherapist check-in to review pain, mobility, and recovery after travel or missed high-load session.",
       "duration_minutes": 15,
-      "facilitator_type": "remote_coach_pool",
+      "facilitator_type": "physiotherapist",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "friday"
+        ],
         "preferred_time_windows": [
-          "20:00-21:30",
+          "16:00-18:00",
           "19:00-20:00"
+        ],
+        "preferred_week": "third",
+        "preferred_weeks": [
+          "third",
+          "fourth",
+          "third"
         ],
         "type": "monthly"
       },
@@ -15875,13 +18068,24 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "next_actions"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "recent travel or skipped session details",
+          "current pain/mobility status"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
       "required_equipment_ids": [],
       "required_provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physio_01"
       ],
       "same_day_repeat_allowed": false,
       "share_with_provider_types": [
@@ -15891,7 +18095,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b03_strength_mobility_pain_recovery_checkin_pain_note_sub"
       ],
-      "title": "Remote coach or physio check-in after travel or skipped session"
+      "title": "Physiotherapist recovery check-in after travel or skipped session"
     },
     {
       "activity_family_id": "b03_strength_mobility_pain_recovery_checkin",
@@ -15947,7 +18151,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "next_actions"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "recent travel or skipped session details",
+          "current pain/mobility status"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -16114,7 +18329,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "RPE",
         "knee_discomfort"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "current knee/back status",
+          "approved protocol"
+        ]
+      },
+      "prep_required": true,
       "priority": 198,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -16314,7 +18540,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 20,
       "facilitator_type": "self_or_remote_coach",
       "frequency": {
-        "count": 1,
+        "count": 3,
         "preferred_time_windows": [
           "20:00-21:30"
         ],
@@ -16322,13 +18548,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_sleep_recovery_weekly",
           "goal_id": "goal_sleep_recovery",
-          "notes": "Travel adaptation; does not count toward normal-week denominator.",
+          "notes": "Travel mobility counts toward weekly recovery because fatigue reduction is especially important during travel weeks.",
           "role": "recovery",
           "unit": "activity",
-          "value": 0
+          "value": 1
         },
         {
           "counts_toward_weekly_target": true,
@@ -16394,7 +18620,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 15,
       "facilitator_type": "self",
       "frequency": {
-        "count": 1,
+        "count": 3,
         "preferred_time_windows": [
           "21:00-22:15"
         ],
@@ -16607,7 +18833,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 25,
       "facilitator_type": "self_or_remote_coach",
       "frequency": {
-        "count": 1,
+        "count": 3,
         "preferred_time_windows": [
           "18:45-20:00"
         ],
@@ -16923,7 +19149,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "fatigue_score",
         "sleep_quality"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "travel fatigue",
+          "recent sleep duration"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -16993,7 +19230,18 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "fatigue_score",
         "sleep_quality"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "context_review",
+        "required_inputs": [
+          "travel fatigue",
+          "recent sleep duration"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -17042,13 +19290,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_sleep_recovery_weekly",
           "goal_id": "goal_sleep_recovery",
-          "notes": "Travel adaptation; does not count toward normal-week denominator.",
+          "notes": "Travel sleep routine counts toward weekly recovery because fatigue reduction is especially important during travel weeks.",
           "role": "recovery",
           "unit": "activity",
-          "value": 0
+          "value": 1
         }
       ],
       "goal_tags": [
@@ -17098,7 +19346,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "duration_minutes": 8,
       "facilitator_type": "self",
       "frequency": {
-        "count": 1,
+        "count": 3,
         "preferred_time_windows": [
           "22:15-22:30"
         ],
@@ -17106,13 +19354,13 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       },
       "goal_contributions": [
         {
-          "counts_toward_weekly_target": false,
+          "counts_toward_weekly_target": true,
           "goal_action_id": "ga_sleep_recovery_weekly",
           "goal_id": "goal_sleep_recovery",
-          "notes": "Travel adaptation; does not count toward normal-week denominator.",
+          "notes": "Short hotel wind-down counts toward weekly recovery when travel fatigue makes the full routine impractical.",
           "role": "recovery",
           "unit": "activity",
-          "value": 0
+          "value": 1
         }
       ],
       "goal_tags": [
@@ -17318,23 +19566,72 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent medication/supplement list",
         "last meal time",
+        "fasting start time",
         "current metabolic goal"
       ],
       "dependencies": [
         {
           "must_happen": "before",
-          "notes": "Member must fast for at least 8 hours prior to lab draw.",
+          "notes": "Member must fast for at least 8 hours before the lab draw.",
           "offset_minutes_min": 480,
           "type": "fasting"
+        },
+        {
+          "blocked_activity_types": [
+            "food"
+          ],
+          "blocked_goal_tags": [
+            "breakfast",
+            "structured_meal"
+          ],
+          "blocked_meal_slots": [
+            "breakfast"
+          ],
+          "calendar_skip_reason_required": true,
+          "must_happen": "before",
+          "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+          "scope": "same_calendar_day_before_lab_draw",
+          "skip_reason_code": "fasting_lab_same_morning",
+          "type": "same_day_meal_exclusion"
         }
       ],
-      "details": "Fasting blood panel for metabolic markers. Must be scheduled at the Elyx Partner Clinic during due week. Requires fasting for at least 8 hours prior.",
+      "details": "Fasting blood panel for metabolic markers at the Elyx Partner Clinic. Requires at least 8 hours fasting. Do not schedule breakfast, caloric beverages, caloric supplements, or any caloric meal before the lab draw on the same day.",
       "duration_minutes": 30,
       "facilitator_type": "phlebotomist",
+      "fasting_hours_required": 8,
+      "fasting_metadata": {
+        "allowed_during_fast": [
+          "water",
+          "non-caloric prescribed medication only if approved by clinician"
+        ],
+        "confirmation_fields": [
+          "last_meal_time",
+          "fasting_start_time",
+          "fasting_confirmed"
+        ],
+        "fasting_hours_required": 8,
+        "fasting_required": true,
+        "fasting_window_minutes_min": 480,
+        "not_allowed_before_lab_same_day": [
+          "breakfast",
+          "caloric beverages",
+          "caloric supplements",
+          "caloric meals"
+        ],
+        "same_day_meal_rule": {
+          "calendar_skip_reason_required": true,
+          "no_caloric_food_before_lab": true,
+          "skip_meal_slots_before_lab": [
+            "breakfast"
+          ],
+          "skip_reason_code": "fasting_lab_same_morning",
+          "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+        }
+      },
+      "fasting_required": true,
       "frequency": {
         "preferred_time_windows": [
-          "07:00-10:00",
-          "19:00-20:00"
+          "07:30-10:00"
         ],
         "type": "once",
         "window_days": 7
@@ -17369,8 +19666,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "metrics_to_collect": [
         "completion",
         "fasting_confirmed",
+        "last_meal_time",
         "lab_panel_collected"
       ],
+      "prep_metadata": {
+        "calendar_skip_reason_required_for_blocked_breakfast": true,
+        "due_before_minutes": 720,
+        "fasting_hours_required": 8,
+        "fasting_required": true,
+        "missing_data_policy": "reschedule_lab_draw_until_fasting_confirmed",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "fasting_lab_prep",
+        "required_inputs": [
+          "recent medication/supplement list",
+          "last meal time",
+          "fasting start time",
+          "current metabolic goal"
+        ],
+        "requires_no_caloric_meal_before_activity": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": true,
@@ -17402,23 +19718,72 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent medication/supplement list",
         "last meal time",
+        "fasting start time",
         "current metabolic goal"
       ],
       "dependencies": [
         {
           "must_happen": "before",
-          "notes": "Member must fast for at least 8 hours prior to lab draw.",
+          "notes": "Member must fast for at least 8 hours before the lab draw.",
           "offset_minutes_min": 480,
           "type": "fasting"
+        },
+        {
+          "blocked_activity_types": [
+            "food"
+          ],
+          "blocked_goal_tags": [
+            "breakfast",
+            "structured_meal"
+          ],
+          "blocked_meal_slots": [
+            "breakfast"
+          ],
+          "calendar_skip_reason_required": true,
+          "must_happen": "before",
+          "notes": "Do not schedule breakfast or any caloric food activity before the fasting lab draw on the same day.",
+          "scope": "same_calendar_day_before_lab_draw",
+          "skip_reason_code": "fasting_lab_same_morning",
+          "type": "same_day_meal_exclusion"
         }
       ],
-      "details": "Lab draw is rescheduled to the nearest available window before or after travel due to clinic or provider unavailability.",
+      "details": "Lab draw rescheduled to the nearest valid morning window before or after travel. Requires at least 8 hours fasting. Do not schedule breakfast, caloric beverages, caloric supplements, or any caloric meal before the lab draw on the same day.",
       "duration_minutes": 30,
       "facilitator_type": "phlebotomist",
+      "fasting_hours_required": 8,
+      "fasting_metadata": {
+        "allowed_during_fast": [
+          "water",
+          "non-caloric prescribed medication only if approved by clinician"
+        ],
+        "confirmation_fields": [
+          "last_meal_time",
+          "fasting_start_time",
+          "fasting_confirmed"
+        ],
+        "fasting_hours_required": 8,
+        "fasting_required": true,
+        "fasting_window_minutes_min": 480,
+        "not_allowed_before_lab_same_day": [
+          "breakfast",
+          "caloric beverages",
+          "caloric supplements",
+          "caloric meals"
+        ],
+        "same_day_meal_rule": {
+          "calendar_skip_reason_required": true,
+          "no_caloric_food_before_lab": true,
+          "skip_meal_slots_before_lab": [
+            "breakfast"
+          ],
+          "skip_reason_code": "fasting_lab_same_morning",
+          "skip_reason_text": "Breakfast skipped because metabolic lab draw requires 8 hours fasting."
+        }
+      },
+      "fasting_required": true,
       "frequency": {
         "preferred_time_windows": [
-          "07:00-10:00",
-          "19:00-20:00"
+          "07:30-10:00"
         ],
         "type": "once",
         "window_days": 14
@@ -17453,8 +19818,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "metrics_to_collect": [
         "completion",
         "fasting_confirmed",
+        "last_meal_time",
         "lab_panel_collected"
       ],
+      "prep_metadata": {
+        "calendar_skip_reason_required_for_blocked_breakfast": true,
+        "due_before_minutes": 720,
+        "fasting_hours_required": 8,
+        "fasting_required": true,
+        "missing_data_policy": "reschedule_lab_draw_until_fasting_confirmed",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "fasting_lab_prep",
+        "required_inputs": [
+          "recent medication/supplement list",
+          "last meal time",
+          "fasting start time",
+          "current metabolic goal"
+        ],
+        "requires_no_caloric_meal_before_activity": true,
+        "skip_reason_code": "fasting_lab_same_morning"
+      },
       "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": true,
@@ -17491,7 +19875,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent lab results",
         "current medication/supplement list",
-        "metabolic goal summary"
+        "metabolic goal summary",
+        "recent symptoms or adverse events"
       ],
       "dependencies": [
         {
@@ -17500,6 +19885,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "notes": "Physician review must occur after lab results are available.",
           "offset_minutes_min": 60,
           "type": "prerequisite_activity"
+        },
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent lab results",
+            "current medication/supplement list",
+            "metabolic goal summary",
+            "recent symptoms or adverse events"
+          ],
+          "type": "required_context_available"
         }
       ],
       "details": "In-person physician review at the clinic after labs are completed. Focus on metabolic markers and protocol updates.",
@@ -17545,7 +19941,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "next_actions"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent lab results",
+          "current medication/supplement list",
+          "metabolic goal summary",
+          "recent symptoms or adverse events"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": true,
       "remote_allowed": false,
@@ -17574,7 +19983,8 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent lab results",
         "current medication/supplement list",
-        "metabolic goal summary"
+        "metabolic goal summary",
+        "recent symptoms or adverse events"
       ],
       "dependencies": [
         {
@@ -17583,6 +19993,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "notes": "Remote review must occur after lab results are available.",
           "offset_minutes_min": 60,
           "type": "prerequisite_activity"
+        },
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent lab results",
+            "current medication/supplement list",
+            "metabolic goal summary",
+            "recent symptoms or adverse events"
+          ],
+          "type": "required_context_available"
         }
       ],
       "details": "Remote video or phone review with physician after labs, used when travel or provider unavailability prevents in-person review.",
@@ -17629,7 +20050,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "next_actions"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent lab results",
+          "current medication/supplement list",
+          "metabolic goal summary",
+          "recent symptoms or adverse events"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": true,
       "remote_allowed": true,
@@ -17663,18 +20097,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent meal logs",
         "travel meal summary",
-        "current nutrition goal"
+        "current nutrition goal",
+        "current supplement list",
+        "recent CGM or fasting glucose notes if available"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent meal logs",
+            "travel meal summary",
+            "current nutrition goal",
+            "current supplement list",
+            "recent CGM or fasting glucose notes if available"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Monthly review with dietitian to adapt nutrition plan, review meal adherence, and address travel or restaurant meal strategies.",
       "duration_minutes": 25,
       "facilitator_type": "dietitian",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
         "preferred_time_windows": [
           "10:00-11:00",
           "18:00-19:00",
           "19:00-20:00"
+        ],
+        "preferred_week": "second",
+        "preferred_weeks": [
+          "second",
+          "first",
+          "second"
         ],
         "type": "monthly"
       },
@@ -17711,7 +20169,21 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "nutrition_adherence"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -17741,18 +20213,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent meal logs",
         "travel meal summary",
-        "current nutrition goal"
+        "current nutrition goal",
+        "current supplement list",
+        "recent CGM or fasting glucose notes if available"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent meal logs",
+            "travel meal summary",
+            "current nutrition goal",
+            "current supplement list",
+            "recent CGM or fasting glucose notes if available"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote video or phone review with dietitian, used when travel or provider unavailability prevents in-person review.",
       "duration_minutes": 20,
       "facilitator_type": "dietitian",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
         "preferred_time_windows": [
           "10:00-11:00",
           "18:00-19:00",
           "19:00-20:00"
+        ],
+        "preferred_week": "second",
+        "preferred_weeks": [
+          "second",
+          "first",
+          "second"
         ],
         "type": "monthly"
       },
@@ -17789,7 +20285,21 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "nutrition_adherence"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent meal logs",
+          "travel meal summary",
+          "current nutrition goal",
+          "current supplement list",
+          "recent CGM or fasting glucose notes if available"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -17822,17 +20332,31 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent pain log",
         "travel summary",
-        "current mobility goal"
+        "current mobility goal",
+        "recent training load notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain log",
+            "travel summary",
+            "current mobility goal",
+            "recent training load notes"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote physio assessment to review mobility, pain, and post-travel adaptation. Used after travel.",
       "duration_minutes": 25,
       "facilitator_type": "physiotherapist",
       "frequency": {
         "preferred_time_windows": [
-          "08:00-09:00",
+          "16:00-18:00",
           "19:00-20:00"
         ],
+        "target_date": "2026-06-26",
         "type": "once",
         "window_days": 7
       },
@@ -17869,7 +20393,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "pain_level"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain log",
+          "travel summary",
+          "current mobility goal",
+          "recent training load notes"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -17898,18 +20435,32 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent pain log",
         "travel summary",
-        "current mobility goal"
+        "current mobility goal",
+        "recent training load notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain log",
+            "travel summary",
+            "current mobility goal",
+            "recent training load notes"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "In-person physio assessment at home or gym, used when remote review is not possible after travel.",
       "duration_minutes": 30,
       "facilitator_type": "physiotherapist",
       "frequency": {
         "preferred_time_windows": [
-          "08:00-09:00",
+          "16:00-18:00",
           "18:45-20:00",
           "19:00-20:00"
         ],
+        "target_date": "2026-06-26",
         "type": "once",
         "window_days": 7
       },
@@ -17946,7 +20497,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "mobility_score",
         "pain_level"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain log",
+          "travel summary",
+          "current mobility goal",
+          "recent training load notes"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": false,
@@ -17977,9 +20541,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "lab due date",
-        "travel window summary"
+        "travel window summary",
+        "clinic availability",
+        "fasting feasibility window"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "lab due date",
+            "travel window summary",
+            "clinic availability",
+            "fasting feasibility window"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote care-team coordination to reschedule lab draws when travel or facility unavailability occurs. Member is notified of new lab date.",
       "duration_minutes": 15,
       "facilitator_type": "remote_coach_pool",
@@ -18023,7 +20601,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "lab_reschedule_confirmed"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18051,9 +20642,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "lab due date",
-        "travel window summary"
+        "travel window summary",
+        "clinic availability",
+        "fasting feasibility window"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "lab due date",
+            "travel window summary",
+            "clinic availability",
+            "fasting feasibility window"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Care team coordinates an alternate lab booking when the preferred lab or due-week window becomes unavailable.",
       "duration_minutes": 15,
       "facilitator_type": "remote_coach_pool",
@@ -18097,7 +20702,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "lab_reschedule_confirmed"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "lab due date",
+          "travel window summary",
+          "clinic availability",
+          "fasting feasibility window"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18133,17 +20751,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent biometric data",
-        "goal progress summary"
+        "goal progress summary",
+        "sleep summary",
+        "activity summary",
+        "CGM data if available"
       ],
-      "dependencies": [],
-      "details": "Remote care-team review of biometric data (weight, sleep, activity, CGM if available) with summary sent to member and providers.",
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent biometric data",
+            "goal progress summary",
+            "sleep summary",
+            "activity summary",
+            "CGM data if available"
+          ],
+          "type": "required_context_available"
+        }
+      ],
+      "details": "Physician-led review of biometric data (weight, sleep, activity, CGM if available) with summary sent to member and providers.",
       "duration_minutes": 20,
-      "facilitator_type": "remote_coach_pool",
+      "facilitator_type": "physician",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "thursday"
+        ],
         "preferred_time_windows": [
           "09:00-11:00",
           "19:00-20:00"
+        ],
+        "preferred_week": "third",
+        "preferred_weeks": [
+          "third",
+          "fourth",
+          "third"
         ],
         "type": "monthly"
       },
@@ -18179,13 +20822,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "biometric_summary_sent"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
       "required_equipment_ids": [],
       "required_provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ],
       "same_day_repeat_allowed": false,
       "share_with_provider_types": [
@@ -18197,7 +20854,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "substitution_activity_ids": [
         "act_b05_clinical_biometric_review_support_async_summary_sub"
       ],
-      "title": "Care-team biometric review and summary (remote)"
+      "title": "Physician biometric review and care-plan summary (remote)"
     },
     {
       "activity_family_id": "b05_clinical_biometric_review_support",
@@ -18208,17 +20865,42 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent biometric data",
-        "goal progress summary"
+        "goal progress summary",
+        "sleep summary",
+        "activity summary",
+        "CGM data if available"
       ],
-      "dependencies": [],
-      "details": "Care team reviews CGM, sleep, and session notes asynchronously and summarizes flags for physician or dietitian follow-up.",
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent biometric data",
+            "goal progress summary",
+            "sleep summary",
+            "activity summary",
+            "CGM data if available"
+          ],
+          "type": "required_context_available"
+        }
+      ],
+      "details": "Physician reviews CGM, sleep, and session notes asynchronously and summarizes flags for physician or dietitian follow-up.",
       "duration_minutes": 15,
-      "facilitator_type": "remote_coach_pool",
+      "facilitator_type": "physician",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "thursday"
+        ],
         "preferred_time_windows": [
           "09:00-11:00",
           "19:00-20:00"
+        ],
+        "preferred_week": "third",
+        "preferred_weeks": [
+          "third",
+          "fourth",
+          "third"
         ],
         "type": "monthly"
       },
@@ -18254,13 +20936,27 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "biometric_summary_sent"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent biometric data",
+          "goal progress summary",
+          "sleep summary",
+          "activity summary",
+          "CGM data if available"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
       "required_equipment_ids": [],
       "required_provider_ids": [
-        "provider_remote_coach_01"
+        "provider_physician_01"
       ],
       "same_day_repeat_allowed": false,
       "share_with_provider_types": [
@@ -18280,7 +20976,7 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "remote_delivery_needed",
         "time_conflict"
       ],
-      "title": "Async biometric summary review"
+      "title": "Async physician biometric summary review"
     },
     {
       "activity_family_id": "b05_clinical_trainer_physio_handoff",
@@ -18292,9 +20988,22 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent pain log",
         "mobility status",
-        "training plan update"
+        "training plan update",
+        "recent strength progression log"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain log",
+            "mobility status",
+            "training plan update",
+            "recent strength progression log"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote care-team handoff between trainer and physiotherapist after travel or when clinically indicated, to coordinate safe return to training.",
       "duration_minutes": 20,
       "facilitator_type": "remote_coach_pool",
@@ -18337,7 +21046,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "handoff_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18368,12 +21090,25 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "care_context_required": [
         "recent pain log",
         "mobility status",
-        "training plan update"
+        "training plan update",
+        "recent strength progression log"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent pain log",
+            "mobility status",
+            "training plan update",
+            "recent strength progression log"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Trainer and physio exchange knee-pain and load notes asynchronously before the next strength progression.",
       "duration_minutes": 10,
-      "facilitator_type": "remote_coach_pool",
+      "facilitator_type": "physiotherapist",
       "frequency": {
         "count": 1,
         "preferred_time_windows": [
@@ -18413,7 +21148,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "completion",
         "handoff_notes"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent pain log",
+          "mobility status",
+          "training plan update",
+          "recent strength progression log"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18450,9 +21198,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent adherence log",
-        "protocol checklist"
+        "protocol checklist",
+        "missed-session reasons",
+        "meal/supplement completion notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent adherence log",
+            "protocol checklist",
+            "missed-session reasons",
+            "meal/supplement completion notes"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote check-in to review adherence to meal, training, and supplement protocols. Provides support and flags for care-team follow-up if needed.",
       "duration_minutes": 10,
       "facilitator_type": "remote_coach_pool",
@@ -18498,7 +21260,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "adherence_score",
         "flagged_issues"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18527,9 +21302,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent adherence log",
-        "protocol checklist"
+        "protocol checklist",
+        "missed-session reasons",
+        "meal/supplement completion notes"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent adherence log",
+            "protocol checklist",
+            "missed-session reasons",
+            "meal/supplement completion notes"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Brief message-based adherence check-in to resolve barriers after missed sessions, travel disruption, or meal-prep gaps.",
       "duration_minutes": 10,
       "facilitator_type": "remote_coach_pool",
@@ -18575,7 +21364,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "adherence_score",
         "flagged_issues"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent adherence log",
+          "protocol checklist",
+          "missed-session reasons",
+          "meal/supplement completion notes"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18612,7 +21414,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent lab or CGM results",
-        "nutrition adherence summary"
+        "nutrition adherence summary",
+        "current supplement list",
+        "recent meal logs"
       ],
       "dependencies": [
         {
@@ -18621,6 +21425,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
           "offset_minutes_min": 60,
           "type": "prerequisite_activity"
+        },
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent lab or CGM results",
+            "nutrition adherence summary",
+            "current supplement list",
+            "recent meal logs"
+          ],
+          "type": "required_context_available"
         }
       ],
       "details": "Remote dietitian follow-up after lab or CGM review to adjust nutrition plan and address metabolic markers.",
@@ -18628,11 +21443,15 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "facilitator_type": "dietitian",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
         "preferred_time_windows": [
           "10:00-11:00",
           "18:00-19:00",
           "19:00-20:00"
         ],
+        "preferred_week": "fourth",
         "type": "monthly"
       },
       "goal_contributions": [
@@ -18667,7 +21486,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "nutrition_plan_update"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18694,7 +21526,9 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent lab or CGM results",
-        "nutrition adherence summary"
+        "nutrition adherence summary",
+        "current supplement list",
+        "recent meal logs"
       ],
       "dependencies": [
         {
@@ -18703,6 +21537,17 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
           "notes": "Dietitian follow-up must occur after lab or CGM results are available.",
           "offset_minutes_min": 60,
           "type": "prerequisite_activity"
+        },
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent lab or CGM results",
+            "nutrition adherence summary",
+            "current supplement list",
+            "recent meal logs"
+          ],
+          "type": "required_context_available"
         }
       ],
       "details": "Remote dietitian follow-up is rescheduled to a later window due to provider or member time conflict.",
@@ -18710,10 +21555,14 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       "facilitator_type": "dietitian",
       "frequency": {
         "count": 1,
+        "preferred_days": [
+          "tuesday"
+        ],
         "preferred_time_windows": [
           "18:00-19:00",
           "19:00-20:00"
         ],
+        "preferred_week": "fourth",
         "type": "monthly"
       },
       "goal_contributions": [
@@ -18748,7 +21597,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "provider_notes",
         "nutrition_plan_update"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent lab or CGM results",
+          "nutrition adherence summary",
+          "current supplement list",
+          "recent meal logs"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18781,9 +21643,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent travel summary",
-        "plan adaptation notes"
+        "plan adaptation notes",
+        "missed or substituted activity log",
+        "current medication/supplement list"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent travel summary",
+            "plan adaptation notes",
+            "missed or substituted activity log",
+            "current medication/supplement list"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Remote care-team handoff to coordinate plan changes during travel or remote delivery. Ensures continuity of clinical review and adaptation.",
       "duration_minutes": 15,
       "facilitator_type": "remote_coach_pool",
@@ -18829,7 +21705,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "handoff_notes",
         "plan_update"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ]
+      },
+      "prep_required": true,
       "priority": 125,
       "raw_clinical_data_required": false,
       "remote_allowed": true,
@@ -18860,9 +21749,23 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
       ],
       "care_context_required": [
         "recent travel summary",
-        "plan adaptation notes"
+        "plan adaptation notes",
+        "missed or substituted activity log",
+        "current medication/supplement list"
       ],
-      "dependencies": [],
+      "dependencies": [
+        {
+          "must_exist": true,
+          "notes": "Required notes/labs/logs must be available before this review can be scheduled.",
+          "required_inputs": [
+            "recent travel summary",
+            "plan adaptation notes",
+            "missed or substituted activity log",
+            "current medication/supplement list"
+          ],
+          "type": "required_context_available"
+        }
+      ],
       "details": "Care-team handoff is completed asynchronously (e.g., via secure message or app) when provider is unavailable for live remote handoff.",
       "duration_minutes": 10,
       "facilitator_type": "remote_coach_pool",
@@ -18907,7 +21810,20 @@ If repair is needed, provide targeted repair recommendations rather than rewriti
         "handoff_notes",
         "plan_update"
       ],
-      "prep_required": false,
+      "prep_metadata": {
+        "due_before_minutes": 1440,
+        "missing_data_policy": "reschedule_or_convert_to_async_review",
+        "owner": "care_team_or_activity_facilitator",
+        "prep_required": true,
+        "prep_type": "clinical_context_review",
+        "required_inputs": [
+          "recent travel summary",
+          "plan adaptation notes",
+          "missed or substituted activity log",
+          "current medication/supplement list"
+        ]
+      },
+      "prep_required": true,
       "priority": 126,
       "raw_clinical_data_required": false,
       "remote_allowed": true,

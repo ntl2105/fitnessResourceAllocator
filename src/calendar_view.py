@@ -6,6 +6,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.io_utils import load_json, save_json  # noqa: E402
+from src.calendar_audit import build_constraint_audit  # noqa: E402
 from src.models.schedule import CalendarRow  # noqa: E402
 
 
@@ -111,6 +112,12 @@ def write_calendar_artifacts(
         destination / "calendar_rows.json",
         [row.model_dump(mode="json") for row in rows],
     )
+    audit = build_constraint_audit(
+        [row.model_dump(mode="json") for row in rows],
+        load_json(RUN_DIR / "00_inputs" / "availability.json"),
+        load_json(RUN_DIR / "00_inputs" / "resource_universe.json"),
+    )
+    save_json(destination / "constraint_violations.json", audit)
     destination.mkdir(parents=True, exist_ok=True)
     (destination / "summary_report.md").write_text(
         build_summary(rows, metadata), encoding="utf-8"

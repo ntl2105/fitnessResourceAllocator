@@ -1,15 +1,15 @@
 # Task Expansion Report
 
-Expanded task instances: 1396
-Primary task instances: 1016
-Substitution task instances: 380
+Expanded task instances: 1388
+Primary task instances: 1035
+Substitution task instances: 353
 
 | Activity | Instances |
 | --- | ---: |
-| act_b01_breakfast_chef_home_primary | 73 |
-| act_b01_breakfast_home_lowprep | 73 |
-| act_b01_breakfast_travel_hotel_primary | 19 |
-| act_b01_breakfast_travel_hotel_restaurant | 19 |
+| act_b01_breakfast_chef_home_primary | 75 |
+| act_b01_breakfast_home_lowprep | 75 |
+| act_b01_breakfast_travel_hotel_primary | 17 |
+| act_b01_breakfast_travel_hotel_restaurant | 17 |
 | act_b01_dinner_chef_home_primary | 73 |
 | act_b01_dinner_home_restaurant | 73 |
 | act_b01_dinner_restaurant_no_prep | 73 |
@@ -37,8 +37,8 @@ Substitution task instances: 380
 | act_b02_cardio_zone2_home_travel_sub | 13 |
 | act_b03_strength_bodyweight_travel_substitution_primary | 3 |
 | act_b03_strength_bodyweight_travel_substitution_remote | 3 |
-| act_b03_strength_home_strength_primary | 26 |
-| act_b03_strength_home_strength_travel | 26 |
+| act_b03_strength_home_strength_primary | 13 |
+| act_b03_strength_home_strength_travel | 13 |
 | act_b03_strength_hotel_gym_strength_bodyweight | 26 |
 | act_b03_strength_hotel_gym_strength_primary | 26 |
 | act_b03_strength_mobility_pain_recovery_checkin_primary | 3 |
@@ -48,10 +48,10 @@ Substitution task instances: 380
 | act_b03_strength_trainer_gym_remote | 13 |
 | act_b04_recovery_evening_mobility_home_primary | 27 |
 | act_b04_recovery_evening_mobility_home_sub_time_conflict | 27 |
-| act_b04_recovery_evening_mobility_travel_primary | 3 |
-| act_b04_recovery_evening_mobility_travel_sub_facility_unavailable | 3 |
+| act_b04_recovery_evening_mobility_travel_primary | 9 |
+| act_b04_recovery_evening_mobility_travel_sub_facility_unavailable | 9 |
 | act_b04_recovery_evening_routine_travel_primary | 3 |
-| act_b04_recovery_evening_routine_travel_sub_facility_unavailable | 3 |
+| act_b04_recovery_evening_routine_travel_sub_facility_unavailable | 9 |
 | act_b04_recovery_remote_coach_recovery_checkin_async_sleep_note_sub | 3 |
 | act_b04_recovery_remote_coach_recovery_checkin_primary | 3 |
 | act_b04_recovery_sleep_routine_support_hotel_wind_down_sub | 26 |
