@@ -1,6 +1,10 @@
-# Resource Allocator
+# Resource Allocator: Auditable Healthspan Scheduling Demo
 
-Synthetic resource-allocation demo for an Elyx-style healthspan member journey. The project turns member goals, providers, locations, availability, and activity families into a 3-month scheduled calendar with decision traces.
+An auditable healthspan scheduling demo that turns a synthetic member care plan into a realistic 3-month calendar.
+
+The project demonstrates how a Resource Allocator can coordinate member goals, provider availability, travel, meals, medications, fitness, recovery, labs, substitutions, and location constraints while preserving decision traceability.
+
+Reviewer path: `Profile -> Activity Board -> Calendar -> Recap`.
 
 ## What It Does
 
@@ -10,6 +14,15 @@ Synthetic resource-allocation demo for an Elyx-style healthspan member journey. 
 - Applies policy checks for travel, WFH days, meal coverage, substitutions, workout timing, provider spacing, transition buffers, and weekly goal validation.
 - Runs a final hard-constraint audit for member blocks, exact travel windows, WFH office bans, provider/location fit, arrival fatigue, and location transitions.
 - Serves a local UI with profile, activity board, calendar, recap, goal validation, constraint audit, and decision traces.
+
+## Submission Highlights
+
+- 50 activity families and 100 scheduler-facing activities.
+- Daily meal and medication coverage, with fasting-lab meal exceptions.
+- Weekly structured-meal, aerobic, strength, recovery, coaching, and clinical-review goal tracking.
+- Provider, location, equipment, WFH, travel, fatigue, and transition-buffer constraints.
+- Same-family substitutions with decision traces.
+- Final hard-constraint audit: `pass`, `0` violations.
 
 ## Project Layout
 

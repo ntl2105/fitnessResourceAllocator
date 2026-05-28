@@ -30,7 +30,7 @@ def test_core_pages_and_api_artifacts_are_available():
 
     calendar_response = client.get("/calendar")
     assert calendar_response.status_code == 200
-    assert "Elyx Weekly Calendar" in calendar_response.text
+    assert "Weekly Calendar" in calendar_response.text
     assert "/api/calendar/interface" in calendar_response.text
     assert "<nav>" not in calendar_response.text
     assert 'class="calendar-tab active" data-tab-target="profile-panel"' in calendar_response.text

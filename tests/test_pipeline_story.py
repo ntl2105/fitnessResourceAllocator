@@ -57,7 +57,7 @@ def test_pipeline_page_and_api_render_marcus_story_without_final_calendar_run():
 
     page_response = client.get("/pipeline")
     assert page_response.status_code == 200
-    assert "Elyx Pipeline Story" in page_response.text
+    assert "Resource Allocator Pipeline" in page_response.text
     assert "/static/pipeline.css" in page_response.text
     assert "Marcus Tan" in page_response.text
     assert "Meaning For Marcus Tan" in page_response.text

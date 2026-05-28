@@ -63,7 +63,7 @@ STAGE_FILES = {
     ],
 }
 
-app = FastAPI(title="Elyx Resource Allocator")
+app = FastAPI(title="Resource Allocator")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
