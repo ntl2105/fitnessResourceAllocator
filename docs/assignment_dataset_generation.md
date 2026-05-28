@@ -340,7 +340,7 @@ Validation pass: 100 activities, 49 primary
 The full test suite passed:
 
 ```text
-152 passed
+163 passed
 ```
 
 The validation report confirms:

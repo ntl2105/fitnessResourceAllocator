@@ -7,8 +7,9 @@ Synthetic resource-allocation demo for an Elyx-style healthspan member journey. 
 - Builds an activity board from generated activity families.
 - Expands activities into dated task instances.
 - Schedules meals, medications, fitness, recovery, labs, and consultations against member/provider/equipment/location availability.
-- Applies policy checks for travel, WFH days, meal coverage, substitutions, workout timing, provider spacing, and weekly goal validation.
-- Serves a local calendar UI with activity details, activity board, goal validation, and decision traces.
+- Applies policy checks for travel, WFH days, meal coverage, substitutions, workout timing, provider spacing, transition buffers, and weekly goal validation.
+- Runs a final hard-constraint audit for member blocks, exact travel windows, WFH office bans, provider/location fit, arrival fatigue, and location transitions.
+- Serves a local UI with profile, activity board, calendar, recap, goal validation, constraint audit, and decision traces.
 
 ## Project Layout
 
@@ -39,7 +40,7 @@ pip install -r requirements.txt
 python scripts/build_demo_run.py
 ```
 
-The staged generation process is documented in [docs/elyx_assignment_dataset_generation.md](docs/elyx_assignment_dataset_generation.md).
+The staged generation process is documented in [docs/assignment_dataset_generation.md](docs/assignment_dataset_generation.md).
 
 This runs:
 
@@ -49,6 +50,12 @@ This runs:
 4. `src/calendar_view.py`
 
 Outputs are written under `data/runs/demo-run/`.
+
+The final calendar stage includes:
+
+- `calendar_rows.json` - scheduled calendar rows used by the app.
+- `decision_traces.json` - acceptance/rejection trace data behind calendar explanations.
+- `constraint_violations.json` - final hard-constraint audit consumed by the recap page.
 
 ## Run Locally
 
@@ -96,17 +103,27 @@ pytest -q
 Current expected result after the latest scheduler updates:
 
 ```text
-152 passed
+163 passed
 ```
 
 ## Key Scheduler Policies
 
 - Every day gets breakfast, lunch, and dinner unless explicitly skipped for a valid reason such as fasted metabolic testing.
-- Member location follows office/home/travel state. During travel, travel activities run at `travel_hotel` unless remote provider support is explicitly used.
+- Member location follows office/home/travel state. WFH days hard-ban office rows, and travel hotel rows apply only inside exact travel windows.
 - Medium/high-load fitness must end by `20:30` unless explicitly allowed.
 - Fitness cannot stack multiple substantial sessions on the same day.
+- Arrival-fatigue windows allow only low-load recovery, mobility, or breathing work unless explicitly overridden.
+- Provider-facilitated rows must match provider availability, location, and remote/in-person mode.
+- Location transitions require realistic buffers between consecutive rows.
 - Travel substitutions prefer higher-resource options when available, such as Tokyo hotel-gym strength before in-room bands/bodyweight.
 - Weekly validation reports structured meals, member-assembled meal cap, estimated chef prep sessions, aerobic sessions, strength sessions, and recovery actions.
+
+## Final Calendar Audit
+
+`src/calendar_view.py` writes `data/runs/demo-run/04_calendar/constraint_violations.json` during the demo build. The current generated demo run has:
+
+- Status: `pass`
+- Violations: `0`
 
 ## Notes
 
